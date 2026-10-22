@@ -73,3 +73,11 @@ Open `index.html`, or serve the directory over HTTP. `Just-One-Minute-website.zi
 Brands and scenarios are fictional. No payment, software installation, notification permission or personal-data submission is performed. Per-tab preferences and actions stay in session storage. Existing images were generated with Image Gen. Google AdSense documentation informed ordinary ad formats; Google does not provide this site’s ads or endorse the scenarios.
 
 The connection-check appearance was inspired by Cloudflare-style verification, but the current page uses Little Daily branding and does not connect to or claim verification by Cloudflare. Original generated imagery and the site implementation are project assets; third-party documentation is referenced for attribution only.
+
+## 独立壁纸站试验版 / Independent wallpaper prototype
+
+[Stillwall English](https://gary1110086.github.io/CSpopups/wallpapers/?lang=en&v=wallpaper1) · [Stillwall 中文](https://gary1110086.github.io/CSpopups/wallpapers/?lang=zh&v=wallpaper1)
+
+wallpapers/ 是独立、可单独托管的壁纸站版本。提供原创壁纸、分类与搜索、收藏和真实 JPG 下载；累计前台浏览 20 秒后，仅广告下载入口会触发一次 Cornhub 重定向。原版 Little Daily 的入口和行为保持独立。详见 [wallpapers/README.md](wallpapers/README.md)。
+
+The self-contained wallpapers/ experiment provides original artwork, search, saved wallpapers and real JPG downloads. Only the sponsored download link triggers the one-time Cornhub redirect after 20 seconds of active browsing. It uses separate session storage and leaves the original entry intact.

@@ -1,0 +1,29 @@
+/* Native document layout, independent from the legacy simulated browser. */
+:root { --bar:0px; --chrome:0px; color-scheme:dark; }
+html, body { height:auto; min-height:100%; overflow:visible; background:#101010; }
+html { scrollbar-gutter:stable; }
+html.has-dialog { overflow:hidden; }
+body { margin:0; }
+#cornhub-content, .night-site { min-height:100vh; }
+.night-site a { color:inherit; text-decoration:none; }
+.night-site a.nr-logo { color:#fff; }
+.night-site a.nr-video-link { display:block; }
+.night-site a.nr-title { display:-webkit-box; }
+.night-site a.nr-title:hover { color:var(--nr-orange); }
+.night-site a.nr-channel { color:#8c8c8c; }
+.night-site a.nr-back { display:inline-block; color:#888; }
+.nr-nav a { flex-shrink:0; color:#bbb; padding:12px 22px 10px; font-size:12px; border-bottom:2px solid transparent; }
+.nr-nav a.active { border-color:var(--nr-orange); color:#fff; }
+.nr-chips a { display:inline-block; border:1px solid #343434; border-radius:3px; padding:5px 10px; font-size:11px; color:#aaa; background:#202020; }
+.nr-chips a.active { background:#3a3a3a; color:white; border-color:#555; }
+.nr-pagination a { display:inline-block; border:1px solid #363636; background:#222; color:#bbb; padding:7px 12px; }
+.nr-pagination a.active { background:var(--nr-orange); color:#111; border-color:var(--nr-orange); }
+.nr-footer>span:last-child { display:flex; gap:16px; flex-wrap:wrap; }
+.nr-footer a:hover { color:#ddd; text-decoration:underline; }
+.nr-prompt-backdrop { inset:0; }
+.nr-prompt { color-scheme:light; }
+.nr-prompt-close { min-width:28px; min-height:28px; }
+noscript { display:block; margin:32px; color:#ddd; }
+@media (max-width:1000px) { .nr-nav a { padding:11px 14px; } }
+@media (max-width:740px) { .nr-nav a { padding:10px 14px; font-size:11px; } }
+@media (prefers-reduced-motion:reduce) { .nr-spinner { animation:none; } .nr-video-link .nr-thumb { transition:none; } }

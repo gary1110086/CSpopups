@@ -27,3 +27,19 @@
 !/assets/earbuds.png
 !/assets/mobile-plan.png
 !/assets/nightroom-contact-sheet.png
+
+# Independent Stillwall wallpaper experience.
+!/wallpapers/
+!/wallpapers/*.html
+!/wallpapers/*.js
+!/wallpapers/*.css
+!/wallpapers/*.svg
+!/wallpapers/README.md
+!/wallpapers/assets/
+!/wallpapers/assets/*.svg
+!/wallpapers/vendor/
+!/wallpapers/vendor/*.js
+!/wallpapers/vendor/*.css
+!/wallpapers/vendor/assets/
+!/wallpapers/vendor/assets/*.png
+!/wallpapers/vendor/assets/*.svg

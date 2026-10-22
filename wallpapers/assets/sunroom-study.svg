@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440"><defs><linearGradient id="base" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eadfc5"/><stop offset="1" stop-color="#d5c4a7"/></linearGradient><linearGradient id="rust" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ba6749"/><stop offset="1" stop-color="#8c422f"/></linearGradient><linearGradient id="arch" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5ac75"/><stop offset="1" stop-color="#aa8058"/></linearGradient><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="12" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><style>.grain{filter:url(#grain);opacity:.06;mix-blend-mode:soft-light}</style></defs><rect width="2560" height="1440" fill="url(#base)"/>
+<circle cx="1940" cy="320" r="310" fill="#c89861"/><path d="M1250 1440V610a320 320 0 0 1 640 0v830Z" fill="#c0b093"/>
+<path d="M1190 1440V550a320 320 0 0 1 640 0v890Z" fill="url(#rust)"/>
+<path d="M1320 1440V580a190 190 0 0 1 380 0v860Z" fill="#673f35"/>
+<path d="M1350 1440V600a170 170 0 0 1 340 0v840Z" fill="#d7bb91"/>
+<rect x="460" y="350" width="470" height="1090" fill="#7e8b74"/><path d="M460 350h470v1090H460Z" fill="#9aa089"/>
+<path d="M460 350h470L460 820Z" fill="#b4b59b"/><circle cx="565" cy="1080" r="355" fill="#cc8e61"/>
+<path d="M210 1080a355 355 0 0 0 710 0Z" fill="#b26d4b"/>
+<path d="M0 1440V1260h370v-210h370v390Z" fill="#d7c49e"/><path d="M0 1260h370l150 180H0Z" fill="#ebe0c6"/>
+<path d="M2010 1440V890a160 160 0 0 1 320 0v550Z" fill="#586d63"/><path d="M2050 1440V920a120 120 0 0 1 240 0v520Z" fill="#849082"/>
+<path d="M1535 440v1000m-43-998v998m86-998v998" fill="none" stroke="#e8d1aa" stroke-width="2" opacity=".5"/>
+<path d="M0 1300h370m0-210h370m1290 188h320" fill="none" stroke="#fff1d4" stroke-width="3" opacity=".35"/><rect width="2560" height="1440" class="grain"/></svg>
