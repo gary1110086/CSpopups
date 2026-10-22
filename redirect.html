@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex"><meta name="referrer" content="same-origin">
+  <title>Redirecting…</title>
+  <style>body { margin:0; background:#fff; color:#777; font:13px/1.6 Arial,sans-serif; } main { padding:24px; } a { color:inherit; } </style>
+</head>
+<body>
+  <main><p id="status" role="status">Opening page…</p><noscript><a href="cornhub.html">Continue · 继续</a></noscript></main>
+  <script>
+    (() => {
+      const lang = new URLSearchParams(location.search).get("lang") === "zh" ? "zh" : "en";
+      document.documentElement.lang = lang === "zh" ? "zh-Hans" : "en";
+      document.getElementById("status").textContent = lang === "zh" ? "正在打开页面…" : "Opening page…";
+      // Fixed local destination: this relay never accepts an external redirect URL.
+      const target = new URL("cornhub.html", location.href);
+      target.searchParams.set("lang", lang);
+      target.searchParams.set("from", "ad");
+      setTimeout(() => location.replace(target.href), 240);
+    })();
+  </script>
+</body>
+</html>

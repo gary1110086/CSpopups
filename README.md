@@ -18,6 +18,12 @@ python -m http.server 5173 --bind 127.0.0.1
 
 打开 http://127.0.0.1:5173/index.html 。这是本机预览地址，不能分享给其他电脑。开场连接检查只是本地演示，完成后真实导航到文章页，不接入 Cloudflare 或其他身份验证服务。
 
+## 中途跳转
+
+在文章或相关阅读累计前台浏览约 30 秒后，下一次文章内或广告上的普通点击会触发一次重定向：`article.html` / `story.html` → `redirect.html` → `cornhub.html`。中转页短暂显示正常的打开提示，约 240ms 后使用浏览器导航到 Cornhub；不使用网页内切屏、假地址栏或夸张动画。它是静态网站中的客户端重定向，不是服务器 HTTP 302。
+
+触发状态先保存到本标签会话；浏览器返回会直接回到原文章，不经过中转页，也不会再次截走点击。Ctrl / Cmd / Shift / Alt 点击、网站顶栏和对话框操作保持原行为。该机制没有倒计时显示，也不结束浏览。Cornhub 是同一 GitHub Pages 项目下的虚构教学页面，没有外跳到真实成人网站；沿用非露骨影视封面素材。旧的 `nightroom.html` 链接会保留查询参数并转到新页面。
+
 ## 页面与代码
 
 | 文件 | 用途 |
@@ -26,7 +32,9 @@ python -m http.server 5173 --bind 127.0.0.1
 | `article.html` | Little Daily 文章、分类、搜索 |
 | `story.html` | 相关阅读独立页面 |
 | `offer.html` | 广告落地页与第二步演示，以查询参数区分情境 |
-| `nightroom.html` | 视频目录、搜索、分类、分页、观看页 |
+| `cornhub.html` | Cornhub 视频目录、搜索、分类、分页、观看页 |
+| `redirect.html` | 固定站内目的地的真实文档中转 |
+| `nightroom.html` | 兼容旧链接，重定向到 Cornhub |
 | `about.html` | 教学用途与隐私说明 |
 | `404.html` | 失效链接的返回入口 |
 | `site.js` / `site.css` | 真实页面导航、交互与适配 |
@@ -48,7 +56,7 @@ GitHub Free 使用公开仓库发布 Pages 时，代码也会公开。仓库仅�
 
 ## 隐私、素材与边界
 
-- Little Daily、Nightroom 与广告品牌为虚构教学场景。跳转是真实的网页导航；付款、安装与权限请求是演示，不执行真实交易、下载或系统通知授权，也没有密码、银行卡或验证码输入表单。
+- Little Daily、Cornhub 与广告品牌为虚构教学场景。跳转是真实的网页导航；付款、安装与权限请求是演示，不执行真实交易、下载或系统通知授权，也没有密码、银行卡或验证码输入表单。
 - 中英文偏好、当前浏览记录与视频站局部状态使用当前标签的 `sessionStorage`，不会上传。存储不可用时仍可浏览，但刷新后不保留关闭状态。未接入统计服务、广告 SDK、远程字体或外部 CDN。
 - 主图、商品图及非露骨视频封面沿用此前内置 Image Gen 生成的本地素材，详见 `design/nightroom-assets.md`（本地项目资料，不在网站 ZIP 中）。
 - 普通广告样式参考 [Google AdSense 广告设置](https://support.google.com/adsense/answer/9305577?hl=en) 。原始视觉与文案由本项目实现，没有接入 Google 广告服务；正常广告不自动等于诈骗。
@@ -57,6 +65,8 @@ GitHub Free 使用公开仓库发布 Pages 时，代码也会公开。仓库仅�
 ## English
 
 Little Daily is a real multipage browsing prototype for a community scam-awareness activity. It uses the browser’s own address bar, tabs, history and reload controls. Ads open native tabs; articles, search results and video pages navigate through real URLs. There is no visible timer, automatic ending, replay loop or cross-tab/device score synchronization in this prototype.
+
+After about 30 seconds of foreground article browsing, one ordinary content or ad click follows a real document relay to the fictional Cornhub page. Browser Back returns directly to the article, and the redirection happens only once per tab session. The legacy video URL forwards to the new Cornhub route.
 
 Open `index.html`, or serve the directory over HTTP. `Just-One-Minute-website.zip` contains the files intended for static hosting, including GitHub Pages project paths. Extract it and publish the files, not the ZIP itself. The public project site is https://gary1110086.github.io/CSpopups/ . Pages publishes from the root of the main branch.
 

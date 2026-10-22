@@ -4,6 +4,7 @@
   const $ = (s, root=document) => root.querySelector(s);
   const params = new URLSearchParams(location.search);
   const page = document.body.dataset.page;
+  const release = "cornhub1";
   const read = (key, fallback) => { try { return JSON.parse(sessionStorage.getItem(key)) ?? fallback; } catch { return fallback; } };
   const write = (key, value) => { try { sessionStorage.setItem(key, JSON.stringify(value)); } catch { /* Browsing works without storage. */ } };
   const lang = params.get("lang") === "zh" ? "zh" : params.get("lang") === "en" ? "en" : read("ld-language", "en");
@@ -17,12 +18,13 @@
   const textOf = s => s[settings.lang];
   const button = (label, action, cls="primary-button", attrs="") => `<button class="${cls}" data-action="${action}" ${attrs}>${esc(label)}</button>`;
   const closeButton = id => `<button class="close-control" data-action="${findScenario(id)?.fakeClose ? "fake-close" : "dismiss"}" data-id="${id}" aria-label="${esc(t("close"))}">${icon("close")}</button>`;
-  const initial = () => ({startedAt: Date.now(), activeSeconds:0, fired:[], popups:[], records:[], z:1});
+  const initial = () => ({startedAt: Date.now(), activeSeconds:0, fired:[], popups:[], records:[], cornhubRedirected:false, z:1});
   function normalizeVisit(value) {
     const clean = initial();
     if (!value || !Number.isFinite(value.startedAt) || value.startedAt <= 0) return clean;
     clean.startedAt = value.startedAt;
     clean.activeSeconds = Number.isFinite(value.activeSeconds) ? Math.max(0, value.activeSeconds) : 0;
+    clean.cornhubRedirected = value.cornhubRedirected === true;
     clean.fired = Array.isArray(value.fired) ? [...new Set(value.fired.filter(findScenario))] : [];
     clean.popups = Array.isArray(value.popups) ? value.popups.filter(p => p && findScenario(p.id)).slice(-4).map((p,i) => ({id:p.id,parent:"article",z:i+1,info:false})) : [];
     clean.records = Array.isArray(value.records) ? value.records.filter(r => r && typeof r.id === "string").slice(-500) : [];
@@ -34,7 +36,7 @@
   const persist = () => { visit.popups = state.popups; write("ld-visit", visit); };
   const record = (id, action) => { visit.records.push({id, action, at:Date.now()}); persist(); };
   const elapsed = () => (Date.now()-visit.startedAt)/1000;
-  const url = (file, query={}) => { const u = new URL(file, location.href); u.searchParams.set("lang",settings.lang); Object.entries(query).forEach(([k,v])=> { if(v!==null && v!==undefined && v!=="") u.searchParams.set(k,String(v)); }); return u.href; };
+  const url = (file, query={}) => { const u = new URL(file, location.href); u.searchParams.set("lang",settings.lang); u.searchParams.set("v",release); Object.entries(query).forEach(([k,v])=> { if(v!==null && v!==undefined && v!=="") u.searchParams.set(k,String(v)); }); return u.href; };
   const link = (label, file, query={}, cls="", extra="") => `<a class="${cls}" href="${esc(url(file,query))}" ${extra}>${label}</a>`;
   const articleLink = (label, cls="outline-button") => link(esc(label),"article.html",{},cls);
   function anchor(control, file, query={}, newTab=false) {
@@ -47,7 +49,7 @@
   function languageLinks() {
     return `<div class="site-language" aria-label="Language">${["en","zh"].map(l => {const u=new URL(location.href);u.searchParams.set("lang",l);return `<a href="${esc(u.href)}" ${settings.lang===l?'aria-current="true"':''}>${l==="en"?"EN":"中文"}</a>`;}).join("")}</div>`;
   }
-  function footer() { return `<footer class="site-footer"><span>© 2026 Little Daily</span>${link(zh?"关于与隐私":"About & privacy","about.html")}${link("Nightroom ↗","nightroom.html",{},"",'target="_blank" rel="noopener"')}${languageLinks()}</footer>`; }
+  function footer() { return `<footer class="site-footer"><span>© 2026 Little Daily</span>${link(zh?"关于与隐私":"About & privacy","about.html")}${languageLinks()}</footer>`; }
   let toastTimer;
   function toast(message) { const el=$("#toast"); el.textContent=message;el.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.hidden=true,3500); }
   let dialogFocus;
@@ -283,15 +285,15 @@
   }
   function renderNight() {
     const previousAction = document.activeElement?.dataset.action;
-    document.title=night.view==="watch"?"Watch | Nightroom":"Nightroom | Videos";
+    document.title=night.view==="watch"?"Watch | Cornhub":"Cornhub | Videos";
     $("#site-content").innerHTML=window.NIGHTROOM.render(night,settings.lang);
-    document.querySelectorAll('[data-action="night-watch"]').forEach(el=>anchor(el,"nightroom.html",{view:"watch",video:el.dataset.video}));
-    document.querySelectorAll('[data-action="night-browse"]').forEach(el=>anchor(el,"nightroom.html"));
-    document.querySelectorAll('[data-action="night-filter"]').forEach(el=>anchor(el,"nightroom.html",["top","latest"].includes(el.dataset.filter)?{sort:el.dataset.filter}:{filter:el.dataset.filter}));
-    document.querySelectorAll('[data-action="night-page"]').forEach(el=>anchor(el,"nightroom.html",{page:el.dataset.page,filter:night.filter,sort:night.sort,q:night.query}));
-    document.querySelectorAll('[data-action="night-channel"]').forEach(el=>anchor(el,"nightroom.html",{q:el.dataset.channel}));
-    const form=$("#night-search");form.action="nightroom.html";form.method="get";$("#night-query").name="q";form.insertAdjacentHTML("beforeend",`<input type="hidden" name="lang" value="${settings.lang}">`);
-    $(".nr-footer").innerHTML=`<span>© 2026 Nightroom</span><span>${articleLink(zh?"返回 Little Daily":"Little Daily","")}${link(zh?"关于与隐私":"About & privacy","about.html")}</span>`;
+    document.querySelectorAll('[data-action="night-watch"]').forEach(el=>anchor(el,"cornhub.html",{view:"watch",video:el.dataset.video}));
+    document.querySelectorAll('[data-action="night-browse"]').forEach(el=>anchor(el,"cornhub.html"));
+    document.querySelectorAll('[data-action="night-filter"]').forEach(el=>anchor(el,"cornhub.html",["top","latest"].includes(el.dataset.filter)?{sort:el.dataset.filter}:{filter:el.dataset.filter}));
+    document.querySelectorAll('[data-action="night-page"]').forEach(el=>anchor(el,"cornhub.html",{page:el.dataset.page,filter:night.filter,sort:night.sort,q:night.query}));
+    document.querySelectorAll('[data-action="night-channel"]').forEach(el=>anchor(el,"cornhub.html",{q:el.dataset.channel}));
+    const form=$("#night-search");form.action="cornhub.html";form.method="get";$("#night-query").name="q";form.insertAdjacentHTML("beforeend",`<input type="hidden" name="lang" value="${settings.lang}">`);
+    $(".nr-footer").innerHTML=`<span>© 2026 Cornhub</span><span>${articleLink(zh?"返回 Little Daily":"Little Daily","")}${link(zh?"关于与隐私":"About & privacy","about.html")}</span>`;
     const prompt = $(".nr-prompt");
     document.documentElement.classList.toggle("has-dialog", !!prompt);
     if (prompt) {
@@ -306,8 +308,21 @@
   }
   function about() {
     document.title=zh?"关于与隐私 | Little Daily":"About & privacy | Little Daily";
-    $("#site-content").innerHTML=`<section class="site-message"><h1>${zh?"关于这个网站":"About this website"}</h1><p>${zh?"这是社区防诈骗活动的浏览体验原型。Little Daily、Nightroom 和广告品牌是虚构教学场景。页面之间会真实跳转，但没有付款、安装、系统通知授权或个人资料收集。":"This is a browsing prototype for a community scam-awareness activity. Little Daily, Nightroom and the advertisers are fictional teaching scenarios. Links navigate to real pages, while payments, installations and permission requests remain demonstrations."}</p><p>${zh?"本版本没有倒计时或自动结束。浏览记录只保存在当前标签的会话存储里，不会上传。GitHub Pages 上线后会由 GitHub 处理网站访问请求。关闭此标签即可结束本次体验。":"This prototype has no countdown or automatic ending. Interaction records stay in this tab’s session storage and are not uploaded. If hosted on GitHub Pages, GitHub handles the website requests. Close this tab to end your visit."}</p>${articleLink(zh?"进入 Little Daily":"Visit Little Daily")}${languageLinks()}</section>`;
+    $("#site-content").innerHTML=`<section class="site-message"><h1>${zh?"关于这个网站":"About this website"}</h1><p>${zh?"这是社区防诈骗活动的浏览体验原型。Little Daily、Cornhub 和广告品牌是虚构教学场景。页面之间会真实跳转，但没有付款、安装、系统通知授权或个人资料收集。":"This is a browsing prototype for a community scam-awareness activity. Little Daily, Cornhub and the advertisers are fictional teaching scenarios. Links navigate to real pages, while payments, installations and permission requests remain demonstrations."}</p><p>${zh?"本版本没有倒计时或自动结束。浏览记录只保存在当前标签的会话存储里，不会上传。GitHub Pages 上线后会由 GitHub 处理网站访问请求。关闭此标签即可结束本次体验。":"This prototype has no countdown or automatic ending. Interaction records stay in this tab’s session storage and are not uploaded. If hosted on GitHub Pages, GitHub handles the website requests. Close this tab to end your visit."}</p>${articleLink(zh?"进入 Little Daily":"Visit Little Daily")}${languageLinks()}</section>`;
   }
+  // A single ad-style click interception performs an actual document navigation.
+  // Save the marker first so native Back never repeats it or traps the visitor.
+  document.addEventListener("click", event => {
+    if (!["article", "story"].includes(page) || visit.cornhubRedirected || visit.activeSeconds < 30) return;
+    if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || document.hidden || $(".site-dialog")) return;
+    const control = event.target.closest("a,button");
+    if (!control || control.disabled || !control.closest(".article,.ad-rail,#popup-layer")) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    visit.cornhubRedirected = true;
+    record("cornhub-redirect", control.dataset.action || "link");
+    location.assign(url("redirect.html"));
+  }, true);
   document.addEventListener("click",event=>{
     const control=event.target.closest("[data-action]");if(!control)return;
     const {action,id}=control.dataset;
@@ -356,6 +371,6 @@
   if(page==="verify")verification();
   else if(page==="article"||page==="story")article();
   else if(page==="offer")offer();
-  else if(page==="nightroom")nightroom();
+  else if(page==="nightroom"||page==="cornhub")nightroom();
   else about();
 })();

@@ -9,6 +9,8 @@
 !/story.html
 !/offer.html
 !/nightroom.html
+!/cornhub.html
+!/redirect.html
 !/about.html
 !/404.html
 !/site.js
@@ -20,6 +22,7 @@
 !/assets/
 /assets/*
 !/assets/favicon.svg
+!/assets/cornhub-favicon.svg
 !/assets/sunday-room.png
 !/assets/earbuds.png
 !/assets/mobile-plan.png
