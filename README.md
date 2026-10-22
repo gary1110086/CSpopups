@@ -20,7 +20,7 @@ python -m http.server 5173 --bind 127.0.0.1
 
 ## 中途跳转
 
-在文章或相关阅读累计前台浏览约 30 秒后，下一次文章内或广告上的普通点击会触发一次重定向：`article.html` / `story.html` → `redirect.html` → `cornhub.html`。中转页短暂显示正常的打开提示，约 240ms 后使用浏览器导航到 Cornhub；不使用网页内切屏、假地址栏或夸张动画。它是静态网站中的客户端重定向，不是服务器 HTTP 302。
+在文章或相关阅读累计前台浏览约 20 秒后，下一次文章内或广告上的普通点击会触发一次重定向：`article.html` / `story.html` → `redirect.html` → `cornhub.html`。中转页短暂显示正常的打开提示，约 240ms 后使用浏览器导航到 Cornhub；不使用网页内切屏、假地址栏或夸张动画。它是静态网站中的客户端重定向，不是服务器 HTTP 302。
 
 触发状态先保存到本标签会话；浏览器返回会直接回到原文章，不经过中转页，也不会再次截走点击。Ctrl / Cmd / Shift / Alt 点击、网站顶栏和对话框操作保持原行为。该机制没有倒计时显示，也不结束浏览。Cornhub 是同一 GitHub Pages 项目下的虚构教学页面，没有外跳到真实成人网站；沿用非露骨影视封面素材。旧的 `nightroom.html` 链接会保留查询参数并转到新页面。
 
@@ -66,7 +66,7 @@ GitHub Free 使用公开仓库发布 Pages 时，代码也会公开。仓库仅�
 
 Little Daily is a real multipage browsing prototype for a community scam-awareness activity. It uses the browser’s own address bar, tabs, history and reload controls. Ads open native tabs; articles, search results and video pages navigate through real URLs. There is no visible timer, automatic ending, replay loop or cross-tab/device score synchronization in this prototype.
 
-After about 30 seconds of foreground article browsing, one ordinary content or ad click follows a real document relay to the fictional Cornhub page. Browser Back returns directly to the article, and the redirection happens only once per tab session. The legacy video URL forwards to the new Cornhub route.
+After about 20 seconds of foreground article browsing, one ordinary content or ad click follows a real document relay to the fictional Cornhub page. Browser Back returns directly to the article, and the redirection happens only once per tab session. The legacy video URL forwards to the new Cornhub route.
 
 Open `index.html`, or serve the directory over HTTP. `Just-One-Minute-website.zip` contains the files intended for static hosting, including GitHub Pages project paths. Extract it and publish the files, not the ZIP itself. The public project site is https://gary1110086.github.io/CSpopups/ . Pages publishes from the root of the main branch.
 

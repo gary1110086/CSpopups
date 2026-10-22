@@ -4,7 +4,7 @@
   const $ = (s, root=document) => root.querySelector(s);
   const params = new URLSearchParams(location.search);
   const page = document.body.dataset.page;
-  const release = "cornhub1";
+  const release = "cornhub2";
   const read = (key, fallback) => { try { return JSON.parse(sessionStorage.getItem(key)) ?? fallback; } catch { return fallback; } };
   const write = (key, value) => { try { sessionStorage.setItem(key, JSON.stringify(value)); } catch { /* Browsing works without storage. */ } };
   const lang = params.get("lang") === "zh" ? "zh" : params.get("lang") === "en" ? "en" : read("ld-language", "en");
@@ -313,7 +313,7 @@
   // A single ad-style click interception performs an actual document navigation.
   // Save the marker first so native Back never repeats it or traps the visitor.
   document.addEventListener("click", event => {
-    if (!["article", "story"].includes(page) || visit.cornhubRedirected || visit.activeSeconds < 30) return;
+    if (!["article", "story"].includes(page) || visit.cornhubRedirected || visit.activeSeconds < 20) return;
     if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || document.hidden || $(".site-dialog")) return;
     const control = event.target.closest("a,button");
     if (!control || control.disabled || !control.closest(".article,.ad-rail,#popup-layer")) return;
