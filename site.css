@@ -1,0 +1,49 @@
+/* Real-page prototype. Shared editorial and ad styles stay in styles.css. */
+:root { --bar: 0px; --chrome: 0px; }
+html, body { height: auto; min-height: 100%; overflow: visible; }
+html.has-dialog { overflow: hidden; }
+body { background: #fff; }
+a { color: inherit; text-decoration: none; }
+a svg { pointer-events: none; }
+a.primary-button, a.blue-button, a.outline-button, a.secondary-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+a:focus-visible { outline: 3px solid #dfa848; outline-offset: 3px; }
+.site-header nav a { position: relative; font-size: 12px; font-weight: 600; padding: 10px 0; color: #727771; }
+.site-header nav a.active { color: var(--pine); border-bottom: 2px solid var(--pine); }
+.site-header .site-logo { flex-shrink: 0; }
+.site-language { margin-left: auto; display: flex; gap: 8px; font-size: 11px; white-space: nowrap; }
+.site-language [aria-current] { font-weight: bold; color: var(--pine); }
+.related a { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.site-footer { display: flex; gap: 20px; flex-wrap: wrap; }
+.site-footer a { text-decoration: underline; text-underline-offset: 3px; }
+.popup-layer { position: fixed; inset: 0; height: 100dvh; }
+.popup a[data-action="offer"], .popup a[data-action="fake-close"] { cursor: pointer; }
+.popup-anchor a.blue-button { flex-shrink: 0; }
+.popup .ad-controls a { display: inline-grid; place-items: center; }
+.human-verification { min-height: 100dvh; }
+.human-footer a { color: #bbb; text-decoration: underline; }
+.site-message { max-width: 720px; margin: 60px auto; padding: 0 24px; }
+.site-message h1 { font: 36px/1.25 var(--serif); }
+.site-message p { line-height: 1.9; }
+.site-search-form { max-width: 1160px; margin: auto; padding: 15px 40px; display: flex; gap: 10px; }
+.site-search-form input { flex: 1; min-width: 0; border: 1px solid var(--line); padding: 10px; border-radius: 4px; }
+.site-search-results { max-width: 1160px; margin: auto; padding: 15px 40px; }
+.site-search-results a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); font: 23px/1.4 var(--serif); }
+.destination-actions { flex-wrap: wrap; }
+.site-dialog { position: fixed; inset: 0; z-index: 500; background: #17251c66; display: grid; place-items: center; padding: 20px; }
+.site-dialog section { position: relative; width: min(100%, 460px); max-height: 85dvh; overflow: auto; background: white; padding: 36px; border-radius: 10px; box-shadow: 0 20px 80px #0003; }
+.site-dialog h2 { font-family: var(--serif); }
+.night-site a.nr-video-link { display: block; }
+.night-site a.nr-title { display: block; }
+.nr-nav a { color: #bbb; padding: 12px 22px 10px; font-size: 12px; border-bottom: 2px solid transparent; }
+.nr-nav a.active { border-color: var(--nr-orange); color: #fff; }
+.nr-chips a, .nr-pagination a { display: inline-block; padding: 8px 14px; background: #252525; border-radius: 3px; }
+.nr-pagination a.active { background: #f4a329; color: #111; }
+.nr-footer a { margin-left: 12px; }
+@media(max-width: 650px) {
+  .site-header { gap: 12px; flex-wrap: wrap; padding: 18px 20px; }
+  .site-header .site-logo { font-size: 32px; }
+  .site-header nav { order: 3; width: 100%; justify-content: space-between; }
+  .site-language { font-size: 11px; }
+  .site-search-form, .site-search-results { padding: 14px 20px; }
+  .nr-nav a { padding: 12px; }
+}

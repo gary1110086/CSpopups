@@ -1,0 +1,26 @@
+# Publish only the website. Local originals, archives and agent notes stay local.
+*
+!/.gitignore
+!/.gitattributes
+!/.nojekyll
+!/README.md
+!/index.html
+!/article.html
+!/story.html
+!/offer.html
+!/nightroom.html
+!/about.html
+!/404.html
+!/site.js
+!/site.css
+!/content.js
+!/styles.css
+!/nightroom.js
+!/nightroom.css
+!/assets/
+/assets/*
+!/assets/favicon.svg
+!/assets/sunday-room.png
+!/assets/earbuds.png
+!/assets/mobile-plan.png
+!/assets/nightroom-contact-sheet.png
