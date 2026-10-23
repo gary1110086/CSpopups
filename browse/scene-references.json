@@ -1,15 +1,98 @@
 {
   "checked": "2026-10-23",
-  "note": "Primary sites inspected as layout and interaction references. None of the normal reference sites is being called a scam. No third-party page, logo, text or photograph is copied into the experience.",
+  "note": "Primary source inspection on 23 October 2026: screenshots where accessible; source text where anti-bot or transport errors prevented a rendered page. Normal layout references and scam evidence are separate. No third-party source code, branding or photographs are bundled.",
   "scenes": [
-    {"id":"wallpapers","route":"wallpaper.html","name":"Stillwall / 壁纸","benchmark":[{"title":"Pexels wallpaper search","url":"https://www.pexels.com/search/desktop%20wallpaper/","observed":"Search-led image discovery, topic browsing, grid previews, item-level download and license information."}],"adaptation":"Eight original local SVG artworks; original green editorial identity; real 1920, 2560 and 3840 px JPEG exports, palette copy and saved collection. No Pexels images or logo used."},
-    {"id":"recipes","route":"recipe.html","name":"Pantry & Plate / 食谱","benchmark":[{"title":"Allrecipes dinner collection","url":"https://www.allrecipes.com/recipes/17562/dinner/","observed":"Search, topic links, editorial recipe collections, image-led cards and rating counts. Only the collection page was inspected; ingredient and method design is our own."}],"adaptation":"Eight original written recipes and generated food photography; native recipe/search/category routes, scaled servings, checked steps, favourites and a downloadable recipe. Not a copy of Allrecipes recipes."},
-    {"id":"tools","route":"tools.html","name":"Pixelpress / 图片工具","benchmark":[{"title":"Squoosh","url":"https://squoosh.app/","observed":"Local image selection, sample workflow, before/after comparison and controls for export quality."}],"adaptation":"Original light workspace using browser canvas; real local JPEG/PNG/WebP export, dimensions and file sizes. No image upload and no Squoosh code or logo copied."},
-    {"id":"movies","route":"movie.html","name":"Frame / by frame / 电影发现","benchmark":[{"title":"Rotten Tomatoes","url":"https://www.rottentomatoes.com/","observed":"Poster-led catalogue, genre browsing, editorial picks, scores, watchlist affordances and rich film detail pages."}],"adaptation":"Twelve fictional original films, illustrated posters, written synopses, fictional cast and reviews; functional watchlist, personal rating and original animated poster previews. These are not real film listings or licensed trailers."},
-    {"id":"events","route":"events.html","name":"Out There KL / 周末出游","benchmark":[{"title":"KL Foodie","url":"https://klfoodie.com/","observed":"Local editorial cards, Food/Events/Lifestyle navigation, trending content and in-flow advertising."}],"adaptation":"Eight original outing guides inspired by Malaysia with generated location-inspired imagery and supplementary illustrations; filters for area, budget and interests; native details and downloadable saved weekend plan. These are inspiration routes, not live event tickets or current opening-hour data."}
+    {
+      "id": "wallpapers",
+      "route": "wallpaper.html",
+      "name": "Stillwall / 壁纸",
+      "benchmark": [
+        {
+          "title": "Wallhaven",
+          "url": "https://wallhaven.cc/",
+          "observed": "Rendered homepage inspected in Chrome: dark image catalogue, compact primary navigation, central search, tag links, thumbnail rows and image-level actions. The web-fetch endpoint returned403 but ordinary Chrome navigation succeeded200."
+        },
+        {
+          "title": "Pexels desktop wallpaper search",
+          "url": "https://www.pexels.com/search/desktop%20wallpaper/",
+          "observed": "Source text inspected for search, topic browsing, download and licensing structure. Rendered browser access encountered a challenge, so no claim of visual screenshot inspection."
+        }
+      ],
+      "adaptation": "Dark utility header, search and tag row, category tabs, compact image grid with dimensions, alphabetical sorting, saved collection and image/download metadata sidebar. Eight original SVGs plus four original generated bitmap wallpapers. JPEG export sizes1920/2560/3840 are generated locally; bitmap exports may upscale the source and are not claimed native4K."
+    },
+    {
+      "id": "recipes",
+      "route": "recipe.html",
+      "name": "Pantry & Plate / 食谱",
+      "benchmark": [
+        {
+          "title": "Allrecipes dinner collection",
+          "url": "https://www.allrecipes.com/recipes/17562/dinner/",
+          "observed": "Source text inspected for dinner categories, search, recipe collections and practical card metadata. Browser access denied; visual comparison is not claimed."
+        },
+        {
+          "title": "Allrecipes: Alysia's Basic Meat Lasagna",
+          "url": "https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/",
+          "observed": "Source text confirms title/save/rating tools, prep/cook/total/servings, scaled ingredients and directions. Recipe content is not copied."
+        }
+      ],
+      "adaptation": "Practical white/orange cooking portal with compact logo/search/category navigation, breadcrumb, two-column recipe photographs, popular-recipe rail and advertisements. Native details support scaled servings, checked ingredients/steps, saved recipes, print and text export. Eight original recipes and generated food images."
+    },
+    {
+      "id": "tools",
+      "route": "tools.html",
+      "name": "Pixelpress / 图片工具",
+      "benchmark": [
+        {
+          "title": "Squoosh",
+          "url": "https://squoosh.app/",
+          "observed": "Rendered interface inspected: immediate image input/sample and local comparison workspace with export settings."
+        },
+        {
+          "title": "iLoveIMG",
+          "url": "https://www.iloveimg.com/",
+          "observed": "Rendered interface inspected: compact tool navigation, direct image-selection control and conventional utility screen."
+        }
+      ],
+      "adaptation": "Blue/gray utility navigation with immediate select/drop/sample image input. Loaded image opens comparison canvas, image/output tabs and settings/export sidebar. Actual on-device JPEG/PNG/WebP conversion and resize; no copied logos or application code."
+    },
+    {
+      "id": "movies",
+      "route": "movie.html",
+      "name": "Frame Movies / 电影发现",
+      "benchmark": [
+        {
+          "title": "Rotten Tomatoes movie browse",
+          "url": "https://www.rottentomatoes.com/browse/movies_at_home/",
+          "observed": "Rendered catalogue inspected: compact masthead/search, trending strip, modest page heading, filters, dense poster rows and per-film ratings."
+        }
+      ],
+      "adaptation": "Dark/orange movie portal, compact catalogue title, filter rail and six-poster desktop grid, metadata and watchlist controls; details contain cast, reviews and personal ratings. Twelve original fictional films use photographic poster crops from the project-owned generated contact sheet. Previews are animated original stills, not licensed trailers."
+    },
+    {
+      "id": "events",
+      "route": "events.html",
+      "name": "Out There KL / 周末出游",
+      "benchmark": [
+        {
+          "title": "KL Foodie",
+          "url": "https://klfoodie.com/",
+          "observed": "Local editorial cards, Food/Events/Lifestyle navigation, trending content and in-flow advertising."
+        }
+      ],
+      "adaptation": "Rendered KLFoodie homepage reverse-adapted into a1152px white portal on gray: utility strip, black/red compact logo/nav, central advertisement, two-column story feed and trending thumbnail rail. Eight evergreen original outing guides with generated images, area/budget filters, practical detail checklists, saved planner and text/ICS exports. No live tickets or invented publication history."
+    }
   ],
   "interactionReferences": [
-    {"title":"FTC: Bringing Dark Patterns to Light (2022)","url":"https://www.ftc.gov/reports/bringing-dark-patterns-light","observed":"Reference for misleading hierarchy and obstructed choices. Our large false close, small genuine close and low-prominence dismiss controls are teaching adaptations; not exact replicas of a named incident."},
-    {"title":"Google Chrome: Block or allow pop-ups","url":"https://support.google.com/chrome/answer/95472?hl=en","observed":"Browsers can block pop-ups. Advertiser tabs are only requested during a user click; a visible ordinary link is available if that request is blocked. No browser permissions or settings are changed."}
+    {
+      "title": "FTC: Bringing Dark Patterns to Light (2022)",
+      "url": "https://www.ftc.gov/reports/bringing-dark-patterns-light",
+      "observed": "Reference for misleading hierarchy and obstructed choices. Our large false close, small genuine close and low-prominence dismiss controls are teaching adaptations; not exact replicas of a named incident."
+    },
+    {
+      "title": "Google Chrome: Block or allow pop-ups",
+      "url": "https://support.google.com/chrome/answer/95472?hl=en",
+      "observed": "Browsers can block pop-ups. Advertiser tabs are only requested during a user click; a visible ordinary link is available if that request is blocked. No browser permissions or settings are changed."
+    }
   ]
 }

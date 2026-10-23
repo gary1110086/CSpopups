@@ -11,7 +11,7 @@
       }
     ],
     "cases": [],
-    "adaptation": "Unrelated entertainment promotion; not labelled a scam. Native video, channel, saved and membership views. No explicit media or external adult site links."
+    "adaptation": "Compact black/orange video portal: search, category navigation, four-column thumbnail rows, durations and studio metadata. Unrelated entertainment promotion; not labelled a scam. Native video, channel, saved and membership views. No explicit media or external adult site links."
   },
   {
     "id": "desk",
@@ -25,7 +25,7 @@
       }
     ],
     "cases": [],
-    "adaptation": "Ordinary retail interruption. Fictional products and brand. Original generated workspace-photography.png supplies eight product images, not copied from the benchmark. Per-product materials, dimensions, finish/quantity options and cart. No actual checkout."
+    "adaptation": "Product-list structure: compact retail search/navigation, category chips, four-column products, prices, dimensions and delivery options. Ordinary retail interruption. Fictional products and brand. Original generated workspace-photography.png supplies eight product images, not copied from the benchmark. Per-product materials, dimensions, finish/quantity options and cart. No actual checkout."
   },
   {
     "id": "stock",
@@ -39,7 +39,7 @@
       }
     ],
     "cases": [],
-    "adaptation": "Ordinary creative subscription/asset promotion. Uses only locally owned original art. Purchase stops at review."
+    "adaptation": "Asset library structure: search band, filter rail, artwork results, asset identifiers and license routes. Ordinary creative subscription/asset promotion. Uses only locally owned original art. Purchase stops at review."
   },
   {
     "id": "game",
@@ -53,7 +53,7 @@
       }
     ],
     "cases": [],
-    "adaptation": "Normal game advertisement with a genuinely playable local browser mini-game. Six titles share a disclosed simple mini-game mechanic, not six full games."
+    "adaptation": "Indie game directory: filter sidebar, compact grid, cover art, tags and playable game route. Normal game advertisement with a genuinely playable local browser mini-game. Six titles share a disclosed simple mini-game mechanic, not six full games."
   },
   {
     "id": "security",
@@ -73,7 +73,7 @@
         "pattern": "Bogus computer warnings and urgent help prompts are used to obtain money or remote access. The prototype uses invented web-scan results leading toward support, with the flow ending before remote access."
       }
     ],
-    "adaptation": "Fictional status dashboard, invented alerts, alert details, support options and a final educational stop. No device scanning, phone calls or remote sessions."
+    "adaptation": "Security account console: product navigation, protection-status cards, device list and review/plan routes. Fictional status dashboard, invented alerts, alert details, support options and a final educational stop. No device scanning, phone calls or remote sessions."
   },
   {
     "id": "player",
@@ -93,7 +93,7 @@
         "pattern": "Fake update pages redirect normal browsing into a software-update lure and installation pathway. The prototype changes that observed browser-update mechanism into a fictional player/codec update context; it does not claim the exact fictional player is a documented campaign."
       }
     ],
-    "adaptation": "Update landing, release notes, platform selection and preselected components; final install click explains the lure without creating a file."
+    "adaptation": "Player utility site: screenshot-style player preview, platform download route and release/documentation sections. Update landing, release notes, platform selection and preselected components; final install click explains the lure without creating a file."
   },
   {
     "id": "software",
@@ -113,7 +113,7 @@
         "pattern": "Counterfeit software-download sites impersonate trusted suppliers and distribute malicious installers. The prototype illustrates the professional catalogue/download wrapper using fictional applications, never real malware."
       }
     ],
-    "adaptation": "Six fictional apps, searchable catalogue, app screenshots, feature/specification pages, release history and download assistant choices. No executables generated."
+    "adaptation": "Conventional software directory: category rail and application/version/platform/download table, architecture choices and release notes. Six fictional apps, searchable catalogue, app screenshots, feature/specification pages, release history and download assistant choices. No executables generated."
   },
   {
     "id": "prize",
@@ -133,7 +133,7 @@
         "pattern": "Unexpected prizes followed by requests for processing, handling or shipping fees are classic advance-fee scams."
       }
     ],
-    "adaptation": "Three invented rewards, selection, preset recipient, release-fee summary and final explanation. No actual winner claim, payment or personal data collection."
+    "adaptation": "Rewards-account structure: balance, product reward catalogue, redemption steps and eligibility route. Three invented rewards, selection, preset recipient, release-fee summary and final explanation. No actual winner claim, payment or personal data collection."
   },
   {
     "id": "coupon",
@@ -158,7 +158,7 @@
         "pattern": "An inexpensive trial can lead to a much larger monthly subscription. Prototype combines a reward survey and low-cost subscription pattern; it is a composite, not an exact reproduction of one campaign."
       }
     ],
-    "adaptation": "Offer categories, detail, three preset preference questions, activation cost plus visible recurring condition, then educational stop. No contact or financial fields."
+    "adaptation": "Voucher marketplace: category links, designed voucher faces, offer metadata and claim steps. Offer categories, detail, three preset preference questions, activation cost plus visible recurring condition, then educational stop. No contact or financial fields."
   },
   {
     "id": "parcel",
@@ -178,6 +178,6 @@
         "pattern": "Unsolicited delivery messages and unrecognised links claim a shipment needs action. The prototype adapts that fake delivery-management pattern into an advertising interruption rather than claiming an exact SMS reproduction."
       }
     ],
-    "adaptation": "Invented tracking number, delivery exception, preset address, delivery window, small reprocessing charge and final explanation. No real tracking lookup or financial fields."
+    "adaptation": "Courier structure: shipment-reference form, tracking number, shipment details and event timeline. Official source text inspected; rendered DHL request failed HTTP2. Invented tracking number, delivery exception, preset address, delivery window, small reprocessing charge and final explanation. No real tracking lookup or financial fields."
   }
 ]

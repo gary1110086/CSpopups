@@ -12,7 +12,7 @@ Exact generation prompt:
 # Original generated outing imagery
 
 - File: `outing-photography.png` (2172 × 724, eight cells), built-in ImageGen, 2026-10-23.
-- Images illustrate location atmosphere; they are not documentary photographs or evidence of exact current venue conditions. Supplementary gallery SVGs remain clearly identified illustrations.
+- Images illustrate location atmosphere; they are not documentary photographs or evidence of exact current venue conditions. The earlier supplementary geometric gallery has been removed in browse2 in favor of a practical route checklist.
 
 Exact generation prompt:
 
@@ -26,3 +26,19 @@ Exact generation prompt:
 Exact generation prompt:
 
 > Create ONE premium ecommerce product photography contact-sheet asset. EXACTLY FOUR COLUMNS by TWO ROWS,8 equal landscape cells, no gutters no borders no text or logos. Wide image3:1, cell aspect3:2. Design-language: quiet minimalist Scandinavian/Japandi home office product photography, soft beige plaster studio backgrounds, warm muted neutral palette, realistic materials and soft shadows, each object centered fully visible with generous breathing room. Distinct exact objects in order top row left to right:1 sage-green metal ARC-shaped desk lamp with rounded mushroom dome and narrow stem on small round base;2 natural oak low desktop shelf/riser, a long flat top on two short legs;3 rectangular olive grey felt desk mat on flat surface;4 soft sage upholstered compact task chair, no armrests. Bottom row left to right:5 shallow warm beige pebble-shaped tray organiser;6 charcoal silicone coiled cable and neat cable clips arranged together;7 dark charcoal monitor stand riser, simple flat rectangular top and sturdy legs;8 soft cream rectangular rounded seat cushion. No extra objects, no people, no computers, no labels, no packaging. Each cell should read like authentic attractive high-end product photography on an independent retail site, not diagram or illustration. High detail texture.
+
+# Original photographic wallpaper additions
+
+- Files: `wallpaper-ridge.png` and `wallpaper-canopy.png`, each native 1672 × 941 px (approximately 16:9), PNG.
+- Created 2026-10-23 using built-in ImageGen; two independent generations, no reference image. Original generated photographic imagery, not documentary captures of named locations.
+- Inspected both outputs for full-bleed photography, natural material texture, no visible lettering, logos or borders. These bitmap sources are not native 4K; a larger JPEG export is an upscale.
+
+Exact ridge prompt:
+
+> Create one ORIGINAL photorealistic landscape desktop wallpaper, wide horizontal 16:9 composition, full bleed. A rugged alpine mountain ridge with finely detailed fractured grey rock and lingering snow high above a deep clear turquoise mountain lake, natural late-morning daylight, foreground tufts of alpine grasses and small stones at the water edge, realistic mountain shadows, distant peaks softly faded by atmospheric haze. Outdoors landscape photography, credible geology and scale, subtle cloud detail, detailed rock and water texture, restrained natural colours, rich photographic depth. This should look like an experienced landscape photographer's actual travel photograph, not digital art, not a flat vector illustration, not an unreal pristine symmetrical fantasy mountain. Wide restful composition but no empty placeholder text zone. No people, buildings, text, borders, framing, watermarks or logos. Large high-resolution bitmap suitable for wallpaper downloading.
+
+Exact canopy prompt:
+
+> Create one ORIGINAL photorealistic landscape desktop wallpaper, wide horizontal 16:9 composition, full bleed. A sunlit temperate forest pine grove viewed from within, tall irregular real tree trunks with detailed rough bark, interlocking canopy, moss-covered roots and ferns in the foreground, warm natural shafts of morning sunlight filtering through needles and leaves, genuinely dappled shadows across an earthy footpath and forest floor. Rich woodland textures and believable botanical variety, subtle atmospheric distance, realistic woodland photography with natural greens and warm daylight. It must read as a real high-quality landscape photograph, not painted scenery, not fantasy, not flat geometric illustration, not an overprocessed HDR image. No people, houses, animals, text, borders, framing, watermarks or logos. Large detailed bitmap suitable for desktop wallpaper downloading.
+
+Other wallpaper prompts and delivery encoding details: [WALLPAPER-PROMPTS.md](WALLPAPER-PROMPTS.md).

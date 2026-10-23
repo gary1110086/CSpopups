@@ -1,6 +1,6 @@
 # Browse release verification — 23 October 2026
 
-Release: `browse1`. Static multipage suite added alongside the existing Little Daily and standalone wallpaper versions.
+Release: `browse2`. Category-specific layout revision of the independent multipage suite. Existing Little Daily and standalone wallpaper files remain separate.
 
 - Root integration suite: **66 checks passed**. Includes 15 sites at 320/390/768 px, all five scenes reached across 100 seeds, repeatable seeded selection, a real 20-second foreground threshold, one interruption at a time, source table coverage, generated product assets, native child tab with `opener === null`, retained image workspace/output/settings, browser Back state and no runtime errors, missing assets or third-party runtime requests.
 - Actual BFCache suite: **17 checks passed**, Chrome launched with BFCache enabled. Confirmed `pageshow.persisted === true`; original wallpaper document reads the latest collection after Back, a second save preserves the detail-page save, and shared pacing does not regress. All four advertisement formats dismiss with Escape and clear background inert state.
@@ -16,3 +16,11 @@ The ordinary runtime makes only local same-origin asset requests. The facilitato
 The local image workspace is retained while an advertiser tab is opened and closed. Leaving or reloading that workspace clears its working image, as described in the product FAQ and guide. There is no account or cross-device progress sync.
 
 Public deployment is checked separately against the deployed commit before reporting publication.
+
+## Visual reference audit for browse2
+
+Reviewed actual reference and implementation screenshots, not only functional check results. Removed the repeated cream/serif oversized hero across all five scenes and ten destinations. Added category-specific navigation, table/list/catalogue structures and advertisements. Allrecipes/Pexels rendered access limitations and DHL HTTP2 failure are recorded in DESIGN-NOTES.md rather than treated as successful visual evidence.
+
+Four new bitmap wallpapers are native1672×941; JPEG exports to3840×2160 are explicitly marked resampled. Original8SVGexports remain independent. Mixed12itemgallery uses small WebP thumbnails; detail/download sources load separately. Favorites last-item removal now shows an empty state, with browser Back state retained.
+
+Current added checks: wallpaper27functional/layout checks plus12full-source responses, including a decoded3840×2160 bitmap export and real BFCache; shared advertisements260checks across10destinations,4formats,desktop/mobile/shortChineseviewport, focus trap/restore and native false-close child tab. Final copy aligned the game name with Signal Garden and voucher/reward amounts with catalogue options.

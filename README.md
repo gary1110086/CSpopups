@@ -1,6 +1,6 @@
 # Little Daily · 真实网页框架
 
-**新增独立版本 Browse：** [随机试玩 / Random start](https://gary1110086.github.io/CSpopups/browse/?lang=en&v=browse1) · [五个场景 / Choose a task](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=browse1) · [对标网站与骗局案例 / Benchmarks & cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh)。五种有实际功能的日常任务，随机搭配十个广告目的地，打开真实新标签页并保留原任务。详见 [browse/README.md](browse/README.md)。
+**新增独立版本 Browse：** [随机试玩 / Random start](https://gary1110086.github.io/CSpopups/browse/?lang=en&v=browse2) · [五个场景 / Choose a task](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=browse2) · [对标网站与骗局案例 / Benchmarks & cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh)。五种有实际功能的日常任务，随机搭配十个广告目的地，打开真实新标签页并保留原任务。详见 [browse/README.md](browse/README.md)。
 
 网站地址：[打开 Little Daily](https://gary1110086.github.io/CSpopups/) · [中文入口](https://gary1110086.github.io/CSpopups/?lang=zh)
 

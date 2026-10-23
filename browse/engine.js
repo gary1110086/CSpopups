@@ -15,7 +15,7 @@
   }
   const url = (file, query = {}) => {
     const u = new URL(file, location.href);
-    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'browse1');
+    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'browse2');
     Object.entries(query).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') u.searchParams.set(k, String(v)); });
     return u.href;
   };
@@ -30,8 +30,8 @@
   const scenes = [
     ['wallpapers', 'wallpaper.html', 'Stillwall', t('Find a wallpaper for your desktop.', '选一张喜欢的桌面壁纸。'), 'wall'],
     ['recipes', 'recipe.html', 'Pantry & Plate', t('Find something good to cook tonight.', '找一道今晚想做的菜。'), 'food'],
-    ['tools', 'tools.html', 'Pixelpress', t('Make an image smaller, without losing the feeling.', '把图片压小，保留喜欢的质感。'), 'tool'],
-    ['movies', 'movie.html', 'Frame / by frame', t('Find your next movie-night watch.', '挑一部周末想看的电影。'), 'film'],
+    ['tools', 'tools.html', 'Pixelpress', t('Compress an image and download the result.', '压缩一张图片并下载。'), 'tool'],
+    ['movies', 'movie.html', 'Frame Movies', t('Find your next movie-night watch.', '挑一部周末想看的电影。'), 'film'],
     ['events', 'events.html', 'Out There KL', t('Put together a weekend around town.', '安排一个周末出游计划。'), 'event']
   ];
   document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : 'en';
@@ -46,8 +46,8 @@
     return;
   }
   if (page === 'launch') {
-    document.title = t('Browse — five ordinary afternoons', 'Browse · 五种日常浏览');
-    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">browse<span> / field notes</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><p class="br-kicker">FIVE ORDINARY AFTERNOONS</p><h1>${t('A little browsing.<br>A few unexpected turns.','从日常浏览，<br>走进意料之外。')}</h1><p>${t('Pick a small task. Browse at your own pace. The web has other plans.','选一个小任务，按自己的节奏浏览。互联网可能另有安排。')}</p><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Start somewhere random','随机开始一次')} <span>↗</span></a></div><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art"><span>0${i+1}</span><b>${['◒','✳','▧','▶','↗'][i]}</b></div><div><small>${['DESKTOPS','GOOD FOOD','IMAGE TOOLS','MOVIE NIGHT','THE WEEKEND'][i]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">↗</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a></footer></main>`;
+    document.title = t('Browse — choose a website', 'Browse · 选择网站');
+    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" aria-hidden="true"></div><div><small>${[t('WALLPAPERS','桌面壁纸'),t('RECIPES','家常食谱'),t('IMAGE TOOLS','图片处理'),t('MOVIES','电影发现'),t('WEEKEND GUIDES','周末指南')][i]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a></footer></main>`;
     return;
   }
   if (document.body.dataset.destination) { window.BROWSE_DESTINATIONS?.(C); return; }
@@ -58,7 +58,7 @@
   // A seed is carried through native GET forms as well as anchors.
   for (const form of root.querySelectorAll('form')) {
     if ((form.method || 'get').toLowerCase() !== 'get') continue;
-    for (const [name,value] of [['lang',lang],['seed',seed],['v','browse1']]) {
+    for (const [name,value] of [['lang',lang],['seed',seed],['v','browse2']]) {
       if (form.querySelector(`[name="${name}"]`)) continue;
       const input = document.createElement('input'); input.type='hidden'; input.name=name; input.value=value; form.append(input);
     }
@@ -77,24 +77,26 @@
   const formats = shuffle(['drawer','panel','tiny','newsletter'], 'formats');
   const chosen = validSites.includes(params.get('ad')) ? params.get('ad') : null;
   const ads = {
-    corn:['Cornhub',t('Your evening, on autoplay.','让今晚，自动播放。'),t('Explore channels','探索频道'),'After hours · Featured channel'],
-    desk:['Form & Field',t('A calmer corner to work.','给工作，留一个安静角落。'),t('Shop the collection','浏览系列'),'Home & office'],
-    stock:['Framekind',t('The right image changes everything.','好图片，让灵感发生。'),t('Browse the library','浏览图片库'),'Images for your next idea'],
-    game:['Tiny Arcade',t('Just one more level.','再玩一关。'),t('Play free','免费试玩'),'Something for your break'],
+    corn:['Cornhub',t('Popular videos this week','本周热门视频'),t('Watch now','立即观看'),'Featured channel'],
+    desk:['Form & Field',t('Upgrade your desk. From RM39.','桌面配件，RM39 起。'),t('Shop now','立即选购'),'Desk accessories'],
+    stock:['Framekind',t('Find stock images for your next project','为下一个项目挑选图库素材'),t('Browse images','浏览图片'),'Photos & creative assets'],
+    game:['Tiny Arcade',t('Quick games. No installation.','即开即玩，无需安装。'),t('Play free','免费试玩'),'Free browser games'],
     security:['SecureLane',t('Unusual activity detected','检测到异常活动'),t('Review device status','查看设备状态'),'Security notice'],
     player:['Orbit Player',t('A player update is required','需要更新播放器'),t('Update player','更新播放器'),'Playback support'],
     software:['AppHarbor',t('Your download is ready','下载已就绪'),t('Download now','立即下载'),'Fast file tools'],
     prize:['Lucky Circle',t('You have been selected','你已被选中'),t('Claim your reward','领取奖励'),'Visitor reward'],
-    coupon:['Perk Basket',t('A little thank-you: a RM500 voucher','一份心意：RM500 礼券'),t('Take a short survey','参与简短问卷'),'Members offer'],
+    coupon:['Perk Basket',t('Unlock a RM100 shopping voucher','领取 RM100 购物券'),t('Take a short survey','参与简短问卷'),'Members offer'],
     parcel:['NorthPost',t('Delivery details need a quick update','派送信息需要更新'),t('View delivery','查看派送'),'Delivery notification']
   };
+  const adDescription = site => ({corn:t('Browse new releases, channels and member picks.','浏览新片、频道及会员推荐。'),desk:t('Desk lamps, organizers and mats. Browse the new workspace range.','台灯、收纳与桌垫，查看最新办公桌系列。'),stock:t('Search photos, illustrations and image collections.','搜索照片、插画及素材合集。'),game:t('Try a quick round of Signal Garden in your browser.','直接在浏览器试玩 Signal Garden。'),security:t('Review recent device warnings and protection status.','查看设备近期提示及防护状态。'),player:t('Install the latest player package to continue playback.','安装新版播放器程序包以继续播放。'),software:t('Your file utility package is available. Choose a download.','文件工具程序包已就绪，请选择下载。'),prize:t('Your visitor reward is waiting. Check your eligibility.','访客奖励待领取，立即查看资格。'),coupon:t('Complete the member survey to view this offer.','填写会员问卷，查看优惠领取方式。'),parcel:t('Action required: confirm the delivery details for your parcel.','需要处理：请确认包裹派送资料。')}[site]);
+  const adVisual = site => `<div class="br-ad-visual br-visual-${site}" aria-hidden="true">${({corn:'<span>Corn<b>hub</b></span><i>▶</i>',desk:'<span>FROM <b>RM39</b></span>',stock:'<span>Framekind<br><b>STOCK IMAGES</b></span>',game:'<span>SIGNAL<br>GARDEN</span><i>▦</i>',security:'<span>!</span>',player:'<span>▶</span>',software:'<span>ZIP</span>',prize:'<span>REWARD<br><b>RM800</b></span>',coupon:'<span>RM<b>500</b><small>SHOPPING VOUCHER</small></span>',parcel:'<span>NorthPost<br><b>DELIVERY UPDATE</b></span>'})[site]}</div>`;
   const adURL = site => url('destination.html', {site, from:scene});
   const wireAds = node => { for (const a of node.querySelectorAll('[data-br-ad]')) { const id = validSites.includes(a.dataset.brAd) ? a.dataset.brAd : deck[0]; a.href=adURL(id); a.target='_blank'; a.rel='noopener'; } };
   wireAds(root);
   if (!root.querySelector('[data-br-ad]')) {
     const strip=document.createElement('aside'); strip.className='br-inline-ad'; strip.setAttribute('aria-label',t('Advertisement','广告'));
     const id=shuffle(['desk','stock','game'],'inline')[0], a=ads[id];
-    strip.innerHTML=`<small>${t('ADVERTISEMENT','广告')}</small><div><span class="br-ad-glyph">${id==='desk'?'◒':id==='stock'?'▧':'✳'}</span><p><b>${a[0]}</b><br>${a[1]}</p><a data-br-ad="${id}">${a[2]} ↗</a></div>`; root.append(strip); wireAds(strip);
+    strip.innerHTML=`<small>${t('ADVERTISEMENT','广告')}</small><div>${adVisual(id)}<p><b>${a[0]}</b><br>${a[1]}</p><a data-br-ad="${id}">${a[2]} →</a></div>`; const main=root.querySelector('main');if(main)main.append(strip);else root.append(strip);wireAds(strip);
   }
   const overlayRoot=document.getElementById('interrupt-root') || document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
   let previousFocus=null;
@@ -108,7 +110,7 @@
     const a=ads[p.site], modal=p.format==='panel'||p.format==='newsletter';
     previousFocus=document.activeElement;
     root.inert=modal;
-    overlayRoot.innerHTML=`<div class="br-interrupt ${modal?'br-ad-backdrop':''}" ${modal?'role="presentation"':''}><section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)}" ${modal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1"><div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(a[0])}</span>${p.format==='panel'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Close promotion','关闭推广')}">×</a>`:''}<button class="br-real-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button></div><div class="br-ad-body"><span class="br-ad-eyebrow">${a[3]}</span><div class="br-ad-mark">${['security','player','parcel'].includes(p.site)?'!':p.site==='corn'?'▶':p.site==='prize'?'✦':'◒'}</div><h2>${a[1]}</h2><p>${p.site==='security'?t('Run a quick check to review recent warnings on this device.','快速检查此设备最近的提示。'):p.site==='parcel'?t('There is an outstanding delivery update for your address.','你的收件地址有一条待处理的派送更新。'):p.site==='player'?t('Continue watching in the latest supported player.','更新至支持的播放器后继续观看。'):t('A new find, selected for your day. See what is waiting.','为你的一天，带来一个新发现。')}</p><a class="br-ad-cta" data-br-ad="${p.site}">${a[2]} ↗</a>${p.format==='newsletter'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div><div class="br-ad-bottom">${p.format==='tiny'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}</div><p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></section></div>`;
+    overlayRoot.innerHTML=`<div class="br-interrupt ${modal?'br-ad-backdrop':''}" ${modal?'role="presentation"':''}><section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)}" ${modal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1"><div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(a[0])}</span>${p.format==='panel'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Close promotion','关闭推广')}">×</a>`:''}<button class="br-real-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button></div>${adVisual(p.site)}<div class="br-ad-body"><span class="br-ad-eyebrow">${a[3]}</span><h2>${a[1]}</h2><p>${adDescription(p.site)}</p><a class="br-ad-cta" data-br-ad="${p.site}">${a[2]} →</a>${p.format==='newsletter'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div><div class="br-ad-bottom">${p.format==='tiny'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}</div><p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></section></div>`;
     wireAds(overlayRoot);
     overlayRoot.querySelectorAll('[data-br-close]').forEach(b=>b.addEventListener('click',close));
     overlayRoot.querySelectorAll('[data-br-ad]').forEach(link=>link.addEventListener('click',e=>{

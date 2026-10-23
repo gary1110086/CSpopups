@@ -2,9 +2,9 @@
 
 Independent third version of CSpopups. The original Little Daily and the self-contained Stillwall experiment keep their own entry points and state.
 
-Play: https://gary1110086.github.io/CSpopups/browse/?lang=en&v=browse1
+Play: https://gary1110086.github.io/CSpopups/browse/?lang=en&v=browse2
 
-Scene selector: https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=browse1
+Scene selector: https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=browse2
 
 References and facilitator notes: https://gary1110086.github.io/CSpopups/browse/guide.html
 
@@ -34,7 +34,7 @@ Image processing happens locally. Work-in-progress uploaded image pixels remain 
 
 See `guide.html`, `scene-references.json`, and `destination-references.json`. They separate legitimate layout references from documented scam cases and explicitly identify adaptations of SMS/email delivery vectors into browser advertisements. Ordinary advertising is not itself evidence of fraud. Third-party sites do not provide these ads or endorse the experience.
 
-All eight Stillwall SVG works are original code-native artwork. Film posters and supplementary local outing illustrations are original code-native artwork. Non-explicit Cornhub covers are the project's existing generated contact sheet. `assets/recipe-photography.png`, `assets/outing-photography.png` and `assets/workspace-photography.png` are original eight-cell image sheets generated with the built-in ImageGen tool, 2026-10-23. Their prompts are recorded in `assets/ASSET-SOURCES.md`. No reference-site imagery or screenshots are bundled.
+All eight Stillwall SVG works are original code-native artwork. Four additional wallpapers are original generated raster artwork (native1672×941), with lightweight WebP previews and native-size JPEG delivery. Larger raster wallpaper exports are resampled, not native4K. Film posters use project-owned generated contact-sheet crops with original title typography. The earlier geometric outing gallery has been replaced by a useful departure checklist. Non-explicit Cornhub covers are the project's existing generated contact sheet. `assets/recipe-photography.png`, `assets/outing-photography.png` and `assets/workspace-photography.png` are original eight-cell image sheets generated with the built-in ImageGen tool, 2026-10-23. Their prompts are recorded in `assets/ASSET-SOURCES.md`. No reference-site imagery or screenshots are bundled.
 
 ## Local preview / package
 
@@ -43,3 +43,7 @@ No build step. Serve repository root with `python -m http.server 5175 --bind 127
 This folder intentionally shares `../wallpapers/assets/`, `../wallpapers/catalog.js` and `../assets/nightroom-contact-sheet.png`. Copying `browse/` alone is insufficient. The local release ZIP includes all of those dependencies. The original self-contained Stillwall ZIP remains separate.
 
 For reproducible QA, append `ad=security` (or another destination ID) to a **scene** URL to pin the scheduled destinations. It never accelerates the real foreground timer. Normal launcher links omit this override. The guide is for facilitators and is separate from ordinary task pages.
+
+## browse2 visual revision
+
+This revision replaces the shared editorial concept style with category-specific layouts adapted from inspected primary sources: Wallhaven, Allrecipes, KLFoodie, Rotten Tomatoes, Squoosh/iLoveIMG, IKEA, itch.io,7-Zip/mpv and courier tracking conventions. See [DESIGN-NOTES.md](DESIGN-NOTES.md) for concrete structure changes and inspection limitations. No source-site code, logos or photographs are copied. Original entries outside browse/ remain separate.
