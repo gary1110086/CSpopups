@@ -3,12 +3,12 @@
   const p=new URLSearchParams(location.search), zh=p.get('lang')==='zh',t=(en,cn)=>zh?cn:en;
   document.documentElement.lang=zh?'zh-Hans':'en';
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const u=(file,q={})=>{const x=new URL(file,location.href);x.searchParams.set('lang',zh?'zh':'en');x.searchParams.set('v','browse2');if(p.has('seed'))x.searchParams.set('seed',p.get('seed'));Object.entries(q).forEach(([k,v])=>x.searchParams.set(k,String(v)));return x.href;};
+  const u=(file,q={})=>{const x=new URL(file,location.href);x.searchParams.set('lang',zh?'zh':'en');x.searchParams.set('v','browse2a');if(p.has('seed'))x.searchParams.set('seed',p.get('seed'));Object.entries(q).forEach(([k,v])=>x.searchParams.set(k,String(v)));return x.href;};
   const el=document.getElementById('guide-root');
   const sources=list=>(list||[]).map(s=>`<p><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)} ↗</a><br><small>${esc(s.observed||s.pattern||'')}</small></p>`).join('');
   const instructions={wallpapers:t('Choose a wallpaper, save it and download a size that suits your screen.','选一张壁纸，收藏后下载适合屏幕的尺寸。'),recipes:t('Choose dinner, change the servings and work through the cooking steps.','挑一道晚餐，调整人份，勾选烹饪步骤。'),tools:t('Use an example or your own image, compare the result and export a smaller image.','用示例或自己的图片，比较压缩结果并导出。'),movies:t('Explore a genre, open film details and put a few titles on your watchlist.','浏览喜欢的类型，打开详情，建立想看片单。'),events:t('Filter by area and budget, save an outing and export a weekend plan.','按地区和预算筛选路线，收藏并导出周末计划。')};
   try {
-    const rs=await Promise.all([fetch('scene-references.json?v=browse2'),fetch('destination-references.json?v=browse2')]);
+    const rs=await Promise.all([fetch('scene-references.json?v=browse2a'),fetch('destination-references.json?v=browse2a')]);
     if(rs.some(r=>!r.ok))throw Error('reference response');
     const [sceneData,destinations]=await Promise.all(rs.map(r=>r.json()));
     if(!Array.isArray(sceneData.scenes)||!Array.isArray(destinations))throw Error('reference schema');

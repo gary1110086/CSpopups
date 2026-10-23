@@ -2,9 +2,9 @@
 
 Independent third version of CSpopups. The original Little Daily and the self-contained Stillwall experiment keep their own entry points and state.
 
-Play: https://gary1110086.github.io/CSpopups/browse/?lang=en&v=browse2
+Play: https://gary1110086.github.io/CSpopups/browse/?lang=en&v=browse2a
 
-Scene selector: https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=browse2
+Scene selector: https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=browse2a
 
 References and facilitator notes: https://gary1110086.github.io/CSpopups/browse/guide.html
 
