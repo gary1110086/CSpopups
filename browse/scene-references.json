@@ -18,7 +18,7 @@
           "observed": "Source text inspected for search, topic browsing, download and licensing structure. Rendered browser access encountered a challenge, so no claim of visual screenshot inspection."
         }
       ],
-      "adaptation": "Dark utility header, search and tag row, category tabs, compact image grid with dimensions, alphabetical sorting, saved collection and image/download metadata sidebar. Eight original SVGs plus four original generated bitmap wallpapers. JPEG export sizes1920/2560/3840 are generated locally; bitmap exports may upscale the source and are not claimed native4K."
+      "adaptation": "Dark utility catalogue with24 works:8 original vectors,4 original generated images and12 historical NASA photographs. Multiword/exclusion search, source/colour/tone/minimum-width filters, real metadata, three-image comparison, saved collection and local JPEG export. Fit/crop preview matches export; source resolution and resampled output sizes are distinguished. Original NASA record/date/credit/usage links are retained."
     },
     {
       "id": "recipes",
@@ -36,7 +36,7 @@
           "observed": "Source text confirms title/save/rating tools, prep/cook/total/servings, scaled ingredients and directions. Recipe content is not copied."
         }
       ],
-      "adaptation": "Practical white/orange cooking portal with compact logo/search/category navigation, breadcrumb, two-column recipe photographs, popular-recipe rail and advertisements. Native details support scaled servings, checked ingredients/steps, saved recipes, print and text export. Eight original recipes and generated food images."
+      "adaptation": "Practical white/orange cooking portal with24 original recipes and matched original generated food imagery. Search combines ingredient words, diet, equipment, total time, budget and allergen exclusions. Native details include scaled ingredients, unique method, equipment, substitutions, storage tips, checked steps, save/print/text export. Budgets are estimates, not live prices."
     },
     {
       "id": "tools",
@@ -54,7 +54,7 @@
           "observed": "Rendered interface inspected: compact tool navigation, direct image-selection control and conventional utility screen."
         }
       ],
-      "adaptation": "Blue/gray utility navigation with immediate select/drop/sample image input. Loaded image opens comparison canvas, image/output tabs and settings/export sidebar. Actual on-device JPEG/PNG/WebP conversion and resize; no copied logos or application code."
+      "adaptation": "Direct-upload local JPEG/PNG/WebP image workspace with6 real example assets, named output presets, before/after comparison, actual dimensions/bytes and target-file-size quality search. Output files are real and can be measured. PNG lossless behaviour and unmet targets are reported. Image pixels stay in the original document while native advertiser tabs open/close."
     },
     {
       "id": "movies",
@@ -67,7 +67,7 @@
           "observed": "Rendered catalogue inspected: compact masthead/search, trending strip, modest page heading, filters, dense poster rows and per-film ratings."
         }
       ],
-      "adaptation": "Dark/orange movie portal, compact catalogue title, filter rail and six-poster desktop grid, metadata and watchlist controls; details contain cast, reviews and personal ratings. Twelve original fictional films use photographic poster crops from the project-owned generated contact sheet. Previews are animated original stills, not licensed trailers."
+      "adaptation": "Dark/orange catalogue with24 titles:12 explicitly fictional film concepts and12 real Blender open films. Collection, genre, language, year, runtime and local-playable filters support real find tasks. Three matching films offer local licensed MP4 excerpts/trailer with sound, native controls and attribution. Other real films link official project sources; fictional titles do not masquerade as playable real trailers."
     },
     {
       "id": "events",
@@ -80,7 +80,7 @@
           "observed": "Local editorial cards, Food/Events/Lifestyle navigation, trending content and in-flow advertising."
         }
       ],
-      "adaptation": "Rendered KLFoodie homepage reverse-adapted into a1152px white portal on gray: utility strip, black/red compact logo/nav, central advertisement, two-column story feed and trending thumbnail rail. Eight evergreen original outing guides with generated images, area/budget filters, practical detail checklists, saved planner and text/ICS exports. No live tickets or invented publication history."
+      "adaptation": "KLFoodie-inspired local portal with24 evergreen original guides, original illustrative imagery, area/budget/duration/weather/transport/walk facets, detailed stop-order itineraries, rain alternatives, cost estimates, access notes and packing checklists. Saved planner exports text/ICS. This is not live event/ticket inventory; venue terms must be checked before a real visit."
     }
   ],
   "interactionReferences": [
@@ -94,5 +94,16 @@
       "url": "https://support.google.com/chrome/answer/95472?hl=en",
       "observed": "Browsers can block pop-ups. Advertiser tabs are only requested during a user click; a visible ordinary link is available if that request is blocked. No browser permissions or settings are changed."
     }
-  ]
+  ],
+  "deepRevision": {
+    "version": "deep1",
+    "checked": "2026-10-23",
+    "taskLibrary": "tasks.html",
+    "tasks": 15,
+    "mediaSources": [
+      "assets/NASA-SOURCES.md",
+      "assets/VIDEO-SOURCES.md",
+      "assets/ASSET-SOURCES.md"
+    ]
+  }
 }

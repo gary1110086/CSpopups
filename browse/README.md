@@ -1,49 +1,75 @@
-# Browse / 五种日常浏览
+# Browse — deep1
 
-Independent third version of CSpopups. The original Little Daily and the self-contained Stillwall experiment keep their own entry points and state.
+An independent, static multipage browsing exercise. The original Little Daily site and standalone Stillwall version keep their own runtime and entry points.
 
-Play: https://gary1110086.github.io/CSpopups/browse/?lang=en&v=browse2a
+- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=deep1
+- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=deep1
+- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=deep1
+- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=deep1
+- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=deep1
+- **Benchmarks and documented scam cases:** guide.html
 
-Scene selector: https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=browse2a
+## Five task websites
 
-References and facilitator notes: https://gary1110086.github.io/CSpopups/browse/guide.html
+| Website | Searchable material and working functions |
+|---|---|
+| Stillwall |24 works:8 original vectors,4 original generated artworks,12 historical NASA photographs. Combined word/exclusion search, source/colour/tone/minimum-width facets, three-image comparison, real source records, saved choices and local JPEG downloads at1920/2560/3840 widths. Fit preserves the complete image; Fill crops the edges, matching the preview. Larger raster outputs are resampled. |
+| Pantry & Plate |24 original bilingual recipes with matching original imagery, ingredient search, diet/equipment/total-time/budget/allergen-exclusion facets. Detailed ingredients, scaled servings, checked pantry and cooking steps, storage/substitution tips, save, print and actual recipe TXT export. Budgets are estimates. |
+| Out There KL |24 original evergreen outing guides. Area, budget, duration, weather, transport and walk filters; detailed stop order, transit, cost estimates, rain alternatives, access notes, preparation checks and primary venue links. Saved weekend planner exports TXT and ICS. Generated illustrations are labelled, not passed off as exact documentary photos. |
+| Frame Movies |24 entries:12 explicitly fictional film concepts and12 real Blender open films. Collection/genre/language/year/runtime/playable facets, director search, detailed sources/crew and watchlist. Three matching films have real locally hosted MP4 excerpts/trailer with sound and native controls. Other real entries link official project sources. |
+| Pixelpress |Real local image conversion, resize and compression,6 usable examples, presets, before/after views, dimensions and byte counts. Target-size mode searches for quality that meets an upload limit and reports failure honestly when it cannot. JPEG/PNG/WebP downloads contain actual processed pixels. |
 
-## 内容 / Contents
+## Fifteen concrete tasks
 
-Five task websites: wallpapers, recipes, image compression, film discovery and weekend outings. All use real document URLs, normal browser history and meaningful local interactions. Wallpaper download and image compression export real images. Food, film and route content is original; film listings and reviews are fictional. Outing guides are inspiration, not live schedules or ticket inventory.
+The task library gives participants constrained searches instead of merely asking them to look around. Examples: compare the1968 and1972 Earthrise photographs; find a vegan no-cook chickpea lunch under15minutes; identify an indoor rail-accessible museum route; find Ian Hubert's2012 open film; export a1280-pixel image below100KB.
 
-Ten advertiser destinations: Cornhub, Form & Field, Framekind, Tiny Arcade, SecureLane, Orbit Player, AppHarbor, Lucky Circle, Perk Basket, NorthPost. Four represent ordinary irrelevant advertising, and six adapt documented fraud patterns. Every destination has multiple native query routes and interactions. Native advertiser tabs preserve the parent task.
+Each assignment offers a collapsible brief, manual criteria, a local result notebook, current-page evidence and TXT note export. Notes survive native scene navigation, reload and Back/Forward, including BFCache. Downloads/video playback can add evidence, but task completion is participant-reported. There is no automatic correctness score, gamebar, visible clock or automatic ending.
 
-## 随机与弹窗 / Randomization
+A shared URL reproduces the scene and task on another computer. Notes, saved choices and uploaded image pixels **do not sync between computers**. Opening the same URL on another computer starts a fresh browser session.
 
-`index.html` generates a seed and navigates directly to one of five scenes. The same seed gives the same scene and shuffled destination/format sequence. `launch.html` creates fresh seeds for its buttons. A facilitator can reproduce a combination by sharing a scene URL containing `seed=example`; the guide lists direct links to all destinations.
+## Ten advertiser destinations
 
-Shared scheduling starts after 20 seconds of active, focused scene browsing. Thresholds are 20/45/75/110 seconds, at most four interruptions per seed, one at a time, with at least 12 active seconds since dismissal. Hidden or unfocused documents do not advance this schedule. Closed advertisements and progress survive native navigation and refresh in the same tab. Browser Back/Forward restores the latest interruption state, including BFCache.
+Cornhub, Form & Field, Framekind, Tiny Arcade, SecureLane, Orbit Player, AppHarbor, Lucky Circle, Perk Basket and NorthPost use separate category-specific layouts and native query routes. The first four represent ordinary/irrelevant promotions; the last six adapt documented fraud mechanisms, referenced in the guide.
 
-Four formats: dismissible corner card, a panel with a large misleading close-shaped advertiser link and a separate genuine small close button, a small low-prominence close card, and a conventional promotion with a decline option. Genuine dismissals and Escape remain available. Clicking an advertisement (including the misleading close-shaped link) opens a real new tab. If a browser blocks this, the card shows a normal fallback link. No mass tab opening, auto navigation on arbitrary content clicks, visible countdown or automatic ending is used in this version.
+This version deepens the destinations:8 shop products with size/finish variants, comparisons, bag and order summary;12 original stock assets with real downloads;6 distinct playable games; three correctly attributed video clips; and persistent choices across six bounded teaching flows. Installers, payments, device scans, rewards and delivery records are fictional teaching endpoints. No real executable, card, password, permission request or credential collection is provided.
 
-Native tab creation is subject to browser rules and installed extensions; the project cannot guarantee that every browser will permit it. Modifier clicks retain their ordinary browser behavior.
+## Interruptions and browser behaviour
 
-## 隐私 / Local state
+Only active, focused scene browsing advances the schedule. Thresholds remain20/45/75/110seconds, at most four interruptions per seed, one pending at a time, and at least12active seconds since dismissal. Hidden or unfocused documents pause the schedule. Navigation, refresh and Back/Forward reconcile the authoritative per-tab state.
 
-`br-run-v1:<seed>` stores foreground pacing; `br-data-v1:<seed>:...` stores scene progress in sessionStorage. Destination modules use their own namespaced local session records. There is no account, backend, analytics, ad network or cross-device progress synchronization. Browser settings can prevent storage; the site remains usable with in-memory state until navigation.
+Formats include a normal corner card, a panel with a large misleading close-shaped advertiser link and a separate small genuine close, a tiny-close card, and a promotion with a decline choice. Escape and true dismissals work. Modal formats make both the scene and assignment notebook inert and keep keyboard focus inside the dialog.
 
-Image processing happens locally. Work-in-progress uploaded image pixels remain in the open tab and are not persisted after leaving/reloading. Opening and closing an advertiser tab keeps that original document alive and retains its working image. Downloads that claim to install software and payments use a local educational endpoint with preset fictional data; no actual executable, payment, system permission or real credential collection is provided.
+An advertiser click opens a real native tab from the gesture, clears opener, and keeps the original task document alive. A visible native fallback remains if the browser blocks the tab. Modifier clicks retain normal browser behaviour. Ordinary content links are not intercepted by this independent edition.
 
-## References / attribution
+## Privacy and storage
 
-See `guide.html`, `scene-references.json`, and `destination-references.json`. They separate legitimate layout references from documented scam cases and explicitly identify adaptations of SMS/email delivery vectors into browser advertisements. Ordinary advertising is not itself evidence of fraud. Third-party sites do not provide these ads or endorse the experience.
+No account, backend, analytics, advertising SDK or runtime third-party asset fetch is required. Image pixels are processed locally. They remain in the existing tool document while advertiser tabs open and close, but are cleared when leaving/reloading that image page. Other task selections and notebooks use sessionStorage; inaccessible storage falls back to memory for that document.
 
-All eight Stillwall SVG works are original code-native artwork. Four additional wallpapers are original generated raster artwork (native1672×941), with lightweight WebP previews and native-size JPEG delivery. Larger raster wallpaper exports are resampled, not native4K. Film posters use project-owned generated contact-sheet crops with original title typography. The earlier geometric outing gallery has been replaced by a useful departure checklist. Non-explicit Cornhub covers are the project's existing generated contact sheet. `assets/recipe-photography.png`, `assets/outing-photography.png` and `assets/workspace-photography.png` are original eight-cell image sheets generated with the built-in ImageGen tool, 2026-10-23. Their prompts are recorded in `assets/ASSET-SOURCES.md`. No reference-site imagery or screenshots are bundled.
+Keys: br-run-v1:<seed> for pacing; br-data-v1:<seed>:... for scene state/notebooks; destination records have separate prefixes. Seeds can be shared; saved work is local. The task library has a facilitator answer view and is not designed to hide answers from a determined participant.
 
-## Local preview / package
+## Media and attribution
 
-No build step. Serve repository root with `python -m http.server 5175 --bind 127.0.0.1`, then open `/browse/`. Relative paths support the GitHub Pages `/CSpopups/` prefix.
+- Original generated art and recipe/outing imagery: assets/ASSET-SOURCES.md and assets/DEEP-A-SOURCES.md.
+- Twelve historical NASA photographs, original record IDs/dates/credits/files and usage guidance: assets/NASA-SOURCES.md.
+- Actual Big Buck Bunny and Tears of Steel60-second excerpts, and the official52-second Sintel trailer: assets/VIDEO-SOURCES.md. CC BY3.0 footage, credited beside each player. Excerpt duration is separate from full-film runtime. Original sound retained; no captions are supplied.
+- Nine additional real open-film stills, exact public source URLs and project license evidence: assets/OPEN-FILM-STILLS.md and movie-data.js.
 
-This folder intentionally shares `../wallpapers/assets/`, `../wallpapers/catalog.js` and `../assets/nightroom-contact-sheet.png`. Copying `browse/` alone is insufficient. The local release ZIP includes all of those dependencies. The original self-contained Stillwall ZIP remains separate.
+All runtime media is served locally. Source/license/venue anchors may open the third-party source when deliberately clicked. Reference sites and creators do not endorse the experience. No proprietary site, article or media collection was copied wholesale.
 
-For reproducible QA, append `ad=security` (or another destination ID) to a **scene** URL to pin the scheduled destinations. It never accelerates the real foreground timer. Normal launcher links omit this override. The guide is for facilitators and is separate from ordinary task pages.
+## Run or package
 
-## browse2 visual revision
+There is no build step. From repository root, run:
 
-This revision replaces the shared editorial concept style with category-specific layouts adapted from inspected primary sources: Wallhaven, Allrecipes, KLFoodie, Rotten Tomatoes, Squoosh/iLoveIMG, IKEA, itch.io,7-Zip/mpv and courier tracking conventions. See [DESIGN-NOTES.md](DESIGN-NOTES.md) for concrete structure changes and inspection limitations. No source-site code, logos or photographs are copied. Original entries outside browse/ remain separate.
+    python browse/preview-server.py --port 5175
+
+Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=deep1 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
+
+The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalog.js, wallpapers/assets/*.svg, assets/nightroom-contact-sheet.png, favicon.svg and .nojekyll. Copying browse/ alone is insufficient. The package includes START-HERE.txt and a SHA256 source manifest.
+
+## 中文使用说明
+
+本版提供五个可检索、可操作的日常网站与15项具体任务。建议活动人员先打开任务库，给参与者一个明确目标，再让其自行检索、核对详情、收藏或导出。广告过程中打开真实标签，参与者可关闭广告标签并回到原任务。没有显示计时器，不会自动结束。
+
+两位工作人员可分别负责说明任务与观察操作，以及在另一台设备查看主持人答案和资料、引导结束讨论。不要替参与者点击；观察他如何筛选、核对、识别误导控件，以及是否能恢复原来的工作。
+
+跨电脑可以共享链接，不能共享已保存的进度。出游预算和路线时间是规划示例，真实出行前应打开场馆来源核实。食谱过敏原筛选按所列食材执行，不能替代包装标签核对。具体授权来源均可在详情页或素材记录中查看。

@@ -23,3 +23,16 @@ This is an original implementation using conventional structures, not a pixel-id
 ## Asset delivery
 
 The four additional bitmap wallpapers were generated with the built-in ImageGen tool. Their native size is1672×941; larger download options resample the source. Original PNGs, native-size JPEG delivery files and640px WebP previews are included. Full prompts are in [ASSET-SOURCES.md](assets/ASSET-SOURCES.md) and [WALLPAPER-PROMPTS.md](assets/WALLPAPER-PROMPTS.md).
+
+
+## deep1: search tasks and content depth
+
+The visual structures from browse2a are retained. This iteration changes the reason and material for browsing:15 constrained bilingual find tasks;24 wallpaper works,24 recipes,24 outing guides,24 film entries,6 actual tool samples. Search facets now reflect the content of each site instead of a generic card search. Detail pages supply the facts necessary to distinguish near matches.
+
+Task instructions live in a separate library and an optional collapsible assignment strip. A bare site URL remains a normal website. The strip records manual checks, a participant result, the current page and real export/playback evidence; it has no visible clock or correctness score. Its DOM is separate from scene redraws so a servings change cannot erase notes. Both regions become inert for modal ads.
+
+Real media is integral:12 historical NASA photographs retain factual record identifiers;12 real open films have corresponding stills; three matching titles have actual MP4 playback with sound and standard controls. Original recipes and outing illustrations match their entries; no borrowed video is presented as the trailer of a fictional title. Exact assets, licenses and transformations are recorded under assets/.
+
+The ten advertiser sites gained variant/product comparisons, working carts and exports, stock downloads, six distinct small games, licensed media players, and persistent choices through bounded teaching workflows. The coupon creative and destination both advertise RM100.
+
+Validation uses Chrome because the Browser plugin is not available in this session. Desktop and320/390/768 widths are exercised with task strips, full document navigation, actual BFCache, native child tabs and measurable downloaded files. Reference sites were inspected during the previous visual revision; no fresh claim of matching every source page pixel-for-pixel is made.

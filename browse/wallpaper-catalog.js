@@ -8,5 +8,7 @@
     ['fluid','cobalt-glass','Cobalt glass','钴蓝玻璃','abstract',['#062E60','#10799D','#6EADBA'],['blue','glass','abstract','texture','蓝','抽象']]
   ].map(([file,id,en,zh,category,colors,tags]) => ({id,title:{en,zh},description:{en:'Original generated wallpaper artwork.',zh:'原创生成壁纸作品。'},category,localAsset:`assets/wallpaper-${file}.jpg`,thumbnail:`assets/wallpaper-${file}-thumb.webp`,colors,tags,width:1672,height:941}));
   const order=['ridge-lake','alpine-dawn','blue-hour-street','quiet-tide','forest-path','mistwood','cobalt-glass','blue-current','sunroom-study','after-rain','lunar-drift','sunday-cat'];
-  window.BROWSE_WALLPAPERS=[...originals,...data].sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+  const palettes={'alpine-dawn':['orange','warm'],'quiet-tide':['blue','cool'],mistwood:['green','dark'],'blue-current':['blue','cool'],'sunroom-study':['orange','warm'],'after-rain':['blue','dark'],'lunar-drift':['neutral','dark'],'sunday-cat':['orange','warm'],'ridge-lake':['blue','cool'],'forest-path':['green','dark'],'blue-hour-street':['blue','dark'],'cobalt-glass':['blue','dark']};
+  const base=[...originals,...data].sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id)).map(i=>({...i,source:i.localAsset?'generated':'vector',credit:'Stillwall Original',color:palettes[i.id]?.[0]||'neutral',mood:palettes[i.id]?.[1]||'neutral',license:'Personal use',captured:'2026-10-23'}));
+  window.BROWSE_WALLPAPERS=[...base,...(window.BROWSE_NASA_WALLPAPERS||[])];
 })();

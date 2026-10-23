@@ -51,9 +51,12 @@
 !/browse/*.css
 !/browse/*.json
 !/browse/*.md
+!/browse/preview-server.py
 !/browse/assets/
 !/browse/assets/*.png
 !/browse/assets/*.jpg
 !/browse/assets/*.webp
 !/browse/assets/*.svg
 !/browse/assets/*.md
+!/browse/assets/*.mp4
+!/browse/assets/*.vtt
