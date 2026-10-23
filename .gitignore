@@ -43,3 +43,15 @@
 !/wallpapers/vendor/assets/
 !/wallpapers/vendor/assets/*.png
 !/wallpapers/vendor/assets/*.svg
+
+# Independent randomized task websites and advertiser destinations.
+!/browse/
+!/browse/*.html
+!/browse/*.js
+!/browse/*.css
+!/browse/*.json
+!/browse/*.md
+!/browse/assets/
+!/browse/assets/*.png
+!/browse/assets/*.svg
+!/browse/assets/*.md

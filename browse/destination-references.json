@@ -1,0 +1,183 @@
+[
+  {
+    "id": "corn",
+    "name": "Cornhub",
+    "kind": "irrelevant promotion",
+    "benchmark": [
+      {
+        "title": "Vimeo Watch",
+        "url": "https://vimeo.com/watch",
+        "observed": "Video discovery navigation separates channels, categories, curated picks and on-demand access. Cornhub adapts the catalogue/channel/watch hierarchy with original non-explicit cinematic artwork and its own black/orange identity."
+      }
+    ],
+    "cases": [],
+    "adaptation": "Unrelated entertainment promotion; not labelled a scam. Native video, channel, saved and membership views. No explicit media or external adult site links."
+  },
+  {
+    "id": "desk",
+    "name": "Form & Field",
+    "kind": "ordinary advertisement",
+    "benchmark": [
+      {
+        "title": "IKEA Malaysia desks and computer desks",
+        "url": "https://www.ikea.com/my/en/cat/desks-computer-desks-20649/",
+        "observed": "Category groups lead to product lists and shopping decisions. Adapted into a workspace collection, product specifications, finish/quantity choices, bag and delivery review."
+      }
+    ],
+    "cases": [],
+    "adaptation": "Ordinary retail interruption. Fictional products and brand. Original generated workspace-photography.png supplies eight product images, not copied from the benchmark. Per-product materials, dimensions, finish/quantity options and cart. No actual checkout."
+  },
+  {
+    "id": "stock",
+    "name": "Framekind",
+    "kind": "ordinary advertisement",
+    "benchmark": [
+      {
+        "title": "Adobe Stock",
+        "url": "https://stock.adobe.com/my",
+        "observed": "Central asset search, content-type navigation, curated collections, library and pricing entry. Adapted as an original illustration catalogue with library, asset detail and licensing choices."
+      }
+    ],
+    "cases": [],
+    "adaptation": "Ordinary creative subscription/asset promotion. Uses only locally owned original art. Purchase stops at review."
+  },
+  {
+    "id": "game",
+    "name": "Tiny Arcade",
+    "kind": "ordinary advertisement",
+    "benchmark": [
+      {
+        "title": "itch.io games",
+        "url": "https://itch.io/games",
+        "observed": "Search and tag discovery sit alongside independent game cards and detail pages. Adapted as six fictional game entries, a shelf, developer journal and one playable star-collection mechanic."
+      }
+    ],
+    "cases": [],
+    "adaptation": "Normal game advertisement with a genuinely playable local browser mini-game. Six titles share a disclosed simple mini-game mechanic, not six full games."
+  },
+  {
+    "id": "security",
+    "name": "SecureLane",
+    "kind": "scam pattern",
+    "benchmark": [
+      {
+        "title": "Norton product catalogue",
+        "url": "https://www.norton.com/products",
+        "observed": "Security product navigation distinguishes device security, privacy, plans and help. Only its product-information vocabulary informs the fictional overview. Norton is a legitimate vendor, not presented as a scam."
+      }
+    ],
+    "cases": [
+      {
+        "title": "FTC: How To Spot, Avoid, and Report Tech Support Scams",
+        "url": "https://consumer.ftc.gov/articles/how-spot-avoid-and-report-tech-support-scams",
+        "pattern": "Bogus computer warnings and urgent help prompts are used to obtain money or remote access. The prototype uses invented web-scan results leading toward support, with the flow ending before remote access."
+      }
+    ],
+    "adaptation": "Fictional status dashboard, invented alerts, alert details, support options and a final educational stop. No device scanning, phone calls or remote sessions."
+  },
+  {
+    "id": "player",
+    "name": "Orbit Player",
+    "kind": "scam pattern",
+    "benchmark": [
+      {
+        "title": "mpv media player",
+        "url": "https://mpv.io/",
+        "observed": "A focused media-player product page with overview, features, installation and release information. Adapted into a fictional player overview, formats/features, release table and component choices."
+      }
+    ],
+    "cases": [
+      {
+        "title": "Proofpoint: An Update on Fake Updates",
+        "url": "https://www.proofpoint.com/us/blog/threat-insight/update-fake-updates-two-new-actors-and-new-mac-malware",
+        "pattern": "Fake update pages redirect normal browsing into a software-update lure and installation pathway. The prototype changes that observed browser-update mechanism into a fictional player/codec update context; it does not claim the exact fictional player is a documented campaign."
+      }
+    ],
+    "adaptation": "Update landing, release notes, platform selection and preselected components; final install click explains the lure without creating a file."
+  },
+  {
+    "id": "software",
+    "name": "AppHarbor",
+    "kind": "scam pattern",
+    "benchmark": [
+      {
+        "title": "7-Zip official site",
+        "url": "https://www.7-zip.org/",
+        "observed": "Software overview includes a feature list, platform/architecture-specific downloads, license information and release history. Adapted into richer fictional app cards and technical detail pages. The official 7-Zip site is not a scam."
+      }
+    ],
+    "cases": [
+      {
+        "title": "Microsoft Security: Counterfeit installers to system compromise",
+        "url": "https://www.microsoft.com/en-us/security/blog/2026/09/01/counterfeit-installers-system-compromise-tracking-deceptive-software-download-campaign/",
+        "pattern": "Counterfeit software-download sites impersonate trusted suppliers and distribute malicious installers. The prototype illustrates the professional catalogue/download wrapper using fictional applications, never real malware."
+      }
+    ],
+    "adaptation": "Six fictional apps, searchable catalogue, app screenshots, feature/specification pages, release history and download assistant choices. No executables generated."
+  },
+  {
+    "id": "prize",
+    "name": "Lucky Circle",
+    "kind": "scam pattern",
+    "benchmark": [
+      {
+        "title": "Microsoft Rewards overview",
+        "url": "https://rewards.bing.com/about",
+        "observed": "Reward catalogue themes include gift cards, member benefits and a discover/earn/redeem pathway. Used only as a reference for understandable reward organisation; legitimate Microsoft Rewards is not called a scam."
+      }
+    ],
+    "cases": [
+      {
+        "title": "FTC: Fake Prize, Sweepstakes, and Lottery Scams",
+        "url": "https://consumer.ftc.gov/articles/fake-prize-sweepstakes-and-lottery-scams",
+        "pattern": "Unexpected prizes followed by requests for processing, handling or shipping fees are classic advance-fee scams."
+      }
+    ],
+    "adaptation": "Three invented rewards, selection, preset recipient, release-fee summary and final explanation. No actual winner claim, payment or personal data collection."
+  },
+  {
+    "id": "coupon",
+    "name": "Perk Basket",
+    "kind": "scam pattern",
+    "benchmark": [
+      {
+        "title": "Groupon",
+        "url": "https://www.groupon.com/",
+        "observed": "Searchable deal discovery uses category navigation and individual offer detail. Adapted as four fictional daily-life offers and a local voucher wallet. Groupon is a legitimate layout reference, not alleged to be a scam."
+      }
+    ],
+    "cases": [
+      {
+        "title": "FTC: Consumer Protection Data Spotlight June 2023",
+        "url": "https://www.ftc.gov/system/files/ftc_gov/pdf/texts-spotlight-final.pdf",
+        "pattern": "Reward/gift messages can lead to small shipping-payment requests that expose card information."
+      },
+      {
+        "title": "FTC: Inside a low-cost trial scam",
+        "url": "https://www.consumer.ftc.gov/sites/www.consumer.ftc.gov/files/articles/pdf/0558-low-cost-trial-scam-infographic.pdf",
+        "pattern": "An inexpensive trial can lead to a much larger monthly subscription. Prototype combines a reward survey and low-cost subscription pattern; it is a composite, not an exact reproduction of one campaign."
+      }
+    ],
+    "adaptation": "Offer categories, detail, three preset preference questions, activation cost plus visible recurring condition, then educational stop. No contact or financial fields."
+  },
+  {
+    "id": "parcel",
+    "name": "NorthPost",
+    "kind": "scam pattern",
+    "benchmark": [
+      {
+        "title": "DHL Malaysia Track & Trace",
+        "url": "https://www.dhl.com/my-en/home/tracking.html",
+        "observed": "Tracking uses a shipment reference and leads into status/help information. Adapted as a fictional courier tracking form, journey timeline and delivery-options pathway. DHL is not called a scam."
+      }
+    ],
+    "cases": [
+      {
+        "title": "US Postal Inspection Service: Smishing Package Tracking Text Scams",
+        "url": "https://www.uspis.gov/news/scam-article/smishing-package-tracking-text-scams",
+        "pattern": "Unsolicited delivery messages and unrecognised links claim a shipment needs action. The prototype adapts that fake delivery-management pattern into an advertising interruption rather than claiming an exact SMS reproduction."
+      }
+    ],
+    "adaptation": "Invented tracking number, delivery exception, preset address, delivery window, small reprocessing charge and final explanation. No real tracking lookup or financial fields."
+  }
+]
