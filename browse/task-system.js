@@ -1,7 +1,7 @@
 (() => {
   'use strict';
-  const routes={wallpapers:'wallpaper.html',recipes:'recipe.html',events:'events.html',movies:'movie.html',tools:'tools.html'};
-  const names={wallpapers:'Stillwall',recipes:'Pantry & Plate',events:'Out There KL',movies:'Frame Movies',tools:'Pixelpress'};
+  const routes=Object.fromEntries((window.BROWSE_SCENE_INDEX||[]).map(s=>[s.id,s.file]));
+  const names=Object.fromEntries((window.BROWSE_SCENE_INDEX||[]).map(s=>[s.id,s.name]));
   window.BROWSE_TASK_UI={
     renderLibrary(C){
       const {root,params,t,esc,url,lang}=C,local=a=>a[lang==='zh'?1:0],selected=params.get('scene'),tasks=window.BROWSE_TASKS.filter(x=>!routes[selected]||x.scene===selected),host=params.get('mode')==='host';

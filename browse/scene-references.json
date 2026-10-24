@@ -1,6 +1,6 @@
 {
-  "checked": "2026-10-23",
-  "note": "Primary source inspection on 23 October 2026: screenshots where accessible; source text where anti-bot or transport errors prevented a rendered page. Normal layout references and scam evidence are separate. No third-party source code, branding or photographs are bundled.",
+  "checked": "2026-10-24",
+  "note": "Reference observations distinguish rendered inspections from readable source text and blocked requests. Brands and implementation are original. Reusable third-party images are bundled under the licences and derivative records linked below; a design reference is not a scam accusation.",
   "scenes": [
     {
       "id": "wallpapers",
@@ -18,7 +18,7 @@
           "observed": "Source text inspected for search, topic browsing, download and licensing structure. Rendered browser access encountered a challenge, so no claim of visual screenshot inspection."
         }
       ],
-      "adaptation": "Dark utility catalogue with24 works:8 original vectors,4 original generated images and12 historical NASA photographs. Multiword/exclusion search, source/colour/tone/minimum-width filters, real metadata, three-image comparison, saved collection and local JPEG export. Fit/crop preview matches export; source resolution and resampled output sizes are distinguished. Original NASA record/date/credit/usage links are retained."
+      "adaptation": "Dark photographic catalogue with24 real photographs:12 reusable landscape/interior/abstract photos and12 historical NASA images. Multiword/exclusion search, colour/tone/source/minimum-width facets, comparison, source records, save and real JPEG export. Delivered dimensions and resampling are explicit."
     },
     {
       "id": "recipes",
@@ -36,7 +36,7 @@
           "observed": "Source text confirms title/save/rating tools, prep/cook/total/servings, scaled ingredients and directions. Recipe content is not copied."
         }
       ],
-      "adaptation": "Practical white/orange cooking portal with24 original recipes and matched original generated food imagery. Search combines ingredient words, diet, equipment, total time, budget and allergen exclusions. Native details include scaled ingredients, unique method, equipment, substitutions, storage tips, checked steps, save/print/text export. Budgets are estimates, not live prices."
+      "adaptation": "Practical cooking portal with24 original bilingual recipes, ingredient/diet/equipment/time/budget/allergen facets, serving scaling, checked ingredients/steps, substitutions, storage and TXT exports. Reusable real photos retain provenance and distinguish illustration from exact-dish documentation."
     },
     {
       "id": "tools",
@@ -54,7 +54,7 @@
           "observed": "Rendered interface inspected: compact tool navigation, direct image-selection control and conventional utility screen."
         }
       ],
-      "adaptation": "Direct-upload local JPEG/PNG/WebP image workspace with6 real example assets, named output presets, before/after comparison, actual dimensions/bytes and target-file-size quality search. Output files are real and can be measured. PNG lossless behaviour and unmet targets are reported. Image pixels stay in the original document while native advertiser tabs open/close."
+      "adaptation": "Local JPEG/PNG/WebP workspace with6 real photographic samples, before/after comparison, output presets, measured dimensions/bytes and target-size quality search. Downloads contain actual pixels. Source photographers and licences remain credited."
     },
     {
       "id": "movies",
@@ -67,7 +67,7 @@
           "observed": "Rendered catalogue inspected: compact masthead/search, trending strip, modest page heading, filters, dense poster rows and per-film ratings."
         }
       ],
-      "adaptation": "Dark/orange catalogue with24 titles:12 explicitly fictional film concepts and12 real Blender open films. Collection, genre, language, year, runtime and local-playable filters support real find tasks. Three matching films offer local licensed MP4 excerpts/trailer with sound, native controls and attribution. Other real films link official project sources; fictional titles do not masquerade as playable real trailers."
+      "adaptation": "24 real works:12 Blender open films and12 silent-era classics. Matching actual stills/poster scans, source links, genre/language/year/runtime/playable facets, viewing notes and watchlist. Three matching works have licensed local MP4 excerpts or trailer with native playback. Personal ratings are stored locally; no invented critic scores."
     },
     {
       "id": "events",
@@ -80,7 +80,72 @@
           "observed": "Local editorial cards, Food/Events/Lifestyle navigation, trending content and in-flow advertising."
         }
       ],
-      "adaptation": "KLFoodie-inspired local portal with24 evergreen original guides, original illustrative imagery, area/budget/duration/weather/transport/walk facets, detailed stop-order itineraries, rain alternatives, cost estimates, access notes and packing checklists. Saved planner exports text/ICS. This is not live event/ticket inventory; venue terms must be checked before a real visit."
+      "adaptation": "Local editorial portal with24 evergreen original KL outing guides, reusable location photos, area/budget/duration/weather/transport/walk facets, detailed stop-order itineraries, rain options, access notes and checklists. Saved planner exports TXT/ICS. Not live ticket inventory; photographs do not prove current venue conditions."
+    },
+    {
+      "id": "books",
+      "route": "book.html",
+      "name": "Folio / 书籍",
+      "benchmark": [
+        {
+          "title": "Project Gutenberg advanced search",
+          "url": "https://www.gutenberg.org/ebooks/",
+          "observed": "Source text inspected2026-10-24: multi-field title/author/subject/language/filetype search; bibliographic records and download links. Historical scans are separately credited."
+        }
+      ],
+      "adaptation": "Historical reading catalogue with20 editions of18 works, original covers or frontispieces, author/language/era/genre filters, edition details, substantial public-domain passages, bookmarks, reading list and real TXT exports. Illustration language and edition language are distinguished."
+    },
+    {
+      "id": "museum",
+      "route": "museum.html",
+      "name": "Open Collection / 藏品",
+      "benchmark": [
+        {
+          "title": "The Met Collection",
+          "url": "https://www.metmuseum.org/art/collection",
+          "observed": "Source text inspected2026-10-24: artist/title/date/object search, advanced search and Open Access images. Artwork media and records come from the Met public collection API under its Open Access terms."
+        }
+      ],
+      "adaptation": "24 real Met objects with actual CC0 images, object numbers, dates, artists, media and record links. Search/filter, image study, comparison, curated exhibition and TXT object-label exports."
+    },
+    {
+      "id": "nature",
+      "route": "nature.html",
+      "name": "Field Guide / 鸟类识别",
+      "benchmark": [
+        {
+          "title": "Cornell Lab All About Birds",
+          "url": "https://www.allaboutbirds.org/guide/",
+          "observed": "Source text inspected2026-10-24: explicitly North American guide, keyword search, family/shape browsing and identification skills. Photos/audio use separately credited reusable sources, not Cornell media copying."
+        }
+      ],
+      "adaptation": "18 North American species with real attributed photographs, identification marks, habitat/colour/size facets, species comparisons, bird sound where provided, sightings and notebook exports. Region and audio provenance are explicit."
+    },
+    {
+      "id": "travel",
+      "route": "travel.html",
+      "name": "Trackside / 轨道出行",
+      "benchmark": [
+        {
+          "title": "Rapid KL integrated transit map",
+          "url": "https://myrapid.com.my/bus-train/rapid-kl/rapid-kl-integrated-transit-map/",
+          "observed": "Official map URL returned403 to the web-fetch tool2026-10-24; no rendered inspection is claimed. Route topology is checked against primary published operator network information in the journey source record."
+        }
+      ],
+      "adaptation": "Local28-node KL rail planner with real station names, interchange topology, route alternatives, stop-by-stop details, saved trips and TXT/ICS exports. Journey times and service schedules are explicitly demonstration estimates."
+    },
+    {
+      "id": "market",
+      "route": "market.html",
+      "name": "loop / 二手相机",
+      "benchmark": [
+        {
+          "title": "MPB used cameras",
+          "url": "https://www.mpb.com/en-us/category/used-cameras",
+          "observed": "Source text inspected2026-10-24: category/brand navigation, DSLR/mirrorless/film families and mount-specific equipment taxonomy. No MPB product photograph, code or seller record is bundled."
+        }
+      ],
+      "adaptation": "18 fictional secondhand listings based on6 real camera models. Credited model photographs, category/mount/condition/budget/place facets,3-item comparison, accessory checklist, saved items, seller profiles, local enquiry drafts and real TXT exports. Model images do not document any fictional unit condition; drafts are never transmitted."
     }
   ],
   "interactionReferences": [
@@ -96,14 +161,17 @@
     }
   ],
   "deepRevision": {
-    "version": "deep1",
-    "checked": "2026-10-23",
+    "version": "deep2",
+    "checked": "2026-10-24",
     "taskLibrary": "tasks.html",
-    "tasks": 15,
+    "tasks": 30,
     "mediaSources": [
+      "assets/REAL-MEDIA-SOURCES.md",
+      "culture-SOURCES.md",
+      "journey-SOURCES.md",
+      "assets/MARKET-SOURCES.md",
       "assets/NASA-SOURCES.md",
-      "assets/VIDEO-SOURCES.md",
-      "assets/ASSET-SOURCES.md"
+      "assets/VIDEO-SOURCES.md"
     ]
   }
 }

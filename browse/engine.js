@@ -15,8 +15,8 @@
   }
   const url = (file, query = {}) => {
     const u = new URL(file, location.href);
-    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'deep1');
-    if(params.has('task')&&/^(?:wallpaper|recipe|events|movie|tools|index)\.html$/.test(u.pathname.split('/').pop()))u.searchParams.set('task',params.get('task'));
+    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'deep2');
+    if(params.has('task')&&['index.html',...(window.BROWSE_SCENE_INDEX||[]).map(s=>s.file)].includes(u.pathname.split('/').pop()))u.searchParams.set('task',params.get('task'));
     Object.entries(query).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') u.searchParams.set(k, String(v)); });
     return u.href;
   };
@@ -28,13 +28,7 @@
   const hash = s => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
   const rng = salt => { let a = hash(seed + salt); return () => { a += 0x6D2B79F5; let n = a; n = Math.imul(n ^ n >>> 15, n | 1); n ^= n + Math.imul(n ^ n >>> 7, n | 61); return ((n ^ n >>> 14) >>> 0) / 4294967296; }; };
   const shuffle = (arr, salt) => { const out = [...arr], r = rng(salt); for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; } return out; };
-  const scenes = [
-    ['wallpapers', 'wallpaper.html', 'Stillwall', t('Find a wallpaper for your desktop.', '选一张喜欢的桌面壁纸。'), 'wall'],
-    ['recipes', 'recipe.html', 'Pantry & Plate', t('Find something good to cook tonight.', '找一道今晚想做的菜。'), 'food'],
-    ['tools', 'tools.html', 'Pixelpress', t('Compress an image and download the result.', '压缩一张图片并下载。'), 'tool'],
-    ['movies', 'movie.html', 'Frame Movies', t('Find your next movie-night watch.', '挑一部周末想看的电影。'), 'film'],
-    ['events', 'events.html', 'Out There KL', t('Put together a weekend around town.', '安排一个周末出游计划。'), 'event']
-  ];
+  const scenes = (window.BROWSE_SCENE_INDEX||[]).map(s=>[s.id,s.file,s.name,s.brief[lang==='zh'?1:0],s.art,s.kicker[lang==='zh'?1:0],s.cover]);
   document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : 'en';
   const root = document.getElementById('site-root');
   const C = {root, params, lang, t, esc, url, read, write, complete(label) { write('last-completed', {label: String(label).slice(0,120), at: Date.now()}); window.dispatchEvent(new CustomEvent('browse:complete',{detail:String(label).slice(0,160)})); }};
@@ -51,7 +45,7 @@
   }
   if (page === 'launch') {
     document.title = t('Browse — choose a website', 'Browse · 选择网站');
-    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><p class="br-task-entry"><a href="${url('tasks.html')}">${t('Choose a specific search task','选择具体检索任务')} →</a> · <a href="${url('index.html',{task:'random',seed:randomSeed()})}">${t('Random task','随机任务')}</a></p><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" aria-hidden="true"></div><div><small>${[t('WALLPAPERS','桌面壁纸'),t('RECIPES','家常食谱'),t('IMAGE TOOLS','图片处理'),t('MOVIES','电影发现'),t('WEEKEND GUIDES','周末指南')][i]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a></footer></main>`;
+    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><p class="br-task-entry"><a href="${url('tasks.html')}">${t('Choose a specific search task','选择具体检索任务')} →</a> · <a href="${url('index.html',{task:'random',seed:randomSeed()})}">${t('Random task','随机任务')}</a></p><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" style="${s[6]?'background-image:url('+esc(s[6])+');background-size:cover;background-position:center;':''}" aria-hidden="true"></div><div><small>${s[5]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a></footer></main>`;
     return;
   }
   if (document.body.dataset.destination) { window.BROWSE_DESTINATIONS?.(C); return; }
@@ -63,7 +57,7 @@
   // A seed is carried through native GET forms as well as anchors.
   for (const form of root.querySelectorAll('form')) {
     if ((form.getAttribute('method') || 'get').toLowerCase() !== 'get') continue;
-    for (const [name,value] of [['lang',lang],['seed',seed],['v','deep1'],...(brief?[['task',brief.id]]:[])]) {
+    for (const [name,value] of [['lang',lang],['seed',seed],['v','deep2'],...(brief?[['task',brief.id]]:[])]) {
       if (form.querySelector(`[name="${name}"]`)) continue;
       const input = document.createElement('input'); input.type='hidden'; input.name=name; input.value=value; form.append(input);
     }
@@ -100,21 +94,25 @@
   wireAds(root);
   // Scene controls can redraw a document region (servings, saved filters, etc.).
   // Reconcile newly created native links/forms without replacing scene handlers.
+  const ensureInlineAd=()=>{
+    if(root.querySelector('[data-br-ad]'))return;
+    const strip=document.createElement('aside');strip.className='br-inline-ad';strip.setAttribute('aria-label',t('Advertisement','广告'));
+    const id=shuffle(['desk','stock','game'],'inline')[0],a=ads[id];
+    strip.innerHTML=`<small>${t('ADVERTISEMENT','广告')}</small><div>${adVisual(id)}<p><b>${a[0]}</b><br>${a[1]}</p><a data-br-ad="${id}">${a[2]} →</a></div>`;
+    (root.querySelector('main')||root).append(strip);wireAds(strip);
+  };
   new MutationObserver(()=>{
+    ensureInlineAd();
     wireAds(root);
     for(const form of root.querySelectorAll('form')){
       if((form.getAttribute('method')||'get').toLowerCase()!=='get')continue;
-      for(const [name,value] of [['lang',lang],['seed',seed],['v','deep1'],...(brief?[['task',brief.id]]:[])]){
+      for(const [name,value] of [['lang',lang],['seed',seed],['v','deep2'],...(brief?[['task',brief.id]]:[])]){
         if(form.querySelector(`[name="${name}"]`))continue;
         const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;form.append(input);
       }
     }
   }).observe(root,{childList:true,subtree:true});
-  if (!root.querySelector('[data-br-ad]')) {
-    const strip=document.createElement('aside'); strip.className='br-inline-ad'; strip.setAttribute('aria-label',t('Advertisement','广告'));
-    const id=shuffle(['desk','stock','game'],'inline')[0], a=ads[id];
-    strip.innerHTML=`<small>${t('ADVERTISEMENT','广告')}</small><div>${adVisual(id)}<p><b>${a[0]}</b><br>${a[1]}</p><a data-br-ad="${id}">${a[2]} →</a></div>`; const main=root.querySelector('main');if(main)main.append(strip);else root.append(strip);wireAds(strip);
-  }
+  ensureInlineAd();
   const overlayRoot=document.getElementById('interrupt-root') || document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
   let previousFocus=null;
   const close = () => {

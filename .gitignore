@@ -60,3 +60,5 @@
 !/browse/assets/*.md
 !/browse/assets/*.mp4
 !/browse/assets/*.vtt
+!/browse/assets/*.mp3
+!/browse/assets/*.json

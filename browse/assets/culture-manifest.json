@@ -1,0 +1,976 @@
+{
+  "verified": "2026-10-24",
+  "books": 20,
+  "distinctWorks": 18,
+  "artworks": 24,
+  "records": [
+    {
+      "type": "book",
+      "id": "pride-prejudice",
+      "title": "Pride and Prejudice",
+      "source": "https://www.gutenberg.org/ebooks/1342",
+      "textEdition": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/1342/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/1342",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        1500,
+        2114
+      ],
+      "localDimensions": [
+        1277,
+        1800
+      ],
+      "image": "assets/culture-book-pride-prejudice.jpg",
+      "localSHA256": "06f3c11cefbb5885bb1e2c90f960908a9e682e8a3def277babce770a740b7eb1",
+      "localBytes": 895823
+    },
+    {
+      "type": "book",
+      "id": "alice",
+      "title": "Alice’s Adventures in Wonderland",
+      "source": "https://www.gutenberg.org/ebooks/11",
+      "textEdition": "https://www.gutenberg.org/cache/epub/11/pg11-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/28885/images/f0002-image.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/28885",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        256,
+        500
+      ],
+      "localDimensions": [
+        256,
+        500
+      ],
+      "image": "assets/culture-book-alice.jpg",
+      "localSHA256": "64eaf9e757d5c1b119eb66d88dbcba7a6b0404cd864d779e314aa14f0951d769",
+      "localBytes": 49765
+    },
+    {
+      "type": "book",
+      "id": "sherlock",
+      "title": "The Adventures of Sherlock Holmes",
+      "source": "https://www.gutenberg.org/ebooks/1661",
+      "textEdition": "https://www.gutenberg.org/cache/epub/1661/pg1661-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/1661/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/1661",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        668,
+        1000
+      ],
+      "localDimensions": [
+        668,
+        1000
+      ],
+      "image": "assets/culture-book-sherlock.jpg",
+      "localSHA256": "a1f92fc8ebd9c6fd900576cbd7575cbc1e3c754709a9358711fc109bce5238c5",
+      "localBytes": 100160
+    },
+    {
+      "type": "book",
+      "id": "wizard-oz",
+      "title": "The Wonderful Wizard of Oz",
+      "source": "https://www.gutenberg.org/ebooks/55",
+      "textEdition": "https://www.gutenberg.org/cache/epub/55/pg55-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/55/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/55",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        750,
+        1000
+      ],
+      "localDimensions": [
+        750,
+        1000
+      ],
+      "image": "assets/culture-book-wizard-oz.jpg",
+      "localSHA256": "ed428d77d85adb96eac11938db9aa9214a75d533557f7a88ac16949383dd160e",
+      "localBytes": 275763
+    },
+    {
+      "type": "book",
+      "id": "treasure-island",
+      "title": "Treasure Island",
+      "source": "https://www.gutenberg.org/ebooks/120",
+      "textEdition": "https://www.gutenberg.org/cache/epub/120/pg120-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/120/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/120",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        671,
+        1000
+      ],
+      "localDimensions": [
+        671,
+        1000
+      ],
+      "image": "assets/culture-book-treasure-island.jpg",
+      "localSHA256": "26c4c6d89702c2b076bb0ca8e710077287dba4870441e5119a01c9d65754173f",
+      "localBytes": 266074
+    },
+    {
+      "type": "book",
+      "id": "christmas-carol",
+      "title": "A Christmas Carol",
+      "source": "https://www.gutenberg.org/ebooks/46",
+      "textEdition": "https://www.gutenberg.org/cache/epub/46/pg46-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/46/images/bookcover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/46",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        660,
+        990
+      ],
+      "localDimensions": [
+        660,
+        990
+      ],
+      "image": "assets/culture-book-christmas-carol.jpg",
+      "localSHA256": "abfd1dbf4932c49d6d008ec1a3629ab7af2283655a1eaec932578101584313c9",
+      "localBytes": 81561
+    },
+    {
+      "type": "book",
+      "id": "tom-sawyer",
+      "title": "The Adventures of Tom Sawyer",
+      "source": "https://www.gutenberg.org/ebooks/74",
+      "textEdition": "https://www.gutenberg.org/cache/epub/74/pg74-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/74/images/bookcover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/74",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        764,
+        974
+      ],
+      "localDimensions": [
+        764,
+        974
+      ],
+      "image": "assets/culture-book-tom-sawyer.jpg",
+      "localSHA256": "a7792aeb2b5bec7b82da3188bdce4631897bebd437373edd156dfde72b5c3197",
+      "localBytes": 250199
+    },
+    {
+      "type": "book",
+      "id": "huck-finn",
+      "title": "Adventures of Huckleberry Finn",
+      "source": "https://www.gutenberg.org/ebooks/76",
+      "textEdition": "https://www.gutenberg.org/cache/epub/76/pg76-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/76/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/76",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        877,
+        973
+      ],
+      "localDimensions": [
+        877,
+        973
+      ],
+      "image": "assets/culture-book-huck-finn.jpg",
+      "localSHA256": "4046b45bafa109a34c5aaa5a16b88232705f1b11f9224deb1c920f600087026d",
+      "localBytes": 315395
+    },
+    {
+      "type": "book",
+      "id": "robinson-crusoe",
+      "title": "Robinson Crusoe",
+      "source": "https://www.gutenberg.org/ebooks/521",
+      "textEdition": "https://www.gutenberg.org/cache/epub/521/pg521-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/12623/images/image.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/12623",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        483,
+        411
+      ],
+      "localDimensions": [
+        483,
+        411
+      ],
+      "image": "assets/culture-book-robinson-crusoe.jpg",
+      "localSHA256": "f862f366a55f153d65c78bca632a5582467d2597a0514803cf6508bb69dc473a",
+      "localBytes": 88846
+    },
+    {
+      "type": "book",
+      "id": "don-quixote",
+      "title": "Don Quixote",
+      "source": "https://www.gutenberg.org/ebooks/996",
+      "textEdition": "https://www.gutenberg.org/cache/epub/996/pg996-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/996/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/996",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        1274,
+        1650
+      ],
+      "localDimensions": [
+        1274,
+        1650
+      ],
+      "image": "assets/culture-book-don-quixote.jpg",
+      "localSHA256": "7ef329e61a5b8055573aee422bb1699d3c39523a5ccc35b35350f07f33837af2",
+      "localBytes": 310346
+    },
+    {
+      "type": "book",
+      "id": "frankenstein",
+      "title": "Frankenstein; or, The Modern Prometheus",
+      "source": "https://www.gutenberg.org/ebooks/84",
+      "textEdition": "https://www.gutenberg.org/cache/epub/84/pg84-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/42324/images/tp.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/42324",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        320,
+        500
+      ],
+      "localDimensions": [
+        320,
+        500
+      ],
+      "image": "assets/culture-book-frankenstein.jpg",
+      "localSHA256": "8438aa7581636226599dbbbc0433b17643a8827c6d64d6be6345eafda9b64ea1",
+      "localBytes": 26613
+    },
+    {
+      "type": "book",
+      "id": "dracula",
+      "title": "Dracula",
+      "source": "https://www.gutenberg.org/ebooks/345",
+      "textEdition": "https://www.gutenberg.org/cache/epub/345/pg345-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/345/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/345",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        659,
+        1000
+      ],
+      "localDimensions": [
+        659,
+        1000
+      ],
+      "image": "assets/culture-book-dracula.jpg",
+      "localSHA256": "4eed432d58f0ba45783312a0f73145de6dab37b438ba7d0760c7cc555efaeb10",
+      "localBytes": 271418
+    },
+    {
+      "type": "book",
+      "id": "jane-eyre",
+      "title": "Jane Eyre: An Autobiography",
+      "source": "https://www.gutenberg.org/ebooks/1260",
+      "textEdition": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/1260/images/p30s.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/1260",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        350,
+        506
+      ],
+      "localDimensions": [
+        350,
+        506
+      ],
+      "image": "assets/culture-book-jane-eyre.jpg",
+      "localSHA256": "3eafd7452a18db69258c077f5ded2de06723f967d4b6da27c4029d30fb812ef9",
+      "localBytes": 47145
+    },
+    {
+      "type": "book",
+      "id": "sense-sensibility",
+      "title": "Sense and Sensibility",
+      "source": "https://www.gutenberg.org/ebooks/161",
+      "textEdition": "https://www.gutenberg.org/cache/epub/161/pg161-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/21839/images/frontispiece.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/21839",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        491,
+        753
+      ],
+      "localDimensions": [
+        491,
+        753
+      ],
+      "image": "assets/culture-book-sense-sensibility.jpg",
+      "localSHA256": "d4a70ba7a9982f5c76ea65bba752a9a702ba812637df8598e3618fdb4884a123",
+      "localBytes": 65269
+    },
+    {
+      "type": "book",
+      "id": "just-so",
+      "title": "Just So Stories",
+      "source": "https://www.gutenberg.org/ebooks/2781",
+      "textEdition": "https://www.gutenberg.org/cache/epub/2781/pg2781-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/32488/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/32488",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        334,
+        500
+      ],
+      "localDimensions": [
+        334,
+        500
+      ],
+      "image": "assets/culture-book-just-so.jpg",
+      "localSHA256": "3dc0d74bf0f6f383488f5130d2df9cba4dfa5c36372fa053100659e4a8dc215f",
+      "localBytes": 90290
+    },
+    {
+      "type": "book",
+      "id": "jungle-book",
+      "title": "The Jungle Book",
+      "source": "https://www.gutenberg.org/ebooks/236",
+      "textEdition": "https://www.gutenberg.org/cache/epub/236/pg236-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/236/images/{0010}.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/236",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        731,
+        1004
+      ],
+      "localDimensions": [
+        731,
+        1004
+      ],
+      "image": "assets/culture-book-jungle-book.jpg",
+      "localSHA256": "29b94cd2354da30f0539c6d6546f8557f43a3d6c03c2a6aa7e8571b14ea385f1",
+      "localBytes": 304210
+    },
+    {
+      "type": "book",
+      "id": "around-world",
+      "title": "Around the World in Eighty Days",
+      "source": "https://www.gutenberg.org/ebooks/103",
+      "textEdition": "https://www.gutenberg.org/cache/epub/103/pg103-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/103/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/103",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        686,
+        1000
+      ],
+      "localDimensions": [
+        686,
+        1000
+      ],
+      "image": "assets/culture-book-around-world.jpg",
+      "localSHA256": "54fe2f9e92f7ac4f3f6c390636f83dc623b3fa27f875745018a1d4d92dea260f",
+      "localBytes": 348701
+    },
+    {
+      "type": "book",
+      "id": "great-expectations",
+      "title": "Great Expectations",
+      "source": "https://www.gutenberg.org/ebooks/1400",
+      "textEdition": "https://www.gutenberg.org/cache/epub/1400/pg1400-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/1400/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/1400",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        500,
+        700
+      ],
+      "localDimensions": [
+        500,
+        700
+      ],
+      "image": "assets/culture-book-great-expectations.jpg",
+      "localSHA256": "259e1756bce9b3d35ca6c981c033341a3a066e4d2a3a0ab04a4e5e11b80c3a40",
+      "localBytes": 151259
+    },
+    {
+      "type": "book",
+      "id": "around-world-fr",
+      "title": "Le tour du monde en quatre-vingts jours",
+      "source": "https://www.gutenberg.org/ebooks/800",
+      "textEdition": "https://www.gutenberg.org/cache/epub/800/pg800-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/103/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/103",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        686,
+        1000
+      ],
+      "localDimensions": [
+        686,
+        1000
+      ],
+      "image": "assets/culture-book-around-world-fr.jpg",
+      "localSHA256": "54fe2f9e92f7ac4f3f6c390636f83dc623b3fa27f875745018a1d4d92dea260f",
+      "localBytes": 348701
+    },
+    {
+      "type": "book",
+      "id": "don-quixote-es",
+      "title": "Don Quijote de la Mancha",
+      "source": "https://www.gutenberg.org/ebooks/2000",
+      "textEdition": "https://www.gutenberg.org/cache/epub/2000/pg2000-images.html",
+      "imageSource": "https://www.gutenberg.org/cache/epub/996/images/cover.jpg",
+      "imageEdition": "https://www.gutenberg.org/ebooks/996",
+      "rights": "Underlying text and historical scan: public domain in the USA; source edition links retained. Folio descriptions are original.",
+      "credit": "Historic illustration / binding scan, via Project Gutenberg",
+      "sourceDimensions": [
+        1274,
+        1650
+      ],
+      "localDimensions": [
+        1274,
+        1650
+      ],
+      "image": "assets/culture-book-don-quixote-es.jpg",
+      "localSHA256": "7ef329e61a5b8055573aee422bb1699d3c39523a5ccc35b35350f07f33837af2",
+      "localBytes": 310346
+    },
+    {
+      "type": "artwork",
+      "id": "436535",
+      "title": "Wheat Field with Cypresses",
+      "source": "https://www.metmuseum.org/art/collection/search/436535",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436535",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP-42549-001.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Purchase, The Annenberg Foundation Gift, 1993",
+      "sourceDimensions": [
+        4000,
+        3184
+      ],
+      "localDimensions": [
+        2400,
+        1910
+      ],
+      "image": "assets/culture-art-436535.jpg",
+      "localSHA256": "c295e55a72e8d5202a74a51630b1711f3c2cfe45a5ede5847cc6477042e6a94a",
+      "localBytes": 2062387
+    },
+    {
+      "type": "artwork",
+      "id": "436533",
+      "title": "Shoes",
+      "source": "https://www.metmuseum.org/art/collection/search/436533",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436533",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DT1947.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Purchase, The Annenberg Foundation Gift, 1992",
+      "sourceDimensions": [
+        3803,
+        3180
+      ],
+      "localDimensions": [
+        2400,
+        2007
+      ],
+      "image": "assets/culture-art-436533.jpg",
+      "localSHA256": "935bbfd68ac1c3d5348f6d5313f64cb0517b204c4512477fb31910aa89ef6ec6",
+      "localBytes": 1968938
+    },
+    {
+      "type": "artwork",
+      "id": "436528",
+      "title": "Irises",
+      "source": "https://www.metmuseum.org/art/collection/search/436528",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436528",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Gift of Adele R. Levy, 1958",
+      "sourceDimensions": [
+        4000,
+        3172
+      ],
+      "localDimensions": [
+        2400,
+        1903
+      ],
+      "image": "assets/culture-art-436528.jpg",
+      "localSHA256": "07ca2b7595e2911bafa18e6c84019109f66db3c0cb0c63a345999bde89c33d9c",
+      "localBytes": 1892989
+    },
+    {
+      "type": "artwork",
+      "id": "436532",
+      "title": "Self-Portrait with a Straw Hat (obverse: The Potato Peeler)",
+      "source": "https://www.metmuseum.org/art/collection/search/436532",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436532",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DT1502_cropped2.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Bequest of Miss Adelaide Milton de Groot (1876-1967), 1967",
+      "sourceDimensions": [
+        2829,
+        3520
+      ],
+      "localDimensions": [
+        1929,
+        2400
+      ],
+      "image": "assets/culture-art-436532.jpg",
+      "localSHA256": "2b8f330c4abe1d221ed974e41cac0663ac83cac4f0c431e8604771edb3164527",
+      "localBytes": 2105424
+    },
+    {
+      "type": "artwork",
+      "id": "436534",
+      "title": "Roses",
+      "source": "https://www.metmuseum.org/art/collection/search/436534",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436534",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP346475.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "The Walter H. and Leonore Annenberg Collection, Gift of Walter H. and Leonore Annenberg, 1993, Bequest of Walter H. Annenberg, 2002",
+      "sourceDimensions": [
+        3167,
+        4000
+      ],
+      "localDimensions": [
+        1900,
+        2400
+      ],
+      "image": "assets/culture-art-436534.jpg",
+      "localSHA256": "d14cd359a7a5c15f9bfc36c816e32861472ccb6ea22ca0100c74f1497ba0ec81",
+      "localBytes": 1905094
+    },
+    {
+      "type": "artwork",
+      "id": "56353",
+      "title": "Under the Wave off Kanagawa (Kanagawa oki nami ura), also known as The Great Wave, from the series Thirty-six Views of Mount Fuji (Fugaku sanjūrokkei)",
+      "source": "https://www.metmuseum.org/art/collection/search/56353",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/56353",
+      "imageSource": "https://images.metmuseum.org/CRDImages/as/original/DP141067.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Henry L. Phillips Collection, Bequest of Henry L. Phillips, 1939",
+      "sourceDimensions": [
+        2000,
+        1350
+      ],
+      "localDimensions": [
+        2000,
+        1350
+      ],
+      "image": "assets/culture-art-56353.jpg",
+      "localSHA256": "5f95f18c24f14090f942958c403eaa4475b8dc83ca70ddadb202f8e34080e706",
+      "localBytes": 656239
+    },
+    {
+      "type": "artwork",
+      "id": "11132",
+      "title": "The Pioneer",
+      "source": "https://www.metmuseum.org/art/collection/search/11132",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/11132",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ad/original/APS1031.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Amelia B. Lazarus Fund, 1910",
+      "sourceDimensions": [
+        3030,
+        2040
+      ],
+      "localDimensions": [
+        2400,
+        1616
+      ],
+      "image": "assets/culture-art-11132.jpg",
+      "localSHA256": "b055a47f81f95557ecb877c73bb88fdc1704f35c5d1e82d4289171e2bfa00426",
+      "localBytes": 659853
+    },
+    {
+      "type": "artwork",
+      "id": "10154",
+      "title": "The Rocky Mountains, Lander's Peak",
+      "source": "https://www.metmuseum.org/art/collection/search/10154",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/10154",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ad/original/DT82.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Rogers Fund, 1907",
+      "sourceDimensions": [
+        3811,
+        2284
+      ],
+      "localDimensions": [
+        2400,
+        1438
+      ],
+      "image": "assets/culture-art-10154.jpg",
+      "localSHA256": "8a437f34f3a4db607b2a4527dad8218ad7dd1708f4d6f75e9d3b1e19b205b4ee",
+      "localBytes": 744074
+    },
+    {
+      "type": "artwork",
+      "id": "11122",
+      "title": "The Gulf Stream",
+      "source": "https://www.metmuseum.org/art/collection/search/11122",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/11122",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ad/original/DP-20821-001.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Catharine Lorillard Wolfe Collection, Wolfe Fund, 1906",
+      "sourceDimensions": [
+        4000,
+        2468
+      ],
+      "localDimensions": [
+        2400,
+        1481
+      ],
+      "image": "assets/culture-art-11122.jpg",
+      "localSHA256": "9500f507550d7e703382a4d18419f65cab9c71a57c0a7176c0f657fdf56fdfc8",
+      "localBytes": 962963
+    },
+    {
+      "type": "artwork",
+      "id": "10497",
+      "title": "View from Mount Holyoke, Northampton, Massachusetts, after a Thunderstorm—The Oxbow",
+      "source": "https://www.metmuseum.org/art/collection/search/10497",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/10497",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ad/original/DP-12550-001.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Gift of Mrs. Russell Sage, 1908",
+      "sourceDimensions": [
+        4000,
+        2733
+      ],
+      "localDimensions": [
+        2400,
+        1640
+      ],
+      "image": "assets/culture-art-10497.jpg",
+      "localSHA256": "7e70978e4bb38ac6d40b52bd97f278036052c354c7e4b92f8d46689eca50e911",
+      "localBytes": 809556
+    },
+    {
+      "type": "artwork",
+      "id": "437853",
+      "title": "Venice, from the Porch of Madonna della Salute",
+      "source": "https://www.metmuseum.org/art/collection/search/437853",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/437853",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP169568.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Bequest of Cornelius Vanderbilt, 1899",
+      "sourceDimensions": [
+        1959,
+        1461
+      ],
+      "localDimensions": [
+        1959,
+        1461
+      ],
+      "image": "assets/culture-art-437853.jpg",
+      "localSHA256": "c153524a86eef5540eede40fe44c7cc999d40e0e5e14c9c170f9b32345d53777",
+      "localBytes": 827978
+    },
+    {
+      "type": "artwork",
+      "id": "437430",
+      "title": "By the Seashore",
+      "source": "https://www.metmuseum.org/art/collection/search/437430",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/437430",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP-14936-039.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "sourceDimensions": [
+        3162,
+        4000
+      ],
+      "localDimensions": [
+        1897,
+        2400
+      ],
+      "image": "assets/culture-art-437430.jpg",
+      "localSHA256": "5a6a5270e643e6417ac30f1883b19b04b472238fa176c604a9c5d73b0b2022b8",
+      "localBytes": 1387056
+    },
+    {
+      "type": "artwork",
+      "id": "437869",
+      "title": "Juan de Pareja (ca. 1608–1670)",
+      "source": "https://www.metmuseum.org/art/collection/search/437869",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/437869",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP-14286-001.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Purchase, Fletcher and Rogers Funds, and Bequest of Miss Adelaide Milton de Groot (1876-1967), by exchange, supplemented by gifts from friends of the Museum, 1971",
+      "sourceDimensions": [
+        3427,
+        3968
+      ],
+      "localDimensions": [
+        2073,
+        2400
+      ],
+      "image": "assets/culture-art-437869.jpg",
+      "localSHA256": "ca1ce45df0079d01122c1fd1bd0114f51bc723ca7353f5ea6eb9e09e5505f215",
+      "localBytes": 1053905
+    },
+    {
+      "type": "artwork",
+      "id": "435882",
+      "title": "Still Life with Apples and a Pot of Primroses",
+      "source": "https://www.metmuseum.org/art/collection/search/435882",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/435882",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DT47.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Bequest of Sam A. Lewisohn, 1951",
+      "sourceDimensions": [
+        3807,
+        3021
+      ],
+      "localDimensions": [
+        2400,
+        1904
+      ],
+      "image": "assets/culture-art-435882.jpg",
+      "localSHA256": "ceb72a2fc17186a28ab311148b56e53fe7af71ef4c668afd95c6c0cda5089dde",
+      "localBytes": 1163318
+    },
+    {
+      "type": "artwork",
+      "id": "436947",
+      "title": "Boating",
+      "source": "https://www.metmuseum.org/art/collection/search/436947",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436947",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP-25466-001.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "sourceDimensions": [
+        4000,
+        3052
+      ],
+      "localDimensions": [
+        2400,
+        1831
+      ],
+      "image": "assets/culture-art-436947.jpg",
+      "localSHA256": "07e57a1507ca7fe2456726720f1489391043f17a02e91934a46db606ae5fc75a",
+      "localBytes": 1178394
+    },
+    {
+      "type": "artwork",
+      "id": "544227",
+      "title": "Hippopotamus (\"William\")",
+      "source": "https://www.metmuseum.org/art/collection/search/544227",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/544227",
+      "imageSource": "https://images.metmuseum.org/CRDImages/eg/original/DP248993.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Gift of Edward S. Harkness, 1917",
+      "sourceDimensions": [
+        2899,
+        3870
+      ],
+      "localDimensions": [
+        1798,
+        2400
+      ],
+      "image": "assets/culture-art-544227.jpg",
+      "localSHA256": "7b6a449cb5d69973bcd3ab5164a8998e0c93756e49eccaa208b81611d7ed43f5",
+      "localBytes": 510281
+    },
+    {
+      "type": "artwork",
+      "id": "547802",
+      "title": "The Temple of Dendur",
+      "source": "https://www.metmuseum.org/art/collection/search/547802",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/547802",
+      "imageSource": "https://images.metmuseum.org/CRDImages/eg/original/DP240337.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Given to the United States by Egypt in 1965 and awarded to The Metropolitan Museum of Art in 1967.",
+      "sourceDimensions": [
+        2995,
+        4000
+      ],
+      "localDimensions": [
+        1797,
+        2400
+      ],
+      "image": "assets/culture-art-547802.jpg",
+      "localSHA256": "94330dde639fc402496412951be19f353bb5670ed21d85a7e127fbbeb9e7c1e8",
+      "localBytes": 1071886
+    },
+    {
+      "type": "artwork",
+      "id": "437879",
+      "title": "Study of a Young Woman",
+      "source": "https://www.metmuseum.org/art/collection/search/437879",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/437879",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP353256.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Gift of Mr. and Mrs. Charles Wrightsman, in memory of Theodore Rousseau Jr., 1979",
+      "sourceDimensions": [
+        3454,
+        3866
+      ],
+      "localDimensions": [
+        2144,
+        2400
+      ],
+      "image": "assets/culture-art-437879.jpg",
+      "localSHA256": "350d9ff7c5a660712a5e5ffa04aae523c61902933eb992fdfd5d6556216ede11",
+      "localBytes": 1272401
+    },
+    {
+      "type": "artwork",
+      "id": "436964",
+      "title": "Young Lady in 1866",
+      "source": "https://www.metmuseum.org/art/collection/search/436964",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436964",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP273977.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Gift of Erwin Davis, 1889",
+      "sourceDimensions": [
+        2607,
+        3795
+      ],
+      "localDimensions": [
+        1649,
+        2400
+      ],
+      "image": "assets/culture-art-436964.jpg",
+      "localSHA256": "9d9aa1b105ea82b69ea4aca2d05e45308162efb1043ef6c2896a8f08a0b95ec1",
+      "localBytes": 606578
+    },
+    {
+      "type": "artwork",
+      "id": "436965",
+      "title": "The Monet Family in Their Garden at Argenteuil",
+      "source": "https://www.metmuseum.org/art/collection/search/436965",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436965",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP-25465-001.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Bequest of Joan Whitney Payson, 1975",
+      "sourceDimensions": [
+        4000,
+        2518
+      ],
+      "localDimensions": [
+        2400,
+        1511
+      ],
+      "image": "assets/culture-art-436965.jpg",
+      "localSHA256": "079bb1d92f9ba00cf8bc7b13116bf864d5fc8e0eca5137eaede9bfed648ef554",
+      "localBytes": 1014504
+    },
+    {
+      "type": "artwork",
+      "id": "437903",
+      "title": "Marie Joséphine Charlotte du Val d'Ognes (1786–1868)",
+      "source": "https://www.metmuseum.org/art/collection/search/437903",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/437903",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP-416-001.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Mr. and Mrs. Isaac D. Fletcher Collection, Bequest of Isaac D. Fletcher, 1917",
+      "sourceDimensions": [
+        3098,
+        3872
+      ],
+      "localDimensions": [
+        1920,
+        2400
+      ],
+      "image": "assets/culture-art-437903.jpg",
+      "localSHA256": "1da40c9a392f202f295b2e819c03fb3a2f13db2ae49f03193df4ef3cdd1591f7",
+      "localBytes": 830665
+    },
+    {
+      "type": "artwork",
+      "id": "436944",
+      "title": "The Spanish Singer",
+      "source": "https://www.metmuseum.org/art/collection/search/436944",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436944",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/dp130799.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Gift of William Church Osborn, 1949",
+      "sourceDimensions": [
+        2994,
+        3811
+      ],
+      "localDimensions": [
+        1885,
+        2400
+      ],
+      "image": "assets/culture-art-436944.jpg",
+      "localSHA256": "b653c23394d4990767d75ca5b7b33a9277355b33f7e88c3ae9b156edc741803d",
+      "localBytes": 811205
+    },
+    {
+      "type": "artwork",
+      "id": "437549",
+      "title": "Wheat Fields",
+      "source": "https://www.metmuseum.org/art/collection/search/437549",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/437549",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP145911.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Bequest of Benjamin Altman, 1913",
+      "sourceDimensions": [
+        3811,
+        2951
+      ],
+      "localDimensions": [
+        2400,
+        1858
+      ],
+      "image": "assets/culture-art-437549.jpg",
+      "localSHA256": "e851edbdb8248e2006c53ce7957342b6656dbbc04aa7ed1d7557a30e72ce0d3e",
+      "localBytes": 1100477
+    },
+    {
+      "type": "artwork",
+      "id": "436840",
+      "title": "Self-Portrait with Two Pupils, Marie Gabrielle Capet (1761–1818) and Marie Marguerite Carraux de Rosemond (1765–1788)",
+      "source": "https://www.metmuseum.org/art/collection/search/436840",
+      "apiSource": "https://collectionapi.metmuseum.org/public/collection/v1/objects/436840",
+      "imageSource": "https://images.metmuseum.org/CRDImages/ep/original/DP320103.jpg",
+      "rights": "CC0 1.0 · The Metropolitan Museum of Art Open Access",
+      "isPublicDomain": true,
+      "credit": "Gift of Julia A. Berwind, 1953",
+      "sourceDimensions": [
+        2884,
+        3894
+      ],
+      "localDimensions": [
+        1778,
+        2400
+      ],
+      "image": "assets/culture-art-436840.jpg",
+      "localSHA256": "a6e8952bef83cb66bfadca3bbc2817c71fec61be6bd37d03d2e3486ff0748ebb",
+      "localBytes": 1086793
+    }
+  ]
+}

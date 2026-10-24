@@ -65,24 +65,24 @@ window.BROWSE_TASKS = [
       "蓝色，但不要城市"
     ],
     "brief": [
-      "Find two blue original works for your desktop. Exclude city or street scenes, compare the sources, and choose a vector work for a 4K export.",
-      "为桌面寻找两幅蓝色原创作品，排除城市或街景。比较来源，并选择矢量作品导出4K。"
+      "Find two blue desktop photographs in the Photography source collection. Exclude city or street scenes, compare the sources, and export your choice at 3840 pixels wide.",
+      "在“实景摄影”来源中寻找两张蓝色桌面照片，排除城市或街景，比较来源，并将选择导出为宽3840像素。"
     ],
     "steps": [
       [
-        "Use the blue colour filter and exclude city or street keywords.",
-        "使用蓝色筛选，排除城市或街道关键词。"
+        "Select the Photography source and blue colour filters; exclude city or street keywords.",
+        "选择“实景摄影”来源和蓝色筛选，并排除城市或街道关键词。"
       ],
       [
-        "Compare a generated candidate with an original vector candidate.",
-        "对比生成图候选与原创矢量候选。"
+        "Compare two photographs; inspect their photographer, licence and delivered source dimensions.",
+        "对比两张照片，核对摄影师、许可与本站源尺寸。"
       ],
       [
-        "Save the vector candidate and download 3840 × 2160; explain why the source type matters.",
-        "收藏矢量候选并下载3840 × 2160，说明来源类型的影响。"
+        "Save a candidate and download it at 3840 pixels wide. Explain whether that output is resampled.",
+        "收藏候选并导出宽3840像素，说明是否为重采样。"
       ]
     ],
-    "answer": "cobalt-glass (generated) and blue-current (vector). blue-current is the vector candidate."
+    "answer": "Examples: ridge-lake, quiet-tide or blue-current; exclude city/streets. Delivered sources are at most3200px;3840px exports are resampled. Check each record for aspect ratio and credit."
   },
   {
     "id": "movie-steel",
@@ -177,13 +177,13 @@ window.BROWSE_TASKS = [
       "为网页准备城市照片"
     ],
     "brief": [
-      "Use the city sample to make a WebP image no wider than 1280 pixels at 75% quality. Compare the result before exporting.",
-      "使用城市示例生成宽度不超过1280像素、质量75%的 WebP，比较后导出。"
+      "Use the Chinatown after dark sample to make a WebP image no wider than 1280 pixels at 75% quality. Compare the result before exporting.",
+      "使用“唐人街入夜”示例生成宽度不超过1280像素、质量75%的 WebP，比较后导出。"
     ],
     "steps": [
       [
-        "Load the city photograph example.",
-        "载入城市照片示例。"
+        "Load the Chinatown after dark photograph example.",
+        "加载“唐人街入夜”照片示例。"
       ],
       [
         "Select WebP, width 1280 and quality 75; check output dimensions and bytes.",
@@ -205,8 +205,8 @@ window.BROWSE_TASKS = [
       "满足上传大小限制"
     ],
     "brief": [
-      "A form accepts an image up to 100 KB. Use the sunroom illustration sample, keep the width at or below 1280 pixels, and find the highest useful quality that fits.",
-      "某表单接受最大100KB图片。使用阳光书房插画示例，宽度不超过1280像素，寻找满足限制的合适最高质量。"
+      "A form accepts an image up to 100 KB. Use the La Trobe reading room sample, keep the width at or below 1280 pixels, and find the highest useful quality that fits.",
+      "某表单接受最大100KB图片。使用“拉筹伯阅览室”照片示例，宽度不超过1280像素，寻找满足限制的合适最高质量。"
     ],
     "steps": [
       [
@@ -233,13 +233,13 @@ window.BROWSE_TASKS = [
       "导出桌面 JPEG"
     ],
     "brief": [
-      "Prepare the Alpine illustration example for a 1920 pixel-wide presentation slide, with JPEG quality 80.",
-      "为演示幻灯片准备宽1920像素、质量80的山间插画示例 JPEG。"
+      "Prepare the Alpine dawn photograph example for a 1920 pixel-wide presentation slide, with JPEG quality 80.",
+      "为演示幻灯片准备宽1920像素、质量80的山间初晓照片示例 JPEG。"
     ],
     "steps": [
       [
-        "Load the Alpine illustration sample and retain its aspect ratio.",
-        "载入山间插画示例，保留宽高比。"
+        "Load the Alpine dawn photograph sample and retain its aspect ratio.",
+        "载入山间初晓照片示例，保留宽高比。"
       ],
       [
         "Choose JPEG,1920 pixels and 80% quality; inspect the actual output dimensions.",
@@ -250,7 +250,7 @@ window.BROWSE_TASKS = [
         "下载结果并记录文件大小。"
       ]
     ],
-    "answer": "Alpine illustration sample; JPEG quality80,1920 × 1080. Record actual dimensions and bytes."
+    "answer": "Alpine dawn photograph; JPEG quality80,1920 ×1277 (aspect ratio from3200×2129). Record actual dimensions and bytes."
   },
   {
     "id": "recipe-lunch",
