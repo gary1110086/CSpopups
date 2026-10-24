@@ -1,8 +1,8 @@
 # Little Daily · 真实网页框架
 
-**独立版本 Browse · motion1：** [三十项任务 / Task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=motion1) · [十个场景 / Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=motion1) · [参考网站与骗局案例 / Sources & cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=motion1)。十种有实际内容与操作的网站，使用附来源的真实照片、书籍插图、馆藏图像和影片，搭配十个广告目的地。六种弹窗包含屏幕内反弹和鼠标接近关闭键时整卡躲避；新 seed 首次在前台专注浏览约 8 秒后出现，同一 seed 最多十次，一次一个。广告打开真实标签并保留原工作；顶部任务说明及笔记栏仍隐藏，没有可见计时器。详见 [browse/README.md](browse/README.md)。
+**独立版本 Browse · pressure1：** [十个场景 / Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=pressure1) · [三十项任务 / Task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=pressure1) · [参考网站与骗局案例 / Sources & cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=pressure1)。十种有实际内容与操作的网站，使用附来源的真实照片、书籍插图、馆藏图像和影片，搭配十个广告目的地。广告采用高密度叠加：首次约3秒，之后每2.2–3.2秒补入，电脑最多同时4个、640px及以下最多2个；每个seed最多30次浮动弹窗，另有顶部促销条、底部横幅和宽屏侧栏。单独关闭一张后至少等0.8秒补位；Esc清除全部广告并提供5秒前台专注时间的空档。原生标签、工作内容及隐藏任务面板保持原行为，没有可见游戏计时器。详见 [browse/README.md](browse/README.md)。
 
-Browse motion1 adds two moving ad formats to the existing four: a bouncing card and a mouse-dodging card. Ads use native browser tabs; the original workspace remains available. Keyboard focus pauses motion, touch does not trigger dodging, and reduced-motion preferences keep both cards still. The task/notes panel remains hidden.
+Browse pressure1 layers up to four concurrent ads on desktop (two on small screens), alongside promotional strips and a desktop rail. New arrivals start after3 focused foreground seconds, then2.2–3.2seconds apart, capped at30 floating cards per seed. Escape clears the ad surfaces for5 active seconds. Native advertiser tabs preserve the original workspace; keyboard, touch and reduced-motion support remain.
 
 网站地址：[打开 Little Daily](https://gary1110086.github.io/CSpopups/) · [中文入口](https://gary1110086.github.io/CSpopups/?lang=zh)
 

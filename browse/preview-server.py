@@ -61,5 +61,5 @@ if __name__ == '__main__':
     parser.add_argument('--bind', default='127.0.0.1')
     args = parser.parse_args()
     os.chdir(Path(__file__).resolve().parent.parent)
-    print(f'Open http://{args.bind}:{args.port}/browse/tasks.html?lang=en&v=motion1', flush=True)
+    print(f'Open http://{args.bind}:{args.port}/browse/tasks.html?lang=en&v=pressure1', flush=True)
     ThreadingHTTPServer((args.bind, args.port), PreviewHandler).serve_forever()

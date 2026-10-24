@@ -1,0 +1,16 @@
+/* A crowded ad layer: individual cards own their close controls and motion. */
+.br-ad.br-stack-card{width:min(312px,calc(100vw - 16px));max-width:calc(var(--br-motion-view-width,100vw) - 8px);max-height:calc(var(--br-motion-view-height,100dvh) - 8px);overflow:auto;overscroll-behavior:contain;pointer-events:auto;box-sizing:border-box;box-shadow:0 12px 35px #0007,0 0 0 1px #ffffff30}
+.br-stack-stage>.br-stack-card:not(.br-motion-card){position:fixed;left:4px;top:4px;right:auto;bottom:auto;margin:0}
+.br-ad.br-stack-card .br-ad-visual{height:90px;min-height:0}
+.br-ad.br-stack-card:not(.br-motion-card) .br-ad-body{padding:14px}
+.br-ad.br-stack-card:not(.br-motion-card) h2{font-size:25px;line-height:1.08;margin:8px 0 10px}
+.br-ad.br-stack-card:not(.br-motion-card) .br-ad-body>p{font-size:12px;line-height:1.45}
+.br-stack-hint{display:block;font:9px/1.45 Tahoma,'Microsoft YaHei',sans-serif;margin-top:3px}
+.br-interrupt.br-stack-modal-stage{inset:auto;display:flex;align-items:center;justify-content:center;padding:16px;background:#17202b8a}
+.br-ad.br-stack-card.br-stack-modal{position:relative;inset:auto;width:min(540px,calc(100vw - 32px));max-height:calc(var(--br-motion-view-height,100dvh) - 32px)}
+.br-ad.br-stack-modal .br-ad-visual{height:135px}
+.br-ad.br-stack-modal .br-ad-body{padding:22px}
+.br-ad.br-stack-modal h2{font-size:35px}
+.br-stack-stage[inert]{pointer-events:none}
+.br-stack-stage[inert]>.br-ad{pointer-events:none}
+@media(max-width:640px){.br-ad.br-stack-card{width:calc(100vw - 24px)}.br-ad.br-stack-card:not(.br-stack-modal) .br-ad-visual{height:70px}.br-ad.br-stack-card:not(.br-stack-modal) h2{font-size:23px}.br-interrupt.br-stack-modal-stage{padding:12px}.br-ad.br-stack-card.br-stack-modal{width:calc(100vw - 24px)}.br-ad.br-stack-modal h2{font-size:27px}}

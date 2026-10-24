@@ -6,11 +6,13 @@
  * --br-motion-view-height (100dvh fallback), plus border-box and overflow:auto.
  * Keep .br-real-close inside the card. stop() preserves
  * the last position; a new controller on the same element replaces the previous one.
+ * Optional numeric slot selects one of four starting quadrants. Omitting it retains
+ * the single-card position. Optional speed is bounded to 0.5–1.7 (default 1).
  */
 (() => {
   'use strict';
   const controllers = new WeakMap();
-  window.BROWSE_POPUP_MOTION = ({element, mode = 'bounce', isActive = () => true, onMove} = {}) => {
+  window.BROWSE_POPUP_MOTION = ({element, mode = 'bounce', isActive = () => true, onMove, slot, speed = 1} = {}) => {
     if (!element?.getBoundingClientRect || !element.style) throw new TypeError('A popup card element is required.');
     if (!['bounce', 'dodge'].includes(mode)) throw new TypeError('Unknown popup motion mode.');
     controllers.get(element)?.stop();
@@ -22,7 +24,9 @@
     let stopped = false, manualPause = false, focused = doc.hasFocus(), focusWithin = element.contains(doc.activeElement);
     let raf = 0, previousTime = 0, settleTimer = 0, pointerSettling = false, pendingPointer = null;
     let x = 0, y = 0, tx = 0, ty = 0, baseX = 0, baseY = 0, width = 0, height = 0, bounds;
-    let vx = 92, vy = 66, count = 0, lastDodge = -Infinity;
+    const motionSpeed = Number.isFinite(speed) ? Math.max(.5, Math.min(1.7, speed)) : 1;
+    const quadrant = Number.isFinite(slot) ? ((Math.trunc(slot) % 4) + 4) % 4 : null;
+    let vx = 92 * motionSpeed, vy = 66 * motionSpeed, count = 0, lastDodge = -Infinity;
     const listen = (target, name, fn, options) => {
       target.addEventListener(name, fn, options);
       listeners.push(() => target.removeEventListener(name, fn, options));
@@ -142,8 +146,10 @@
       try { const m = new win.DOMMatrixReadOnly(matrix); tx = m.m41; ty = m.m42; } catch { /* CSS contract excludes other transforms. */ }
     }
     measure();
-    x = bounds.left + (bounds.right - bounds.left) * (mode === 'bounce' ? .64 : .55);
-    y = bounds.top + (bounds.bottom - bounds.top) * (mode === 'bounce' ? .24 : .30);
+    const start = quadrant === null ? (mode === 'bounce' ? [.64, .24] : [.55, .30])
+      : [[.04, .08], [.93, .16], [.08, .90], [.87, .87]][quadrant];
+    x = bounds.left + (bounds.right - bounds.left) * start[0];
+    y = bounds.top + (bounds.bottom - bounds.top) * start[1];
     apply(); emit('start');
     listen(doc, 'visibilitychange', () => { pendingPointer = null; cancelFrame(); if (!doc.hidden) refresh('visibility'); });
     listen(win, 'blur', () => { focused = false; held.clear(); pendingPointer = null; cancelFrame(); });

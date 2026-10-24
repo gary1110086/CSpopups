@@ -1,3 +1,19 @@
+# Pressure1 verification record
+
+24 October 2026. Replaced the single-pending advertisement schedule with overlapping cards plus commercial page inventory. A fresh seed starts at3 active focused seconds, with2.2/2.8/2.5/3.2/2.3/3.0-second arrival gaps. Desktop permits four simultaneous cards;640px and below permits two. The floating-card arrival cap is30 per seed. Individual close preserves other cards and waits at least800ms before replacement. Escape clears all cards and hides ambient inventory for5 active seconds. There is no visible game clock or automatic ending.
+
+Current local evidence, using installed Chrome through Playwright (Browser plugin not available):
+
+- Real integrated flow:50 assertions passed, including an actually measured3s first arrival, four cards building up without dismissal, full-screen cap, delayed replacement, modal isolation and paused motion, five-second quiet deadline, phone bounds, all ten website routes, native advertiser child with retained processed image/settings, blocked fallback and actual BFCache.
+- Expanded site integration:46 assertions passed, including all ten websites after their ambient inventory appears, all three fixed surfaces and two sponsored document blocks, no desktop horizontal overflow, hidden task panel, native image workflow and genuine BFCache. The repeat omitted the already-measured real waiting sequence.
+- Independent stack review:54 actual-module fixture assertions (motion and ambient explicitly stubbed), plus19 real-page assertions with the actual three modules. Covered v3-presence versus corruption, v2/v1 migration, bounded unique pending IDs,30 arrivals,800ms replacement,5s Escape, modal/resize policies, hidden/suspended timing, cached state reconciliation, moving-node replacement and retained scene notes/native tabs.
+- Motion module:20 new multi-card assertions plus47 prior regression assertions passed. Four slots remain bounded, motion/controllers are independent, speed is clamped, old callers retain their starting position, reduced motion and narrow-screen resize remain valid.
+- Ambient module:149 independent fixture assertions passed across1440/390/320px and both languages. Covered all five placements, one-second reveal, individual10-second dismissal, authoritative state merge, update without writes, quiet hiding, modal inert, native child/opener isolation, redraw recovery and destroy cleanup. Image credit/source/licence links remain beside photographs.
+
+Desktop and phone screenshots of the actual crowded website were reviewed. The new placement layer uses no third-party runtime assets. The original root runtime and standalone wallpapers remain independent; scene storage and the hidden task/notes-panel decision are preserved. Release archive checks and exact-commit public deployment are verified separately at delivery. Historical records below describe previous releases.
+
+---
+
 # Motion1 verification record
 
 24 October 2026. Added bounded bouncing and close-hover-evading advertisements across the ten Browse websites. Both are nonmodal. The first arrival uses8 active focused seconds; later arrivals wait a full12–18 active seconds from dismissal, with one pending advertisement and ten arrivals per seed. All six formats appear within the first six arrivals; the first and third cover both moving forms. The top task/notes panel remains hidden. Existing scene data, original root runtime and standalone wallpapers remain separate.

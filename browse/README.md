@@ -1,12 +1,12 @@
-# Browse — motion1
+# Browse — pressure1
 
 An independent, static multipage browsing exercise. The original Little Daily site and standalone Stillwall version keep their own runtime and entry points.
 
-- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=motion1
-- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=motion1
-- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=motion1
-- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=motion1
-- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=motion1
+- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=pressure1
+- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=pressure1
+- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=pressure1
+- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=pressure1
+- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=pressure1
 - **Benchmarks and documented scam cases:** guide.html
 
 ## Ten task websites
@@ -28,7 +28,7 @@ An independent, static multipage browsing exercise. The original Little Daily si
 
 The task library gives participants constrained searches instead of merely asking them to look around. Examples: compare the1968 and1972 Earthrise photographs; find a vegan no-cook chickpea lunch under15minutes; identify an indoor rail-accessible museum route; find Ian Hubert's2012 open film; export a1280-pixel image below100KB.
 
-The independent task library retains all assignment briefs and manual criteria. In motion1, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
+The independent task library retains all assignment briefs and manual criteria. In pressure1, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
 
 A shared URL reproduces the scene and task on another computer. Notes, saved choices and uploaded image pixels **do not sync between computers**. Opening the same URL on another computer starts a fresh browser session.
 
@@ -40,19 +40,23 @@ This version deepens the destinations:8 shop products with size/finish variants,
 
 ## Interruptions and browser behaviour
 
-Only active, focused scene browsing advances the schedule. For a fresh seed, the first interruption appears after 8 active seconds. Each dismissal starts the next relative wait: 12, 14, 12, 16, 14, 12, 16, 14 and 18 active seconds, in that order. One seed allows at most ten interruptions, with only one pending at a time. Hidden or unfocused documents pause the schedule. Navigation, refresh and Back/Forward reconcile the authoritative per-tab state.
+Only active, focused scene browsing advances the schedule. A fresh seed gets its first floating advertisement after3 active seconds. Further arrivals follow2.2/2.8/2.5/3.2/2.3/3.0-second gaps measured from arrival, even while earlier cards remain open. There can be four simultaneous floating cards on desktop or two at640px and below, with at most30 arrivals per seed. Closing one card removes only that card, leaves the others intact and delays any replacement by at least800ms. A full screen never accumulates a catch-up queue; background time does not advance the clock.
 
-Six formats include a normal corner card, a panel with a large misleading close-shaped advertiser link and a separate small genuine close, a tiny-close card, a promotion with a decline choice, a bouncing card and a dodging card. For a fresh seed, the first six interruptions cover all six formats; interruptions 1 and 3 use the two moving formats in a seeded order. The normal ten-destination deck does not repeat a destination within its first cycle.
+The six formats remain: a corner card, a modal with a misleading close-shaped advertiser link and a separate genuine close, a tiny-close card, a promotion with a decline choice, a bouncing card and a mouse-dodging card. The first, third and later moving cards start in different quadrants and move faster. At most one modal is present; while it is open, the website, other cards and ambient advertisements are inert, other motion pauses, and focus stays in the modal. The normal ten-destination deck repeats after each complete cycle.
 
-The bouncing card reflects off the visible viewport edges. The dodging card moves away as a mouse approaches its genuine close button. Both are nonmodal, stay within the visible viewport and allow internal scrolling on short screens. Focusing a card control with the keyboard freezes its movement so the close button and advertiser link remain reachable. Touch does not trigger dodging; a reduced-motion preference keeps both formats still. Escape and true dismissals work in all six formats. Modal formats make the website inert and keep keyboard focus inside the dialog.
+Additional surfaces include a top promotion ticker, bottom leaderboard, a desktop side rail and clearly labelled sponsored sections in the document. Each surface has a genuine close button that dismisses that surface for10 active seconds. Escape clears all floating cards and hides all ad surfaces for5 active seconds, then the schedule resumes. There is no visible game clock or automatic ending.
 
-An advertiser click opens a real native tab from the gesture, clears opener, and keeps the original task document alive. A visible native fallback remains if the browser blocks the tab. Modifier clicks retain normal browser behaviour. Ordinary content links are not intercepted by this independent edition.
+Bouncing and dodging cards remain within the visible viewport. Keyboard focus freezes motion, touch does not trigger dodging and a reduced-motion preference keeps them still. Cards can scroll internally on short screens. On resize to a smaller capacity, excess floating cards are removed while preserving any modal and the most recent other cards; the arrival count never decreases.
+
+Advertiser links open real native tabs from a click, clear opener and preserve the original task document. A blocked floating-card request exposes a stable native fallback. Modifier clicks retain normal browser behaviour. Ordinary content links are not intercepted.
 
 ## Privacy and storage
 
-No account, backend, analytics, advertising SDK or runtime third-party asset fetch is required. Image pixels are processed locally. They remain in the existing tool document while advertiser tabs open and close, but are cleared when leaving/reloading that image page. Other task selections and notebooks use sessionStorage; inaccessible storage falls back to memory for that document.
+No account, backend, analytics, advertising SDK or runtime third-party asset fetch is required. Image pixels are processed locally and remain in the existing tool document while advertiser tabs open and close; leaving/reloading that image page clears those pixels. Selections and notebooks use sessionStorage; inaccessible storage falls back to memory in the current document.
 
-Keys: `br-run-v2:<seed>` for pacing; `br-data-v1:<seed>:...` remains unchanged for scene state/notebooks; destination records have separate prefixes. When the v2 pacing key is absent, the existing `br-run-v1:<seed>` record is imported once into the new schedule. Later loads use v2, so an older document cannot overwrite the new pacing record. Seeds can be shared; saved work is local. The task library has a facilitator answer view and is not designed to hide answers from a determined participant.
+Pacing uses `br-run-v3:<seed>` with a bounded pending array and persisted next-arrival/quiet deadlines. Only when v3 is absent is v2 imported, with v1 as a fallback if v2 is absent. Corrupt existing v3 is repaired without reviving stale v2/v1 advertisements. Original `br-data-v1:<seed>:...` scene records remain unchanged. Ambient-dismissal records use the scene-data key `ad-pressure-v1`; updates read authoritative data and only actual surface dismissals write it. Native navigation, reload and genuine BFCache restores reconcile the current records. Suspended cached pages must never overwrite newer pacing during visibility/blur events before pageshow.
+
+The task library has a facilitator answer view. Shared seeds reproduce a task/scene, while saved work remains local to the browser tab and does not synchronize between computers.
 
 ## Media and attribution
 
@@ -73,7 +77,7 @@ There is no build step. From repository root, run:
 
     python browse/preview-server.py --port 5175
 
-Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=motion1 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
+Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=pressure1 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
 
 The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalog.js, wallpapers/assets/*.svg, assets/nightroom-contact-sheet.png, favicon.svg and .nojekyll. Copying browse/ alone is insufficient. The package includes START-HERE.txt and a SHA256 source manifest.
 
