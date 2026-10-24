@@ -1,3 +1,15 @@
+# Rescue1 verification record
+
+25 October 2026. A ghost-only card now reveals its genuine external cross after10 active foreground seconds. The same button becomes opaque with a white background, dark border and shadow. That card stops bouncing or evading so the revealed cross can be clicked. No visible countdown is added. Each ghost card persists its independent bounded elapsed time in `br-run-v5:<seed>`; normal/dual closes and the4–6-evasion budgets retain their behaviour. Absent v5 imports v4/older records without resetting existing dodge budgets; migrated ghost cards without an age start at0. Older v4 scripts cannot overwrite v5 reveal progress.
+
+- Installed Chrome full website flow:62 assertions passed, including measured3s first arrival, four-card density, three close styles, all ten websites/thirty tasks, responsive limits, modal controls, native advertiser child with retained processed image/settings, blocked fallback and genuine BFCache.
+- Independent read-only Chrome integration:51 assertions across8 flows passed with no runtime or HTTP errors. A complete real10-second wait remained faint at9.4s, then revealed the cross without spending the unused0/5 dodge budget; actual pointer approaches no longer evaded and the same external button closed the card. Reload, native navigation and true BFCache preserve elapsed time and already-revealed state. Two ghost cards advance independently; visible/dual cards retain their normal behaviour.
+- The independent check also covered immediate restored reveals on390×240px dodge/bounce/panel cards, viewport bounds, hit testing, genuine close, modal keyboard handling, and v4 migration retaining a3/6 budget. Explicit document visibility/focus fixtures verified a2.2-second background pause; this is a timing-gate fixture, not evidence of operating-system focus switching.
+
+Actual desktop and short-screen screenshots were reviewed. Browser plugin not available; installed Chrome was driven through Playwright. Source syntax, package integrity, extracted behaviour and exact-commit public deployment are checked separately before delivery. Historical verification records follow.
+
+---
+
 # Dodge1 verification record
 
 25 October 2026. Expanded mouse-dodging destinations across the usable viewport, added a persisted4–6-evasion budget per card, and varied close controls independently. The new faint genuine cross sits outside the upper-right frame, about26–27px above it. Cards have an internal scroll wrapper and reserve30px above the shell. Existing high-density pacing, native advertiser tabs, scene data and the hidden task panel remain.

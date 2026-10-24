@@ -3,7 +3,7 @@
   'use strict';
   window.BROWSE_AD_STACK = C => {
     const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,wireAds,deck,chosen}=C;
-    const KEY='br-run-v4:'+seed, MISSING=Symbol('missing'), MAX=30;
+    const KEY='br-run-v5:'+seed, MISSING=Symbol('missing'), MAX=30, REVEAL_MS=10000;
     const GAPS=[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter'];
     const hash=salt=>{let value=2166136261;for(const c of seed+salt)value=Math.imul(value^c.charCodeAt(0),16777619);return value>>>0;};
@@ -24,18 +24,19 @@
         const closeStyle=['visible','dual','ghost'].includes(p.closeStyle)?p.closeStyle:'visible';
         const extra=p.format==='dodge'?{dodgeLimit:Number.isInteger(p.dodgeLimit)&&p.dodgeLimit>=4&&p.dodgeLimit<=6?p.dodgeLimit:dodgeLimit(p.id)}:{};
         if(p.format==='dodge')extra.dodgeCount=Number.isInteger(p.dodgeCount)?Math.max(0,Math.min(extra.dodgeLimit,p.dodgeCount)):0;
+        if(closeStyle==='ghost')extra.closeElapsedMs=Number.isFinite(p.closeElapsedMs)?Math.max(0,Math.min(REVEAL_MS,p.closeElapsedMs)):0;
         pending.push({id:p.id,site:p.site,format:p.format,closeStyle,...extra});ids.add(p.id);if(modal(p))hasModal=true;
         if(pending.length===4)break;
       }
       const shown=Math.max(Number.isInteger(obj.shown)?Math.max(0,Math.min(MAX,obj.shown)):0,...pending.map(p=>p.id));
       const quietUntil=Number.isFinite(obj.quietUntil)&&obj.quietUntil>=0&&obj.quietUntil<=activeMs+5000?obj.quietUntil:0;
       const nextAt=shown>=MAX?null:Math.max(quietUntil,Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=activeMs+5000?obj.nextAt:activeMs+(shown?2500:3000));
-      return {pacingVersion:4,activeMs,shown,nextAt,quietUntil,pending};
+      return {pacingVersion:5,activeMs,shown,nextAt,quietUntil,pending};
     };
     const stored=readRun(KEY);
     let initial=stored;
     if(stored===MISSING){
-      let legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
+      let legacy=readRun('br-run-v4:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
       const old=legacy&&typeof legacy==='object'&&!Array.isArray(legacy)?legacy:{};
       const shown=Number.isInteger(old.shown)?Math.max(0,Math.min(MAX,old.shown)):0;
       initial=Array.isArray(old.pending)?old:{activeMs:old.activeMs,shown,pending:old.pending&&typeof old.pending==='object'?[{...old.pending,id:Math.max(1,shown)}]:[]};
@@ -72,10 +73,17 @@
       for(const entry of entries.values()){
         const blocked=modalId!==null&&entry.p.id!==modalId;
         entry.stage.inert=blocked;
-        const paused=blocked||entry.blockedLink;
+        const paused=blocked||entry.blockedLink||entry.revealed;
         if(entry.paused!==paused){entry.paused=paused;if(paused)entry.motion?.pause();else entry.motion?.resume();}
       }
       pressureUpdate();
+    };
+    const updateClose=entry=>{
+      const revealed=entry.p.closeStyle==='ghost'&&entry.p.closeElapsedMs>=REVEAL_MS;
+      entry.card.dataset.closeRevealed=String(revealed);
+      if(entry.revealed===revealed)return;
+      entry.revealed=revealed;
+      if(revealed&&entry.moving)entry.card.querySelector('.br-motion-taunt').textContent=t('You can close this now.','现在可以关闭了。');
     };
     const trimToViewport=()=>{
       const count=limit();if(state.pending.length<=count)return;
@@ -114,7 +122,7 @@
         <div class="br-ad-bottom">${p.format==='tiny'&&p.closeStyle!=='ghost'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}<span class="br-stack-hint">${t('Esc clears all offers','Esc 关闭全部广告')}</span></div>
         <p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></div></section>`;
       overlayRoot.append(stage);const card=stage.querySelector('.br-ad');
-      const entry={p,stage,card,moving,motion:null,paused:false,blockedLink:false};entries.set(p.id,entry);positionEntry(entry);wireAds(stage);
+      const entry={p,stage,card,moving,motion:null,paused:false,blockedLink:false,revealed:false};entries.set(p.id,entry);positionEntry(entry);wireAds(stage);
       stage.querySelectorAll('[data-br-close]').forEach(button=>button.addEventListener('click',()=>closeOne(p.id)));
       stage.querySelectorAll('[data-br-ad]').forEach(link=>link.addEventListener('click',event=>{
         if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
@@ -127,6 +135,7 @@
         if(p.format==='dodge'){
           card.dataset.dodgeLimit=String(meta.dodgeLimit);card.dataset.dodgeCount=String(meta.dodgeCount);card.dataset.dodgeSettled=String(meta.settled);
           if(meta.reason==='dodge'){p.dodgeCount=meta.dodgeCount;save();}
+          if(entry.revealed)return;
           if(meta.settled){card.querySelector('.br-motion-taunt').textContent=t('All right. I will stay here.','好啦，这次不跑了。');return;}
         }
         if(meta.reason===p.format)card.querySelector('.br-motion-taunt').textContent=t(...taunts[p.format][line++%taunts[p.format].length]);
@@ -137,7 +146,7 @@
       trimToViewport();const ids=new Set(state.pending.map(p=>p.id));
       for(const id of [...entries.keys()])if(!ids.has(id))removeEntry(id);
       for(const p of state.pending)if(!entries.has(p.id))createEntry(p);
-      for(const entry of entries.values())positionEntry(entry);
+      for(const entry of entries.values()){updateClose(entry);positionEntry(entry);}
       applyModal();
     }
     overlayRoot.addEventListener('keydown',event=>{
@@ -154,10 +163,17 @@
       const now=performance.now(),delta=Math.max(0,Math.min(1100,now-last));last=now;
       if(!foreground()){pressureUpdate();return;}
       state.activeMs+=delta;
+      let justRevealed=false;
+      for(const p of state.pending)if(p.closeStyle==='ghost'){
+        const before=p.closeElapsedMs;p.closeElapsedMs=Math.min(REVEAL_MS,before+delta);
+        if(before<REVEAL_MS&&p.closeElapsedMs>=REVEAL_MS)justRevealed=true;
+      }
+      if(justRevealed){for(const entry of entries.values())updateClose(entry);applyModal();save();}
       if(state.shown<MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
         let format=FORMATS[state.shown%FORMATS.length];
         if((format==='panel'||format==='newsletter')&&state.pending.some(modal))format=state.shown%2?'dodge':'bounce';
-        state.shown++;state.pending.push({id:state.shown,site:chosen||deck[(state.shown-1)%deck.length],format,closeStyle:closeStyles[(state.shown-1)%closeStyles.length],...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})});
+        state.shown++;const closeStyle=closeStyles[(state.shown-1)%closeStyles.length];
+        state.pending.push({id:state.shown,site:chosen||deck[(state.shown-1)%deck.length],format,closeStyle,...(closeStyle==='ghost'?{closeElapsedMs:0}:{}),...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})});
         state.nextAt=state.shown<MAX?state.activeMs+GAPS[(state.shown-1)%GAPS.length]:null;
         sync();save();
       }else pressureUpdate();
