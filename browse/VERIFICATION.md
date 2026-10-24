@@ -1,5 +1,7 @@
 # Deep2 verification record
 
+Deep2a update, 24 October 2026: the on-site task/notes panel is temporarily inactive across all ten websites; the independent30-task library remains available.76 targeted Chrome assertions passed: every assignment opens without a panel, website header starts at the top, native search/detail/Back preserve context, old notes remain stored, Chinese390px layout, modal focus/Escape, isolated advertiser tab with retained processed image, and malformed pacing state. No runtime or missing-asset errors. Desktop1440px and mobile390px screenshots were reviewed. The detailed deep2 record below describes the earlier full-panel release.
+
 Date: 24 October 2026. Installed Chrome was exercised through Playwright. Temporary test scripts, downloaded outputs and screenshots stay outside the published source. The original root website and standalone wallpapers runtime were preserved.
 
 ## Implemented scope
