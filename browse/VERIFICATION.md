@@ -1,3 +1,17 @@
+# Rescue2 verification record
+
+25 October 2026. Keeps the10-second conspicuous genuine close and fixes a BFCache race discovered during public testing. A restored renderer can briefly read its old sessionStorage snapshot before the departed page's newer write arrives. Synchronous pageshow reconstruction could therefore retain an old age in memory and overwrite the newer progress on a later save. The first public failure and all-key/write-stack audits are retained in TEMP.
+
+Recovery now keeps every writer suspended and the old overlay hidden for two animation frames, then reads current storage, rebuilds cards/controllers and resumes the clock. Modal focus is restored after unhiding the overlay. A new navigation cancels pending recovery and never saves its stale state; resize and periodic/event saves also respect suspension. Escape during recovery is applied to the reconciled state. The cache version is rescue2; pacing uses br-run-v6 and imports existing v5/v4/older records only when absent, keeping ghost ages and dodge budgets.
+
+- Full local Chrome integration:62 assertions passed, retaining all ten websites/thirty tasks, commercial density, keyboard controls, mobile limits, image processing and native advertiser tabs.
+- Independent checks covered eleven flows: real10-second disclosure and genuine close; persisted wait; explicit foreground gating; independent cards; short-screen dodge/bounce/panel controls; migration; rapid reload plus another native Back; pending recovery cancelled by a real navigation with no stale writes; and restored ghost-modal focus. Ten flows passed in the initial report. The remaining persistence assertion originally read before the two-second save phase; its corrected12-assertion final check uses an actual reload to flush pagehide and proves at least1.5s age growth after2.2s foreground time. Original reports are retained, and no threshold was relaxed.
+- The strengthened recovery checks inspect rebuilt DOM identity, immediate reload, subsequent pagehide/periodic saves and a second native navigation. This verifies the in-memory age rather than only observing a transient newer storage value. A held-frame fixture confirms pending recovery cannot write during focus, visibility, resize or another pagehide, and its cancelled callback cannot overwrite later work.
+
+Browser plugin not available; installed Chrome was driven through Playwright. Source syntax, archive integrity, extracted behaviour, exact Pages commit and final public checks are verified separately before delivery. Earlier records follow.
+
+---
+
 # Rescue1 verification record
 
 25 October 2026. A ghost-only card now reveals its genuine external cross after10 active foreground seconds. The same button becomes opaque with a white background, dark border and shadow. That card stops bouncing or evading so the revealed cross can be clicked. No visible countdown is added. Each ghost card persists its independent bounded elapsed time in `br-run-v5:<seed>`; normal/dual closes and the4–6-evasion budgets retain their behaviour. Absent v5 imports v4/older records without resetting existing dodge budgets; migrated ghost cards without an age start at0. Older v4 scripts cannot overwrite v5 reveal progress.

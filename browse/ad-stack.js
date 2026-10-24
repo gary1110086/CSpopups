@@ -3,7 +3,7 @@
   'use strict';
   window.BROWSE_AD_STACK = C => {
     const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,wireAds,deck,chosen}=C;
-    const KEY='br-run-v5:'+seed, MISSING=Symbol('missing'), MAX=30, REVEAL_MS=10000;
+    const KEY='br-run-v6:'+seed, MISSING=Symbol('missing'), MAX=30, REVEAL_MS=10000;
     const GAPS=[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter'];
     const hash=salt=>{let value=2166136261;for(const c of seed+salt)value=Math.imul(value^c.charCodeAt(0),16777619);return value>>>0;};
@@ -31,12 +31,12 @@
       const shown=Math.max(Number.isInteger(obj.shown)?Math.max(0,Math.min(MAX,obj.shown)):0,...pending.map(p=>p.id));
       const quietUntil=Number.isFinite(obj.quietUntil)&&obj.quietUntil>=0&&obj.quietUntil<=activeMs+5000?obj.quietUntil:0;
       const nextAt=shown>=MAX?null:Math.max(quietUntil,Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=activeMs+5000?obj.nextAt:activeMs+(shown?2500:3000));
-      return {pacingVersion:5,activeMs,shown,nextAt,quietUntil,pending};
+      return {pacingVersion:6,activeMs,shown,nextAt,quietUntil,pending};
     };
     const stored=readRun(KEY);
     let initial=stored;
     if(stored===MISSING){
-      let legacy=readRun('br-run-v4:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
+      let legacy=readRun('br-run-v5:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v4:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
       const old=legacy&&typeof legacy==='object'&&!Array.isArray(legacy)?legacy:{};
       const shown=Number.isInteger(old.shown)?Math.max(0,Math.min(MAX,old.shown)):0;
       initial=Array.isArray(old.pending)?old:{activeMs:old.activeMs,shown,pending:old.pending&&typeof old.pending==='object'?[{...old.pending,id:Math.max(1,shown)}]:[]};
@@ -44,7 +44,8 @@
     const state=normalize(initial),entries=new Map();
     const overlayRoot=document.getElementById('interrupt-root')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
     let suspended=false,last=performance.now(),lastOutsideFocus=null,modalId=null;
-    const save=()=>C.rawWrite(KEY,state);
+    let restoreFrame=0,restoreGeneration=0,restoring=false,clearAfterRestore=false;
+    const save=()=>{if(!suspended)C.rawWrite(KEY,state);};
     const limit=()=>matchMedia('(max-width: 640px)').matches?2:4;
     const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write});
     const foreground=()=>!suspended&&!document.hidden&&document.hasFocus();
@@ -93,6 +94,7 @@
       if(state.shown<MAX)state.nextAt=Math.max(state.nextAt??0,state.activeMs+800,state.quietUntil);
     };
     const closeOne=id=>{
+      if(suspended)return;
       const entry=entries.get(id),ownedFocus=entry?.card.contains(document.activeElement);
       state.pending=state.pending.filter(p=>p.id!==id);
       if(state.shown<MAX)state.nextAt=Math.max(state.nextAt??0,state.activeMs+800,state.quietUntil);
@@ -101,6 +103,7 @@
       if(ownedFocus&&modalId===null)returnFocus();
     };
     const closeAll=()=>{
+      if(suspended){if(restoring)clearAfterRestore=true;return;}
       const ownedFocus=overlayRoot.contains(document.activeElement);
       for(const id of [...entries.keys()])removeEntry(id);
       state.pending=[];state.quietUntil=state.activeMs+5000;state.nextAt=state.shown<MAX?state.quietUntil:null;
@@ -181,14 +184,32 @@
     setInterval(tick,250);setInterval(()=>{if(!suspended)save();},2000);
     const resetClock=()=>{last=performance.now();if(!suspended)save();pressureUpdate();};
     document.addEventListener('visibilitychange',resetClock);window.addEventListener('blur',resetClock);window.addEventListener('focus',resetClock);
-    window.addEventListener('pagehide',()=>{suspended=true;stopAll();save();pressureUpdate();});
-    window.addEventListener('pageshow',event=>{
-      last=performance.now();suspended=false;if(!event.persisted)return;
-      const current=readRun(KEY);Object.assign(state,normalize(current===MISSING?state:current));
-      for(const id of [...entries.keys()])removeEntry(id);
-      sync();save();
+    window.addEventListener('pagehide',()=>{
+      const wasLive=!suspended;suspended=true;restoring=false;restoreGeneration++;
+      cancelAnimationFrame(restoreFrame);restoreFrame=0;stopAll();
+      if(wasLive)C.rawWrite(KEY,state);
+      pressureUpdate();
     });
-    const resize=()=>{sync();if(!suspended)save();};
+    window.addEventListener('pageshow',event=>{
+      last=performance.now();if(!event.persisted){suspended=false;return;}
+      suspended=true;restoring=true;overlayRoot.hidden=true;overlayRoot.dataset.restoring='true';stopAll();
+      cancelAnimationFrame(restoreFrame);const generation=++restoreGeneration;
+      // A restored renderer can receive the previous page's sessionStorage write
+      // after pageshow. Keep every writer suspended until the frame/task boundary.
+      restoreFrame=requestAnimationFrame(()=>{
+        restoreFrame=requestAnimationFrame(()=>{
+          if(generation!==restoreGeneration||!restoring)return;
+          restoreFrame=0;
+          const current=readRun(KEY);Object.assign(state,normalize(current===MISSING?state:current));
+          for(const id of [...entries.keys()])removeEntry(id);
+          overlayRoot.hidden=false;
+          sync();restoring=false;suspended=false;last=performance.now();
+          delete overlayRoot.dataset.restoring;
+          if(clearAfterRestore){clearAfterRestore=false;closeAll();}else{save();pressureUpdate();}
+        });
+      });
+    });
+    const resize=()=>{if(suspended)return;sync();save();};
     window.addEventListener('resize',resize);visualViewport?.addEventListener('resize',resize);visualViewport?.addEventListener('scroll',()=>{for(const entry of entries.values())positionEntry(entry);});
     sync();save();
   };
