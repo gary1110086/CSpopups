@@ -15,7 +15,7 @@
   }
   const url = (file, query = {}) => {
     const u = new URL(file, location.href);
-    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'deep2a');
+    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'motion1');
     if(params.has('task')&&['index.html',...(window.BROWSE_SCENE_INDEX||[]).map(s=>s.file)].includes(u.pathname.split('/').pop()))u.searchParams.set('task',params.get('task'));
     Object.entries(query).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') u.searchParams.set(k, String(v)); });
     return u.href;
@@ -33,7 +33,14 @@
   const root = document.getElementById('site-root');
   const C = {root, params, lang, t, esc, url, read, write, complete(label) { write('last-completed', {label: String(label).slice(0,120), at: Date.now()}); window.dispatchEvent(new CustomEvent('browse:complete',{detail:String(label).slice(0,160)})); }};
   const page = document.body.dataset.page;
-  const taskKey = 'br-run-v1:' + seed;
+  const taskKey = 'br-run-v2:' + seed;
+  const legacyTaskKey = 'br-run-v1:' + seed;
+  const MAX_INTERRUPTS = 10;
+  const MAX_ACTIVE_MS = 14400000;
+  // First arrival, then foreground-time gaps measured from each dismissal.
+  const ARRIVAL_DELAYS = [8000,12000,14000,12000,16000,14000,12000,16000,14000,18000];
+  const MIN_GAP_MS = 6000;
+  const VALID_FORMATS = ['drawer','panel','tiny','newsletter','bounce','dodge'];
   const validSites = ['corn','desk','stock','game','security','player','software','prize','coupon','parcel'];
   if(params.get('task')==='random'&&window.BROWSE_TASKS?.length){const chosenTask=window.BROWSE_TASKS[Math.floor(rng('brief')()*window.BROWSE_TASKS.length)];params.set('task',chosenTask.id);}
   const brief=window.BROWSE_TASKS?.find(x=>x.id===params.get('task'));
@@ -57,23 +64,31 @@
   // A seed is carried through native GET forms as well as anchors.
   for (const form of root.querySelectorAll('form')) {
     if ((form.getAttribute('method') || 'get').toLowerCase() !== 'get') continue;
-    for (const [name,value] of [['lang',lang],['seed',seed],['v','deep2a'],...(brief?[['task',brief.id]]:[])]) {
+    for (const [name,value] of [['lang',lang],['seed',seed],['v','motion1'],...(brief?[['task',brief.id]]:[])]) {
       if (form.querySelector(`[name="${name}"]`)) continue;
       const input = document.createElement('input'); input.type='hidden'; input.name=name; input.value=value; form.append(input);
     }
   }
-  const old = rawRead(taskKey, {});
-  const obj = old && typeof old === 'object' && !Array.isArray(old) ? old : {};
-  const state = {
-    activeMs: Number.isFinite(obj.activeMs) ? Math.max(0, Math.min(obj.activeMs, 14400000)) : 0,
-    shown: Number.isInteger(obj.shown) ? Math.max(0, Math.min(obj.shown,4)) : 0,
-    closedAt: Number.isFinite(obj.closedAt) ? Math.max(0,obj.closedAt) : 0,
-    pending: obj.pending && typeof obj.pending==='object' && validSites.includes(obj.pending.site) && ['drawer','panel','tiny','newsletter'].includes(obj.pending.format) ? obj.pending : null
+  const validPending = value => value && typeof value==='object' && validSites.includes(value.site) && VALID_FORMATS.includes(value.format) ? {site:value.site,format:value.format} : null;
+  const normalizeState = raw => {
+    const obj=raw && typeof raw==='object' && !Array.isArray(raw) ? raw : {};
+    const activeMs=Number.isFinite(obj.activeMs)?Math.max(0,Math.min(obj.activeMs,MAX_ACTIVE_MS)):0;
+    const pending=validPending(obj.pending);
+    const shown=Math.max(pending?1:0,Number.isInteger(obj.shown)?Math.max(0,Math.min(obj.shown,MAX_INTERRUPTS)):0);
+    const closedAt=Number.isFinite(obj.closedAt)?Math.max(0,Math.min(obj.closedAt,activeMs)):0;
+    const freshNext=shown<MAX_INTERRUPTS?activeMs+ARRIVAL_DELAYS[shown]:null;
+    const nextAt=pending||shown>=MAX_INTERRUPTS ? null : obj.pacingVersion===2&&Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=activeMs+18000
+      ? Math.max(shown?closedAt+MIN_GAP_MS:0,obj.nextAt) : freshNext;
+    return {pacingVersion:2,activeMs,shown,closedAt,nextAt,pending};
   };
-  state.closedAt = Math.min(state.closedAt,state.activeMs);
+  // A separate key keeps a restored pre-update document from overwriting this schedule.
+  const currentRun=rawRead(taskKey,null);
+  const state=normalizeState(currentRun===null?rawRead(legacyTaskKey,null):currentRun);
   const save = () => rawWrite(taskKey, state);
   const deck = shuffle(validSites, 'destinations');
-  const formats = shuffle(['drawer','panel','tiny','newsletter'], 'formats');
+  const movingFormats=shuffle(['bounce','dodge'],'moving-formats');
+  const normalFormats=shuffle(['drawer','panel','tiny','newsletter'],'formats');
+  const formats=[movingFormats[0],normalFormats[0],movingFormats[1],...normalFormats.slice(1)];
   const chosen = validSites.includes(params.get('ad')) ? params.get('ad') : null;
   const ads = {
     corn:['Cornhub',t('Popular videos this week','本周热门视频'),t('Watch now','立即观看'),'Featured channel'],
@@ -106,7 +121,7 @@
     wireAds(root);
     for(const form of root.querySelectorAll('form')){
       if((form.getAttribute('method')||'get').toLowerCase()!=='get')continue;
-      for(const [name,value] of [['lang',lang],['seed',seed],['v','deep2a'],...(brief?[['task',brief.id]]:[])]){
+      for(const [name,value] of [['lang',lang],['seed',seed],['v','motion1'],...(brief?[['task',brief.id]]:[])]){
         if(form.querySelector(`[name="${name}"]`))continue;
         const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;form.append(input);
       }
@@ -114,20 +129,39 @@
   }).observe(root,{childList:true,subtree:true});
   ensureInlineAd();
   const overlayRoot=document.getElementById('interrupt-root') || document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
-  let previousFocus=null;
+  let previousFocus=null, motion=null, pageSuspended=false;
+  const stopMotion=()=>{motion?.stop();motion=null;};
   const close = () => {
-    state.pending=null; state.closedAt=state.activeMs; save(); overlayRoot.replaceChildren();
+    stopMotion();
+    state.pending=null; state.closedAt=state.activeMs;
+    state.nextAt=state.shown<MAX_INTERRUPTS?state.activeMs+ARRIVAL_DELAYS[state.shown]:null;
+    save(); overlayRoot.replaceChildren();
     root.inert=false;
     const taskShell=document.querySelector('.br-task-shell');if(taskShell)taskShell.inert=false;
     if (previousFocus?.isConnected) previousFocus.focus({preventScroll:true}); previousFocus=null;
   };
+  const taunts={
+    bounce:[['Taking the scenic route.','拐个弯，继续营业。'],['Corners are just a suggestion.','角落？只是路过。'],['Still got your attention?','还在看我吗？'],['Small ad. Big detour.','小小广告，弯弯绕绕。']],
+    dodge:[['Nearly! The × is feeling shy.','差一点！这个 × 有点害羞。'],['Oops. Missed me.','哎呀，又溜走了。'],['A little quicker?','再快一点点？'],['I saw that cursor coming.','看到你的鼠标啦。']]
+  };
   const renderAd = () => {
+    stopMotion();
     const p=state.pending; if (!p) return;
-    const a=ads[p.site], modal=p.format==='panel'||p.format==='newsletter';
-    previousFocus=document.activeElement;
+    const a=ads[p.site], moving=p.format==='bounce'||p.format==='dodge',modal=p.format==='panel'||p.format==='newsletter';
+    if(document.activeElement!==document.body&&!overlayRoot.contains(document.activeElement))previousFocus=document.activeElement;
+    else if(!previousFocus?.isConnected)previousFocus=null;
     root.inert=modal;
     const taskShell=document.querySelector('.br-task-shell');if(taskShell)taskShell.inert=modal;
-    overlayRoot.innerHTML=`<div class="br-interrupt ${modal?'br-ad-backdrop':''}" ${modal?'role="presentation"':''}><section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)}" ${modal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1"><div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(a[0])}</span>${p.format==='panel'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Close promotion','关闭推广')}">×</a>`:''}<button class="br-real-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button></div>${adVisual(p.site)}<div class="br-ad-body"><span class="br-ad-eyebrow">${a[3]}</span><h2>${a[1]}</h2><p>${adDescription(p.site)}</p><a class="br-ad-cta" data-br-ad="${p.site}">${a[2]} →</a>${p.format==='newsletter'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div><div class="br-ad-bottom">${p.format==='tiny'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}</div><p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></section></div>`;
+    overlayRoot.innerHTML=`<div class="br-interrupt ${modal?'br-ad-backdrop':''} ${moving?'br-motion-stage':''}" ${modal?'role="presentation"':''}>
+      <section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)} ${moving?'br-motion-card':''}" ${modal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1">
+        <div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(a[0])}</span>${p.format==='panel'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Close promotion','关闭推广')}">×</a>`:''}<button class="br-real-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button></div>
+        ${moving?`<div class="br-motion-label"><span aria-hidden="true">${p.format==='bounce'?'↗':'✦'}</span> ${p.format==='bounce'?t('Catch this offer','接住这条优惠'):t('Hey, over here','嘿，看这边')}</div>`:''}
+        ${adVisual(p.site)}<div class="br-ad-body"><span class="br-ad-eyebrow">${a[3]}</span><h2>${a[1]}</h2><p>${adDescription(p.site)}</p>
+        ${moving?`<p class="br-motion-taunt">${p.format==='bounce'?t('A little offer, on the move.','一点优惠，正在路过。'):t('Quick hands? We will see.','手速够快吗？试试看。')}</p>`:''}
+        <a class="br-ad-cta" data-br-ad="${p.site}">${a[2]} →</a>${p.format==='newsletter'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div>
+        <div class="br-ad-bottom">${p.format==='tiny'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}${moving?`<span class="br-motion-hint">${t('Esc to dismiss','按 Esc 关闭')}</span>`:''}</div>
+        <p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p>
+      </section></div>`;
     wireAds(overlayRoot);
     overlayRoot.querySelectorAll('[data-br-close]').forEach(b=>b.addEventListener('click',close));
     overlayRoot.querySelectorAll('[data-br-ad]').forEach(link=>link.addEventListener('click',e=>{
@@ -135,8 +169,16 @@
       e.preventDefault();
       const child=window.open(link.href,'_blank');
       if (child) { try { child.opener=null; } catch {} close(); }
-      else overlayRoot.querySelector('.br-blocked').hidden=false;
+      else {overlayRoot.querySelector('.br-blocked').hidden=false;motion?.pause();}
     }));
+    if(moving){
+      const card=overlayRoot.querySelector('.br-motion-card');let line=0;
+      motion=window.BROWSE_POPUP_MOTION?.({element:card,mode:p.format,isActive:()=>!pageSuspended&&!document.hidden&&document.hasFocus()&&Boolean(state.pending),onMove:meta=>{
+        card.dataset.motionMoves=String(meta.count);card.dataset.motionReason=meta.reason;
+        if(meta.reason!==p.format)return;
+        const text=taunts[p.format][line++%taunts[p.format].length];card.querySelector('.br-motion-taunt').textContent=t(...text);
+      }});
+    }
     if (modal) overlayRoot.querySelector('.br-real-close').focus({preventScroll:true});
   };
   overlayRoot.addEventListener('keydown',e=>{
@@ -153,30 +195,27 @@
   let last=performance.now();
   const tick=()=>{
     const now=performance.now(), delta=Math.max(0,Math.min(now-last,1100)); last=now;
-    if(document.hidden||!document.hasFocus()) return;
+    if(pageSuspended||document.hidden||!document.hasFocus()) return;
     state.activeMs+=delta;
-    if (!state.pending && state.shown<4 && state.activeMs >= [20000,45000,75000,110000][state.shown] && state.activeMs-state.closedAt>=12000) {
-      state.pending={site:chosen||deck[state.shown],format:formats[state.shown]}; state.shown++; save(); renderAd();
+    if (!state.pending && state.shown<MAX_INTERRUPTS && state.activeMs >= state.nextAt && (state.shown===0||state.activeMs-state.closedAt>=MIN_GAP_MS)) {
+      state.pending={site:chosen||deck[state.shown%deck.length],format:formats[state.shown%formats.length]}; state.shown++;state.nextAt=null;save();renderAd();
     }
   };
-  setInterval(tick,500); setInterval(save,2000);
-  document.addEventListener('visibilitychange',()=>{last=performance.now();save();});
-  window.addEventListener('blur',()=>{last=performance.now();save();});
+  setInterval(tick,500); setInterval(()=>{if(!pageSuspended)save();},2000);
+  document.addEventListener('visibilitychange',()=>{last=performance.now();if(!pageSuspended)save();});
+  window.addEventListener('blur',()=>{last=performance.now();if(!pageSuspended)save();});
   window.addEventListener('focus',()=>{last=performance.now();});
-  window.addEventListener('pagehide',save);
+  window.addEventListener('pagehide',()=>{pageSuspended=true;stopMotion();save();});
   window.addEventListener('pageshow',event=>{
     last=performance.now();
+    pageSuspended=false;
     if (!event.persisted) return;
     const current=rawRead(taskKey,null);
-    if(current && typeof current==='object' && !Array.isArray(current)) {
-      if(Number.isFinite(current.activeMs)) state.activeMs=Math.max(state.activeMs,Math.min(14400000,current.activeMs));
-      if(Number.isInteger(current.shown)) state.shown=Math.max(state.shown,Math.min(4,current.shown));
-      state.closedAt=Number.isFinite(current.closedAt)?Math.max(0,Math.min(state.activeMs,current.closedAt)):0;
-      state.pending=current.pending&&validSites.includes(current.pending.site)&&['drawer','panel','tiny','newsletter'].includes(current.pending.format)?current.pending:null;
-      overlayRoot.replaceChildren();root.inert=false;
-      const taskShell=document.querySelector('.br-task-shell');if(taskShell)taskShell.inert=false;
-      if(state.pending) renderAd();
-    }
+    Object.assign(state,normalizeState(current&&typeof current==='object'&&!Array.isArray(current)?current:state));
+    stopMotion();overlayRoot.replaceChildren();root.inert=false;
+    const taskShell=document.querySelector('.br-task-shell');if(taskShell)taskShell.inert=false;
+    if(state.pending) renderAd();
+    save();
   });
   if(state.pending) renderAd();
   save();

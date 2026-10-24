@@ -1,6 +1,8 @@
 # Little Daily · 真实网页框架
 
-**独立版本 Browse · deep2a：** [三十项任务 / Task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=deep2a) · [十个场景 / Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=deep2a) · [参考网站与骗局案例 / Sources & cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=deep2a)。十种有实际内容与操作的网站，使用附来源的真实照片、书籍插图、馆藏图像和影片，搭配十个广告目的地。广告打开真实标签，原任务及笔记保留。详见 [browse/README.md](browse/README.md)。
+**独立版本 Browse · motion1：** [三十项任务 / Task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=motion1) · [十个场景 / Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=motion1) · [参考网站与骗局案例 / Sources & cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=motion1)。十种有实际内容与操作的网站，使用附来源的真实照片、书籍插图、馆藏图像和影片，搭配十个广告目的地。六种弹窗包含屏幕内反弹和鼠标接近关闭键时整卡躲避；新 seed 首次在前台专注浏览约 8 秒后出现，同一 seed 最多十次，一次一个。广告打开真实标签并保留原工作；顶部任务说明及笔记栏仍隐藏，没有可见计时器。详见 [browse/README.md](browse/README.md)。
+
+Browse motion1 adds two moving ad formats to the existing four: a bouncing card and a mouse-dodging card. Ads use native browser tabs; the original workspace remains available. Keyboard focus pauses motion, touch does not trigger dodging, and reduced-motion preferences keep both cards still. The task/notes panel remains hidden.
 
 网站地址：[打开 Little Daily](https://gary1110086.github.io/CSpopups/) · [中文入口](https://gary1110086.github.io/CSpopups/?lang=zh)
 

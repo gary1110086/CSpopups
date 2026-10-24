@@ -1,3 +1,23 @@
+# Motion1 verification record
+
+24 October 2026. Added bounded bouncing and close-hover-evading advertisements across the ten Browse websites. Both are nonmodal. The first arrival uses8 active focused seconds; later arrivals wait a full12–18 active seconds from dismissal, with one pending advertisement and ten arrivals per seed. All six formats appear within the first six arrivals; the first and third cover both moving forms. The top task/notes panel remains hidden. Existing scene data, original root runtime and standalone wallpapers remain separate.
+
+Installed Chrome was driven with Playwright because no browser plugin was available in the listed tools. Tests and screenshots stay in the system temporary directory.
+
+| Area | Current local evidence |
+|---|---|
+| Real schedule and integration |87 assertions: measured first arrival near8s and second after a full12s dismissal gap; ten real overlay transitions cover all ten destinations without repetition, all six formats, correct persisted deadlines and cap; all ten websites load versioned motion assets once, render within bounds and retain the hidden brief panel; thirty task definitions remain. |
+| Actual moving interactions |87 assertions: wallpaper and image-tool pages with both formats at1440/390/320px; actual pointer evasion, collision taunts, repeated bounded positions, keyboard focus pause, genuine close/Enter/Escape, touch close, reduced motion, and CDP2x zoom. A processed image, output blob, width setting and byte count survive an isolated advertiser tab; a blocked request exposes a stable native fallback. |
+| Persistence and native Back |61 actual-engine fixture assertions plus19 actual Chrome/motion-module assertions: relative scheduling, old v1 imports, malformed state/deadlines, pending restore, foreground suspension, corrupt storage recovery, focus/inert and genuine BFCache. Separately reproduced and fixed a stale cached document overwriting the newer dismissal on visibilitychange before pageshow; actual Folio catalogue/detail/Back now leaves that advertisement dismissed. |
+| Motion and visual fixtures |47 module assertions and203 CSS assertions cover cleanup, viewport/pinch bounds, focus, input modes and reduced motion, plus ten advertiser identities in both forms and languages over five widths. |
+| Documentation and loading |100 assertions cover single stylesheet/module loading and order, all fourteen engine documents, motion1 versions and390px English/Chinese facilitator guide layout. |
+
+The genuine Back tests launch Chrome with its automation BFCache-disabling flag removed and confirm persisted pageshow. Focus/visibility fixture tests are labelled as fixtures; they do not establish native operating-system focus switching. No runtime or missing-asset errors were observed in the current local integrated tests. Desktop and320px actual-page screenshots were reviewed. The desk-accessory advertisement now uses the existing sourced shelf photograph rather than an unrelated library interior.
+
+Release ZIP integrity, extracted-site checks, the exact Pages commit and public-browser checks are verified separately at delivery. Historical records below describe earlier releases.
+
+---
+
 # Deep2 verification record
 
 Deep2a update, 24 October 2026: the on-site task/notes panel is temporarily inactive across all ten websites; the independent30-task library remains available.76 targeted Chrome assertions passed: every assignment opens without a panel, website header starts at the top, native search/detail/Back preserve context, old notes remain stored, Chinese390px layout, modal focus/Escape, isolated advertiser tab with retained processed image, and malformed pacing state. No runtime or missing-asset errors. Desktop1440px and mobile390px screenshots were reviewed. The detailed deep2 record below describes the earlier full-panel release.

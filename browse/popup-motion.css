@@ -1,0 +1,477 @@
+/* Moving advertisements: geometry belongs to popup-motion.js, never CSS. */
+.br-interrupt.br-motion-stage {
+  position: fixed;
+  inset: auto;
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  width: 0;
+  height: 0;
+  max-width: none;
+  padding: 0;
+  background: none;
+  pointer-events: none;
+}
+
+.br-ad.br-motion-card {
+  --br-motion-ink: #16243e;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  width: min(320px, calc(100vw - 24px));
+  max-width: calc(var(--br-motion-view-width, 100vw) - 8px);
+  max-height: calc(100vh - 24px);
+  max-height: calc(var(--br-motion-view-height, 100dvh) - 8px);
+  margin: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #939b9c transparent;
+  color: var(--br-motion-ink);
+  font-family: Tahoma, 'Microsoft YaHei', sans-serif;
+  font-size: 12px;
+  text-align: left;
+  pointer-events: auto;
+  touch-action: manipulation;
+  will-change: transform;
+  transform: none;
+  transition: none;
+  animation: none;
+  isolation: isolate;
+}
+
+.br-ad.br-motion-card,
+.br-ad.br-motion-card * {
+  box-sizing: border-box;
+}
+
+.br-ad.br-motion-card .br-ad-top {
+  position: relative;
+  min-height: 38px;
+  height: auto;
+  padding: 5px 7px 5px 12px;
+  gap: 8px;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.br-ad.br-motion-card .br-ad-top > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.br-ad.br-motion-card .br-real-close {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0 0 2px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  color: inherit;
+  background: transparent;
+  font: 24px/1 Tahoma, 'Microsoft YaHei', sans-serif;
+  cursor: pointer;
+}
+
+.br-ad.br-motion-card .br-ad-visual {
+  height: 88px;
+  margin: 12px 12px 0;
+  border: 1px solid var(--br-motion-ink);
+  border-radius: 0;
+}
+
+.br-ad.br-motion-card .br-ad-visual > span {
+  font-size: 18px;
+}
+
+.br-ad.br-motion-card .br-visual-desk > span {
+  font-size: 10px;
+}
+
+.br-ad.br-motion-card .br-visual-desk > span > b {
+  font-size: 25px;
+}
+
+.br-ad.br-motion-card .br-visual-stock > span,
+.br-ad.br-motion-card .br-visual-prize > span {
+  font-size: 11px;
+}
+
+.br-ad.br-motion-card .br-visual-stock b {
+  font-size: 20px;
+}
+
+.br-ad.br-motion-card .br-visual-prize b {
+  font-size: 30px;
+}
+
+.br-ad.br-motion-card .br-visual-coupon {
+  border-width: 4px;
+}
+
+.br-ad.br-motion-card .br-visual-coupon b {
+  font-size: 42px;
+}
+
+.br-ad.br-motion-card .br-visual-security > span,
+.br-ad.br-motion-card .br-visual-player > span {
+  font-size: 26px;
+}
+
+.br-ad.br-motion-card .br-visual-game i {
+  font-size: 44px;
+}
+
+.br-ad.br-motion-card .br-visual-parcel b {
+  display: block;
+  margin-top: 4px;
+}
+
+.br-ad.br-motion-card .br-ad-body {
+  position: relative;
+  padding: 15px 17px 14px;
+}
+
+.br-ad.br-motion-card .br-ad-eyebrow {
+  display: block;
+  color: inherit;
+  font: 700 9px/1.4 Tahoma, 'Microsoft YaHei', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.br-ad.br-motion-card h2 {
+  max-width: none;
+  margin: 8px 0 10px;
+  color: var(--br-motion-ink);
+  font-size: 26px;
+  line-height: 1.04;
+  letter-spacing: -.6px;
+  overflow-wrap: anywhere;
+}
+
+.br-ad.br-motion-card .br-ad-body > p {
+  margin: 0 0 15px;
+  color: #455067;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.br-ad.br-motion-card .br-ad-cta {
+  display: block;
+  min-height: 42px;
+  padding: 12px 13px;
+  border: 1px solid var(--br-motion-ink);
+  border-radius: 0;
+  color: #fff !important;
+  background: var(--br-motion-ink);
+  text-align: center;
+  text-decoration: none;
+  font: 700 12px/1.4 Tahoma, 'Microsoft YaHei', sans-serif;
+  letter-spacing: .1px;
+}
+
+.br-ad.br-motion-card .br-ad-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.br-ad.br-motion-card .br-ad-bottom {
+  min-height: 0;
+  padding: 7px 12px;
+  color: inherit;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.br-ad.br-motion-card .br-motion-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 9px;
+  padding: 4px 6px;
+  border: 1px solid currentColor;
+  font: 700 9px/1.2 Tahoma, 'Microsoft YaHei', sans-serif;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.br-ad.br-motion-card .br-ad-top .br-motion-label {
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 3px 5px;
+  font-size: 8px;
+  letter-spacing: .35px;
+}
+
+.br-ad.br-motion-card .br-motion-taunt {
+  display: block;
+  min-height: 27px;
+  margin: 0 0 11px;
+  padding: 7px 0 0;
+  border-top: 1px dashed currentColor;
+  color: inherit;
+  font: 700 10px/1.45 Tahoma, 'Microsoft YaHei', sans-serif;
+}
+
+.br-ad.br-motion-card .br-motion-hint {
+  display: block;
+  margin: 0;
+  color: inherit;
+  font: 9px/1.45 Tahoma, 'Microsoft YaHei', sans-serif;
+}
+
+.br-ad.br-motion-card .br-motion-hint kbd {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 0 3px;
+  border: 1px solid currentColor;
+  border-bottom-width: 2px;
+  border-radius: 2px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+}
+
+.br-ad.br-motion-card .br-blocked {
+  margin: 0;
+  padding: 10px 13px 13px;
+  border-top: 1px dashed currentColor;
+  color: inherit;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.br-ad.br-motion-card .br-blocked a {
+  font-weight: 700;
+}
+
+.br-ad.br-motion-card :is(a, button):focus-visible {
+  outline: 3px solid #e15d27;
+  outline-offset: 3px;
+}
+
+/* A small, bright promotional ticket with a perforated tear line. */
+.br-ad.br-ad-bounce {
+  --br-motion-ink: #173ab6;
+  border: 2px solid var(--br-motion-ink);
+  border-radius: 3px;
+  color: var(--br-motion-ink);
+  background: #fff5ce;
+  box-shadow: 4px 4px 0 #173ab6, 7px 9px 15px #18223a26;
+}
+
+.br-ad.br-ad-bounce .br-ad-top {
+  border-bottom: 1px solid #173ab6;
+  color: #fff9df;
+  background: #173ab6;
+}
+
+.br-ad.br-ad-bounce .br-real-close {
+  border-color: #c4d0ff;
+}
+
+.br-ad.br-ad-bounce .br-real-close:hover {
+  color: #173ab6;
+  background: #fff5ce;
+}
+
+.br-ad.br-ad-bounce .br-ad-body {
+  padding-top: 16px;
+}
+
+.br-ad.br-ad-bounce h2 {
+  font-family: Georgia, 'Noto Serif CJK SC', SimSun, serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.08;
+  letter-spacing: -.9px;
+}
+
+.br-ad.br-ad-bounce .br-motion-label {
+  color: #173ab6;
+  background: #ffdb56;
+}
+
+.br-ad.br-ad-bounce .br-ad-top .br-motion-label {
+  border-color: #ffdb56;
+}
+
+.br-ad.br-ad-bounce .br-ad-cta {
+  border-color: #173ab6;
+  background: #173ab6;
+  box-shadow: 2px 2px 0 #acb9ea;
+}
+
+.br-ad.br-ad-bounce .br-ad-bottom {
+  border-top: 1px dashed #173ab6;
+  background: #ffe8a0;
+}
+
+.br-ad.br-ad-bounce .br-motion-spark {
+  display: inline-block;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  background: #ffdb56;
+  clip-path: polygon(50% 0, 62% 36%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 36%);
+}
+
+/* A cheeky sponsor card: crisp desktop-window chrome, no position animation. */
+.br-ad.br-ad-dodge {
+  --br-motion-ink: #172b24;
+  border: 2px solid #172b24;
+  border-radius: 13px 13px 5px 13px;
+  color: #172b24;
+  background: #f5faed;
+  box-shadow: 4px 4px 0 #172b24, 7px 9px 15px #18223a26;
+}
+
+.br-ad.br-ad-dodge .br-ad-top {
+  border-bottom: 2px solid #172b24;
+  color: #e8f3df;
+  background: #172b24;
+}
+
+.br-ad.br-ad-dodge .br-real-close {
+  border-color: #a9c6a7;
+  border-radius: 5px;
+  color: #e8f3df;
+  background: #28443a;
+}
+
+.br-ad.br-ad-dodge .br-real-close:hover {
+  color: #172b24;
+  background: #d9fa6e;
+}
+
+.br-ad.br-ad-dodge .br-ad-visual {
+  border-radius: 5px;
+}
+
+.br-ad.br-ad-dodge h2 {
+  font-family: Impact, 'Arial Narrow', 'Microsoft YaHei', sans-serif;
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: .1px;
+}
+
+.br-ad.br-ad-dodge .br-motion-label {
+  border-color: #172b24;
+  border-radius: 3px;
+  color: #172b24;
+  background: #d9fa6e;
+  box-shadow: 2px 2px 0 #172b24;
+}
+
+.br-ad.br-ad-dodge .br-ad-top .br-motion-label {
+  box-shadow: none;
+}
+
+.br-ad.br-ad-dodge .br-motion-taunt {
+  padding: 8px 9px;
+  border: 1px dashed #5c7a5c;
+  border-radius: 3px;
+  color: #304c35;
+  background: #e6f0dc;
+}
+
+.br-ad.br-ad-dodge .br-ad-cta {
+  border: 2px solid #172b24;
+  border-radius: 4px;
+  color: #172b24 !important;
+  background: #d9fa6e;
+  box-shadow: 2px 2px 0 #172b24;
+}
+
+.br-ad.br-ad-dodge .br-ad-bottom {
+  border-top: 1px solid #c4d3b8;
+  color: #53664c;
+  background: #eaf1e0;
+}
+
+.br-ad.br-ad-dodge .br-motion-spark {
+  display: inline-block;
+  flex: 0 0 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  color: #d9fa6e;
+  background: currentColor;
+  box-shadow: -10px 0 0 #65856a;
+}
+
+@media (max-width: 359px) {
+  .br-ad.br-motion-card .br-ad-top {
+    padding-left: 9px;
+    gap: 6px;
+  }
+
+  .br-ad.br-motion-card .br-ad-top .br-motion-label {
+    max-width: 85px;
+  }
+
+  .br-ad.br-motion-card .br-ad-body {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .br-ad.br-ad-bounce h2 {
+    font-size: 26px;
+  }
+
+  .br-ad.br-ad-dodge h2 {
+    font-size: 27px;
+  }
+}
+
+@media (max-height: 520px) {
+  .br-ad.br-motion-card .br-ad-visual {
+    height: 64px;
+    margin-top: 8px;
+  }
+
+  .br-ad.br-motion-card .br-ad-body {
+    padding-top: 10px;
+    padding-bottom: 11px;
+  }
+
+  .br-ad.br-motion-card h2 {
+    font-size: 24px;
+  }
+
+  .br-ad.br-motion-card .br-ad-body > p {
+    margin-bottom: 10px;
+  }
+
+  .br-ad.br-motion-card .br-motion-taunt {
+    margin-bottom: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .br-ad.br-motion-card {
+    will-change: auto;
+  }
+
+  .br-ad.br-motion-card,
+  .br-ad.br-motion-card *,
+  .br-ad.br-motion-card::before,
+  .br-ad.br-motion-card::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto;
+  }
+}
