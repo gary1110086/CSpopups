@@ -3,9 +3,12 @@
   'use strict';
   window.BROWSE_AD_STACK = C => {
     const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,wireAds,deck,chosen}=C;
-    const KEY='br-run-v3:'+seed, MISSING=Symbol('missing'), MAX=30;
+    const KEY='br-run-v4:'+seed, MISSING=Symbol('missing'), MAX=30;
     const GAPS=[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter'];
+    const hash=salt=>{let value=2166136261;for(const c of seed+salt)value=Math.imul(value^c.charCodeAt(0),16777619);return value>>>0;};
+    const closeStyles=['visible','dual','ghost'].sort((a,b)=>hash('close:'+a)-hash('close:'+b));
+    const dodgeLimit=id=>4+hash('dodge:'+id)%3;
     const validSites=Object.keys(ads), modal=p=>p.format==='panel'||p.format==='newsletter';
     const readRun=key=>{
       try {const raw=sessionStorage.getItem(key);if(raw===null)return MISSING;try{return JSON.parse(raw);}catch{return {};}}
@@ -18,21 +21,24 @@
       for(const p of Array.isArray(obj.pending)?obj.pending:[]){
         if(!p||!Number.isInteger(p.id)||p.id<1||p.id>MAX||ids.has(p.id)||!validSites.includes(p.site)||!FORMATS.includes(p.format))continue;
         if(modal(p)&&hasModal)continue;
-        pending.push({id:p.id,site:p.site,format:p.format});ids.add(p.id);if(modal(p))hasModal=true;
+        const closeStyle=['visible','dual','ghost'].includes(p.closeStyle)?p.closeStyle:'visible';
+        const extra=p.format==='dodge'?{dodgeLimit:Number.isInteger(p.dodgeLimit)&&p.dodgeLimit>=4&&p.dodgeLimit<=6?p.dodgeLimit:dodgeLimit(p.id)}:{};
+        if(p.format==='dodge')extra.dodgeCount=Number.isInteger(p.dodgeCount)?Math.max(0,Math.min(extra.dodgeLimit,p.dodgeCount)):0;
+        pending.push({id:p.id,site:p.site,format:p.format,closeStyle,...extra});ids.add(p.id);if(modal(p))hasModal=true;
         if(pending.length===4)break;
       }
       const shown=Math.max(Number.isInteger(obj.shown)?Math.max(0,Math.min(MAX,obj.shown)):0,...pending.map(p=>p.id));
       const quietUntil=Number.isFinite(obj.quietUntil)&&obj.quietUntil>=0&&obj.quietUntil<=activeMs+5000?obj.quietUntil:0;
       const nextAt=shown>=MAX?null:Math.max(quietUntil,Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=activeMs+5000?obj.nextAt:activeMs+(shown?2500:3000));
-      return {pacingVersion:3,activeMs,shown,nextAt,quietUntil,pending};
+      return {pacingVersion:4,activeMs,shown,nextAt,quietUntil,pending};
     };
     const stored=readRun(KEY);
     let initial=stored;
     if(stored===MISSING){
-      let legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
+      let legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
       const old=legacy&&typeof legacy==='object'&&!Array.isArray(legacy)?legacy:{};
       const shown=Number.isInteger(old.shown)?Math.max(0,Math.min(MAX,old.shown)):0;
-      initial={activeMs:old.activeMs,shown,pending:old.pending&&typeof old.pending==='object'&&!Array.isArray(old.pending)?[{...old.pending,id:Math.max(1,shown)}]:[]};
+      initial=Array.isArray(old.pending)?old:{activeMs:old.activeMs,shown,pending:old.pending&&typeof old.pending==='object'?[{...old.pending,id:Math.max(1,shown)}]:[]};
     }
     const state=normalize(initial),entries=new Map();
     const overlayRoot=document.getElementById('interrupt-root')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
@@ -49,14 +55,15 @@
     const returnFocus=()=>{if(lastOutsideFocus?.isConnected&&!lastOutsideFocus.inert)lastOutsideFocus.focus({preventScroll:true});};
     const viewport=()=>({left:visualViewport?.offsetLeft||0,top:visualViewport?.offsetTop||0,width:visualViewport?.width||innerWidth,height:visualViewport?.height||innerHeight});
     const positionEntry=entry=>{
-      const v=viewport();entry.card.style.setProperty('--br-motion-view-width',v.width+'px');entry.card.style.setProperty('--br-motion-view-height',v.height+'px');
+      const v=viewport(),reserve=entry.p.closeStyle==='visible'?0:30;entry.card.style.setProperty('--br-motion-view-width',v.width+'px');entry.card.style.setProperty('--br-motion-view-height',v.height+'px');
       if(modal(entry.p)){
-        Object.assign(entry.stage.style,{left:v.left+'px',top:v.top+'px',width:v.width+'px',height:v.height+'px'});return;
+        const pad=limit()===2?12:16;
+        Object.assign(entry.stage.style,{left:v.left+'px',top:v.top+'px',width:v.width+'px',height:v.height+'px',paddingTop:(pad+reserve)+'px',paddingBottom:pad+'px'});return;
       }
       if(entry.moving)return;
       const rect=entry.card.getBoundingClientRect(),slots=[[.04,.10],[.96,.16],[.07,.94],[.9,.88]],slot=slots[(entry.p.id-1)%4];
       entry.card.style.left=(v.left+4+Math.max(0,v.width-rect.width-8)*slot[0])+'px';
-      entry.card.style.top=(v.top+4+Math.max(0,v.height-rect.height-8)*slot[1])+'px';
+      entry.card.style.top=(v.top+4+reserve+Math.max(0,v.height-rect.height-8-reserve)*slot[1])+'px';
     };
     const applyModal=()=>{
       const current=state.pending.find(modal);modalId=current?.id??null;
@@ -97,14 +104,15 @@
       const a=ads[p.site],isModal=modal(p),moving=p.format==='bounce'||p.format==='dodge';
       const stage=document.createElement('div');stage.className='br-interrupt '+(isModal?'br-ad-backdrop br-stack-modal-stage':'br-motion-stage br-stack-stage');
       stage.dataset.brEntry=String(p.id);stage.style.zIndex=String(isModal?11000:9000+p.id);
-      stage.innerHTML=`<section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)} br-stack-card ${moving?'br-motion-card':''} ${isModal?'br-stack-modal':''}" ${isModal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1">
-        <div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(a[0])}</span>${p.format==='panel'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Close promotion','关闭推广')}">×</a>`:''}<button class="br-real-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button></div>
+      stage.innerHTML=`<section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)} br-stack-card ${moving?'br-motion-card':''} ${isModal?'br-stack-modal':''}" data-close-style="${p.closeStyle}" ${isModal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1">
+        ${p.closeStyle!=='visible'?`<button class="br-ghost-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button>`:''}<div class="br-ad-scroll">
+        <div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(a[0])}</span>${p.format==='panel'&&p.closeStyle!=='ghost'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Close promotion','关闭推广')}">×</a>`:''}<button class="br-real-close" type="button" data-br-close ${p.closeStyle==='ghost'?'hidden':''} aria-label="${t('Dismiss advertisement','关闭广告')}">×</button></div>
         ${moving?`<div class="br-motion-label">${p.format==='bounce'?t('↗ ONE MORE OFFER','↗ 再来一条优惠'):t('✦ CATCH ME FIRST','✦ 先追上我再说')}</div>`:''}
         ${adVisual(p.site)}<div class="br-ad-body"><span class="br-ad-eyebrow">${esc(a[3])}</span><h2>${a[1]}</h2><p>${adDescription(p.site)}</p>
         ${moving?`<p class="br-motion-taunt">${moving&&p.format==='dodge'?t('Looking for the ×?','在找那个 × 吗？'):t('Just passing through. Again.','只是路过，又路过。')}</p>`:''}
-        <a class="br-ad-cta" data-br-ad="${p.site}">${a[2]} →</a>${p.format==='newsletter'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div>
-        <div class="br-ad-bottom">${p.format==='tiny'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}<span class="br-stack-hint">${t('Esc clears all offers','Esc 关闭全部广告')}</span></div>
-        <p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></section>`;
+        <a class="br-ad-cta" data-br-ad="${p.site}">${a[2]} →</a>${p.format==='newsletter'&&p.closeStyle!=='ghost'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div>
+        <div class="br-ad-bottom">${p.format==='tiny'&&p.closeStyle!=='ghost'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}<span class="br-stack-hint">${t('Esc clears all offers','Esc 关闭全部广告')}</span></div>
+        <p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></div></section>`;
       overlayRoot.append(stage);const card=stage.querySelector('.br-ad');
       const entry={p,stage,card,moving,motion:null,paused:false,blockedLink:false};entries.set(p.id,entry);positionEntry(entry);wireAds(stage);
       stage.querySelectorAll('[data-br-close]').forEach(button=>button.addEventListener('click',()=>closeOne(p.id)));
@@ -114,11 +122,16 @@
         if(child){try{child.opener=null;}catch{}closeOne(p.id);}
         else{stage.querySelector('.br-blocked').hidden=false;entry.blockedLink=true;entry.motion?.pause();positionEntry(entry);}
       }));
-      if(moving){let line=0;entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:p.format,slot:(p.id-1)%4,speed:1.25,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
+      if(moving){let line=0;entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:p.format,slot:(p.id-1)%4,speed:1.25,topReserve:p.closeStyle==='visible'?0:30,dodgeLimit:p.dodgeLimit,dodgeCount:p.dodgeCount,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
         card.dataset.motionMoves=String(meta.count);card.dataset.motionReason=meta.reason;
+        if(p.format==='dodge'){
+          card.dataset.dodgeLimit=String(meta.dodgeLimit);card.dataset.dodgeCount=String(meta.dodgeCount);card.dataset.dodgeSettled=String(meta.settled);
+          if(meta.reason==='dodge'){p.dodgeCount=meta.dodgeCount;save();}
+          if(meta.settled){card.querySelector('.br-motion-taunt').textContent=t('All right. I will stay here.','好啦，这次不跑了。');return;}
+        }
         if(meta.reason===p.format)card.querySelector('.br-motion-taunt').textContent=t(...taunts[p.format][line++%taunts[p.format].length]);
       }});}
-      if(isModal)card.querySelector('.br-real-close').focus({preventScroll:true});
+      if(isModal)(card.querySelector('.br-real-close:not([hidden])')||card.querySelector('.br-ghost-close')).focus({preventScroll:true});
     };
     function sync(){
       trimToViewport();const ids=new Set(state.pending.map(p=>p.id));
@@ -144,7 +157,7 @@
       if(state.shown<MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
         let format=FORMATS[state.shown%FORMATS.length];
         if((format==='panel'||format==='newsletter')&&state.pending.some(modal))format=state.shown%2?'dodge':'bounce';
-        state.shown++;state.pending.push({id:state.shown,site:chosen||deck[(state.shown-1)%deck.length],format});
+        state.shown++;state.pending.push({id:state.shown,site:chosen||deck[(state.shown-1)%deck.length],format,closeStyle:closeStyles[(state.shown-1)%closeStyles.length],...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})});
         state.nextAt=state.shown<MAX?state.activeMs+GAPS[(state.shown-1)%GAPS.length]:null;
         sync();save();
       }else pressureUpdate();

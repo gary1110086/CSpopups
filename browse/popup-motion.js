@@ -8,11 +8,14 @@
  * the last position; a new controller on the same element replaces the previous one.
  * Optional numeric slot selects one of four starting quadrants. Omitting it retains
  * the single-card position. Optional speed is bounded to 0.5–1.7 (default 1).
+ * Dodge state can be persisted from onMove: dodgeLimit, dodgeCount and settled.
+ * topReserve leaves room for an absolutely positioned .br-ghost-close above the card.
  */
 (() => {
   'use strict';
   const controllers = new WeakMap();
-  window.BROWSE_POPUP_MOTION = ({element, mode = 'bounce', isActive = () => true, onMove, slot, speed = 1} = {}) => {
+  window.BROWSE_POPUP_MOTION = ({element, mode = 'bounce', isActive = () => true, onMove, slot, speed = 1,
+    random = Math.random, dodgeLimit, dodgeCount = 0, topReserve = 0} = {}) => {
     if (!element?.getBoundingClientRect || !element.style) throw new TypeError('A popup card element is required.');
     if (!['bounce', 'dodge'].includes(mode)) throw new TypeError('Unknown popup motion mode.');
     controllers.get(element)?.stop();
@@ -27,6 +30,14 @@
     const motionSpeed = Number.isFinite(speed) ? Math.max(.5, Math.min(1.7, speed)) : 1;
     const quadrant = Number.isFinite(slot) ? ((Math.trunc(slot) % 4) + 4) % 4 : null;
     let vx = 92 * motionSpeed, vy = 66 * motionSpeed, count = 0, lastDodge = -Infinity;
+    const draw = () => {
+      let value;
+      try { value = typeof random === 'function' ? random() : Math.random(); } catch { value = Math.random(); }
+      return Number.isFinite(value) ? Math.max(0, Math.min(1 - Number.EPSILON, value)) : Math.random();
+    };
+    const limit = Number.isInteger(dodgeLimit) && dodgeLimit >= 4 && dodgeLimit <= 6 ? dodgeLimit : 4 + Math.floor(draw() * 3);
+    let usedDodges = Number.isFinite(dodgeCount) ? Math.max(0, Math.min(limit, Math.trunc(dodgeCount))) : 0;
+    const reserve = Number.isFinite(topReserve) ? Math.max(0, topReserve) : 0;
     const listen = (target, name, fn, options) => {
       target.addEventListener(name, fn, options);
       listeners.push(() => target.removeEventListener(name, fn, options));
@@ -41,7 +52,8 @@
     };
     const emit = reason => {
       if (typeof onMove !== 'function') return;
-      try { onMove({mode, count, x, y, width, height, reason}); } catch { /* A text callback must not break motion or native controls. */ }
+      try { onMove({mode, count, x, y, width, height, reason, dodgeLimit: limit, dodgeCount: usedDodges,
+        settled: mode === 'dodge' && usedDodges >= limit}); } catch { /* A text callback must not break motion or native controls. */ }
     };
     const measure = () => {
       const left = viewport?.offsetLeft || 0, top = viewport?.offsetTop || 0;
@@ -52,9 +64,10 @@
       const rect = element.getBoundingClientRect();
       baseX = rect.left - tx; baseY = rect.top - ty;
       width = rect.width; height = rect.height;
-      bounds = {left: left + margin, top: top + margin,
+      const bottom = Math.max(top + margin, top + viewHeight - height - margin);
+      bounds = {left: left + margin, top: Math.min(bottom, top + margin + reserve),
         right: Math.max(left + margin, left + viewWidth - width - margin),
-        bottom: Math.max(top + margin, top + viewHeight - height - margin)};
+        bottom};
       x = clamp(rect.left, bounds.left, bounds.right);
       y = clamp(rect.top, bounds.top, bounds.bottom);
     };
@@ -83,26 +96,44 @@
         hit: raw < 0 || raw > range || (raw === 0 && velocity < 0) || (raw === range && velocity > 0)};
     };
     const dodge = (pointer, now) => {
-      const close = element.querySelector('.br-real-close');
-      if (!close || !mouse.matches || now - lastDodge < 260) return;
-      const rect = close.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      const dx = Math.max(rect.left - pointer.x, 0, pointer.x - rect.right);
-      const dy = Math.max(rect.top - pointer.y, 0, pointer.y - rect.bottom);
-      if (Math.hypot(dx, dy) > 44) return;
-      const closeX = rect.left + rect.width / 2 - x, closeY = rect.top + rect.height / 2 - y;
-      const midX = (bounds.left + bounds.right) / 2, midY = (bounds.top + bounds.bottom) / 2;
-      const candidates = [[bounds.left, bounds.top], [bounds.right, bounds.top],
-        [bounds.left, bounds.bottom], [bounds.right, bounds.bottom],
-        [midX, bounds.top], [midX, bounds.bottom], [bounds.left, midY], [bounds.right, midY]];
-      const distance = (a, b) => Math.hypot(a + closeX - pointer.x, b + closeY - pointer.y);
-      let best = [x, y], bestDistance = distance(x, y);
-      for (const candidate of candidates) {
-        const d = distance(candidate[0], candidate[1]);
-        if (d > bestDistance) { best = candidate; bestDistance = d; }
+      if (usedDodges >= limit || !mouse.matches || now - lastDodge < 260) return;
+      const closes = [...element.querySelectorAll('.br-real-close, .br-ghost-close[data-br-close]')].map(close => {
+        const style = win.getComputedStyle(close), rect = close.getBoundingClientRect();
+        return style.display !== 'none' && style.visibility !== 'hidden' && close.getClientRects().length && rect.width && rect.height ? rect : null;
+      }).filter(Boolean);
+      if (!closes.some(rect => Math.hypot(Math.max(rect.left - pointer.x, 0, pointer.x - rect.right),
+        Math.max(rect.top - pointer.y, 0, pointer.y - rect.bottom)) <= 44)) return;
+      const offsets = closes.map(rect => [rect.left + rect.width / 2 - x, rect.top + rect.height / 2 - y]);
+      const distance = (a, b) => Math.min(...offsets.map(([cx, cy]) => Math.hypot(a + cx - pointer.x, b + cy - pointer.y)));
+      const travelX = bounds.right - bounds.left, travelY = bounds.bottom - bounds.top;
+      const diagonal = Math.hypot(travelX, travelY);
+      if (diagonal < 1) return;
+      const corners = [[bounds.left, bounds.top], [bounds.right, bounds.top], [bounds.left, bounds.bottom], [bounds.right, bounds.bottom]];
+      const currentDistance = distance(x, y), maxDistance = Math.max(...corners.map(([a,b]) => distance(a,b)));
+      const minDistance = Math.min(Math.max(72, currentDistance + 32), maxDistance * .78);
+      const minGain = Math.min(24, Math.max(0, maxDistance - currentDistance) * .35);
+      const minTravel = Math.max(1, Math.min(140, diagonal * .23));
+      const preferEdge = draw() < .6, candidates = [];
+      const sample = edge => {
+        let u = draw(), v = draw();
+        if (edge) {
+          const side = Math.floor(draw() * 4);
+          if (side === 0) u *= .15;
+          else if (side === 1) u = 1 - u * .15;
+          else if (side === 2) v *= .15;
+          else v = 1 - v * .15;
+        }
+        return [bounds.left + travelX * u, bounds.top + travelY * v];
+      };
+      // Rejection sampling preserves a random destination instead of choosing a fixed
+      // farthest corner. A bounded fallback handles narrow screens and unusual RNGs.
+      for (let attempt = 0; attempt < 40 && candidates.length < 6; attempt++) {
+        const candidate = sample(attempt < 28 ? preferEdge : !preferEdge), d = distance(...candidate);
+        if (Math.hypot(candidate[0] - x, candidate[1] - y) >= minTravel && d >= minDistance && d > currentDistance + minGain) candidates.push(candidate);
       }
-      if (Math.hypot(best[0] - x, best[1] - y) < 1) return;
-      x = best[0]; y = best[1]; lastDodge = now; count++;
+      if (!candidates.length) return;
+      const destination = candidates[Math.floor(draw() * candidates.length)];
+      x = destination[0]; y = destination[1]; lastDodge = now; count++; usedDodges++;
       apply(); emit('dodge');
     };
     function tick(now) {
@@ -181,7 +212,7 @@
     listen(doc, 'pointerup', pointerEnd, {capture: true, passive: true});
     listen(doc, 'pointercancel', pointerEnd, {capture: true, passive: true});
     if (mode === 'dodge') listen(doc, 'pointermove', event => {
-      if (event.pointerType !== 'mouse' || event.buttons || !mouse.matches || basicPause() || !active()) return;
+      if (usedDodges >= limit || event.pointerType !== 'mouse' || event.buttons || !mouse.matches || basicPause() || !active()) return;
       pendingPointer = {x: event.clientX, y: event.clientY}; schedule();
     }, {passive: true});
     const motionPreference = () => { pendingPointer = null; cancelFrame(); if (!reduce.matches) refresh('preference'); };

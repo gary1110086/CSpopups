@@ -1,0 +1,104 @@
+/* Close-control variants. Position, motion and the 30px top reservation belong to JS. */
+.br-ad.br-stack-card {
+  --br-close-reserve: 0px;
+  overflow: visible;
+  max-height: none;
+}
+
+.br-ad.br-stack-card:is([data-close-style="dual"], [data-close-style="ghost"]) {
+  --br-close-reserve: 30px;
+}
+
+/* The frame keeps its original border, colour and shadow; only its contents scroll. */
+.br-ad.br-stack-card > .br-ad-scroll {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-height: calc(100vh - var(--br-close-reserve) - 12px);
+  max-height: calc(var(--br-motion-view-height, 100dvh) - var(--br-close-reserve) - 12px);
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-radius: inherit;
+  background: inherit;
+  color: inherit;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #89949d transparent;
+  scroll-padding-block: 7px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.br-ad.br-stack-card.br-stack-modal > .br-ad-scroll {
+  max-height: calc(100vh - var(--br-close-reserve) - 36px);
+  max-height: calc(var(--br-motion-view-height, 100dvh) - var(--br-close-reserve) - 36px);
+}
+
+/* A genuine target above the frame. Hover/focus alters visibility, never geometry. */
+.br-ad.br-stack-card > button.br-ghost-close {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  bottom: auto;
+  left: auto;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  min-width: 28px;
+  height: 26px;
+  min-height: 26px;
+  margin: 0;
+  padding: 0 0 2px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: #101820;
+  opacity: .06;
+  font: 24px/1 Tahoma, 'Microsoft YaHei', sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.br-ad.br-stack-card > button.br-ghost-close:hover {
+  opacity: .65;
+}
+
+.br-ad.br-stack-card > button.br-ghost-close:active {
+  opacity: .9;
+}
+
+.br-ad.br-stack-card > button.br-ghost-close:focus-visible {
+  opacity: 1;
+  color: #182333;
+  border-color: #182333;
+  background: #fff;
+  outline: 2px solid #397b9b;
+  outline-offset: 2px;
+}
+
+.br-ad.br-stack-card > button.br-ghost-close[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .br-ad.br-stack-card.br-stack-modal > .br-ad-scroll {
+    max-height: calc(100vh - var(--br-close-reserve) - 28px);
+    max-height: calc(var(--br-motion-view-height, 100dvh) - var(--br-close-reserve) - 28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .br-ad.br-stack-card > .br-ad-scroll {
+    scroll-behavior: auto;
+  }
+}

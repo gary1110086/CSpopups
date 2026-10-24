@@ -1,3 +1,18 @@
+# Dodge1 verification record
+
+25 October 2026. Expanded mouse-dodging destinations across the usable viewport, added a persisted4–6-evasion budget per card, and varied close controls independently. The new faint genuine cross sits outside the upper-right frame, about26–27px above it. Cards have an internal scroll wrapper and reserve30px above the shell. Existing high-density pacing, native advertiser tabs, scene data and the hidden task panel remain.
+
+Current local evidence uses installed Chrome through Playwright because no Browser plugin is available:
+
+- Real integrated website flow:62 assertions passed. Measured3s first arrival and four-card buildup; fresh arrivals cover all three close styles. Includes individual close/replacement, modal isolation, Escape quiet period, responsive limits, all ten websites and ambient placements, thirty assignments, actual processed-image preservation in a native advertiser child, blocked fallback and genuine BFCache.
+- Independent read-only integration:214 assertions across29 cases passed. A real ghost-close dodge advances from2/5 to3, reload retains3, native navigation advances to4, genuine BFCache retains4, and the fifth actual evasion settles the card. Subsequent mouse approaches do not move it, and its external close works. Sibling closure retains the other controller. Three close styles and modal/nonmodal layouts fit desktop,390px and short250/240px viewports; keyboard focus, Tab wrap, Escape and v3/v2 migration/corrupt-v4 repair pass.
+- Motion module:36 new assertions plus47 prior and20 four-card regressions passed.420 actual DOM/RAF samples reached420 distinct positions, the centre and all four edges.80.2% landed in an outer15% edge band under the60%-edge/40%-whole-area sampler; whole-area sampling can also land near an edge. Random4/5/6 limits, stop/recreation, ghost and hidden-header detection,30px reserve, resize, touch, keyboard and reduced motion were checked.
+- Close CSS:144 combinations and2114 geometry/control assertions passed across six formats, three styles, both languages,1440/390/320px widths and a180px-high viewport. Verified external hit targets, actual click/Enter, keyboard-visible focus, scrolling without losing the external cross, and retained branded frames.
+
+Actual crowded desktop/mobile screenshots and external-close short-screen fixtures were reviewed. There were no observed runtime or missing-asset errors. Pacing is now `br-run-v4:<seed>` so old cached v3 code cannot drop new close styles or reset dodge budgets. Absent v4 migrates the newest available legacy record; corrupt existing v4 does not revive old advertisements. Source syntax, release archive integrity, extracted-package behaviour and exact-commit public deployment are verified separately at delivery. Historical records follow.
+
+---
+
 # Pressure1 verification record
 
 24 October 2026. Replaced the single-pending advertisement schedule with overlapping cards plus commercial page inventory. A fresh seed starts at3 active focused seconds, with2.2/2.8/2.5/3.2/2.3/3.0-second arrival gaps. Desktop permits four simultaneous cards;640px and below permits two. The floating-card arrival cap is30 per seed. Individual close preserves other cards and waits at least800ms before replacement. Escape clears all cards and hides ambient inventory for5 active seconds. There is no visible game clock or automatic ending.
