@@ -2,9 +2,9 @@
 
 A browsing experience about attention, advertising and deceptive design. Complete an everyday task while ordinary promotions and misleading pop-ups compete for your attention.
 
-**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1a)** · [中文说明](README.zh-CN.md)
+**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=reflect1)** · [中文说明](README.zh-CN.md)
 
-Current version: **[events1a](https://github.com/gary1110086/CSpopups/releases/tag/v-events1a)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip) · [What changed](docs/CHANGELOG.md)
+Current version: **[reflect1](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip) · [What changed](docs/CHANGELOG.md)
 
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 
@@ -21,11 +21,12 @@ The current **Browse** experience includes **10 task websites, 30 task briefs an
 
 | Start here | What you get |
 | --- | --- |
-| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1a) | Explore any of the ten scenes. |
-| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=events1a) | Open a randomly assigned task and website. |
-| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=events1a) | Read the briefs and expected outcomes before starting. |
-| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=events1a) | Use a separate device to check participants' results. |
-| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=events1a) | Read the design references and documented mechanisms. |
+| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=reflect1) | Explore any of the ten scenes. |
+| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=reflect1) | Open a randomly assigned task and website. |
+| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=reflect1) | Read the briefs and expected outcomes before starting. |
+| [Review recent sessions](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=reflect1) | On the participant's browser, manually inspect local interaction records and discussion prompts. |
+| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=reflect1) | Use a separate device to check participants' results. |
+| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=reflect1) | Read the design references and documented mechanisms. |
 
 Task briefs stay in the separate library; the top task/notebook panel is currently hidden on browsing pages. Sessions have no visible game timer, automatic score or automatic ending.
 
@@ -57,6 +58,14 @@ Advertisements appear in search results, reading paths, banners and stacked floa
 
 Advertiser tabs preserve the original task page. Genuine downloads, saves and ordinary Browse navigation remain functional.
 
+## Browsing friction and reflection
+
+- Some websites load a sponsored block late, visibly moving the reading or catalogue content. This happens once per website/session; its genuine close stays dismissed.
+- A cookie banner offers a prominent acceptance button and a deeper preference panel. Essential storage stays on; optional choices start off and can be rejected or saved. Each website remembers its choice for this session. These controls do not enable tracking.
+- The chooser links to a **manual facilitator review** with actual advertiser opening outcomes, close-shaped link clicks, real evasion attempts, encountered mechanisms and a local timeline. It includes discussion prompts and a TXT export. It never ends browsing automatically or scores task correctness.
+
+Review records stay in the same browser tab, contain no typed queries, draft text or file pixels, and can be cleared separately from saved work. A facilitator on another computer can read task answers, but cannot see this tab's interaction record.
+
 ## Random encounters
 
 Each session selects three applicable events from eight possibilities. They respond to browsing actions, so the same task can unfold differently:
@@ -80,11 +89,11 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=events1a).
+Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=reflect1).
 
 Serve the repository root: Browse also uses shared files in `assets/` and `wallpapers/`. A local `127.0.0.1` link works on the host computer; share the published demo link with other computers.
 
-For the [local package](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip), extract the complete ZIP and follow `START-HERE.txt`. It includes the media, shared dependencies and SHA256 source manifest.
+For the [local package](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip), extract the complete ZIP and follow `START-HERE.txt`. It includes the media, shared dependencies and SHA256 source manifest.
 
 The public demo is hosted on GitHub Pages. Other static hosts can serve the same repository tree from its root.
 
@@ -107,7 +116,7 @@ The root [Little Daily entry](https://gary1110086.github.io/CSpopups/) and the [
 
 The experience includes ordinary ads as well as deceptive examples; advertising alone does not make something a scam. Website and advertiser identities in the exercise, along with their simulated transactions, are fictional. Software installation, device scans, payments, rewards and parcel claims are teaching demonstrations. Wallpaper, image, text and calendar exports are real local downloads.
 
-There are no player accounts, advertising SDKs or application analytics. Image processing stays in the browser; preferences and saved choices use per-tab session storage. **Sharing a link does not synchronize progress between computers.** The hosting provider still receives normal web requests.
+There are no player accounts, advertising SDKs or remote application analytics. A bounded, per-tab interaction record supports the manually opened facilitator review. Image processing stays in the browser; preferences and saved choices use per-tab session storage. **Sharing a link does not synchronize progress between computers.** The hosting provider still receives normal web requests.
 
 Real photographs, historical images, illustrations, audio and film clips retain their individual source licences. Some earlier generated assets remain for compatibility. Credits, changes and source records are documented here:
 

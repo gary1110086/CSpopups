@@ -2,9 +2,9 @@
 
 一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
 
-**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1a)** · [English](README.md)
+**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=reflect1)** · [English](README.md)
 
-当前版本：**[events1a](https://github.com/gary1110086/CSpopups/releases/tag/v-events1a)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip) · [查看更新记录](docs/CHANGELOG.md)
+当前版本：**[reflect1](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip) · [查看更新记录](docs/CHANGELOG.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
@@ -21,11 +21,11 @@
 
 | 入口 | 用途 |
 | --- | --- |
-| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1a) | 自由探索十个场景。 |
-| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=events1a) | 随机进入一个任务及对应网站。 |
-| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1a) | 开始前阅读任务要求和预期结果。 |
-| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=events1a) | 工作人员可在另一台设备核对参与者的结果。 |
-| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=events1a) | 查看设计对标和已有案例。 |
+| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=reflect1) | 自由探索十个场景。 |
+| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=reflect1) | 随机进入一个任务及对应网站。 |
+| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=reflect1) | 开始前阅读任务要求和预期结果。 |
+| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=reflect1) | 工作人员可在另一台设备核对参与者的结果。 |
+| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=reflect1) | 查看设计对标和已有案例。 |
 
 任务要求放在独立任务库中；浏览页面顶部的任务／笔记面板目前隐藏。体验没有可见的游戏计时器、自动评分或自动结束。
 
@@ -57,6 +57,14 @@
 
 广告标签页保留原来的任务页面。Browse 中真正的下载、收藏和普通网页导航可以正常使用。
 
+## 页面变化、Cookie 选择与复盘
+
+- 部分网站会延迟加载一块赞助广告，真实挤开列表或正文；每个网站、每次会话只出现一次，真正关闭后会记住。
+- Cookie 横幅突出“接受全部”，“管理偏好”中有分类开关、保存和真正的拒绝入口。必要存储固定开启，可选项默认关闭；选择只在当前会话中保存，不会启用追踪。
+- 工作人员可从网站选择页主动打开[浏览复盘](https://gary1110086.github.io/CSpopups/browse/review.html?lang=zh&v=reflect1)，查看广告打开结果、假关闭按钮点击、实际闪避次数、事件时间线和讨论提示，也可以导出 TXT。
+
+复盘不会自动结束浏览或判断任务答案对错。记录保存在参与者当前浏览器标签页，不包含搜索文字、草稿或图片内容；可以单独清除，不影响收藏与处理结果。另一台电脑无法读取这份本地记录。
+
 ## 随机事件
 
 每次体验从八种事件中选取三种适合当前网站的事件，由浏览操作触发，让同一个任务也能有不同经历：
@@ -80,11 +88,11 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=events1a)。
+打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=reflect1)。
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 
-使用[本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip)时，请完整解压 ZIP，并按 `START-HERE.txt` 操作。包内包含媒体、共用依赖和源文件哈希清单。
+使用[本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip)时，请完整解压 ZIP，并按 `START-HERE.txt` 操作。包内包含媒体、共用依赖和源文件哈希清单。
 
 公开演示托管在 GitHub Pages，也可以保持仓库目录结构，在其他静态网站服务上部署。
 
@@ -107,7 +115,7 @@ assets/                     共用图片、图标与 README 预览图
 
 体验同时包含正常广告与误导案例，广告本身不等于诈骗。练习中的网站与广告商身份及模拟交易均为虚构；软件安装、设备扫描、付款、奖品和包裹领取属于教学演示。壁纸、图片、文本和日历导出会生成真实的本地下载文件。
 
-项目没有玩家账号、广告 SDK 或应用分析服务。图片在浏览器内处理，偏好与收藏等使用当前标签的会话存储。**分享链接不会在不同电脑之间同步进度。** 托管平台仍会接收正常的网站访问请求。
+项目没有玩家账号、广告 SDK 或远程应用分析服务。本地操作记录用于工作人员主动打开的复盘，有数量上限。图片在浏览器内处理，偏好与收藏等使用当前标签的会话存储。**分享链接不会在不同电脑之间同步进度。** 托管平台仍会接收正常的网站访问请求。
 
 真实照片、历史图片、插图、音频和影片分别保留原来源的许可；部分早期生成素材为兼容而保留。署名、修改和来源记录见：
 

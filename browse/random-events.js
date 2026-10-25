@@ -42,7 +42,7 @@
     const providerFor=kind=>['chat','tab','escalation'].includes(kind)?social:['video','character'].includes(kind)?media:actions;
     const suppressed=()=>suspended||restoring||current.suspended||current.modalOpen||current.quietUntil>current.activeMs;
     const allowed=kind=>!destroyed&&!suspended&&!restoring&&selected.includes(kind)&&!state.seen.includes(kind);
-    const remember=kind=>{if(!state.seen.includes(kind))state.seen.push(kind);state.lastAt=current.activeMs;save();};
+    const remember=kind=>{if(!state.seen.includes(kind))state.seen.push(kind);state.lastAt=current.activeMs;save();window.dispatchEvent(new CustomEvent('browse:review',{detail:{type:'event',kind}}));};
     const comeback=()=>{
       if(!state.comeback||activeKind||suppressed()||!current.active)return;
       state.comeback=false;activeKind='quiet';save();
@@ -90,6 +90,7 @@
     const openEvent=event=>{
       const anchor=event.target.closest?.('a[data-br-event-link]');if(!anchor||!plain(event)||suspended||destroyed)return;
       event.preventDefault();const child=window.open(anchor.href,'_blank');
+      window.dispatchEvent(new CustomEvent('browse:review',{detail:{type:'ad-open',site:anchor.dataset.brEventLink,format:'event',control:'cta',outcome:child?'opened':'blocked'}}));
       if(child){try{child.opener=null;}catch{}clear(false);titleOnDeparture();}
       else{
         const widget=anchor.closest('.br-event-widget');if(!widget||widget.querySelector('.br-event-fallback'))return;

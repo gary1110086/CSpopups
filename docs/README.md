@@ -1,14 +1,15 @@
 # Documentation / 文档索引
 
-The current experience is **Browse events1a**: 10 task websites, 30 assignments, 10 advertiser destinations and eight possible random encounters. 每次体验选取三种适合当前网站的事件，由相关浏览操作触发。
+The current experience is **Browse reflect1**: 10 task websites, 30 assignments, 10 advertiser destinations and eight possible random encounters. 每次体验选取三种适合当前网站的事件，由相关浏览操作触发。
 
 ## Start / 开始
 
 | Entry / 入口 | Links / 链接 |
 | --- | --- |
-| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1a) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1a) |
-| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=events1a) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1a) |
-| Local package / 本地运行包 | [Release and download](https://github.com/gary1110086/CSpopups/releases/tag/v-events1a); extract everything and follow `START-HERE.txt`. |
+| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=reflect1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=reflect1) |
+| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=reflect1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=reflect1) |
+| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=reflect1); records stay in that browser tab. |
+| Local package / 本地运行包 | [Release and download](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1); extract everything and follow `START-HERE.txt`. |
 
 ## Project documents / 项目文档
 
@@ -19,7 +20,7 @@ The current experience is **Browse events1a**: 10 task websites, 30 assignments,
 | [Browse implementation](../browse/README.md) | Scene capabilities, event triggers, storage, browser controls and packaging. |
 | [Design references](../browse/DESIGN-NOTES.md) | Category-specific layouts and reference decisions. |
 | [Verification record](../browse/VERIFICATION.md) | Recorded checks and their limits, including media, exports, native tabs and cached browser returns. |
-| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=events1a) | Benchmark websites and documented deceptive mechanisms. |
+| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=reflect1) | Benchmark websites and documented deceptive mechanisms. |
 | [Little Daily runtime](../prototypes/little-daily/README.md) | Earlier article-site implementation and the root HTML routes that still use it. |
 | [Standalone Stillwall](../wallpapers/README.md) | Independent wallpaper prototype, its runtime and original artwork. |
 

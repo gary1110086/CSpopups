@@ -1,12 +1,12 @@
-# Browse — events1a
+# Browse — reflect1
 
 An independent, static multipage browsing exercise. The original Little Daily site and standalone Stillwall version keep their own runtime and entry points.
 
-- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=events1a
-- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1a
-- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=events1a
-- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1a
-- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=events1a
+- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=reflect1
+- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=reflect1
+- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=reflect1
+- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=reflect1
+- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=reflect1
 - **Benchmarks and documented scam cases:** guide.html
 
 ## Ten task websites
@@ -28,7 +28,7 @@ An independent, static multipage browsing exercise. The original Little Daily si
 
 The task library gives participants constrained searches instead of merely asking them to look around. Examples: compare the1968 and1972 Earthrise photographs; find a vegan no-cook chickpea lunch under15minutes; identify an indoor rail-accessible museum route; find Ian Hubert's2012 open film; export a1280-pixel image below100KB.
 
-The independent task library retains all assignment briefs and manual criteria. In events1a, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
+The independent task library retains all assignment briefs and manual criteria. In reflect1, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
 
 A shared URL reproduces the scene and task on another computer. Notes, saved choices and uploaded image pixels **do not sync between computers**. Opening the same URL on another computer starts a fresh browser session.
 
@@ -46,7 +46,7 @@ The first visited scene selects a relevant sponsor, saved locally as `br-data-v1
 
 Signal Garden now has three solvable light puzzles, keyboard/touch controls, hints, undo, restart, saved moves and native level routes. The other five games remain available. Lucky Circle spins a local six-segment wheel and keeps the selected reward consistent through reload, claim and delivery/release review. Perk Basket adds combined search/category/value/channel filters, sorting, a three-offer comparison, selection and the existing survey/activation flow. Its comparison displays minimum spend and recurring membership terms. Prizes, offers and locations remain fictional.
 
-## Random encounters (events1a)
+## Random encounters (reflect1)
 
 A seed selects three applicable event types from eight locally implemented possibilities. Image tools and the rail planner omit search suggestions because they use file controls or station selectors. The plan follows native scene navigation; seen events do not restart on reload or Back. A shared URL selects the same plan, while each browser tab keeps its own progress.
 
@@ -87,7 +87,7 @@ Advertiser links open real native tabs from a click, clear opener and preserve t
 
 ## Privacy and storage
 
-No account, backend, analytics, advertising SDK or runtime third-party asset fetch is required. Image pixels are processed locally and remain in the existing tool document while advertiser tabs open and close; leaving/reloading that image page clears those pixels. Selections and notebooks use sessionStorage; inaccessible storage falls back to memory in the current document.
+No account, backend, remote analytics, advertising SDK or runtime third-party asset fetch is required. A bounded local interaction record supports the manual facilitator review. Image pixels are processed locally and remain in the existing tool document while advertiser tabs open and close; leaving/reloading that image page clears those pixels. Selections and notebooks use sessionStorage; inaccessible storage falls back to memory in the current document.
 
 Pacing uses `br-run-v7:<seed>` with persisted deadlines, close style, corner, decoy flag, dodge limit/count and a bounded per-ghost-card `closeElapsedMs`(0–10000). Only absent v7 imports v6, then v5/v4/v3/v2/v1 when each newer legacy key is absent. Existing ghost cards without elapsed time start their10-second wait at migration. Corrupt present v7 does not revive legacy advertisements. Scene `br-data-v1` records and ambient `ad-pressure-v1` dismissals remain unchanged. Native navigation, reload and genuine BFCache reconcile authoritative records. Genuine BFCache recovery keeps every writer suspended for two animation frames before reading session state, allowing the departed renderer’s storage write to propagate. A new navigation cancels pending recovery and skips stale writes. Recovery rebuilds the card/controller before resuming clocks; older cached v6 code cannot overwrite v7 elapsed time.
 
@@ -112,7 +112,7 @@ There is no build step. From repository root, run:
 
     python browse/preview-server.py --port 5175
 
-Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=events1a . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
+Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=reflect1 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
 
 The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalog.js, wallpapers/assets/*.svg, assets/nightroom-contact-sheet.png, favicon.svg and .nojekyll. Copying browse/ alone is insufficient. The package includes START-HERE.txt and a SHA256 source manifest.
 
@@ -129,3 +129,14 @@ The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalo
 两位工作人员可分别负责说明任务与观察操作，以及在另一台设备查看主持人答案和资料、引导结束讨论。不要替参与者点击；观察他如何筛选、核对、识别误导控件，以及是否能恢复原来的工作。
 
 跨电脑可以共享链接，不能共享已保存的进度。出游预算和路线时间是规划示例，真实出行前应打开场馆来源核实。食谱过敏原筛选按所列食材执行，不能替代包装标签核对。具体授权来源均可在详情页或素材记录中查看。
+
+
+## Reflect1: delayed ads, cookie choices and manual review
+
+Selected scenes add one delayed sponsored document block after 8–12 focused seconds. Eligibility is stable per seed+scene (60%); no space is reserved before the first insertion. The genuine close persists. Later documents restore an activated banner without replaying its first displacement.
+
+Cookie banners are eligible in roughly 70% of seed+scene pairs and wait 6.5 focused seconds. Preferences can always be reopened from a footer control. The native settings dialog freezes/inerts advertisements; essential storage is locked and optional choices default off. Accept, reject and custom save are real local choices, not switches for third-party services.
+
+Open `review.html?lang=en&v=reflect1` from the chooser to inspect the latest available session in this browser tab. The report separates confirmed opening requests, blocked requests and native modifier actions whose result was not observed. It counts real evasion attempts and close-shaped links, presents a bounded timeline and discussion prompts, and exports a local text record. It does not score task correctness, record user-entered text, synchronize to another device or automatically end a visit. Clearing a report leaves scene preferences and saved work intact.
+
+New state is isolated from `br-run-v7`: consent and layout records use `br-data-v1:<seed>:consent-v1:<scene>` and `layout-v1:<scene>`; review uses `br-review-v1:<seed>` plus a bounded recent-session index. All restored writers remain suspended until two animation frames have passed and current state has been reread.

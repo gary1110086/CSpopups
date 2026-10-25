@@ -15,7 +15,7 @@
   }
   const url = (file, query = {}) => {
     const u = new URL(file, location.href);
-    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'events1a');
+    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'reflect1');
     if(params.has('task')&&['index.html',...(window.BROWSE_SCENE_INDEX||[]).map(s=>s.file)].includes(u.pathname.split('/').pop()))u.searchParams.set('task',params.get('task'));
     Object.entries(query).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') u.searchParams.set(k, String(v)); });
     return u.href;
@@ -44,19 +44,21 @@
   }
   if (page === 'launch') {
     document.title = t('Browse — choose a website', 'Browse · 选择网站');
-    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><p class="br-task-entry"><a href="${url('tasks.html')}">${t('Choose a specific search task','选择具体检索任务')} →</a> · <a href="${url('index.html',{task:'random',seed:randomSeed()})}">${t('Random task','随机任务')}</a></p><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" style="${s[6]?'background-image:url('+esc(s[6])+');background-size:cover;background-position:center;':''}" aria-hidden="true"></div><div><small>${s[5]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a></footer></main>`;
+    const reviewHref=new URL('review.html',location.href);reviewHref.searchParams.set('lang',lang);reviewHref.searchParams.set('v','reflect1');
+    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><p class="br-task-entry"><a href="${url('tasks.html')}">${t('Choose a specific search task','选择具体检索任务')} →</a> · <a href="${url('index.html',{task:'random',seed:randomSeed()})}">${t('Random task','随机任务')}</a></p><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" style="${s[6]?'background-image:url('+esc(s[6])+');background-size:cover;background-position:center;':''}" aria-hidden="true"></div><div><small>${s[5]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a><a href="${esc(reviewHref.href)}">${t('Review recent sessions','工作人员 · 浏览复盘')} →</a></footer></main>`;
     return;
   }
   if (document.body.dataset.destination) { window.BROWSE_DESTINATIONS?.(C); return; }
   const scene = document.body.dataset.scene;
   const renderer = window.BROWSE_SCENES?.[scene];
   if (!renderer) { root.innerHTML = `<main class="br-guide"><h1>${t('This page could not be loaded.','此页面未能加载。')}</h1><a href="${url('launch.html')}">${t('Choose a website','选择网站')}</a></main>`; return; }
+  const review=window.BROWSE_REVIEW_LOG?.({...C,seed,scene});
   renderer(C);
   // Keep briefs in the task library; website pages currently open without the task/notes panel.
   // A seed is carried through native GET forms as well as anchors.
   for (const form of root.querySelectorAll('form')) {
     if ((form.getAttribute('method') || 'get').toLowerCase() !== 'get') continue;
-    for (const [name,value] of [['lang',lang],['seed',seed],['v','events1a'],...(brief?[['task',brief.id]]:[])]) {
+    for (const [name,value] of [['lang',lang],['seed',seed],['v','reflect1'],...(brief?[['task',brief.id]]:[])]) {
       if (form.querySelector(`[name="${name}"]`)) continue;
       const input = document.createElement('input'); input.type='hidden'; input.name=name; input.value=value; form.append(input);
     }
@@ -92,13 +94,16 @@
     strip.innerHTML=`<small>${t('ADVERTISEMENT','广告')}</small><div>${adVisual(id)}<p><b>${a[0]}</b><br>${a[1]}</p><a data-br-ad="${id}">${a[2]} →</a></div>`;
     (root.querySelector('main')||root).append(strip);wireAds(strip);
   };
+  let events=null,consent=null,layout=null;
   new MutationObserver(()=>{
     campaign?.reconcile();
+    layout?.reconcile();
+    consent?.reconcile();
     ensureInlineAd();
     wireAds(root);
     for(const form of root.querySelectorAll('form')){
       if((form.getAttribute('method')||'get').toLowerCase()!=='get')continue;
-      for(const [name,value] of [['lang',lang],['seed',seed],['v','events1a'],...(brief?[['task',brief.id]]:[])]){
+      for(const [name,value] of [['lang',lang],['seed',seed],['v','reflect1'],...(brief?[['task',brief.id]]:[])]){
         if(form.querySelector(`[name="${name}"]`))continue;
         const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;form.append(input);
       }
@@ -106,7 +111,36 @@
   }).observe(root,{childList:true,subtree:true});
   campaign?.reconcile();
   ensureInlineAd();
-  let events=null;
-  const stack=window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adOffer,campaignSite,adURL,wireAds,deck,chosen,rawRead,rawWrite,onState:state=>events?.update(state)});
+  const stack=window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adOffer,campaignSite,adURL,wireAds,deck,chosen,rawRead,rawWrite,onState:state=>{
+    review?.update(state);events?.update(state);layout?.update(state);consent?.update(state);
+  }});
   events=window.BROWSE_EVENTS?.({...C,seed,scene,ads,adURL,adOffer,campaignSite,stack});
+  layout=window.BROWSE_LAYOUT_EVENT?.({...C,seed,scene,adURL,adOffer,campaignSite,wireAds,stack});
+  consent=window.BROWSE_CONSENT?.({...C,seed,scene,stack});
+  // Observe the actual outcome for document advertisements as well as floating cards.
+  // Modifiers keep the browser's native action and are reported as unconfirmed intent.
+  document.addEventListener('click',event=>{
+    if(event.defaultPrevented)return;
+    const anchor=event.target.closest?.('a[data-br-ad],a[data-br-event-link],a[data-br-fallback],.br-event-fallback a');
+    if(!anchor||anchor.closest('[inert]')||stack.snapshot().suspended)return;
+    let site=anchor.dataset.brAd||anchor.dataset.brEventLink;
+    if(!validSites.includes(site)){try{site=new URL(anchor.href).searchParams.get('site');}catch{return;}}
+    if(!validSites.includes(site))return;
+    const card=anchor.closest('.br-ad');
+    const cardFormat=card&&['bounce','tiny','dodge','drawer','panel','newsletter'].find(name=>card.classList.contains('br-ad-'+name));
+    const format=cardFormat|| (anchor.closest('.br-event-widget')?'event':anchor.closest('[data-br-layout]')?'layout':anchor.closest('[data-context-ad]')?'context':anchor.closest('.br-inline-ad')?'inline':'ambient');
+    const control=anchor.classList.contains('br-false-close')||anchor.hasAttribute('data-br-decoy')?'decoy':anchor.hasAttribute('data-br-fallback')||anchor.closest('.br-event-fallback')?'fallback':'cta';
+    const plain=event.button===0&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey;
+    // A fallback must remain a real anchor: it is the way out when script-opened
+    // windows were blocked. Its result cannot be synchronously observed here.
+    if(!plain||control==='fallback'){review?.record({type:'ad-open',site,format,control,outcome:'native'});return;}
+    event.preventDefault();let child=null;try{child=window.open(anchor.href,'_blank');}catch{}
+    review?.record({type:'ad-open',site,format,control,outcome:child?'opened':'blocked'});
+    if(child){try{child.opener=null;}catch{}return;}
+    const owner=anchor.closest('aside,section')||anchor.parentElement;
+    let fallback=owner.querySelector('.br-document-fallback');
+    if(!fallback){fallback=document.createElement('p');fallback.className='br-blocked br-document-fallback';owner.append(fallback);}
+    fallback.replaceChildren(document.createTextNode(t('Your browser kept this page here. ','浏览器保留了当前页面。')));
+    const link=document.createElement('a');link.href=anchor.href;link.target='_blank';link.rel='noopener';link.dataset.brFallback='';link.textContent=t('Open advertiser page ↗','打开广告页面 ↗');fallback.append(link);
+  });
 })();

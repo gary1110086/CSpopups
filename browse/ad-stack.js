@@ -50,13 +50,14 @@
     const state=normalize(initial),entries=new Map();
     const overlayRoot=document.getElementById('interrupt-root')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
     overlayRoot.dataset.collisions=String(collisionEnabled);
-    let suspended=false,last=performance.now(),lastOutsideFocus=null,modalId=null;
+    let suspended=false,last=performance.now(),lastOutsideFocus=null,modalId=null,externalModal=false;
     let restoreFrame=0,restoreGeneration=0,restoring=false,clearAfterRestore=false;
     const save=()=>{if(!suspended)C.rawWrite(KEY,state);};
     const limit=()=>matchMedia('(max-width: 640px)').matches?2:4;
     const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write,adOffer,campaignSite});
-    const foreground=()=>!suspended&&!document.hidden&&document.hasFocus();
-    const snapshot=()=>({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:modalId!==null,suspended,restoring,shown:state.shown,pending:state.pending.length});
+    const foreground=()=>!suspended&&!externalModal&&!document.hidden&&document.hasFocus();
+    const snapshot=()=>({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:externalModal||modalId!==null,externalModal,suspended,restoring,shown:state.shown,pending:state.pending.length});
+    const observe=detail=>window.dispatchEvent(new CustomEvent('browse:review',{detail}));
     const pressureUpdate=()=>{const current=snapshot();pressure.update(current);C.onState?.(current);};
     const stopEntry=entry=>{entry.motion?.stop();entry.motion=null;};
     const removeEntry=id=>{const entry=entries.get(id);if(!entry)return;stopEntry(entry);entry.stage.remove();entries.delete(id);};
@@ -78,10 +79,10 @@
     };
     const applyModal=()=>{
       const current=state.pending.find(modal);modalId=current?.id??null;
-      root.inert=modalId!==null;
-      const taskShell=document.querySelector('.br-task-shell');if(taskShell)taskShell.inert=modalId!==null;
+      root.inert=externalModal||modalId!==null;
+      const taskShell=document.querySelector('.br-task-shell');if(taskShell)taskShell.inert=externalModal||modalId!==null;
       for(const entry of entries.values()){
-        const blocked=modalId!==null&&entry.p.id!==modalId;
+        const blocked=externalModal||(modalId!==null&&entry.p.id!==modalId);
         entry.stage.inert=blocked;
         const paused=blocked||entry.blockedLink||entry.revealed;
         if(entry.paused!==paused){entry.paused=paused;if(paused)entry.motion?.pause();else entry.motion?.resume();}
@@ -93,6 +94,7 @@
       entry.card.dataset.closeRevealed=String(revealed);
       if(entry.revealed===revealed)return;
       entry.revealed=revealed;
+      if(revealed)observe({type:'close-reveal',id:entry.p.id,site:entry.p.site});
       if(revealed&&entry.moving)entry.card.querySelector('.br-motion-taunt').textContent=t('You can close this now.','现在可以关闭了。');
     };
     const trimToViewport=()=>{
@@ -110,7 +112,10 @@
       else state.nextAt=null;
       removeEntry(id);save();sync();
       if(ownedFocus&&modalId===null)returnFocus();
-      if(entry&&reason==='dismiss')window.dispatchEvent(new CustomEvent('browse:ad-dismiss',{detail:{site:entry.p.site}}));
+      if(entry&&reason==='dismiss'){
+        observe({type:'ad-close',id:entry.p.id,site:entry.p.site,format:entry.p.format});
+        window.dispatchEvent(new CustomEvent('browse:ad-dismiss',{detail:{site:entry.p.site}}));
+      }
     };
     const closeAll=(duration=5000,reason='escape')=>{
       if(suspended){if(restoring)clearAfterRestore=true;return;}
@@ -120,6 +125,7 @@
       state.pending=[];state.quietUntil=state.activeMs+wait;state.nextAt=state.shown<MAX?state.quietUntil:null;
       save();applyModal();if(ownedFocus)returnFocus();
       window.dispatchEvent(new CustomEvent('browse:quiet',{detail:{reason}}));
+      observe({type:'quiet',reason});
     };
     const taunts={bounce:[['Another little detour.','又来一小段绕路。'],['Yes, I am still here.','没错，我还在这里。'],['Your attention looks busy.','你的注意力好像很忙。'],['Room for one more offer?','还能再放一条优惠吗？']],dodge:[['Nearly! Try the other corner.','差一点！换个角落试试。'],['Oops. New address.','哎呀，我搬家啦。'],['You close. I relocate.','你要关，我就搬。'],['Still following me?','还在追我吗？']]};
     const collide=()=>{
@@ -163,10 +169,12 @@
         <p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></div></section>`;
       overlayRoot.append(stage);const card=stage.querySelector('.br-ad');
       const entry={p,stage,card,moving,motion:null,paused:false,blockedLink:false,revealed:false};entries.set(p.id,entry);positionEntry(entry);wireAds(stage);
+      observe({type:'ad-show',id:p.id,site:p.site,format:p.format,count:p.dodgeCount||0});
       stage.querySelectorAll('[data-br-close]').forEach(button=>button.addEventListener('click',()=>closeOne(p.id)));
       stage.querySelectorAll('[data-br-ad]').forEach(link=>link.addEventListener('click',event=>{
         if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
         event.preventDefault();const child=window.open(link.href,'_blank');
+        observe({type:'ad-open',id:p.id,site:p.site,format:p.format,control:link.classList.contains('br-false-close')?'decoy':'cta',outcome:child?'opened':'blocked'});
         if(child){try{child.opener=null;}catch{}if(!link.hasAttribute('data-br-decoy'))closeOne(p.id,'advertiser');}
         else{stage.querySelector('.br-blocked').hidden=false;entry.blockedLink=true;entry.motion?.pause();positionEntry(entry);}
       }));
@@ -174,13 +182,13 @@
         card.dataset.motionMoves=String(meta.count);card.dataset.motionReason=meta.reason;
         if(p.format==='dodge'){
           card.dataset.dodgeLimit=String(meta.dodgeLimit);card.dataset.dodgeCount=String(meta.dodgeCount);card.dataset.dodgeSettled=String(meta.settled);
-          if(meta.reason==='dodge'){p.dodgeCount=meta.dodgeCount;save();}
+          if(meta.reason==='dodge'){p.dodgeCount=meta.dodgeCount;save();observe({type:'dodge',id:p.id,site:p.site,count:meta.dodgeCount});}
           if(entry.revealed)return;
           if(meta.settled){card.querySelector('.br-motion-taunt').textContent=t('All right. I will stay here.','好啦，这次不跑了。');return;}
         }
         if(meta.reason===p.format)card.querySelector('.br-motion-taunt').textContent=t(...taunts[p.format][line++%taunts[p.format].length]);
       }});}
-      if(isModal)(card.querySelector('.br-real-close:not([hidden])')||card.querySelector('.br-ghost-close')).focus({preventScroll:true});
+      if(isModal&&!externalModal)(card.querySelector('.br-real-close:not([hidden])')||card.querySelector('.br-ghost-close')).focus({preventScroll:true});
     };
     function sync(){
       trimToViewport();const ids=new Set(state.pending.map(p=>p.id));
@@ -190,7 +198,7 @@
       applyModal();
     }
     overlayRoot.addEventListener('keydown',event=>{
-      if(event.key!=='Tab'||modalId===null)return;
+      if(event.key!=='Tab'||modalId===null||externalModal)return;
       const dialog=entries.get(modalId)?.card;if(!dialog)return;
       const controls=[...dialog.querySelectorAll('a[href],button:not([disabled])')].filter(el=>el.getClientRects().length);
       const first=controls[0],end=controls.at(-1);if(!first)return;
@@ -198,7 +206,7 @@
       else if(!event.shiftKey&&document.activeElement===end){event.preventDefault();first.focus();}
     });
     document.addEventListener('focusin',event=>{if(root.contains(event.target))lastOutsideFocus=event.target;});
-    document.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closeAll();}});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!externalModal){event.preventDefault();closeAll();}});
     const tick=()=>{
       const now=performance.now(),delta=Math.max(0,Math.min(1100,now-last));last=now;
       if(!foreground()){pressureUpdate();return;}
@@ -226,7 +234,7 @@
     const resetClock=()=>{last=performance.now();if(!suspended)save();pressureUpdate();};
     document.addEventListener('visibilitychange',resetClock);window.addEventListener('blur',resetClock);window.addEventListener('focus',resetClock);
     window.addEventListener('pagehide',()=>{
-      const wasLive=!suspended;suspended=true;restoring=false;restoreGeneration++;
+      const wasLive=!suspended;suspended=true;restoring=false;externalModal=false;restoreGeneration++;
       cancelAnimationFrame(restoreFrame);restoreFrame=0;stopAll();
       if(wasLive)C.rawWrite(KEY,state);
       pressureUpdate();
@@ -253,6 +261,10 @@
     const resize=()=>{if(suspended)return;sync();save();};
     window.addEventListener('resize',resize);visualViewport?.addEventListener('resize',resize);visualViewport?.addEventListener('scroll',()=>{for(const entry of entries.values())positionEntry(entry);});
     sync();save();
-    return {snapshot,quiet:(duration)=>{if(suspended)return false;closeAll(duration,'event');return true;}};
+    return {snapshot,quiet:(duration)=>{if(suspended)return false;closeAll(duration,'event');return true;},setExternalModal:(value)=>{
+      const next=value===true;if(next===externalModal)return;externalModal=next;last=performance.now();
+      // Dialog cleanup must release the lock even after pagehide has suspended writers.
+      applyModal();
+    }};
   };
 })();

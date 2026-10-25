@@ -1,3 +1,22 @@
+# Reflect1 verification record
+
+25 October 2026. Adds the three selected features: occasional delayed document-ad displacement, a site-specific cookie-choice flow, and a manually opened facilitator reflection. Existing Browse pacing stays at br-run-v7; new state is isolated.
+
+Current source validation:
+
+- Local integrated Chrome flow:56 assertions passed. Measured real catalogue displacement of at least140px with no reserved placeholder; delayed foreground appearance; actual isolated advertiser child; persistent close/reload; real6.5-second cookie onset; native settings dialog, optional defaults, custom save/reject/reopen, ad-clock pause after periodic save, keyboard focus return, real detail navigation and actual BFCache reread,390x240 controls; real pointer evasions with cumulative-count dedupe, explicit card-restore fixture, false-close opened versus blocked outcomes and a native fallback that still works when script opening is blocked; typed-query exclusion; native chooser-to-review navigation, exact totals, TXT download, Chinese report, confirmed report deletion preserving scene choices and empty state in another browser context. No runtime or failed asset errors.
+- Existing task/advertiser regressions:62+52 Chrome assertions passed, retaining real3-second onset, four-card buildup, all ten websites/thirty tasks, real processed-image preservation, genuine close/rescue/keyboard/mobile bounds, native advertiser isolation and actual Back, playable puzzles/reward wheel/offer comparisons.
+- Focused module checks:cookie29, delayed ad27, reflection logger27, reflection viewing19. An independent read-only logger audit passed17 assertions. The viewing audit confirmed no storage writes simply from inspecting a report. These checks include malformed state, bounded200-event histories with retained totals,12-report pruning, privacy allowlists, monotonic dodge baselines and suspended/two-frame restoration.
+- All43 Browse JavaScript files pass syntax checks.557 source/link/loading assertions passed, including all14 engine documents loading the new modules once before engine.js and the standalone report omitting the ad engine.
+
+Issues found and fixed during verification: bottom leaderboard obscured the cookie reopen control (added footer space); generic advertiser handling intercepted native fallback links (preserved default browser action and separate unconfirmed accounting); modifier-key actions lost decoy/event provenance; a broad genuine-close total label was narrowed to standard popup closes. Cookie choice completion returns keyboard focus to a stable footer control when the original banner has disappeared.
+
+Browser plugin not available; installed Chrome was driven through Playwright. Desktop1440x1000 and phone390x844/390x240 screenshots were inspected. Native advertiser children, TXT download, pointer evasions and cookie Back above are real browser operations. Card placement, malformed/background/recovery branches also use explicit fixtures; those do not establish operating-system focus switching. Timeline timestamps follow the existing250ms active-time snapshots and are approximate. Opening requests observed through window.open are separated from native actions whose outcome cannot be confirmed by the logger. Reports contain observations, not screen recordings or correctness scores. Other-browser coverage is not claimed.
+
+The downloadable archive is checked separately for CRC and source SHA256, and the exact Pages commit and public flows are checked before the release is announced. Release metadata holds the published package digest and final public verification result.
+
+---
+
 # Events1a verification record
 
 25 October 2026. Adds eight action-driven event types: scripted sponsor chat, genuine document-title return reminder, muted inline-to-floating video, real search shortcuts with a separate sponsored link, escalating refusals, original character promotion, a short quiet/comeback, and an optional bonus after a real save/export. Each seed selects three applicable types; file tools and the station-selector rail planner omit text-search suggestions. One event widget runs at a time alongside the existing standard popup stack.

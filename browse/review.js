@@ -1,0 +1,84 @@
+/* A manual, read-only conversation sheet for the facilitator. */
+(() => {
+  'use strict';
+  const root=document.getElementById('review-root'),data=window.BROWSE_REVIEW_DATA;
+  if(!root||!data)return;
+  const params=new URLSearchParams(location.search),lang=params.get('lang')==='zh'?'zh':'en';
+  const t=(en,zh)=>lang==='zh'?zh:en;
+  const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const scenes=window.BROWSE_SCENE_INDEX||[],sceneName=id=>scenes.find(s=>s.id===id)?.name||t('Website','网站');
+  const sponsors={corn:'Cornhub',desk:'Form & Field',stock:'Framekind',game:'Tiny Arcade',security:'SecureLane',player:'Orbit Player',software:'AppHarbor',prize:'Lucky Circle',coupon:'Perk Basket',parcel:'NorthPost'};
+  const kindNames={chat:t('Sponsor conversation','赞助商对话'),tab:t('Tab-title reminder','标签页提醒'),video:t('Following video','跟随视频'),search:t('Sponsored search suggestion','搜索赞助建议'),escalation:t('Growing offer','逐步升级的优惠'),character:t('Sponsor character','广告角色'),quiet:t('Sponsor comeback','安静后的广告回归'),reward:t('Bonus offer after a task action','任务操作后的额外优惠')};
+  const url=(file,query={})=>{const u=new URL(file,location.href);u.searchParams.set('lang',lang);u.searchParams.set('v','reflect1');for(const [key,value]of Object.entries(query))if(value)u.searchParams.set(key,value);return u.href;};
+  const duration=ms=>{const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+  const when=ms=>{if(!Number.isFinite(ms)||ms<=0)return t('Time unavailable','时间未记录');try{return new Intl.DateTimeFormat(lang==='zh'?'zh-CN':'en-GB',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(ms));}catch{return t('Time unavailable','时间未记录');}};
+  const requested=params.get('seed');let selected=requested&&data.read(requested)?requested:data.index().find(seed=>data.read(seed))||null;
+  let confirming=false,frame=0,generation=0;
+  document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
+  document.title=t('Browse — facilitator review','Browse · 工作人员复盘');
+  const reportName=r=>`${sceneName(r.scene)} · ${when(r.updated||r.created)}`;
+  const advertiserLink=e=>Object.prototype.hasOwnProperty.call(sponsors,e.site)?`<a class="rv-event-link" href="${esc(url('destination.html',{site:e.site,from:scenes.some(s=>s.id===e.scene)?e.scene:null}))}" target="_blank" rel="noopener">${t('View advertiser page','查看广告页面')} ↗</a>`:'';
+  const eventText=e=>{
+    const site=sponsors[e.site]||t('Advertiser','广告商');
+    if(e.type==='visit')return [t('Opened a task page','打开任务页面'),sceneName(e.scene)];
+    if(e.type==='ad-show')return [t('A floating ad appeared','浮动广告出现'),site];
+    if(e.type==='ad-open'){
+      const label=e.outcome==='opened'?t('Advertiser tab opened','已打开广告标签页'):e.outcome==='blocked'?t('Advertiser opening was blocked','广告新标签页被拦截'):t('Native link action · opening unconfirmed','原生链接操作 · 未确认打开');
+      const control=e.control==='decoy'?t('Close-shaped link','形似关闭的广告链接'):e.control==='fallback'?t('Fallback link','备用链接'):t('Advertisement link','广告链接');
+      return [label,`${site} · ${control}`];
+    }
+    if(e.type==='dodge')return [t('The close control evaded the pointer','关闭控件闪避鼠标'),`${site} · ${t('attempt','第')} ${e.count||1}${lang==='zh'?' 次':''}`];
+    if(e.type==='ad-close')return [t('A genuine close was used','使用了真正的关闭控件'),site];
+    if(e.type==='close-reveal')return [t('A hidden close became obvious','隐藏关闭按钮变得明显'),site];
+    if(e.type==='event')return [kindNames[e.kind]||t('A random encounter appeared','随机事件出现'),sceneName(e.scene)];
+    if(e.type==='layout')return [e.action==='dismissed'?t('The inserted ad was dismissed','关闭了插入广告'):t('A delayed ad moved the page content','延迟广告挤开了页面内容'),e.action==='inserted'?t(`Inserted space: ${e.height||0}px`,`新增空间：${e.height||0} 像素`):sceneName(e.scene)];
+    if(e.type==='consent'){
+      const action={shown:t('Cookie banner appeared','Cookie 横幅出现'),manage:t('Opened cookie settings','打开 Cookie 设置'),accept:t('Accepted optional categories','接受可选类别'),reject:t('Rejected optional categories','拒绝可选类别'),save:t('Saved cookie preferences','保存 Cookie 偏好')}[e.action]||t('Cookie choice','Cookie 选择');
+      return [action,['accept','reject','save'].includes(e.action)?t(`${e.optional||0} optional categories enabled`,`${e.optional||0} 个可选类别已开启`):sceneName(e.scene)];
+    }
+    if(e.type==='quiet')return [e.reason==='event'?t('A short quiet spell began','开始短暂安静时段'):t('Esc cleared the advertisements','Esc 清除了广告'),t('Browsing could continue','可以继续浏览')];
+    return [t('A task action was recorded','记录到一次任务操作'),t('A scene control reported a save, export or other completed action.','网站控件报告了收藏、导出或其他已完成操作。')];
+  };
+  const mechanisms=r=>{
+    const c=r.counts,items=[];
+    if(c.layouts)items.push({id:'layout',title:t('A moving page, without a moving pointer','鼠标没动，页面位置变了'),illustration:`<div class="rv-demo-layout"><span></span><b>${t('Sponsored','赞助')}</b><span></span></div>`,body:t('A delayed advertisement inserted space into the reading path. The content below moved, which can put a different target beneath a pointer.','延迟广告在阅读路径中插入空间，下方内容随之移动，鼠标下面可能已经换成另一个目标。'),question:t('Did the page move just as you were about to click? What helped you check the target again?','准备点击时，页面有没有移动？什么线索帮你重新确认了目标？')});
+    if(c.consentShown||c.consentManaged||c.consentSaved||c.consentAccepted||c.consentRejected)items.push({id:'consent',title:t('The easy choice and the extra steps','醒目的选择与额外的步骤'),illustration:`<div class="rv-demo-consent"><i></i><i></i><b>${t('Accept all','接受全部')}</b><span>${t('Manage preferences','管理偏好')}</span></div>`,body:t('The prominent acceptance button and the longer settings route ask for different amounts of effort. In this exercise the switches save a local practice preference; they do not enable tracking.','接受按钮更醒目，进入设置则需要更多步骤。这次练习只保存本地偏好，开关不会启用追踪。'),question:t('Which option did you notice first? Did the settings match the choice you wanted to make?','你先注意到哪个选项？设置里有没有找到你真正想要的选择？')});
+    if(c.decoys)items.push({id:'decoy',title:t('A familiar shape with a different action','熟悉的形状，不同的操作'),illustration:`<div class="rv-demo-close"><span>×</span><b>${t('An offer','一条优惠')}</b><i>×</i></div>`,body:t('A close-shaped advertising link was activated. It requests an advertiser tab; a genuine close dismisses its own card. A blocked request is still recorded as an attempt.','形似关闭的广告链接被触发了。它会请求打开广告标签页；真正的关闭控件会移除自己的广告卡片。被浏览器拦截的请求也会记为一次尝试。'),question:t('What made that control look like a close button? Where was the genuine close?','什么让那个控件看起来像关闭按钮？真正的关闭控件在哪里？')});
+    if(c.dodges)items.push({id:'dodge',title:t('Following a target takes attention','追逐目标会占用注意力'),illustration:`<div class="rv-demo-dodge"><b>×</b><span>↗</span><i>×</i></div>`,body:t('Only actual pointer-triggered evasions count here. Ordinary bouncing, collision nudges and resizing do not add attempts.','这里仅统计由鼠标触发的实际闪避；普通弹跳、碰撞和尺寸调整不会增加次数。'),question:t('Did you keep chasing, switch to another control, or return to your original task?','你继续追逐、换了其他控件，还是回到了原来的任务？')});
+    return items;
+  };
+  const sheet=r=>{
+    const c=r.counts,task=(window.BROWSE_TASKS||[]).find(item=>item.id===r.task),items=mechanisms(r);
+    const resumeScene=scenes.find(s=>s.id===r.scene);
+    return `<section class="rv-sheet" aria-labelledby="rv-session-title"><div class="rv-session-heading"><div><p class="rv-eyebrow">${t('LOCAL OBSERVATION SHEET','本地观察记录')}</p><h2 id="rv-session-title">${esc(sceneName(r.scene))}</h2><p>${task?esc(task.title?.[lang==='zh'?1:0]||task.id):t('Free browsing session','自由浏览场次')}</p></div><div class="rv-session-meta"><span>${esc(when(r.updated||r.created))}</span><span>${t('Focused browsing','前台浏览')} <strong>${duration(r.activeMs)}</strong></span></div></div>
+      <dl class="rv-totals"><div><dt>${t('Advertiser tabs opened','已打开广告标签页')}</dt><dd>${c.opened}</dd></div><div><dt>${t('False-close attempts','假关闭尝试')}</dt><dd>${c.decoys}</dd></div><div><dt>${t('Actual evasions','实际闪避')}</dt><dd>${c.dodges}</dd></div><div><dt>${t('Recorded task actions','已记录任务操作')}</dt><dd>${c.completed}</dd></div></dl>
+      <p class="rv-count-note">${t('Task actions are signals from scene controls, such as saving or exporting. They do not confirm that the assigned answer is correct.','任务操作来自网站控件，例如收藏或导出；这些记录不代表任务答案已核对正确。')}</p>
+      <div class="rv-secondary-counts"><span>${c.shown} ${t('floating cards','个浮动广告')}</span><span>${c.closed} ${t('standard popup closes','次常规弹窗关闭')}</span><span>${c.blocked} ${t('blocked tab requests','次标签页请求被拦截')}</span><span>${c.native} ${t('native link actions','次原生链接操作')}</span></div>
+      ${c.native?`<p class="rv-small">${t('Native link actions include modifier-key clicks and fallback links. Opening a new tab could not be confirmed for those actions, so they are separate from opened tabs.','原生链接操作包括组合键点击和备用链接；无法确认这些操作是否实际打开了新标签页，因此单独列出。')}</p>`:''}
+      <section class="rv-discussion" aria-labelledby="rv-discussion-title"><h3 id="rv-discussion-title">${t('Talk through one moment','挑一个瞬间聊一聊')}</h3><p>${t('Start with what the participant remembers, then use the observations below to revisit a decision.','先听参与者回忆，再用下面的记录回看某一次选择。')}</p>${items.length?items.map(item=>`<article class="rv-mechanism"><div class="rv-illustration" aria-hidden="true">${item.illustration}</div><div><h4>${esc(item.title)}</h4><p>${esc(item.body)}</p><p class="rv-prompt">${esc(item.question)}</p></div></article>`).join(''):`<blockquote>${t('What were you trying to find? Which interruption pulled your attention away, and how did you get back?','你原本在找什么？哪一次中断带走了你的注意力？后来怎样回到原来的任务？')}</blockquote>`}${items.length?`<p class="rv-small">${t('The drawings above illustrate the mechanisms. They are not screenshots of this session.','上方示意图用于解释机制，并非本场次截图。')}</p>`:''}</section>
+      <section class="rv-history" aria-labelledby="rv-history-title"><div class="rv-history-heading"><h3 id="rv-history-title">${t('Interaction sequence','操作顺序')}</h3><span>${r.events.length}${r.seq>r.events.length?t(` of ${r.seq} observations`,` / ${r.seq} 条观察记录`):t(' observations',' 条观察记录')}</span></div><p class="rv-small">${t('Times show accumulated focused scene browsing. This sheet opens only when requested; the session has no automatic ending.','时间表示累计前台网站浏览时长。复盘只在主动打开时显示，场次不会自动结束。')}</p><ol class="rv-timeline">${r.events.map(e=>{const [title,detail]=eventText(e);return `<li><time>${duration(e.at)}</time><div><strong>${esc(title)}</strong><span>${esc(detail)}</span>${advertiserLink(e)}</div></li>`;}).join('')}</ol>${r.seq>r.events.length?`<p class="rv-small">${t('The most recent 200 observations are kept. The totals above also include older observations.','最多保留最近 200 条操作记录，上方总数仍包含较早操作。')}</p>`:''}</section>
+      <div class="rv-sheet-actions">${resumeScene?`<a class="rv-primary" href="${esc(url(resumeScene.file,{seed:r.seed,task:task?.id}))}">${t('Return to this website','返回这个网站')} →</a>`:''}<button type="button" data-review-export>${t('Export text notes','导出文字记录')}</button><button type="button" class="rv-delete" data-review-clear>${t('Delete this review','删除本场复盘')}</button></div>
+      <div class="rv-confirm" ${confirming?'':'hidden'}><p>${t('Delete only this local observation sheet? Saved items, cookie choices and task progress will stay.','仅删除本地复盘记录？收藏、Cookie 选择和任务进度会保留。')}</p><button type="button" data-review-confirm>${t('Delete review','删除复盘')}</button><button type="button" data-review-cancel>${t('Keep it','保留记录')}</button></div>
+    </section>`;
+  };
+  const render=()=>{
+    const reports=data.index().map(seed=>data.read(seed)).filter(Boolean),r=selected?data.read(selected):null;
+    root.innerHTML=`<header class="rv-header"><a class="rv-brand" href="${esc(url('launch.html'))}">Browse <span>/ ${t('facilitator','工作人员')}</span></a><a href="${esc(url('review.html',{lang:lang==='zh'?'en':'zh',seed:selected}))}">${lang==='zh'?'English':'中文'}</a></header><div class="rv-intro"><p class="rv-eyebrow">${t('AFTER THE BROWSING TASK','浏览任务之后')}</p><h1>${t('What caught your attention?','刚才，什么吸引了你的注意？')}</h1><p>${t('Use this sheet for a short conversation with the participant. There is no score and no automatic judgement of their answer.','用这份记录和参与者进行简短讨论。这里没有评分，也不会自动判断任务答案。')}</p></div><div class="rv-toolbar"><label for="rv-session">${t('Session in this tab','当前标签页中的场次')}</label><select id="rv-session" ${reports.length?'':'disabled'}>${reports.length?reports.map(item=>`<option value="${esc(item.seed)}" ${item.seed===selected?'selected':''}>${esc(reportName(item))}</option>`).join(''):`<option>${t('No saved observations','暂无观察记录')}</option>`}</select><button type="button" data-review-refresh>${t('Refresh observations','刷新记录')}</button></div>${r?sheet(r):`<section class="rv-empty"><span aria-hidden="true">↗</span><h2>${t('Start with a browsing task','先开始一次浏览任务')}</h2><p>${t('Observations appear here after someone uses a task website in this browser tab. Older sessions from before this feature have no interaction record.','在当前浏览器标签页中体验任务网站后，这里会出现观察记录。此功能启用前的旧场次没有操作记录。')}</p><a class="rv-primary" href="${esc(url('launch.html'))}">${t('Choose a website','选择一个网站')} →</a></section>`}<footer class="rv-footer"><p>${t('Local practice observations only. No input text, files, passwords or images are captured. At most 12 sessions and 200 recent observations per session are kept in this browser tab.','仅保存本地练习操作。不会采集输入文字、文件、密码或图片。当前标签页最多保留 12 个场次，每场最多保留最近 200 条操作记录。')}</p><a href="${esc(url('launch.html'))}">← ${t('Website chooser','场景选择页')}</a><a href="${esc(url('guide.html'))}">${t('References & facilitator notes','参考来源与主持人说明')} ↗</a></footer>`;
+  };
+  const exportText=r=>{
+    const c=r.counts,lines=[t('Browse — facilitator observations','Browse · 工作人员观察记录'),reportName(r),t('Focused browsing: ','前台浏览：')+duration(r.activeMs),'',t('Advertiser tabs opened: ','已打开广告标签页：')+c.opened,t('Blocked tab requests: ','被拦截的标签页请求：')+c.blocked,t('Native link actions (opening unconfirmed): ','原生链接操作（未确认打开）：')+c.native,t('False-close attempts: ','假关闭尝试：')+c.decoys,t('Actual evasions: ','实际闪避：')+c.dodges,t('Recorded task actions: ','已记录任务操作：')+c.completed,'',t('Recent interaction sequence','最近操作顺序'),...r.events.map(e=>`${duration(e.at)}  ${eventText(e).join(' — ')}`),'',t('Task actions do not confirm a correct answer. These are local observations, not a screen recording.','任务操作不代表答案正确。这是本地操作观察，不是屏幕录像。')];
+    const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/plain;charset=utf-8'}),href=URL.createObjectURL(blob),a=document.createElement('a');a.href=href;a.download='Browse-review.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),1000);
+  };
+  root.addEventListener('change',event=>{if(event.target.id!=='rv-session')return;selected=event.target.value;confirming=false;render();root.querySelector('#rv-session').focus();});
+  root.addEventListener('click',event=>{
+    const button=event.target.closest('button');if(!button)return;
+    if(button.hasAttribute('data-review-refresh')){if(!selected||!data.read(selected))selected=data.index().find(seed=>data.read(seed))||null;confirming=false;render();}
+    else if(button.hasAttribute('data-review-export')){const r=data.read(selected);if(r)exportText(r);}
+    else if(button.hasAttribute('data-review-clear')){confirming=true;root.querySelector('.rv-confirm').hidden=false;root.querySelector('[data-review-cancel]').focus();}
+    else if(button.hasAttribute('data-review-cancel')){confirming=false;root.querySelector('.rv-confirm').hidden=true;root.querySelector('[data-review-clear]').focus();}
+    else if(button.hasAttribute('data-review-confirm')){data.clear(selected);selected=data.index().find(seed=>data.read(seed))||null;confirming=false;render();}
+  });
+  window.addEventListener('pageshow',event=>{if(!event.persisted)return;const current=++generation;cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{frame=requestAnimationFrame(()=>{if(current===generation){if(!selected||!data.read(selected))selected=data.index().find(seed=>data.read(seed))||null;confirming=false;render();}});});});
+  window.addEventListener('pagehide',()=>{generation++;cancelAnimationFrame(frame);});
+  render();
+})();

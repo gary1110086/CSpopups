@@ -1,6 +1,15 @@
 # Release history / 版本记录
 
-Current version: **[events1a](https://github.com/gary1110086/CSpopups/releases/tag/v-events1a)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current version: **[reflect1](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## reflect1 — 25 October 2026
+
+- Added occasional late-loading sponsored document blocks that displace catalogue/reading content once per website and session, with a genuine persistent close.
+- Added site-specific cookie banners, detailed optional-category choices, real rejection/custom saving and a preference reopen control. The native settings dialog pauses and inerts advertisements.
+- Added a manually opened facilitator review from the chooser: bounded local event history, verified versus blocked/unconfirmed advertiser outcomes, close-shaped links, actual evasion attempts, mechanism explanations and TXT export. No automatic ending or correctness score.
+- Kept typed input and file pixels out of the record; report clearing is separate from saved scene work. Existing popup pacing, controls, native navigation and independent earlier prototypes remain.
+
+新增页面挤位、Cookie 选择迷宫及工作人员主动打开的浏览复盘。记录仅保存在当前浏览器标签页，不上传、不跨设备同步，也不恢复顶部任务面板。
 
 ## events1a — 25 October 2026
 
