@@ -1,0 +1,24 @@
+/* Sponsored inventory embedded in each site's existing reading/search path. */
+.br-context-ad{box-sizing:border-box;display:flex;align-items:center;gap:17px;position:relative;grid-column:1/-1;flex:0 0 100%;width:100%;min-width:0;margin:18px 0;padding:17px 19px;background:#f4f6f8;color:#263542;border:1px solid #dce1e5;border-left:3px solid #a6b3be;text-align:left;font-family:Arial,'Microsoft YaHei',sans-serif;font-size:13px;line-height:1.4;clear:both}
+.br-context-ad *{box-sizing:border-box}
+.br-context-ad[hidden]{display:none!important}
+.br-context-mark{display:flex;align-items:center;justify-content:center;flex:0 0 62px;width:62px;height:62px;background:#e0e6ed;border:1px solid #cbd3dc;color:#1c465d;font-size:22px;font-weight:700;letter-spacing:-1px}
+.br-context-copy{min-width:0;flex:1}
+.br-context-copy>small{display:block;color:inherit;font-size:10px;line-height:1.3;opacity:.7;margin:0 0 5px}
+.br-context-ad .br-context-title{display:block;font:700 18px/1.2 Arial,'Microsoft YaHei',sans-serif!important;letter-spacing:0;color:inherit!important;text-decoration:none;margin:0}
+.br-context-ad .br-context-title:hover{text-decoration:underline}
+.br-context-copy>p{font:12px/1.45 Arial,'Microsoft YaHei',sans-serif!important;color:inherit!important;margin:6px 0!important;max-width:740px}
+.br-context-domain{font-size:10px;line-height:1.3;opacity:.7;overflow-wrap:anywhere}
+.br-context-ad .br-context-cta{flex:0 0 auto;display:inline-block;padding:9px 12px;border:1px solid currentColor;color:inherit!important;font:700 11px/1.3 Arial,'Microsoft YaHei',sans-serif!important;text-decoration:none;text-align:center;max-width:160px;white-space:normal}
+.br-context-ad a:focus-visible{outline:3px solid #f28d35;outline-offset:3px}
+.br-context-wallpapers{background:#27343b;color:#cbd9df;border-color:#465760;border-left-color:#9bc944;margin:10px 0 20px}.br-context-wallpapers .br-context-mark{background:#15262e;color:#a1c5d8;border-color:#526971}
+.br-context-recipes{background:#faf6eb;color:#463e2c;border-color:#e7dcc4;border-left-color:#677e50}.br-context-recipes .br-context-mark{color:#526a3a;background:#edf0df;border-color:#cbd7b7}
+.br-context-movies{background:#fffaf0;border-left-color:#d8951b}.br-context-movies .br-context-mark{background:#242834;color:#e8ac35;border-color:#363c4c}
+.br-context-events{background:#f5f5f5;color:#272727;border-left-color:#d52a2a}.br-context-events .br-context-title{font-family:Georgia,SimSun,serif!important}
+.br-context-books{background:#f6f3eb;color:#39362d;border-color:#e1dbcd;border-left-color:#8c7154}.br-context-books .br-context-mark{font-family:Georgia,serif;background:#e9e2d3;color:#6a4b2d;border-color:#d5c8af}
+.br-context-museum{background:#f7f7f4;border-left-color:#212a26}.br-context-museum .br-context-mark{background:#e5e6e1;border-color:#c7ccc1;color:#272d27}
+.br-context-nature{background:#f0f4ec;border-left-color:#426941;color:#29432d}.br-context-nature .br-context-mark{background:#dce9d6;color:#426744;border-color:#bdcfb5}
+.br-context-travel{background:#edf4fa;border-left-color:#1478a6;color:#174057}.br-context-travel .br-context-mark{background:#d2e7f4;border-color:#a7cedf;color:#1b607b}
+.br-context-market{background:#f2f8f7;border-left-color:#1c7c79;color:#214e4d}.br-context-market .br-context-mark{background:#dcedea;border-color:#c2d8d3;color:#287270}
+.swb-detail-info>.br-context-ad,.lp-price-panel>.br-context-ad{grid-column:auto;display:block;margin-top:14px;padding:14px}.swb-detail-info>.br-context-ad .br-context-mark,.lp-price-panel>.br-context-ad .br-context-mark{display:none}.swb-detail-info>.br-context-ad .br-context-cta,.lp-price-panel>.br-context-ad .br-context-cta{margin-top:10px}
+@media(max-width:640px){.br-context-ad{gap:11px;padding:14px 12px;flex-wrap:wrap}.br-context-mark{width:43px;height:43px;flex-basis:43px;font-size:17px}.br-context-ad .br-context-title{font-size:16px!important}.br-context-copy{flex-basis:calc(100% - 60px)}.br-context-ad .br-context-cta{margin-left:54px;max-width:calc(100% - 54px);font-size:11px!important;padding:8px 11px}.br-context-copy>p{font-size:11px!important}.swb-detail-info>.br-context-ad .br-context-cta,.lp-price-panel>.br-context-ad .br-context-cta{margin-left:0;max-width:100%}}

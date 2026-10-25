@@ -1,3 +1,22 @@
+# Encounter1 verification record
+
+25 October 2026. Adds task-context sponsored results, recurring local sponsors, complete advertiser interactions, independently varied genuine-close corners, a new decoy-right/genuine-left layout, and seeded30% collision sessions. Dense scheduling, ten-second ghost rescue,4–6 persisted evasions, native tabs and the hidden task panel remain. The current cache version is encounter1; pacing uses br-run-v7 with absent-only migration from v6 and older keys.
+
+Local Chrome evidence:
+
+- Full root integration62 assertions: actual3-second first arrival, four-card buildup, replacement delay, all ten websites/thirty tasks, modal keyboard controls, narrow-screen capacity/bounds, real processed-image preservation through native advertiser tabs, blocked-tab fallback and genuine BFCache.
+- Root short-screen matrix293 assertions across54 format/style/corner combinations at390×240, including hit-tested genuine closes and actual keyboard dismissal. Independent popup implementation checks302 assertions include actual10.229-second upper-left/lower-right disclosure, migration, safe copy, collision guards and2,000 seeded samples (616enabled,30.8%).
+- Independent popup review63 legacy/rescue assertions plus51 new interaction assertions over22flows: actual decoy child with opener detached, playable child, identical retained image blobs/settings/parent card, true upper-left and lower-right rescue closes, actual collision separation, focus/held-pointer/touch/reduced-motion/settled/rescue guards, disabled seeds, and authoritative2-frame BFCache restoration of corner, budget and age.
+- Context main107 plus focused20 assertions: all ten catalogues/read paths, native advertiser children, sponsor progression across detail and true Back, search context, serving/ingredient redraw, modal inert/Escape quiet, mobile bounds, malformed noncoercible campaign data and escaped input. Review caught an incorrect preference for related-item grids on detail pages; the sponsor now appears near the actual ingredients, player or equivalent detail content.
+- Root destination52 assertions plus independent57 and native-Back7: all three Signal Garden levels via real hint/tile controls, keyboard, undo/reset, reload and BFCache; spin animation/result consistency and the full claim/delivery/release route; coupon combined filters, comparison, selection and survey/activation; malformed records, Chinese and real touch interactions. Review fixed strict selected-ID normalization, inconsistent spin-segment records and a mobile grid/status overlap caused by inherited button/paragraph margins.
+- All35 Browse JavaScript files pass syntax checks.330 source/loading assertions verify local script/style paths, module ordering, current versions and isolation of the original root/standalone wallpaper runtimes.
+
+Browser plugin not available; installed Chrome was driven through Playwright. Desktop and phone screenshots were inspected. Explicit foreground fixtures do not prove operating-system focus switching, and this record does not promise other-browser coverage. Old modal false closes remain intentionally distinct from the new decoy layout; the10% decoy figure refers only to that new ten-card layout deck, with lower-right placements separately10%.
+
+Archive CRC/source hashes, extracted-package flows, exact Pages build and public interaction checks are validated separately before delivery; local success alone is not publication evidence. Their final results are retained with the project handoff and TEMP evidence. Earlier release records follow unchanged.
+
+---
+
 # Rescue2 verification record
 
 25 October 2026. Keeps the10-second conspicuous genuine close and fixes a BFCache race discovered during public testing. A restored renderer can briefly read its old sessionStorage snapshot before the departed page's newer write arrives. Synchronous pageshow reconstruction could therefore retain an old age in memory and overwrite the newer progress on a later save. The first public failure and all-key/write-stack audits are retained in TEMP.

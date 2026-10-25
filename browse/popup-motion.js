@@ -9,13 +9,15 @@
  * Optional numeric slot selects one of four starting quadrants. Omitting it retains
  * the single-card position. Optional speed is bounded to 0.5–1.7 (default 1).
  * Dodge state can be persisted from onMove: dodgeLimit, dodgeCount and settled.
- * topReserve leaves room for an absolutely positioned .br-ghost-close above the card.
+ * topReserve/bottomReserve leave room for a genuine close outside the frame.
+ * snapshot()/nudge() let the caller resolve occasional card collisions without
+ * bypassing the same focus, pointer, reduced-motion and settled-dodge guards.
  */
 (() => {
   'use strict';
   const controllers = new WeakMap();
   window.BROWSE_POPUP_MOTION = ({element, mode = 'bounce', isActive = () => true, onMove, slot, speed = 1,
-    random = Math.random, dodgeLimit, dodgeCount = 0, topReserve = 0} = {}) => {
+    random = Math.random, dodgeLimit, dodgeCount = 0, topReserve = 0, bottomReserve = 0} = {}) => {
     if (!element?.getBoundingClientRect || !element.style) throw new TypeError('A popup card element is required.');
     if (!['bounce', 'dodge'].includes(mode)) throw new TypeError('Unknown popup motion mode.');
     controllers.get(element)?.stop();
@@ -38,6 +40,7 @@
     const limit = Number.isInteger(dodgeLimit) && dodgeLimit >= 4 && dodgeLimit <= 6 ? dodgeLimit : 4 + Math.floor(draw() * 3);
     let usedDodges = Number.isFinite(dodgeCount) ? Math.max(0, Math.min(limit, Math.trunc(dodgeCount))) : 0;
     const reserve = Number.isFinite(topReserve) ? Math.max(0, topReserve) : 0;
+    const reserveBottom = Number.isFinite(bottomReserve) ? Math.max(0, bottomReserve) : 0;
     const listen = (target, name, fn, options) => {
       target.addEventListener(name, fn, options);
       listeners.push(() => target.removeEventListener(name, fn, options));
@@ -64,7 +67,7 @@
       const rect = element.getBoundingClientRect();
       baseX = rect.left - tx; baseY = rect.top - ty;
       width = rect.width; height = rect.height;
-      const bottom = Math.max(top + margin, top + viewHeight - height - margin);
+      const bottom = Math.max(top + margin, top + viewHeight - height - margin - reserveBottom);
       bounds = {left: left + margin, top: Math.min(bottom, top + margin + reserve),
         right: Math.max(left + margin, left + viewWidth - width - margin),
         bottom};
@@ -166,7 +169,18 @@
     }
     const pause = () => { if (!stopped) { manualPause = true; pendingPointer = null; cancelFrame(); } };
     const resume = () => { if (!stopped) { manualPause = false; refresh('resume'); } };
-    const controller = {stop, pause, resume};
+    const canNudge = () => !basicPause() && active() && mouse.matches && !(mode === 'dodge' && usedDodges >= limit);
+    const snapshot = () => ({x, y, width, height, canMove: canNudge(), mode});
+    const nudge = (dx, dy) => {
+      if (!canNudge() || !Number.isFinite(dx) || !Number.isFinite(dy)) return false;
+      const nextX=clamp(x+Math.max(-64,Math.min(64,dx)),bounds.left,bounds.right);
+      const nextY=clamp(y+Math.max(-64,Math.min(64,dy)),bounds.top,bounds.bottom);
+      if (Math.hypot(nextX-x,nextY-y)<.5) return false;
+      if (nextX!==x) vx=Math.sign(nextX-x)*Math.abs(vx);
+      if (nextY!==y) vy=Math.sign(nextY-y)*Math.abs(vy);
+      x=nextX;y=nextY;count++;apply();emit('collision');previousTime=0;schedule();return true;
+    };
+    const controller = {stop, pause, resume, snapshot, nudge};
     let resizeObserver = null, detachObserver = null;
     controllers.set(element, controller);
     if (!element.isConnected) { stop(); return controller; }

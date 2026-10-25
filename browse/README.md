@@ -1,12 +1,12 @@
-# Browse — rescue2
+# Browse — encounter1
 
 An independent, static multipage browsing exercise. The original Little Daily site and standalone Stillwall version keep their own runtime and entry points.
 
-- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=rescue2
-- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=rescue2
-- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=rescue2
-- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=rescue2
-- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=rescue2
+- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=encounter1
+- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=encounter1
+- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=encounter1
+- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=encounter1
+- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=encounter1
 - **Benchmarks and documented scam cases:** guide.html
 
 ## Ten task websites
@@ -28,7 +28,7 @@ An independent, static multipage browsing exercise. The original Little Daily si
 
 The task library gives participants constrained searches instead of merely asking them to look around. Examples: compare the1968 and1972 Earthrise photographs; find a vegan no-cook chickpea lunch under15minutes; identify an indoor rail-accessible museum route; find Ian Hubert's2012 open film; export a1280-pixel image below100KB.
 
-The independent task library retains all assignment briefs and manual criteria. In rescue2, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
+The independent task library retains all assignment briefs and manual criteria. In encounter1, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
 
 A shared URL reproduces the scene and task on another computer. Notes, saved choices and uploaded image pixels **do not sync between computers**. Opening the same URL on another computer starts a fresh browser session.
 
@@ -38,11 +38,19 @@ Cornhub, Form & Field, Framekind, Tiny Arcade, SecureLane, Orbit Player, AppHarb
 
 This version deepens the destinations:8 shop products with size/finish variants, comparisons, bag and order summary;12 credited real photographs with real downloads;6 distinct playable games; three correctly attributed video clips; and persistent choices across six bounded teaching flows. Installers, payments, device scans, rewards and delivery records are fictional teaching endpoints. No real executable, card, password, permission request or credential collection is provided.
 
+## Context, campaigns and complete advertiser experiences
+
+Each task website places one clearly labelled sponsored recommendation inside its catalogue results or its reading/tool path. The wording uses the current scene and, when present, the current search term. It does not replace a genuine result, download, save control or normal navigation. The recommendation is restored after scene redraws. Escape also hides this surface during the normal quiet period.
+
+The first visited scene selects a relevant sponsor, saved locally as `br-data-v1:<seed>:ad-campaign-v1`. Its first, return and familiar-sponsor copy follows native document visits, including Back/Forward. Search or detail navigation keeps the sponsor while updating the subject. The top ticker, side rail, first document promotion and every sixth floating arrival reuse that campaign. Other arrivals consume the complete ten-destination deck without skipping entries. Destination links carry bounded campaign, phase, scene and topic context; native destination links and GET forms retain it. This is generated from local exercise pages, with no advertising network or remote tracking.
+
+Signal Garden now has three solvable light puzzles, keyboard/touch controls, hints, undo, restart, saved moves and native level routes. The other five games remain available. Lucky Circle spins a local six-segment wheel and keeps the selected reward consistent through reload, claim and delivery/release review. Perk Basket adds combined search/category/value/channel filters, sorting, a three-offer comparison, selection and the existing survey/activation flow. Its comparison displays minimum spend and recurring membership terms. Prizes, offers and locations remain fictional.
+
 ## Interruptions and browser behaviour
 
 Only active, focused scene browsing advances the schedule. A fresh seed gets its first floating advertisement after3 active seconds. Further arrivals follow2.2/2.8/2.5/3.2/2.3/3.0-second gaps measured from arrival, even while earlier cards remain open. There can be four simultaneous floating cards on desktop or two at640px and below, with at most30 arrivals per seed. Closing one card removes only that card, leaves the others intact and delays any replacement by at least800ms. A full screen never accumulates a catch-up queue; background time does not advance the clock.
 
-The six formats (with close controls varied independently) remain: a corner card, a modal with a misleading close-shaped advertiser link and a separate genuine close, a tiny-close card, a promotion with an optional decline choice, a bouncing card and a mouse-dodging card. The first, third and later moving cards start in different quadrants and move faster. At most one modal is present; while it is open, the website, other cards and ambient advertisements are inert, other motion pauses, and focus stays in the modal. The normal ten-destination deck repeats after each complete cycle.
+The six formats (with close controls varied independently) remain: a corner card, a modal with a misleading close-shaped advertiser link and a separate genuine close, a tiny-close card, a promotion with an optional decline choice, a bouncing card and a mouse-dodging card. The first, third and later moving cards start in different quadrants and move faster. At most one modal is present; while it is open, the website, other cards and ambient advertisements are inert, other motion pauses, and focus stays in the modal. The ordinary destination deck advances only on non-campaign arrivals, so recurring sponsor slots never skip a destination.
 
 Additional surfaces include a top promotion ticker, bottom leaderboard, a desktop side rail and clearly labelled sponsored sections in the document. Each surface has a genuine close button that dismisses that surface for10 active seconds. Escape clears all floating cards and hides all ad surfaces for5 active seconds, then the schedule resumes. There is no visible game clock or automatic ending.
 
@@ -50,7 +58,11 @@ Bouncing and dodging cards remain within the visible viewport. Keyboard focus fr
 
 Dodging cards sample random destinations throughout the usable viewport:60% of sampling prefers an outer15% edge band and40% uses the whole area. Rejection sampling avoids the current pointer and tiny shifts, so the final edge proportion can be higher. Every card gets a stable4–6 actual evasions; after its limit it stays catchable. Reload, native navigation and BFCache retain the count. Keyboard, touch, resize and reduced motion do not consume attempts.
 
-New cards cycle a seed-shuffled deck of three independent close styles: visible header cross; header plus faint external cross; and only the faint external cross. The external28×26px genuine button sits about26–27px above the upper-right frame. Its low opacity becomes clear on hover and keyboard focus. A30px top reserve and an internally scrolling wrapper keep it usable on short screens. Ghost-only cards initially omit other visible close/decline controls. After10 active foreground seconds from each card’s appearance, its external cross becomes fully opaque with a white background and dark border. That card stops bouncing or dodging so the revealed close can be clicked. Each card’s elapsed time is saved independently across reload, native navigation and BFCache; background time does not count. Revealing does not spend or reset the4–6 dodge budget. Escape remains available.
+New cards cycle a seed-shuffled deck of three independent close styles: visible cross, visible plus faint external cross, or only the faint external cross. A separate ten-card layout deck retains four conventional upper-right layouts, four upper-left layouts, one lower-right layout and one decoy layout, shuffled by seed. The decoy has one upper-right advertiser link shaped like × and a genuine upper-left close. Clicking that decoy opens a native advertiser tab while leaving its card; the genuine button closes only its own card. Existing modal teaching controls remain. Lower-right placements account for10% of a complete layout cycle.
+
+The external28×26px genuine button sits above its chosen upper corner or below the lower-right frame. Hover and keyboard focus increase its contrast. A30px top or bottom reserve and an internally scrolling wrapper keep it usable on short screens. Ghost-only cards initially omit other visible close/decline controls. After10 active foreground seconds from each card’s appearance, its same genuine cross becomes fully opaque with a white background and dark border. That card stops moving so the revealed close can be clicked. Elapsed time, corner, decoy selection and dodge budget survive reload, native navigation and BFCache. Background time does not count. Revealing neither spends nor resets the4–6 dodge budget.
+
+A deterministic30% of seeds enable collisions. When two eligible moving cards overlap, they occasionally nudge apart and react with a short message. A pair has a1.2s active-time cooldown. This never moves a card held by keyboard focus, touch/pointer interaction, a modal, reduced-motion preference, blocked-tab fallback, exhausted dodge budget or the ten-second rescue. Positions and external closes remain bounded to the visual viewport. Collisions do not spend evasion attempts.
 
 Advertiser links open real native tabs from a click, clear opener and preserve the original task document. A blocked floating-card request exposes a stable native fallback. Modifier clicks retain normal browser behaviour. Ordinary content links are not intercepted.
 
@@ -58,7 +70,7 @@ Advertiser links open real native tabs from a click, clear opener and preserve t
 
 No account, backend, analytics, advertising SDK or runtime third-party asset fetch is required. Image pixels are processed locally and remain in the existing tool document while advertiser tabs open and close; leaving/reloading that image page clears those pixels. Selections and notebooks use sessionStorage; inaccessible storage falls back to memory in the current document.
 
-Pacing uses `br-run-v6:<seed>` with persisted deadlines, close style, dodge limit/count and a bounded per-ghost-card `closeElapsedMs`(0–10000). Only absent v6 imports v5, then v4/v3/v2/v1 when each newer legacy key is absent. Existing ghost cards without elapsed time start their10-second wait at migration. Corrupt present v6 does not revive legacy advertisements. Scene `br-data-v1` records and ambient `ad-pressure-v1` dismissals remain unchanged. Native navigation, reload and genuine BFCache reconcile authoritative records. Genuine BFCache recovery keeps every writer suspended for two animation frames before reading session state, allowing the departed renderer’s storage write to propagate. A new navigation cancels pending recovery and skips stale writes. Recovery rebuilds the card/controller before resuming clocks; older cached v5 code cannot overwrite v6 elapsed time.
+Pacing uses `br-run-v7:<seed>` with persisted deadlines, close style, corner, decoy flag, dodge limit/count and a bounded per-ghost-card `closeElapsedMs`(0–10000). Only absent v7 imports v6, then v5/v4/v3/v2/v1 when each newer legacy key is absent. Existing ghost cards without elapsed time start their10-second wait at migration. Corrupt present v7 does not revive legacy advertisements. Scene `br-data-v1` records and ambient `ad-pressure-v1` dismissals remain unchanged. Native navigation, reload and genuine BFCache reconcile authoritative records. Genuine BFCache recovery keeps every writer suspended for two animation frames before reading session state, allowing the departed renderer’s storage write to propagate. A new navigation cancels pending recovery and skips stale writes. Recovery rebuilds the card/controller before resuming clocks; older cached v6 code cannot overwrite v7 elapsed time.
 
 The task library has a facilitator answer view. Shared seeds reproduce a task/scene, while saved work remains local to the browser tab and does not synchronize between computers.
 
@@ -81,7 +93,7 @@ There is no build step. From repository root, run:
 
     python browse/preview-server.py --port 5175
 
-Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=rescue2 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
+Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=encounter1 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
 
 The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalog.js, wallpapers/assets/*.svg, assets/nightroom-contact-sheet.png, favicon.svg and .nojekyll. Copying browse/ alone is insufficient. The package includes START-HERE.txt and a SHA256 source manifest.
 
@@ -91,7 +103,9 @@ The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalo
 
 弹窗有六种：普通角落卡、模态推广、小关闭键卡、可带拒绝选项的推广、屏幕内反弹卡和鼠标接近 × 时整卡躲避的卡片。首次约3秒前台专注时间后出现，随后每2.2–3.2秒补入，电脑最多同时4张、640px及以下最多2张，每个seed最多30次。关闭一张保留其他卡，补位至少等0.8秒；另有顶部促销条、底部横幅、宽屏侧栏与正文赞助区。环境广告单独关闭后隐藏10秒；Esc清除全部广告并提供5秒前台专注时间空档。
 
-闪避覆盖全屏可用位置，边缘取样概率更高，每卡随机闪避4–6次后不再跑，刷新及原生前进后退会保留次数。关闭样式独立随机排列：普通明显×、明显×加外侧透明×、仅外侧透明×；外侧按钮位于卡片右上方约26–27px，键盘聚焦时清晰显示。仅透明×的卡片在出现10秒前台专注时间后，×自动变为白底、深色边框的明显按钮，该卡片停止反弹或闪避，保证可点击；每张独立计时，后台暂停，刷新及前进后退保留等待进度。内部滚动与30px顶部预留避免裁掉关闭键。键盘聚焦暂停移动，触屏不躲避，减少动态效果时保持静止；这些操作不消耗闪避次数。节奏使用br-run-v6，缺少记录才顺序导入v5/v4/v3/v2/v1，原br-data-v1场景数据与笔记保留。
+闪避覆盖全屏可用位置，边缘取样概率更高，每卡随机闪避4–6次后不再跑，刷新及原生前进后退会保留次数。关闭样式独立随机排列：普通明显×、明显×加外侧透明×、仅外侧透明×；外侧按钮随布局位于右上、左上或右下方约26–27px，键盘聚焦时清晰显示。仅透明×的卡片在出现10秒前台专注时间后，×自动变为白底、深色边框的明显按钮，该卡片停止反弹或闪避，保证可点击；每张独立计时，后台暂停，刷新及前进后退保留等待进度。内部滚动与30px顶部／底部预留避免裁掉关闭键。键盘聚焦暂停移动，触屏不躲避，减少动态效果时保持静止；这些操作不消耗闪避次数。节奏使用br-run-v7，缺少记录才顺序导入v6/v5/v4/v3/v2/v1，原br-data-v1场景数据与笔记保留。
+
+广告会结合场景与搜索词，一个本地赞助商沿页面访问推进三阶段文案；赞助推荐放在列表中途或实际阅读路径，广告页面内可继续游戏、转盘和比较优惠。每次新开始有30%概率启用移动卡碰撞推挤。十张布局牌组中右下关闭占一张，右上假×配左上真关闭占一张，其余保留常规与左上角变体；假×打开广告并保留原卡。
 
 两位工作人员可分别负责说明任务与观察操作，以及在另一台设备查看主持人答案和资料、引导结束讨论。不要替参与者点击；观察他如何筛选、核对、识别误导控件，以及是否能恢复原来的工作。
 

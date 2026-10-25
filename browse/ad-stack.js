@@ -2,12 +2,17 @@
 (() => {
   'use strict';
   window.BROWSE_AD_STACK = C => {
-    const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,wireAds,deck,chosen}=C;
-    const KEY='br-run-v6:'+seed, MISSING=Symbol('missing'), MAX=30, REVEAL_MS=10000;
+    const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,wireAds,deck,chosen,adOffer,campaignSite}=C;
+    const KEY='br-run-v7:'+seed, MISSING=Symbol('missing'), MAX=30, REVEAL_MS=10000;
     const GAPS=[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter'];
     const hash=salt=>{let value=2166136261;for(const c of seed+salt)value=Math.imul(value^c.charCodeAt(0),16777619);return value>>>0;};
     const closeStyles=['visible','dual','ghost'].sort((a,b)=>hash('close:'+a)-hash('close:'+b));
+    // Each ten-card cycle retains four conventional corners, five left corners
+    // (one with a decoy), and one lower-right corner. The order is seed-shuffled.
+    const closeLayouts=['top-right','top-left','top-right','top-left','decoy','top-right','top-left','bottom-right','top-left','top-right']
+      .map((layout,index)=>({layout,order:hash('layout:'+index)})).sort((a,b)=>a.order-b.order).map(p=>p.layout);
+    const collisionEnabled=hash('collision-session')/4294967296<.3,collisionPairs=new Map();
     const dodgeLimit=id=>4+hash('dodge:'+id)%3;
     const validSites=Object.keys(ads), modal=p=>p.format==='panel'||p.format==='newsletter';
     const readRun=key=>{
@@ -22,32 +27,34 @@
         if(!p||!Number.isInteger(p.id)||p.id<1||p.id>MAX||ids.has(p.id)||!validSites.includes(p.site)||!FORMATS.includes(p.format))continue;
         if(modal(p)&&hasModal)continue;
         const closeStyle=['visible','dual','ghost'].includes(p.closeStyle)?p.closeStyle:'visible';
+        const decoy=p.decoy===true,closeCorner=decoy?'top-left':['top-right','top-left','bottom-right'].includes(p.closeCorner)?p.closeCorner:'top-right';
         const extra=p.format==='dodge'?{dodgeLimit:Number.isInteger(p.dodgeLimit)&&p.dodgeLimit>=4&&p.dodgeLimit<=6?p.dodgeLimit:dodgeLimit(p.id)}:{};
         if(p.format==='dodge')extra.dodgeCount=Number.isInteger(p.dodgeCount)?Math.max(0,Math.min(extra.dodgeLimit,p.dodgeCount)):0;
         if(closeStyle==='ghost')extra.closeElapsedMs=Number.isFinite(p.closeElapsedMs)?Math.max(0,Math.min(REVEAL_MS,p.closeElapsedMs)):0;
-        pending.push({id:p.id,site:p.site,format:p.format,closeStyle,...extra});ids.add(p.id);if(modal(p))hasModal=true;
+        pending.push({id:p.id,site:p.site,format:p.format,closeStyle,closeCorner,decoy,...extra});ids.add(p.id);if(modal(p))hasModal=true;
         if(pending.length===4)break;
       }
       const shown=Math.max(Number.isInteger(obj.shown)?Math.max(0,Math.min(MAX,obj.shown)):0,...pending.map(p=>p.id));
       const quietUntil=Number.isFinite(obj.quietUntil)&&obj.quietUntil>=0&&obj.quietUntil<=activeMs+5000?obj.quietUntil:0;
       const nextAt=shown>=MAX?null:Math.max(quietUntil,Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=activeMs+5000?obj.nextAt:activeMs+(shown?2500:3000));
-      return {pacingVersion:6,activeMs,shown,nextAt,quietUntil,pending};
+      return {pacingVersion:7,activeMs,shown,nextAt,quietUntil,pending};
     };
     const stored=readRun(KEY);
     let initial=stored;
     if(stored===MISSING){
-      let legacy=readRun('br-run-v5:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v4:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
+      let legacy=readRun('br-run-v6:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v5:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v4:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
       const old=legacy&&typeof legacy==='object'&&!Array.isArray(legacy)?legacy:{};
       const shown=Number.isInteger(old.shown)?Math.max(0,Math.min(MAX,old.shown)):0;
       initial=Array.isArray(old.pending)?old:{activeMs:old.activeMs,shown,pending:old.pending&&typeof old.pending==='object'?[{...old.pending,id:Math.max(1,shown)}]:[]};
     }
     const state=normalize(initial),entries=new Map();
     const overlayRoot=document.getElementById('interrupt-root')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
+    overlayRoot.dataset.collisions=String(collisionEnabled);
     let suspended=false,last=performance.now(),lastOutsideFocus=null,modalId=null;
     let restoreFrame=0,restoreGeneration=0,restoring=false,clearAfterRestore=false;
     const save=()=>{if(!suspended)C.rawWrite(KEY,state);};
     const limit=()=>matchMedia('(max-width: 640px)').matches?2:4;
-    const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write});
+    const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write,adOffer,campaignSite});
     const foreground=()=>!suspended&&!document.hidden&&document.hasFocus();
     const pressureUpdate=()=>pressure.update({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:modalId!==null});
     const stopEntry=entry=>{entry.motion?.stop();entry.motion=null;};
@@ -56,16 +63,17 @@
     const rememberFocus=()=>{const el=document.activeElement;if(el&&el!==document.body&&root.contains(el))lastOutsideFocus=el;};
     const returnFocus=()=>{if(lastOutsideFocus?.isConnected&&!lastOutsideFocus.inert)lastOutsideFocus.focus({preventScroll:true});};
     const viewport=()=>({left:visualViewport?.offsetLeft||0,top:visualViewport?.offsetTop||0,width:visualViewport?.width||innerWidth,height:visualViewport?.height||innerHeight});
+    const closeReserves=p=>p.closeStyle==='visible'?{top:0,bottom:0}:p.closeCorner==='bottom-right'?{top:0,bottom:30}:{top:30,bottom:0};
     const positionEntry=entry=>{
-      const v=viewport(),reserve=entry.p.closeStyle==='visible'?0:30;entry.card.style.setProperty('--br-motion-view-width',v.width+'px');entry.card.style.setProperty('--br-motion-view-height',v.height+'px');
+      const v=viewport(),reserve=closeReserves(entry.p);entry.card.style.setProperty('--br-motion-view-width',v.width+'px');entry.card.style.setProperty('--br-motion-view-height',v.height+'px');
       if(modal(entry.p)){
         const pad=limit()===2?12:16;
-        Object.assign(entry.stage.style,{left:v.left+'px',top:v.top+'px',width:v.width+'px',height:v.height+'px',paddingTop:(pad+reserve)+'px',paddingBottom:pad+'px'});return;
+        Object.assign(entry.stage.style,{left:v.left+'px',top:v.top+'px',width:v.width+'px',height:v.height+'px',paddingTop:(pad+reserve.top)+'px',paddingBottom:(pad+reserve.bottom)+'px'});return;
       }
       if(entry.moving)return;
       const rect=entry.card.getBoundingClientRect(),slots=[[.04,.10],[.96,.16],[.07,.94],[.9,.88]],slot=slots[(entry.p.id-1)%4];
       entry.card.style.left=(v.left+4+Math.max(0,v.width-rect.width-8)*slot[0])+'px';
-      entry.card.style.top=(v.top+4+reserve+Math.max(0,v.height-rect.height-8-reserve)*slot[1])+'px';
+      entry.card.style.top=(v.top+4+reserve.top+Math.max(0,v.height-rect.height-8-reserve.top-reserve.bottom)*slot[1])+'px';
     };
     const applyModal=()=>{
       const current=state.pending.find(modal);modalId=current?.id??null;
@@ -110,18 +118,43 @@
       save();applyModal();if(ownedFocus)returnFocus();
     };
     const taunts={bounce:[['Another little detour.','又来一小段绕路。'],['Yes, I am still here.','没错，我还在这里。'],['Your attention looks busy.','你的注意力好像很忙。'],['Room for one more offer?','还能再放一条优惠吗？']],dodge:[['Nearly! Try the other corner.','差一点！换个角落试试。'],['Oops. New address.','哎呀，我搬家啦。'],['You close. I relocate.','你要关，我就搬。'],['Still following me?','还在追我吗？']]};
+    const collide=()=>{
+      if(!collisionEnabled||!foreground()||modalId!==null)return;
+      const moving=[...entries.values()].filter(entry=>entry.motion&&!entry.paused);
+      for(let i=0;i<moving.length;i++)for(let j=i+1;j<moving.length;j++){
+        const a=moving[i],b=moving[j],pair=a.p.id+':'+b.p.id;
+        if(state.activeMs-(collisionPairs.get(pair)??-Infinity)<1200)continue;
+        const ar=a.motion.snapshot(),br=b.motion.snapshot();if(!ar.canMove||!br.canMove)continue;
+        const overlapX=Math.min(ar.x+ar.width,br.x+br.width)-Math.max(ar.x,br.x);
+        const overlapY=Math.min(ar.y+ar.height,br.y+br.height)-Math.max(ar.y,br.y);
+        if(overlapX<8||overlapY<8)continue;
+        let dx=0,dy=0;
+        if(overlapX<overlapY){dx=(ar.x+ar.width/2<br.x+br.width/2?-1:1)*Math.min(56,overlapX/2+9);}
+        else{dy=(ar.y+ar.height/2<br.y+br.height/2?-1:1)*Math.min(56,overlapY/2+9);}
+        const movedA=a.motion.nudge(dx,dy),movedB=b.motion.nudge(-dx,-dy);
+        if(!movedA&&!movedB)continue;
+        collisionPairs.set(pair,state.activeMs);
+        for(const entry of [a,b]){
+          entry.card.dataset.collisionCount=String(Number(entry.card.dataset.collisionCount||0)+1);
+          const line=entry.card.querySelector('.br-motion-taunt');if(line)line.textContent=t('Excuse me. That was my corner!','借过，这个角落我先来的！');
+        }
+      }
+    };
     const createEntry=p=>{
       rememberFocus();
       const a=ads[p.site],isModal=modal(p),moving=p.format==='bounce'||p.format==='dodge';
+      const offer=typeof adOffer==='function'?adOffer(p.site,p.id):{brand:a[0],title:a[1],cta:a[2],eyebrow:a[3],description:adDescription(p.site)};
+      const lower=p.closeCorner==='bottom-right';
+      const genuine=`<button class="br-real-close${lower?' br-corner-close':''}" type="button" data-br-close ${p.closeStyle==='ghost'?'hidden':''} aria-label="${t('Dismiss advertisement','关闭广告')}">×</button>`;
       const stage=document.createElement('div');stage.className='br-interrupt '+(isModal?'br-ad-backdrop br-stack-modal-stage':'br-motion-stage br-stack-stage');
       stage.dataset.brEntry=String(p.id);stage.style.zIndex=String(isModal?11000:9000+p.id);
-      stage.innerHTML=`<section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)} br-stack-card ${moving?'br-motion-card':''} ${isModal?'br-stack-modal':''}" data-close-style="${p.closeStyle}" ${isModal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1">
-        ${p.closeStyle!=='visible'?`<button class="br-ghost-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button>`:''}<div class="br-ad-scroll">
-        <div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(a[0])}</span>${p.format==='panel'&&p.closeStyle!=='ghost'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Close promotion','关闭推广')}">×</a>`:''}<button class="br-real-close" type="button" data-br-close ${p.closeStyle==='ghost'?'hidden':''} aria-label="${t('Dismiss advertisement','关闭广告')}">×</button></div>
+      stage.innerHTML=`<section class="br-ad br-ad-${esc(p.format)} br-ad-${esc(p.site)} br-stack-card ${moving?'br-motion-card':''} ${isModal?'br-stack-modal':''}" data-close-style="${p.closeStyle}" data-close-corner="${p.closeCorner}" data-decoy="${p.decoy}" ${isModal?'role="dialog" aria-modal="true"':'role="region"'} aria-label="${esc(t('Sponsored message','赞助信息'))}" tabindex="-1">
+        ${p.closeStyle!=='visible'?`<button class="br-ghost-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button>`:''}${lower?genuine:''}<div class="br-ad-scroll">
+        <div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(offer.brand)}</span>${!lower?genuine:''}${p.decoy?`<a class="br-false-close br-decoy-close" data-br-ad="${p.site}" data-br-decoy aria-label="${t('Open sponsor offer','打开赞助推广')}">×</a>`:p.format==='panel'&&p.closeStyle!=='ghost'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Open sponsor offer','打开赞助推广')}">×</a>`:''}</div>
         ${moving?`<div class="br-motion-label">${p.format==='bounce'?t('↗ ONE MORE OFFER','↗ 再来一条优惠'):t('✦ CATCH ME FIRST','✦ 先追上我再说')}</div>`:''}
-        ${adVisual(p.site)}<div class="br-ad-body"><span class="br-ad-eyebrow">${esc(a[3])}</span><h2>${a[1]}</h2><p>${adDescription(p.site)}</p>
+        ${adVisual(p.site)}<div class="br-ad-body"><span class="br-ad-eyebrow">${esc(offer.eyebrow)}</span><h2>${esc(offer.title)}</h2><p>${esc(offer.description)}</p>
         ${moving?`<p class="br-motion-taunt">${moving&&p.format==='dodge'?t('Looking for the ×?','在找那个 × 吗？'):t('Just passing through. Again.','只是路过，又路过。')}</p>`:''}
-        <a class="br-ad-cta" data-br-ad="${p.site}">${a[2]} →</a>${p.format==='newsletter'&&p.closeStyle!=='ghost'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div>
+        <a class="br-ad-cta" data-br-ad="${p.site}">${esc(offer.cta)} →</a>${p.format==='newsletter'&&p.closeStyle!=='ghost'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div>
         <div class="br-ad-bottom">${p.format==='tiny'&&p.closeStyle!=='ghost'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}<span class="br-stack-hint">${t('Esc clears all offers','Esc 关闭全部广告')}</span></div>
         <p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></div></section>`;
       overlayRoot.append(stage);const card=stage.querySelector('.br-ad');
@@ -130,10 +163,10 @@
       stage.querySelectorAll('[data-br-ad]').forEach(link=>link.addEventListener('click',event=>{
         if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
         event.preventDefault();const child=window.open(link.href,'_blank');
-        if(child){try{child.opener=null;}catch{}closeOne(p.id);}
+        if(child){try{child.opener=null;}catch{}if(!link.hasAttribute('data-br-decoy'))closeOne(p.id);}
         else{stage.querySelector('.br-blocked').hidden=false;entry.blockedLink=true;entry.motion?.pause();positionEntry(entry);}
       }));
-      if(moving){let line=0;entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:p.format,slot:(p.id-1)%4,speed:1.25,topReserve:p.closeStyle==='visible'?0:30,dodgeLimit:p.dodgeLimit,dodgeCount:p.dodgeCount,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
+      if(moving){let line=0;const reserve=closeReserves(p);entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:p.format,slot:(p.id-1)%4,speed:1.25,topReserve:reserve.top,bottomReserve:reserve.bottom,dodgeLimit:p.dodgeLimit,dodgeCount:p.dodgeCount,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
         card.dataset.motionMoves=String(meta.count);card.dataset.motionReason=meta.reason;
         if(p.format==='dodge'){
           card.dataset.dodgeLimit=String(meta.dodgeLimit);card.dataset.dodgeCount=String(meta.dodgeCount);card.dataset.dodgeSettled=String(meta.settled);
@@ -175,11 +208,15 @@
       if(state.shown<MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
         let format=FORMATS[state.shown%FORMATS.length];
         if((format==='panel'||format==='newsletter')&&state.pending.some(modal))format=state.shown%2?'dodge':'bounce';
-        state.shown++;const closeStyle=closeStyles[(state.shown-1)%closeStyles.length];
-        state.pending.push({id:state.shown,site:chosen||deck[(state.shown-1)%deck.length],format,closeStyle,...(closeStyle==='ghost'?{closeElapsedMs:0}:{}),...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})});
+        state.shown++;const closeStyle=closeStyles[(state.shown-1)%closeStyles.length],layout=closeLayouts[(state.shown-1)%closeLayouts.length];
+        const recurring=validSites.includes(campaignSite)&&(state.shown-1)%6===0;
+        const normalIndex=state.shown-1-(validSites.includes(campaignSite)?Math.ceil((state.shown-1)/6):0);
+        const site=chosen||(recurring?campaignSite:deck[normalIndex%deck.length]);
+        state.pending.push({id:state.shown,site,format,closeStyle,closeCorner:layout==='decoy'?'top-left':layout,decoy:layout==='decoy',...(closeStyle==='ghost'?{closeElapsedMs:0}:{}),...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})});
         state.nextAt=state.shown<MAX?state.activeMs+GAPS[(state.shown-1)%GAPS.length]:null;
         sync();save();
       }else pressureUpdate();
+      collide();
     };
     setInterval(tick,250);setInterval(()=>{if(!suspended)save();},2000);
     const resetClock=()=>{last=performance.now();if(!suspended)save();pressureUpdate();};

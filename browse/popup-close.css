@@ -1,4 +1,4 @@
-/* Close-control variants. Position, motion and the 30px top reservation belong to JS. */
+/* Close-control variants. JS reserves 30px above or below external targets. */
 .br-ad.br-stack-card {
   --br-close-reserve: 0px;
   overflow: visible;
@@ -97,6 +97,86 @@
 
 .br-ad.br-stack-card > button.br-ghost-close[hidden] {
   display: none !important;
+}
+
+/* Genuine controls retain one corner across scroll, navigation and rescue. */
+.br-ad.br-stack-card[data-close-corner="top-left"] > button.br-ghost-close {
+  right: auto;
+  left: 0;
+}
+
+.br-ad.br-stack-card[data-close-corner="bottom-right"] > button.br-ghost-close {
+  top: auto;
+  right: 0;
+  bottom: -28px;
+  left: auto;
+}
+
+.br-ad.br-stack-card[data-close-corner="top-left"] .br-ad-top > .br-real-close {
+  position: static;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  order: -1;
+  flex-shrink: 0;
+  margin-right: 3px;
+}
+
+.br-ad.br-stack-card[data-close-corner="top-left"] .br-ad-top > span {
+  flex: 1;
+}
+
+.br-ad.br-stack-card > button.br-real-close.br-corner-close {
+  position: absolute;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  top: auto;
+  right: 7px;
+  bottom: 6px;
+  left: auto;
+  width: 28px;
+  min-width: 28px;
+  height: 26px;
+  min-height: 26px;
+  margin: 0;
+  padding: 0 0 2px;
+  border: 1px solid #8996a1;
+  border-radius: 2px;
+  background: #fff;
+  color: #26323e;
+  font: 24px/1 Tahoma, 'Microsoft YaHei', sans-serif;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.br-ad.br-stack-card[data-close-corner="bottom-right"]:not([data-close-style="ghost"]) .br-ad-scroll {
+  padding-bottom: 33px;
+}
+
+.br-ad.br-stack-card .br-ad-top > a.br-decoy-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin: 0 0 0 auto;
+  padding: 0 0 2px;
+  border: 0;
+  border-radius: 2px;
+  color: inherit;
+  background: transparent;
+  font: 24px/1 Tahoma, 'Microsoft YaHei', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.br-ad.br-stack-card .br-ad-top > a.br-decoy-close:hover {
+  background: #8996a12b;
 }
 
 @media (max-width: 640px) {

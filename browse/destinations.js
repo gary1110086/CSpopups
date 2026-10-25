@@ -5,7 +5,8 @@ window.BROWSE_DESTINATIONS = function (C) {
   const t=(en,zh)=>lang==='zh'?zh:en, esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const get=k=>typeof p.get==='function'?p.get(k):p[k], site=['corn','desk','stock','game','security','player','software','prize','coupon','parcel'].includes(get('site'))?get('site'):'desk';
   const view=get('view')||'home', id=Math.max(0,Math.min(11,Math.floor(Number(get('id'))||0)));
-  const href=(v='home',extra={})=>{const q=new URLSearchParams({site,view:v,lang,v:'rescue2',...extra});if(get('seed'))q.set('seed',get('seed'));return 'destination.html?'+q;};
+  const contextFields=()=>Object.fromEntries(['seed','campaign','phase','interest','topic','from'].filter(k=>get(k)).map(k=>[k,String(get(k)).slice(0,160)]));
+  const href=(v='home',extra={})=>{const q=new URLSearchParams({site,view:v,lang,v:'encounter1',...contextFields(),...extra});return 'destination.html?'+q;};
   const a=(v,label,cls='',extra={})=>`<a class="${cls}" href="${href(v,extra)}">${label}</a>`;
   const btn=(action,label,extra='')=>`<button type="button" data-dest-action="${action}" ${extra}>${label}</button>`;
   const read=(key,fallback)=>{try{const v=JSON.parse(sessionStorage.getItem('browse-dest-'+site+'-'+key));return v===null?fallback:v;}catch{return fallback;}};
@@ -36,7 +37,7 @@ window.BROWSE_DESTINATIONS = function (C) {
     const labels={corn:['Videos · Channels · Studio releases','视频 · 频道 · 工作室更新'],desk:['Delivery & returns · Product care · Customer service','配送与退换 · 产品保养 · 客户服务'],stock:['Original illustration library · Standard and extended licences','原创插画库 · 标准与扩展许可'],game:['Independent games for your browser','独立浏览器游戏'],security:['Protection centre · Session SL-2048','保护中心 · 会话 SL-2048'],player:['Orbit Player 4.2.1 · Windows / macOS / Linux','Orbit Player 4.2.1 · Windows / macOS / Linux'],software:['Desktop software · Version information and release history','桌面软件 · 版本资料与更新记录'],prize:['Rewards programme · Allocation LC-2048','奖励计划 · 分配编号 LC-2048'],coupon:['Local offers · Terms apply to every promotion','本地优惠 · 每项活动均有适用条件'],parcel:['Domestic delivery · Shipment management','国内派送 · 包裹管理']};
     return `<footer class="d-footer"><div><strong>${brand}</strong><p>${t(...labels[site])}</p></div><div>${a('about',t('About','关于'))}${a('terms',t('Terms & privacy','条款与隐私'))}${a('guide',t('Site information','网站信息'))}</div><small>© 2026 ${title.split(' —')[0]}</small></footer>`;
   };
-  const search=(placeholder)=>`<form class="d-search" action="destination.html" method="get"><input type="hidden" name="site" value="${site}"><input type="hidden" name="view" value="home"><input type="hidden" name="lang" value="${lang}"><input type="hidden" name="v" value="rescue2"><input type="hidden" name="seed" value="${esc(get('seed')||'')}"><input name="q" aria-label="${placeholder}" placeholder="${placeholder}" value="${esc(get('q')||'')}"><button>${t('Search','搜索')}</button></form>`;
+  const search=(placeholder)=>`<form class="d-search" action="destination.html" method="get">${Object.entries({site,view:'home',lang,v:'encounter1',...contextFields()}).map(([k,v])=>`<input type="hidden" name="${k}" value="${esc(v)}">`).join('')}<input name="q" aria-label="${placeholder}" placeholder="${placeholder}" value="${esc(get('q')||'')}"><button>${t('Search','搜索')}</button></form>`;
   const section=(eyebrow,title,text='')=>`<div class="d-section-heading"><small>${eyebrow}</small><h1>${title}</h1>${text?`<p>${text}</p>`:''}</div>`;
   const stepbar=(n,labels)=>`<ol class="d-steps">${labels.map((l,i)=>`<li class="${i+1<=n?'done':''}"><b>${i+1}</b>${l}</li>`).join('')}</ol>`;
   const complete=(heading,text)=>`<section class="d-final"><div class="d-final-icon">✓</div><small>${t('BROWSING EXERCISE · FINAL STEP','浏览练习 · 最后一步')}</small><h1>${heading}</h1><p>${text}</p><p class="d-fine">${t('This fictional site is part of a browsing exercise. No payment was taken, no personal information was submitted, and nothing was installed. You can close this tab and return to your original task.','这是浏览练习中的虚构网站。没有付款、没有提交个人资料，也没有安装任何内容。你可以关闭这个标签页，回到原本的任务。')}</p>${a('guide',t('Understand this page','了解这个页面'),'d-primary')} ${a('home',t('Explore the site','继续浏览'),'d-text-link')}</section>`;
@@ -193,11 +194,13 @@ window.BROWSE_DESTINATIONS = function (C) {
     return null;
   }
   const depth=window.BROWSE_DESTINATION_DEPTH?.({C,root,p,lang,t,esc,get,site,view,id,href,a,btn,read,write,safeArray,photo,productArt,products,prices,productSpecs,apps,appIcon,assets,wall,clipNames,cornCards,gameArt,games,getCart,complete,section,stepbar,stockCards,offerCards,rewardCards,tags,search});
+  const experiences=window.BROWSE_DESTINATION_EXPERIENCES?.({C,root,p,lang,t,esc,get,site,view,id,href,a,read,write,section,offers,voucher,prizeNames,rewardArt,complete,stepbar});
   const render = () => {
     const result=common();
     root.className='dest dest-'+site;
-    root.innerHTML=head()+`<main class="d-main">${result===null?(depth?.render()??redesign()??({corn,desk,stock,game,security,player,software,prize,coupon,parcel}[site])()):result}</main>`+footer()+`<div class="d-toast" role="status" aria-live="polite"></div>`;
+    root.innerHTML=head()+`<main class="d-main">${experiences?.banner()||''}${result===null?(experiences?.render()??depth?.render()??redesign()??({corn,desk,stock,game,security,player,software,prize,coupon,parcel}[site])()):result}</main>`+footer()+`<div class="d-toast" role="status" aria-live="polite"></div>`;
     depth?.afterRender?.();
+    experiences?.afterRender?.();
   };
   let toastTimer, starCount=0;
   const toast=text=>{const box=root.querySelector('.d-toast');box.textContent=text;box.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.remove('show'),2600);};
@@ -213,6 +216,6 @@ window.BROWSE_DESTINATIONS = function (C) {
     if(action==='star'){starCount++;const counter=root.querySelector('#d-game-count');counter.textContent=starCount+' / 10';if(starCount>=10){target.hidden=true;root.querySelector('#d-game-message').textContent=t('The garden is glowing. Ten stars found. Well played!','花园亮起来了。十颗星星全部找到！');write('game-best',10);}else{target.style.left=(12+(starCount*29)%72)+'%';target.style.top=(23+(starCount*19)%51)+'%';root.querySelector('#d-game-message').textContent=t('A little more light. Keep going.','又亮了一点，继续。');}}
     if(action==='game-reset'){starCount=0;const star=root.querySelector('.d-game-star');star.hidden=false;star.style.left='45%';star.style.top='45%';root.querySelector('#d-game-count').textContent='0 / 10';root.querySelector('#d-game-message').textContent=t('Click the glowing star to begin.','点击发光星星开始。');}
   });
-  window.addEventListener('pageshow',event=>{if(event.persisted){depth?.resume?.();render();}});
+  window.addEventListener('pageshow',event=>{if(event.persisted){depth?.resume?.();experiences?.resume?.();render();}});
   render();
 };

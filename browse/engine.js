@@ -15,7 +15,7 @@
   }
   const url = (file, query = {}) => {
     const u = new URL(file, location.href);
-    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'rescue2');
+    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'encounter1');
     if(params.has('task')&&['index.html',...(window.BROWSE_SCENE_INDEX||[]).map(s=>s.file)].includes(u.pathname.split('/').pop()))u.searchParams.set('task',params.get('task'));
     Object.entries(query).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') u.searchParams.set(k, String(v)); });
     return u.href;
@@ -56,7 +56,7 @@
   // A seed is carried through native GET forms as well as anchors.
   for (const form of root.querySelectorAll('form')) {
     if ((form.getAttribute('method') || 'get').toLowerCase() !== 'get') continue;
-    for (const [name,value] of [['lang',lang],['seed',seed],['v','rescue2'],...(brief?[['task',brief.id]]:[])]) {
+    for (const [name,value] of [['lang',lang],['seed',seed],['v','encounter1'],...(brief?[['task',brief.id]]:[])]) {
       if (form.querySelector(`[name="${name}"]`)) continue;
       const input = document.createElement('input'); input.type='hidden'; input.name=name; input.value=value; form.append(input);
     }
@@ -77,7 +77,10 @@
   };
   const adDescription = site => ({corn:t('Browse new releases, channels and member picks.','浏览新片、频道及会员推荐。'),desk:t('Desk lamps, organizers and mats. Browse the new workspace range.','台灯、收纳与桌垫，查看最新办公桌系列。'),stock:t('Search photos, illustrations and image collections.','搜索照片、插画及素材合集。'),game:t('Try a quick round of Signal Garden in your browser.','直接在浏览器试玩 Signal Garden。'),security:t('Review recent device warnings and protection status.','查看设备近期提示及防护状态。'),player:t('Install the latest player package to continue playback.','安装新版播放器程序包以继续播放。'),software:t('Your file utility package is available. Choose a download.','文件工具程序包已就绪，请选择下载。'),prize:t('Your visitor reward is waiting. Check your eligibility.','访客奖励待领取，立即查看资格。'),coupon:t('Complete the member survey to view this offer.','填写会员问卷，查看优惠领取方式。'),parcel:t('Action required: confirm the delivery details for your parcel.','需要处理：请确认包裹派送资料。')}[site]);
   const adVisual = site => `<div class="br-ad-visual br-visual-${site}" aria-hidden="true">${({corn:'<span>Corn<b>hub</b></span><i>▶</i>',desk:'<span>FROM <b>RM39</b></span>',stock:'<span>Framekind<br><b>STOCK IMAGES</b></span>',game:'<span>SIGNAL<br>GARDEN</span><i>▦</i>',security:'<span>!</span>',player:'<span>▶</span>',software:'<span>ZIP</span>',prize:'<span>REWARD<br><b>RM800</b></span>',coupon:'<span>RM<b>100</b><small>SHOPPING VOUCHER</small></span>',parcel:'<span>NorthPost<br><b>DELIVERY UPDATE</b></span>'})[site]}</div>`;
-  const adURL = site => url('destination.html', {site, from:scene});
+  const campaign=window.BROWSE_AD_CONTEXT?.({...C,seed,scene,ads,adDescription});
+  const adOffer=(site,ordinal)=>campaign?.adOffer(site,ordinal)||{brand:ads[site][0],title:ads[site][1],cta:ads[site][2],eyebrow:ads[site][3],description:adDescription(site)};
+  const campaignSite=campaign?.campaignSite;
+  const adURL = site => url('destination.html', {site, from:scene,...(campaign?.adURLMeta(site)||{})});
   const wireAds = node => { for (const a of node.querySelectorAll('[data-br-ad]')) { const id = validSites.includes(a.dataset.brAd) ? a.dataset.brAd : deck[0]; a.href=adURL(id); a.target='_blank'; a.rel='noopener'; } };
   wireAds(root);
   // Scene controls can redraw a document region (servings, saved filters, etc.).
@@ -90,16 +93,18 @@
     (root.querySelector('main')||root).append(strip);wireAds(strip);
   };
   new MutationObserver(()=>{
+    campaign?.reconcile();
     ensureInlineAd();
     wireAds(root);
     for(const form of root.querySelectorAll('form')){
       if((form.getAttribute('method')||'get').toLowerCase()!=='get')continue;
-      for(const [name,value] of [['lang',lang],['seed',seed],['v','rescue2'],...(brief?[['task',brief.id]]:[])]){
+      for(const [name,value] of [['lang',lang],['seed',seed],['v','encounter1'],...(brief?[['task',brief.id]]:[])]){
         if(form.querySelector(`[name="${name}"]`))continue;
         const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;form.append(input);
       }
     }
   }).observe(root,{childList:true,subtree:true});
+  campaign?.reconcile();
   ensureInlineAd();
-  window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adURL,wireAds,deck,chosen,rawRead,rawWrite});
+  window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adOffer,campaignSite,adURL,wireAds,deck,chosen,rawRead,rawWrite});
 })();
