@@ -1,3 +1,23 @@
+# Refine1 verification record
+
+26 October 2026. Audited the accepted requirements and corrected four reproducible issues without adding another state/fallback layer. The current cache version is refine1; br-run-v7 and existing scene/review records remain compatible.
+
+Source changes:
+
+- Movie details reread the saved rating on actual cached-page restoration. Reproduction: save8, navigate through the catalogue into a new detail, save3, use native Back twice; the older document now displays3, and a further edit4 survives reload. Combined movie filters and their six matching items survive the same real BFCache path.
+- Camera search indexes the lens only when the listing includes it. The original18–55mm search incorrectly returned6 listings, four body-only; the corrected native search returns the two actual kits, and adding Body only returns0.
+- A cancelled image-example load no longer continues to rewrite the URL/status. Its completion contract checks whether its source image is still current after encoding. This deliberately distinguishes cancellation from changing width/quality on the same image. Actual Chrome checks cover reset during a held real canvas callback, normal WebP download1280x853/177724bytes, rapid example replacement and width400 adjustment during loading. The callback fixture pauses real encoding; it does not replace image processing with a mock.
+- Middle-button advertiser navigation is observed once as native/unconfirmed. Native tab opening and rel=noopener remain; right-click is not counted and ordinary clicks retain their confirmed/blocked result. Repeated GET-form context wiring now shares one implementation.
+- The bilingual facilitator guide describes late displacement, Cookie preferences and manual review. Both review links omit an unrelated chooser seed and correctly select the latest actual local report.
+
+Fresh local validation:216 labelled Chrome assertions passed (native opening9, guide13, eight-event flows50, event lifecycle26, existing website regression62, delayed-ad/Cookie/review integration56). The movie/filter/search and four image-processing paths above also passed. An independent20-assertion actual-playback test checked Cookie-dialog clock/ghost-age/media pause, Escape ownership, resumed10-second disclosure, manual-pause retention and complete video/slot removal. No runtime or failed application asset errors were observed in these flows.
+
+Static/source validation:43 JavaScript files compile;734 local-reference/loading/source assertions pass. An independent13-assertion VM review covers click/auxclick provenance and repeated GET context wiring; reflection logger27 and read-only report19 assertions pass. The ten-scene catalogue audit found30 task records,353 existing local media references and unique content IDs. A2000-seed event sample reaches all eight event types (three selected per seed). No unimplemented accepted mechanism was found in the audited source; this is not a claim of manually solving every one of the30 assignments.
+
+Browser plugin not available; the existing installed Chrome was driven through Playwright. Screenshots at1440x1000,390x844 and short390x240 sizes were inspected. Native advertiser tabs, BFCache, search and downloads are actual browser operations. Controlled foreground/background and held-canvas callbacks isolate particular lifecycle cases; they do not prove OS-level focus switching or other-browser behaviour. No new browser dependencies were installed. Archive/source hashes, extracted-package checks and exact Pages/public flows are verified separately before delivery and recorded in the release metadata.
+
+---
+
 # Reflect1 verification record
 
 25 October 2026. Adds the three selected features: occasional delayed document-ad displacement, a site-specific cookie-choice flow, and a manually opened facilitator reflection. Existing Browse pacing stays at br-run-v7; new state is isolated.

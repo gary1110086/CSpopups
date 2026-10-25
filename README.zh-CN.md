@@ -2,9 +2,9 @@
 
 一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
 
-**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=reflect1)** · [English](README.md)
+**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=refine1)** · [English](README.md)
 
-当前版本：**[reflect1](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip) · [查看更新记录](docs/CHANGELOG.md)
+当前版本：**[refine1](https://github.com/gary1110086/CSpopups/releases/tag/v-refine1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip) · [查看更新记录](docs/CHANGELOG.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
@@ -21,11 +21,11 @@
 
 | 入口 | 用途 |
 | --- | --- |
-| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=reflect1) | 自由探索十个场景。 |
-| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=reflect1) | 随机进入一个任务及对应网站。 |
-| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=reflect1) | 开始前阅读任务要求和预期结果。 |
-| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=reflect1) | 工作人员可在另一台设备核对参与者的结果。 |
-| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=reflect1) | 查看设计对标和已有案例。 |
+| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=refine1) | 自由探索十个场景。 |
+| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=refine1) | 随机进入一个任务及对应网站。 |
+| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=refine1) | 开始前阅读任务要求和预期结果。 |
+| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=refine1) | 工作人员可在另一台设备核对参与者的结果。 |
+| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=refine1) | 查看设计对标和已有案例。 |
 
 任务要求放在独立任务库中；浏览页面顶部的任务／笔记面板目前隐藏。体验没有可见的游戏计时器、自动评分或自动结束。
 
@@ -61,7 +61,7 @@
 
 - 部分网站会延迟加载一块赞助广告，真实挤开列表或正文；每个网站、每次会话只出现一次，真正关闭后会记住。
 - Cookie 横幅突出“接受全部”，“管理偏好”中有分类开关、保存和真正的拒绝入口。必要存储固定开启，可选项默认关闭；选择只在当前会话中保存，不会启用追踪。
-- 工作人员可从网站选择页主动打开[浏览复盘](https://gary1110086.github.io/CSpopups/browse/review.html?lang=zh&v=reflect1)，查看广告打开结果、假关闭按钮点击、实际闪避次数、事件时间线和讨论提示，也可以导出 TXT。
+- 工作人员可从网站选择页主动打开[浏览复盘](https://gary1110086.github.io/CSpopups/browse/review.html?lang=zh&v=refine1)，查看广告打开结果、假关闭按钮点击、实际闪避次数、事件时间线和讨论提示，也可以导出 TXT。
 
 复盘不会自动结束浏览或判断任务答案对错。记录保存在参与者当前浏览器标签页，不包含搜索文字、草稿或图片内容；可以单独清除，不影响收藏与处理结果。另一台电脑无法读取这份本地记录。
 
@@ -88,11 +88,11 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=reflect1)。
+打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=refine1)。
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 
-使用[本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip)时，请完整解压 ZIP，并按 `START-HERE.txt` 操作。包内包含媒体、共用依赖和源文件哈希清单。
+使用[本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip)时，请完整解压 ZIP，并按 `START-HERE.txt` 操作。包内包含媒体、共用依赖和源文件哈希清单。
 
 公开演示托管在 GitHub Pages，也可以保持仓库目录结构，在其他静态网站服务上部署。
 
@@ -107,7 +107,7 @@ assets/                     共用图片、图标与 README 预览图
 *.html                      保留的网页入口及 404 页面
 ```
 
-[文档索引](docs/README.md) · [Browse 详细说明](browse/README.md) · [设计说明](browse/DESIGN-NOTES.md) · [验证记录](browse/VERIFICATION.md)
+[文档索引](docs/README.md) · [功能核对](docs/IMPLEMENTATION-STATUS.md) · [Browse 详细说明](browse/README.md) · [设计说明](browse/DESIGN-NOTES.md) · [验证记录](browse/VERIFICATION.md)
 
 根目录的 [Little Daily 入口](https://gary1110086.github.io/CSpopups/)与[独立 Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=zh&v=wallpaper1)保留各自的行为和会话状态。原 HTML 网址继续保留，Little Daily 的脚本与样式集中在 `prototypes/little-daily/`。**当前体验请从 `browse/launch.html` 开始。**
 

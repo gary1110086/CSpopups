@@ -25,7 +25,7 @@
   // Use the same current-state filter for initial rendering and BFCache reconciliation.
   const filteredItems=()=>{
    const savedIds=new Set(saved());
-   const found=items.filter(i=>(!brand||i.brand===brand)&&(!type||i.type===type)&&(!condition||i.condition===condition)&&(!place||i.place===place)&&(!max||i.price<=max)&&(!kit||i.kit===(kit==='kit'))&&q.toLowerCase().split(/\s+/).every(w=>[i.name,i.brand,i.type,i.mount,i.lens].join(' ').toLowerCase().includes(w))&&(view!=='saved'||savedIds.has(i.id)));
+   const found=items.filter(i=>(!brand||i.brand===brand)&&(!type||i.type===type)&&(!condition||i.condition===condition)&&(!place||i.place===place)&&(!max||i.price<=max)&&(!kit||i.kit===(kit==='kit'))&&q.toLowerCase().split(/\s+/).every(w=>[i.name,i.brand,i.type,i.mount,i.kit?i.lens:''].join(' ').toLowerCase().includes(w))&&(view!=='saved'||savedIds.has(i.id)));
    if(params.get('sort')==='price')found.sort((a,b)=>a.price-b.price);
    if(params.get('sort')==='price-desc')found.sort((a,b)=>b.price-a.price);
    return found;

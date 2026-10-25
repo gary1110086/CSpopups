@@ -6,7 +6,7 @@ window.BROWSE_DESTINATION_EXPERIENCES = function (D) {
   const action=(name,label,extra='')=>`<button type="button" data-experience="${name}" ${extra}>${label}</button>`;
   const hash=s=>{let n=2166136261;for(const c of s)n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0;};
   const contextFields=()=>Object.fromEntries(['seed','campaign','phase','interest','topic','from'].filter(k=>get(k)).map(k=>[k,get(k)]));
-  const form=(fields,body)=>`<form class="dx-offer-filters" method="get" action="destination.html">${Object.entries({site,lang:D.lang,v:get('v')||'reflect1',...contextFields(),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('')}${body}<button>${t('Find offers','查找优惠')}</button></form>`;
+  const form=(fields,body)=>`<form class="dx-offer-filters" method="get" action="destination.html">${Object.entries({site,lang:D.lang,v:get('v')||'refine1',...contextFields(),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('')}${body}<button>${t('Find offers','查找优惠')}</button></form>`;
   const safeIds=value=>Array.isArray(value)?[...new Set(value.filter(n=>Number.isInteger(n)&&n>=0&&n<4))].slice(0,3):[];
   const selectedIds=()=>safeIds(read('compare-v2:'+seed,[]));
   const money=n=>'RM'+Number(n).toFixed(2).replace(/\.00$/,'');

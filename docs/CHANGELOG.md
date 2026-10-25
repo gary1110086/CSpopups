@@ -1,6 +1,17 @@
 # Release history / 版本记录
 
-Current version: **[reflect1](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current version: **[refine1](https://github.com/gary1110086/CSpopups/releases/tag/v-refine1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## refine1 — 26 October 2026
+
+- Corrected movie-rating restoration after native Back/Forward, so an earlier cached detail page displays the latest saved rating.
+- Limited lens search terms to camera listings that actually include that lens.
+- Stopped a cancelled image-example load from changing the tool URL and status after encoding finishes. Changing output settings during the same image load remains supported.
+- Added middle-button advertiser observation as a native/unconfirmed action without intercepting the browser's new-tab behaviour. Ordinary clicks and blocked fallback links retain their existing handling.
+- Unified repeated native GET-form context wiring. Updated the facilitator guide with displacement, Cookie choices and manual review, and removed unrelated chooser seeds from its review links.
+- Added an [implementation check](IMPLEMENTATION-STATUS.md) covering the accepted feature set. All eight random encounters remain; each session selects three applicable types.
+
+本轮重点是核对与修复既有功能：电影评分回退、镜头搜索、取消图片处理及中键广告记录。高密度广告、闪避与关闭变体、八类事件和主动复盘继续保留。
 
 ## reflect1 — 25 October 2026
 

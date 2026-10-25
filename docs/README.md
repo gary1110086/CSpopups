@@ -1,15 +1,15 @@
 # Documentation / 文档索引
 
-The current experience is **Browse reflect1**: 10 task websites, 30 assignments, 10 advertiser destinations and eight possible random encounters. 每次体验选取三种适合当前网站的事件，由相关浏览操作触发。
+The current experience is **Browse refine1**: 10 task websites, 30 assignments, 10 advertiser destinations and eight possible random encounters. 每次体验选取三种适合当前网站的事件，由相关浏览操作触发。
 
 ## Start / 开始
 
 | Entry / 入口 | Links / 链接 |
 | --- | --- |
-| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=reflect1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=reflect1) |
-| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=reflect1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=reflect1) |
-| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=reflect1); records stay in that browser tab. |
-| Local package / 本地运行包 | [Release and download](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1); extract everything and follow `START-HERE.txt`. |
+| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=refine1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=refine1) |
+| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=refine1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=refine1) |
+| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=refine1); records stay in that browser tab. |
+| Local package / 本地运行包 | [Release and download](https://github.com/gary1110086/CSpopups/releases/tag/v-refine1); extract everything and follow `START-HERE.txt`. |
 
 ## Project documents / 项目文档
 
@@ -17,10 +17,11 @@ The current experience is **Browse reflect1**: 10 task websites, 30 assignments,
 | --- | --- |
 | [Project overview](../README.md) · [中文概览](../README.zh-CN.md) | How to play, current features, local setup, privacy and media credits. |
 | [Release history / 版本记录](CHANGELOG.md) | Current changes and a compact history of the main development milestones. |
+| [Implementation check / 功能核对](IMPLEMENTATION-STATUS.md) | Accepted requirements, current behaviour and fixes found during the latest review. |
 | [Browse implementation](../browse/README.md) | Scene capabilities, event triggers, storage, browser controls and packaging. |
 | [Design references](../browse/DESIGN-NOTES.md) | Category-specific layouts and reference decisions. |
 | [Verification record](../browse/VERIFICATION.md) | Recorded checks and their limits, including media, exports, native tabs and cached browser returns. |
-| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=reflect1) | Benchmark websites and documented deceptive mechanisms. |
+| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=refine1) | Benchmark websites and documented deceptive mechanisms. |
 | [Little Daily runtime](../prototypes/little-daily/README.md) | Earlier article-site implementation and the root HTML routes that still use it. |
 | [Standalone Stillwall](../wallpapers/README.md) | Independent wallpaper prototype, its runtime and original artwork. |
 

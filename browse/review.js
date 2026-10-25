@@ -9,7 +9,7 @@
   const scenes=window.BROWSE_SCENE_INDEX||[],sceneName=id=>scenes.find(s=>s.id===id)?.name||t('Website','网站');
   const sponsors={corn:'Cornhub',desk:'Form & Field',stock:'Framekind',game:'Tiny Arcade',security:'SecureLane',player:'Orbit Player',software:'AppHarbor',prize:'Lucky Circle',coupon:'Perk Basket',parcel:'NorthPost'};
   const kindNames={chat:t('Sponsor conversation','赞助商对话'),tab:t('Tab-title reminder','标签页提醒'),video:t('Following video','跟随视频'),search:t('Sponsored search suggestion','搜索赞助建议'),escalation:t('Growing offer','逐步升级的优惠'),character:t('Sponsor character','广告角色'),quiet:t('Sponsor comeback','安静后的广告回归'),reward:t('Bonus offer after a task action','任务操作后的额外优惠')};
-  const url=(file,query={})=>{const u=new URL(file,location.href);u.searchParams.set('lang',lang);u.searchParams.set('v','reflect1');for(const [key,value]of Object.entries(query))if(value)u.searchParams.set(key,value);return u.href;};
+  const url=(file,query={})=>{const u=new URL(file,location.href);u.searchParams.set('lang',lang);u.searchParams.set('v','refine1');for(const [key,value]of Object.entries(query))if(value)u.searchParams.set(key,value);return u.href;};
   const duration=ms=>{const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
   const when=ms=>{if(!Number.isFinite(ms)||ms<=0)return t('Time unavailable','时间未记录');try{return new Intl.DateTimeFormat(lang==='zh'?'zh-CN':'en-GB',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(ms));}catch{return t('Time unavailable','时间未记录');}};
   const requested=params.get('seed');let selected=requested&&data.read(requested)?requested:data.index().find(seed=>data.read(seed))||null;

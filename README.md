@@ -2,9 +2,9 @@
 
 A browsing experience about attention, advertising and deceptive design. Complete an everyday task while ordinary promotions and misleading pop-ups compete for your attention.
 
-**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=reflect1)** · [中文说明](README.zh-CN.md)
+**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=refine1)** · [中文说明](README.zh-CN.md)
 
-Current version: **[reflect1](https://github.com/gary1110086/CSpopups/releases/tag/v-reflect1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip) · [What changed](docs/CHANGELOG.md)
+Current version: **[refine1](https://github.com/gary1110086/CSpopups/releases/tag/v-refine1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip) · [What changed](docs/CHANGELOG.md)
 
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 
@@ -21,12 +21,12 @@ The current **Browse** experience includes **10 task websites, 30 task briefs an
 
 | Start here | What you get |
 | --- | --- |
-| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=reflect1) | Explore any of the ten scenes. |
-| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=reflect1) | Open a randomly assigned task and website. |
-| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=reflect1) | Read the briefs and expected outcomes before starting. |
-| [Review recent sessions](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=reflect1) | On the participant's browser, manually inspect local interaction records and discussion prompts. |
-| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=reflect1) | Use a separate device to check participants' results. |
-| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=reflect1) | Read the design references and documented mechanisms. |
+| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=refine1) | Explore any of the ten scenes. |
+| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=refine1) | Open a randomly assigned task and website. |
+| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=refine1) | Read the briefs and expected outcomes before starting. |
+| [Review recent sessions](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=refine1) | On the participant's browser, manually inspect local interaction records and discussion prompts. |
+| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=refine1) | Use a separate device to check participants' results. |
+| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=refine1) | Read the design references and documented mechanisms. |
 
 Task briefs stay in the separate library; the top task/notebook panel is currently hidden on browsing pages. Sessions have no visible game timer, automatic score or automatic ending.
 
@@ -89,11 +89,11 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=reflect1).
+Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=refine1).
 
 Serve the repository root: Browse also uses shared files in `assets/` and `wallpapers/`. A local `127.0.0.1` link works on the host computer; share the published demo link with other computers.
 
-For the [local package](https://github.com/gary1110086/CSpopups/releases/download/v-reflect1/Browse-scenarios-reflect1.zip), extract the complete ZIP and follow `START-HERE.txt`. It includes the media, shared dependencies and SHA256 source manifest.
+For the [local package](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip), extract the complete ZIP and follow `START-HERE.txt`. It includes the media, shared dependencies and SHA256 source manifest.
 
 The public demo is hosted on GitHub Pages. Other static hosts can serve the same repository tree from its root.
 
@@ -108,7 +108,7 @@ assets/                     Shared images, icons and README preview
 *.html                      Public entry routes and the 404 page
 ```
 
-[Documentation index](docs/README.md) · [Browse details](browse/README.md) · [Design notes](browse/DESIGN-NOTES.md) · [Verification record](browse/VERIFICATION.md)
+[Documentation index](docs/README.md) · [Implementation check](docs/IMPLEMENTATION-STATUS.md) · [Browse details](browse/README.md) · [Design notes](browse/DESIGN-NOTES.md) · [Verification record](browse/VERIFICATION.md)
 
 The root [Little Daily entry](https://gary1110086.github.io/CSpopups/) and the [standalone Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=en&v=wallpaper1) keep their own behaviour and session state. Old HTML URLs stay in place; Little Daily's scripts and styles are grouped under `prototypes/little-daily/`. **Start at `browse/launch.html` for the current experience.**
 
