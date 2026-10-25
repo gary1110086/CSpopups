@@ -36,7 +36,7 @@
 .nr-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px 14px; }
 .nr-card { min-width:0; }
 .nr-video-link { display:block; width:100%; position:relative; padding:0; overflow:hidden; background:#242424; }
-.nr-thumb { display:block; background-image:url('assets/nightroom-contact-sheet.png'); background-size:400% 300%; background-position:var(--thumb-x) var(--thumb-y); aspect-ratio:16/10; }
+.nr-thumb { display:block; background-image:url('../../assets/nightroom-contact-sheet.png'); background-size:400% 300%; background-position:var(--thumb-x) var(--thumb-y); aspect-ratio:16/10; }
 .nr-video-link .nr-thumb { transition:filter .15s; }
 .nr-video-link:hover .nr-thumb { filter:brightness(.78); }
 .nr-video-link time { position:absolute; right:4px; bottom:4px; background:#000c; border-radius:2px; padding:1px 4px; font-size:11px; color:#fff; }

@@ -1959,7 +1959,7 @@ button:active:not(:disabled) {
   border: 0;
 }
 .telecom-ad {
-  background: #2878bd url("assets/mobile-plan.png") center/cover no-repeat;
+  background: #2878bd url("../../assets/mobile-plan.png") center/cover no-repeat;
   min-height: 450px;
 }
 .telecom-ad:after {

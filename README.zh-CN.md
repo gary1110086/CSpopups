@@ -4,6 +4,8 @@
 
 **[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1a)** · [English](README.md)
 
+当前版本：**[events1a](https://github.com/gary1110086/CSpopups/releases/tag/v-events1a)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip) · [查看更新记录](docs/CHANGELOG.md)
+
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
 *Stillwall 的实际运行截图，它是十个任务网站之一。[照片署名与来源](assets/README-PREVIEW.md)。*
@@ -82,16 +84,24 @@ python browse/preview-server.py --port 5175
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 
+使用[本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip)时，请完整解压 ZIP，并按 `START-HERE.txt` 操作。包内包含媒体、共用依赖和源文件哈希清单。
+
 公开演示托管在 GitHub Pages，也可以保持仓库目录结构，在其他静态网站服务上部署。
 
-## 项目资料
+## 仓库目录
 
-| 位置 | 内容 |
-| --- | --- |
-| [`browse/`](browse/) | 当前任务网站、广告目的地和公共交互模块。 |
-| [Browse 详细说明](browse/README.md) | 具体行为、存储、操作方式与本地打包说明。 |
-| [验证记录](browse/VERIFICATION.md) | 已完成检查及其边界，包含原生标签、前进后退、媒体和导出。 |
-| [设计说明](browse/DESIGN-NOTES.md) | 页面布局参考和设计决定。 |
+```text
+browse/                     当前任务网站与广告体验
+docs/                       文档索引与版本记录
+prototypes/little-daily/    早期文章站的脚本和样式
+wallpapers/                 独立 Stillwall，以及共用的壁纸资源
+assets/                     共用图片、图标与 README 预览图
+*.html                      保留的网页入口及 404 页面
+```
+
+[文档索引](docs/README.md) · [Browse 详细说明](browse/README.md) · [设计说明](browse/DESIGN-NOTES.md) · [验证记录](browse/VERIFICATION.md)
+
+根目录的 [Little Daily 入口](https://gary1110086.github.io/CSpopups/)与[独立 Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=zh&v=wallpaper1)保留各自的行为和会话状态。原 HTML 网址继续保留，Little Daily 的脚本与样式集中在 `prototypes/little-daily/`。**当前体验请从 `browse/launch.html` 开始。**
 
 ## 素材与隐私
 
@@ -109,12 +119,3 @@ python browse/preview-server.py --port 5175
 - [相机照片](browse/assets/MARKET-SOURCES.md)及[早期生成素材](browse/assets/ASSET-SOURCES.md)
 
 被引用的创作者、机构和服务并未为本项目背书。轨道时间、商业优惠和相机商品包含演示数据。
-
-## 早期独立原型
-
-| 原型 | 入口 | 说明 |
-| --- | --- | --- |
-| **Little Daily** | [打开原始网站](https://gary1110086.github.io/CSpopups/) | 早期文章浏览体验，目前仍使用仓库根网址。 |
-| **独立 Stillwall** | [打开壁纸原型](https://gary1110086.github.io/CSpopups/wallpapers/?lang=zh&v=wallpaper1) | 单独的壁纸实验；[详细说明](wallpapers/README.md)。 |
-
-这些原型各自保留原来的行为与会话状态。**当前体验请使用顶部的 Browse 试玩入口。**

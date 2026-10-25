@@ -1,6 +1,6 @@
 # README preview credits
 
-`readme-preview.png` is an unaltered 1440 × 1000 screenshot of the public Browse encounter1 experience, captured during Chrome verification on 25 October 2026. It contains demonstration content and no participant information.
+`readme-preview.png` is an unaltered 1440 × 1000 screenshot of the public Browse events1a experience, captured during Chrome verification on 25 October 2026. It contains demonstration content and no participant information.
 
 The screenshot presents the project interface around the following photographs. The images are resized/cropped by the website layout and retain their source licences; the screenshot does not assign a new licence to them.
 

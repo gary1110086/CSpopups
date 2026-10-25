@@ -4,7 +4,7 @@
   const $ = (s, root=document) => root.querySelector(s);
   const params = new URLSearchParams(location.search);
   const page = document.body.dataset.page;
-  const release = "cornhub2";
+  const release = "cornhub3";
   const read = (key, fallback) => { try { return JSON.parse(sessionStorage.getItem(key)) ?? fallback; } catch { return fallback; } };
   const write = (key, value) => { try { sessionStorage.setItem(key, JSON.stringify(value)); } catch { /* Browsing works without storage. */ } };
   const lang = params.get("lang") === "zh" ? "zh" : params.get("lang") === "en" ? "en" : read("ld-language", "en");

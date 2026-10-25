@@ -4,6 +4,8 @@ A browsing experience about attention, advertising and deceptive design. Complet
 
 **[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1a)** · [中文说明](README.zh-CN.md)
 
+Current version: **[events1a](https://github.com/gary1110086/CSpopups/releases/tag/v-events1a)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip) · [What changed](docs/CHANGELOG.md)
+
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 
 *An actual screenshot of Stillwall, one of the ten task websites. [Photograph credits](assets/README-PREVIEW.md).*
@@ -82,16 +84,24 @@ Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=even
 
 Serve the repository root: Browse also uses shared files in `assets/` and `wallpapers/`. A local `127.0.0.1` link works on the host computer; share the published demo link with other computers.
 
+For the [local package](https://github.com/gary1110086/CSpopups/releases/download/v-events1a/Browse-scenarios-events1a.zip), extract the complete ZIP and follow `START-HERE.txt`. It includes the media, shared dependencies and SHA256 source manifest.
+
 The public demo is hosted on GitHub Pages. Other static hosts can serve the same repository tree from its root.
 
-## Project guide
+## Repository layout
 
-| Location | Purpose |
-| --- | --- |
-| [`browse/`](browse/) | Current task websites, advertiser destinations and shared interaction modules. |
-| [Browse documentation](browse/README.md) | Detailed behaviour, storage, controls and local packaging notes. |
-| [Verification notes](browse/VERIFICATION.md) | Recorded checks and their limits, including native tabs, Back/Forward, media and exports. |
-| [Design notes](browse/DESIGN-NOTES.md) | Layout references and design decisions. |
+```text
+browse/                     Current task websites and advertiser experiences
+docs/                       Documentation index and release history
+prototypes/little-daily/    Earlier article-site scripts and styles
+wallpapers/                 Standalone Stillwall and shared wallpaper resources
+assets/                     Shared images, icons and README preview
+*.html                      Public entry routes and the 404 page
+```
+
+[Documentation index](docs/README.md) · [Browse details](browse/README.md) · [Design notes](browse/DESIGN-NOTES.md) · [Verification record](browse/VERIFICATION.md)
+
+The root [Little Daily entry](https://gary1110086.github.io/CSpopups/) and the [standalone Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=en&v=wallpaper1) keep their own behaviour and session state. Old HTML URLs stay in place; Little Daily's scripts and styles are grouped under `prototypes/little-daily/`. **Start at `browse/launch.html` for the current experience.**
 
 ## Media and privacy
 
@@ -109,12 +119,3 @@ Real photographs, historical images, illustrations, audio and film clips retain 
 - [Camera photographs](browse/assets/MARKET-SOURCES.md) and [earlier generated assets](browse/assets/ASSET-SOURCES.md)
 
 Referenced creators, institutions and services do not endorse the project. Rail times, commercial offers and camera listings include demonstration data.
-
-## Earlier independent prototypes
-
-| Prototype | Entry | Notes |
-| --- | --- | --- |
-| **Little Daily** | [Open the original site](https://gary1110086.github.io/CSpopups/) | Earlier article-browsing experience; still served at the repository's root URL. |
-| **Standalone Stillwall** | [Open the wallpaper prototype](https://gary1110086.github.io/CSpopups/wallpapers/?lang=en&v=wallpaper1) | Separate wallpaper experiment; [documentation](wallpapers/README.md). |
-
-These retain their own behaviour and session state. **Use the Browse demo at the top for the current experience.**

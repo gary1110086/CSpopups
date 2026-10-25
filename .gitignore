@@ -14,12 +14,6 @@
 !/redirect.html
 !/about.html
 !/404.html
-!/site.js
-!/site.css
-!/content.js
-!/styles.css
-!/nightroom.js
-!/nightroom.css
 !/assets/
 /assets/*
 !/assets/favicon.svg
@@ -65,3 +59,12 @@
 !/browse/assets/*.vtt
 !/browse/assets/*.mp3
 !/browse/assets/*.json
+
+# Project documentation and the earlier article-site runtime.
+!/docs/
+!/docs/*.md
+!/prototypes/
+!/prototypes/little-daily/
+!/prototypes/little-daily/*.js
+!/prototypes/little-daily/*.css
+!/prototypes/little-daily/README.md
