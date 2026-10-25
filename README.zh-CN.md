@@ -1,0 +1,107 @@
+# CSpopups
+
+一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
+
+**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=encounter1)** · [English](README.md)
+
+![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
+
+*Stillwall 的实际运行截图，它是十个任务网站之一。[照片署名与来源](assets/README-PREVIEW.md)。*
+
+## 怎么玩
+
+1. **领取任务。** 找一张壁纸、安排一次出游、比较相机，或选择其他日常目标。
+2. **浏览并作出选择。** 搜索、筛选、阅读详情、对比、收藏，或者导出结果。
+3. **处理干扰。** 关闭广告，或进入真实的广告标签页，再返回原来的任务。
+4. **回顾体验。** 讨论什么吸引了注意、哪些控件具有误导性，以及如何恢复原来的工作。
+
+当前的 **Browse** 版本包含 **10 个任务网站、30 项任务和 10 个广告目的地**，使用浏览器本身的地址栏、标签页、历史记录和刷新功能。
+
+| 入口 | 用途 |
+| --- | --- |
+| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=encounter1) | 自由探索十个场景。 |
+| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=encounter1) | 随机进入一个任务及对应网站。 |
+| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=encounter1) | 开始前阅读任务要求和预期结果。 |
+| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=encounter1) | 工作人员可在另一台设备核对参与者的结果。 |
+| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=encounter1) | 查看设计对标和已有案例。 |
+
+任务要求放在独立任务库中；浏览页面顶部的任务／笔记面板目前隐藏。体验没有可见的游戏计时器、自动评分或自动结束。
+
+## 十个日常网站
+
+| 网站 | 可以完成的操作 |
+| --- | --- |
+| **Stillwall** · 壁纸 | 找照片、核对来源、比较图片，并下载 JPEG。 |
+| **Pantry & Plate** · 食谱 | 按食材和饮食要求筛选、调整份量，并导出食谱。 |
+| **Pixelpress** · 图片工具 | 在本地缩放或压缩图片，对比效果，并保存处理结果。 |
+| **Frame Movies** · 电影 | 查找真实开放电影和默片经典，建立片单，并播放部分预览。 |
+| **Out There KL** · 出游 | 比较周末指南、核对雨天方案，并导出计划或日历文件。 |
+| **Folio** · 书籍 | 查看历史版本、阅读节选，并保存书目或摘录。 |
+| **Open Collection** · 博物馆 | 查看真实藏品、比较作品，并策划一组小展览。 |
+| **Field Guide** · 鸟类 | 根据照片、外观特征、栖息地及可用叫声，比较北美鸟类。 |
+| **Trackside** · 轨道出行 | 规划吉隆坡轨道行程、核对换乘，并保存路线。 |
+| **loop** · 二手相机 | 比较虚构相机商品、检查配件，并准备保存在本地的询问草稿。 |
+
+## 广告与弹窗
+
+广告分布在检索结果、阅读路径、横幅和叠加浮窗中。文案会结合当前场景与搜索内容，同一赞助商也会跟随页面访问继续出现。
+
+- **移动与闪避：** 屏幕内反弹、随机闪避四至六次，以及部分会话中的碰撞推挤。
+- **误导控件：** 小型或透明关闭按钮、不同位置的关闭按钮，以及外形像关闭按钮的广告链接。
+- **退出机制：** 仅有隐蔽关闭按钮的弹窗在前台专注浏览十秒后，显示明显的真关闭，并停止移动。
+- **广告内也能操作：** 目的地包含商店、图片下载、可玩小游戏、转盘和优惠比较，以及有明确终点的骗局教学流程。
+
+**按 Esc 可以暂时清除广告。** 键盘聚焦会暂停移动，触屏不会触发闪避。广告节奏只在场景处于前台且获得焦点时推进。
+
+广告标签页保留原来的任务页面。Browse 中真正的下载、收藏和普通网页导航可以正常使用。
+
+## 本地运行
+
+项目由静态 HTML、CSS 和 JavaScript 组成。使用 Python 3 启动内置预览服务器，它支持视频拖动定位。
+
+```sh
+git clone https://github.com/gary1110086/CSpopups.git
+cd CSpopups
+python browse/preview-server.py --port 5175
+```
+
+打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=encounter1)。
+
+需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
+
+公开演示托管在 GitHub Pages，也可以保持仓库目录结构，在其他静态网站服务上部署。
+
+## 项目资料
+
+| 位置 | 内容 |
+| --- | --- |
+| [`browse/`](browse/) | 当前任务网站、广告目的地和公共交互模块。 |
+| [Browse 详细说明](browse/README.md) | 具体行为、存储、操作方式与本地打包说明。 |
+| [验证记录](browse/VERIFICATION.md) | 已完成检查及其边界，包含原生标签、前进后退、媒体和导出。 |
+| [设计说明](browse/DESIGN-NOTES.md) | 页面布局参考和设计决定。 |
+
+## 素材与隐私
+
+体验同时包含正常广告与误导案例，广告本身不等于诈骗。练习中的网站与广告商身份及模拟交易均为虚构；软件安装、设备扫描、付款、奖品和包裹领取属于教学演示。壁纸、图片、文本和日历导出会生成真实的本地下载文件。
+
+项目没有玩家账号、广告 SDK 或应用分析服务。图片在浏览器内处理，偏好与收藏等使用当前标签的会话存储。**分享链接不会在不同电脑之间同步进度。** 托管平台仍会接收正常的网站访问请求。
+
+真实照片、历史图片、插图、音频和影片分别保留原来源的许可；部分早期生成素材为兼容而保留。署名、修改和来源记录见：
+
+- [风景、食谱、地点、电影与工作空间照片](browse/assets/REAL-MEDIA-SOURCES.md)
+- [可播放影片](browse/assets/VIDEO-SOURCES.md)及[电影剧照](browse/assets/OPEN-FILM-STILLS.md)
+- [NASA 照片](browse/assets/NASA-SOURCES.md)
+- [书籍与博物馆藏品](browse/culture-SOURCES.md)
+- [鸟类、声音与轨道交通参考](browse/journey-SOURCES.md)
+- [相机照片](browse/assets/MARKET-SOURCES.md)及[早期生成素材](browse/assets/ASSET-SOURCES.md)
+
+被引用的创作者、机构和服务并未为本项目背书。轨道时间、商业优惠和相机商品包含演示数据。
+
+## 早期独立原型
+
+| 原型 | 入口 | 说明 |
+| --- | --- | --- |
+| **Little Daily** | [打开原始网站](https://gary1110086.github.io/CSpopups/) | 早期文章浏览体验，目前仍使用仓库根网址。 |
+| **独立 Stillwall** | [打开壁纸原型](https://gary1110086.github.io/CSpopups/wallpapers/?lang=zh&v=wallpaper1) | 单独的壁纸实验；[详细说明](wallpapers/README.md)。 |
+
+这些原型各自保留原来的行为与会话状态。**当前体验请使用顶部的 Browse 试玩入口。**

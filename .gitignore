@@ -4,6 +4,7 @@
 !/.gitattributes
 !/.nojekyll
 !/README.md
+!/README.zh-CN.md
 !/index.html
 !/article.html
 !/story.html
@@ -22,6 +23,8 @@
 !/assets/
 /assets/*
 !/assets/favicon.svg
+!/assets/readme-preview.png
+!/assets/README-PREVIEW.md
 !/assets/cornhub-favicon.svg
 !/assets/sunday-room.png
 !/assets/earbuds.png
