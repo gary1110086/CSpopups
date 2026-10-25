@@ -74,6 +74,7 @@
       const fresh=state();fresh.dismissedUntil[id]=activeMs+10000;
       try{write?.(key,fresh);}catch{}
       apply();
+      window.dispatchEvent(new CustomEvent('browse:ad-dismiss',{detail:{site:'ambient'}}));
     }
     host.addEventListener('click',onClick);
     const apply=()=>{

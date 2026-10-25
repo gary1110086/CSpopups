@@ -1,3 +1,23 @@
+# Events1 verification record
+
+25 October 2026. Adds eight action-driven event types: scripted sponsor chat, genuine document-title return reminder, muted inline-to-floating video, real search shortcuts with a separate sponsored link, escalating refusals, original character promotion, a short quiet/comeback, and an optional bonus after a real save/export. Each seed selects three applicable types; file tools and the station-selector rail planner omit text-search suggestions. One event widget runs at a time alongside the existing standard popup stack.
+
+Local Chrome evidence:
+
+- Integrated eight-event flows:50 assertions passed, including three chat stages, actual isolated advertiser children retaining the processed image, native GET search, two actual ambient ad dismissals and10%/20%/mystery-box progression,390x240 touch close, quiet/comeback/Escape, actual image export and optional reward, blocked-request fallback, real Sintel playback/seek/manual pause/dock/return, malformed event state and genuine BFCache.
+- State/lifecycle checks:18 assertions passed, covering Escape received during two-frame recovery without resurrecting a stored comeback, real recipe/outing save versus removal, immediate modal suppression/inert and Escape, foreground-gated video, unavailable storage and intact native search. Removing a saved item no longer emits a false completion.
+- Existing website regression:62 assertions passed, retaining actual3-second onset, four-card buildup, delayed replacement, all ten scenes/thirty assignments, genuine-close styles, keyboard controls, mobile capacity/bounds, processed pixels/settings through an isolated native advertiser child, blocked fallback and actual BFCache. Advertiser destination regression:52 assertions passed, retaining playable puzzles, spin/claim consistency, offer filtering/comparison and narrow-screen controls.
+- Separate module checks passed: social164, media63 and search/reward47 assertions. Tests cover genuine closes, bounded malformed state, media lifecycle and keyboard/touch layouts. Desktop and phone screenshots were inspected.
+- All39 Browse JavaScript files pass syntax checks.614 source/loading assertions cover the14 engine documents, four new modules and styles loaded once in order, local references, current cache versions and isolation of the original root/standalone wallpaper runtime.
+
+The event director reads the stack's active-time snapshot; existing br-run-v7 migrations, ghost rescue, evasion budgets and dense schedule are unchanged. New bounded event counts/history use a separate br-data-v1 event record. No entered searches, conversation transcripts, pixels, credentials or remote tracking are collected. A real browser tab/fallback is opened only from a click. All new cards retain an obvious genuine close. Escape clears them; modal controls suppress them; background time pauses scheduling/media. Cached pages wait two frames before authoritative reads, and queued Escape is applied after the fresh read.
+
+Browser plugin not available; installed Chrome was driven through Playwright. The advertiser children and BFCache navigations above are actual browser operations. Document-title departure/return and background/resume cases use explicit foreground fixtures; they do not establish operating-system focus switching. Other-browser coverage is not claimed.
+
+Archive CRC/source hashes, extracted-package flows, exact Pages build and public interaction checks are validated separately before delivery. Their final records are retained in the project handoff and TEMP evidence. Earlier records follow unchanged.
+
+---
+
 # Encounter1 verification record
 
 25 October 2026. Adds task-context sponsored results, recurring local sponsors, complete advertiser interactions, independently varied genuine-close corners, a new decoy-right/genuine-left layout, and seeded30% collision sessions. Dense scheduling, ten-second ghost rescue,4–6 persisted evasions, native tabs and the hidden task panel remain. The current cache version is encounter1; pacing uses br-run-v7 with absent-only migration from v6 and older keys.

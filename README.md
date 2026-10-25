@@ -2,7 +2,7 @@
 
 A browsing experience about attention, advertising and deceptive design. Complete an everyday task while ordinary promotions and misleading pop-ups compete for your attention.
 
-**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=encounter1)** · [中文说明](README.zh-CN.md)
+**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1)** · [中文说明](README.zh-CN.md)
 
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 
@@ -19,11 +19,11 @@ The current **Browse** experience includes **10 task websites, 30 task briefs an
 
 | Start here | What you get |
 | --- | --- |
-| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=encounter1) | Explore any of the ten scenes. |
-| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=encounter1) | Open a randomly assigned task and website. |
-| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=encounter1) | Read the briefs and expected outcomes before starting. |
-| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=encounter1) | Use a separate device to check participants' results. |
-| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=encounter1) | Read the design references and documented mechanisms. |
+| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1) | Explore any of the ten scenes. |
+| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=events1) | Open a randomly assigned task and website. |
+| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=events1) | Read the briefs and expected outcomes before starting. |
+| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=events1) | Use a separate device to check participants' results. |
+| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=events1) | Read the design references and documented mechanisms. |
 
 Task briefs stay in the separate library; the top task/notebook panel is currently hidden on browsing pages. Sessions have no visible game timer, automatic score or automatic ending.
 
@@ -55,6 +55,19 @@ Advertisements appear in search results, reading paths, banners and stacked floa
 
 Advertiser tabs preserve the original task page. Genuine downloads, saves and ordinary Browse navigation remain functional.
 
+## Random encounters
+
+Each session selects three applicable events from eight possibilities. They respond to browsing actions, so the same task can unfold differently:
+
+- A sponsor assistant starts a conversation and gradually recommends unrelated offers.
+- An advertiser departure changes the original browser tab title; returning reveals a sponsored message.
+- A muted film banner becomes a following mini-player after it scrolls out of view.
+- Search suggestions mix genuine query shortcuts with a separately labelled sponsored link.
+- Rejected ads lead to an offer that grows from 10% to 20% and then a mystery box.
+- A small animated character presents a scene-related promotion.
+- A brief quiet spell ends with a sponsor's return message.
+- A real save or export can be followed by an optional bonus offer.
+
 ## Run locally
 
 The site is static HTML, CSS and JavaScript. Use Python 3 for the included preview server, which supports video seeking.
@@ -65,7 +78,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=encounter1).
+Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=events1).
 
 Serve the repository root: Browse also uses shared files in `assets/` and `wallpapers/`. A local `127.0.0.1` link works on the host computer; share the published demo link with other computers.
 

@@ -15,7 +15,7 @@
   }
   const url = (file, query = {}) => {
     const u = new URL(file, location.href);
-    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'encounter1');
+    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'events1');
     if(params.has('task')&&['index.html',...(window.BROWSE_SCENE_INDEX||[]).map(s=>s.file)].includes(u.pathname.split('/').pop()))u.searchParams.set('task',params.get('task'));
     Object.entries(query).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') u.searchParams.set(k, String(v)); });
     return u.href;
@@ -56,7 +56,7 @@
   // A seed is carried through native GET forms as well as anchors.
   for (const form of root.querySelectorAll('form')) {
     if ((form.getAttribute('method') || 'get').toLowerCase() !== 'get') continue;
-    for (const [name,value] of [['lang',lang],['seed',seed],['v','encounter1'],...(brief?[['task',brief.id]]:[])]) {
+    for (const [name,value] of [['lang',lang],['seed',seed],['v','events1'],...(brief?[['task',brief.id]]:[])]) {
       if (form.querySelector(`[name="${name}"]`)) continue;
       const input = document.createElement('input'); input.type='hidden'; input.name=name; input.value=value; form.append(input);
     }
@@ -98,7 +98,7 @@
     wireAds(root);
     for(const form of root.querySelectorAll('form')){
       if((form.getAttribute('method')||'get').toLowerCase()!=='get')continue;
-      for(const [name,value] of [['lang',lang],['seed',seed],['v','encounter1'],...(brief?[['task',brief.id]]:[])]){
+      for(const [name,value] of [['lang',lang],['seed',seed],['v','events1'],...(brief?[['task',brief.id]]:[])]){
         if(form.querySelector(`[name="${name}"]`))continue;
         const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;form.append(input);
       }
@@ -106,5 +106,7 @@
   }).observe(root,{childList:true,subtree:true});
   campaign?.reconcile();
   ensureInlineAd();
-  window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adOffer,campaignSite,adURL,wireAds,deck,chosen,rawRead,rawWrite});
+  let events=null;
+  const stack=window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adOffer,campaignSite,adURL,wireAds,deck,chosen,rawRead,rawWrite,onState:state=>events?.update(state)});
+  events=window.BROWSE_EVENTS?.({...C,seed,scene,ads,adURL,adOffer,campaignSite,stack});
 })();

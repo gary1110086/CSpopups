@@ -1,0 +1,35 @@
+/* Search assistance and a commercial follow-up to a real completed action. */
+.br-event-search,.br-event-reward{position:fixed;pointer-events:auto;box-sizing:border-box;display:flex;flex-direction:column;min-height:0;overflow:hidden;border:1px solid #b9c2cc;border-radius:3px;background:#fff;color:#24313d;box-shadow:0 5px 24px #10233440;font:13px/1.45 Arial,'Microsoft YaHei',sans-serif}
+.br-event-actions *{box-sizing:border-box}
+.br-event-actions button,.br-event-actions a{-webkit-tap-highlight-color:transparent}
+.br-event-actions button{font:inherit;cursor:pointer}
+.br-event-action-heading{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:34px;padding:3px 6px 3px 12px;background:#f5f7f8;border-bottom:1px solid #dde2e6;color:#687582;font-size:10px;gap:8px}
+.br-event-action-heading>span{min-width:0;overflow-wrap:anywhere}
+.br-event-action-close{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;padding:0;border:1px solid transparent;border-radius:2px;background:transparent;color:#4c5c6a;font:22px/1 Arial,sans-serif!important}
+.br-event-action-close:hover,.br-event-action-close:focus-visible{background:#fff;border-color:#8e9caa;color:#142b3d}
+.br-event-action-scroll{overflow:auto;overscroll-behavior:contain;min-height:0}
+.br-event-query-options{padding:4px 0}
+.br-event-query-options button{display:flex;align-items:center;width:100%;gap:10px;padding:10px 13px;text-align:left;color:#2b3c4a;background:#fff;border:0;margin:0}
+.br-event-query-options button:hover,.br-event-query-options button:focus-visible{background:#edf3f8;outline-offset:-3px}
+.br-event-query-options button>span{font-size:20px;color:#8294a3;line-height:1}
+.br-event-query-options b{flex:1;min-width:0;font-size:13px;font-weight:400;overflow-wrap:anywhere}
+.br-event-query-options small{flex-shrink:0;font-size:10px;color:#84919b}
+.br-event-search-sponsored{background:#f7f5ee;border-top:1px solid #e1ddcf;padding:11px 13px 12px}
+.br-event-search-sponsored>small{display:block;color:#7c786d;font-size:9px;margin-bottom:5px}
+.br-event-search-offer{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:700;line-height:1.45;text-decoration:none;color:#285d8e!important;overflow-wrap:anywhere}
+.br-event-search-offer:hover{text-decoration:underline}
+.br-event-search-sponsored>span{display:block;color:#8b887d;font-size:10px;margin-top:4px}
+.br-event-reward{border-color:#c8bbb2}
+.br-event-reward-ticket{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:15px 17px 0;padding:16px 13px;background:#a72c37;color:#fff;border:1px dashed #edb7ba;outline:4px solid #a72c37}
+.br-event-reward-ticket>span{font-size:30px;font-weight:700;line-height:1.05;letter-spacing:-1px}
+.br-event-reward-ticket>small{max-width:85px;font-size:9px;line-height:1.5;letter-spacing:1px;text-align:right}
+.br-event-reward-copy{padding:16px 17px 14px}
+.br-event-reward-copy h2{font:700 23px/1.18 Arial,'Microsoft YaHei',sans-serif;color:#28313a;margin:9px 0 10px}
+.br-event-reward-copy p{font-size:12px;line-height:1.55;color:#70808c;margin:9px 0 14px;overflow-wrap:anywhere}
+.br-event-reward-copy .br-event-reward-complete{font-size:10px;color:#5c7861;margin:0 0 7px}
+.br-event-reward-cta{display:block;padding:11px 12px;text-align:center;background:#a72c37;color:#fff!important;text-decoration:none;font-size:13px;font-weight:700;border-radius:2px}
+.br-event-reward-cta:hover{background:#8f202a}
+.br-event-reward-return{display:block;width:100%;margin:11px 0 8px!important;padding:7px 9px;border:1px solid #d2d8dc;background:#fff;color:#5c6c79;text-align:center;font-size:12px!important;border-radius:2px}
+.br-event-reward-return:hover{background:#f2f5f7}
+.br-event-reward-copy>small{display:block;text-align:center;color:#91999e;font-size:9px}
+@media(max-width:520px){.br-event-query-options button{padding:9px 11px}.br-event-reward-ticket{padding:12px}.br-event-reward-copy h2{font-size:21px}.br-event-reward-copy{padding:13px 15px}.br-event-reward-copy p{font-size:11px}}

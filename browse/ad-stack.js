@@ -56,7 +56,8 @@
     const limit=()=>matchMedia('(max-width: 640px)').matches?2:4;
     const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write,adOffer,campaignSite});
     const foreground=()=>!suspended&&!document.hidden&&document.hasFocus();
-    const pressureUpdate=()=>pressure.update({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:modalId!==null});
+    const snapshot=()=>({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:modalId!==null,suspended,restoring,shown:state.shown,pending:state.pending.length});
+    const pressureUpdate=()=>{const current=snapshot();pressure.update(current);C.onState?.(current);};
     const stopEntry=entry=>{entry.motion?.stop();entry.motion=null;};
     const removeEntry=id=>{const entry=entries.get(id);if(!entry)return;stopEntry(entry);entry.stage.remove();entries.delete(id);};
     const stopAll=()=>{for(const entry of entries.values())stopEntry(entry);};
@@ -101,7 +102,7 @@
       state.pending=state.pending.filter(p=>keep.has(p.id));
       if(state.shown<MAX)state.nextAt=Math.max(state.nextAt??0,state.activeMs+800,state.quietUntil);
     };
-    const closeOne=id=>{
+    const closeOne=(id,reason='dismiss')=>{
       if(suspended)return;
       const entry=entries.get(id),ownedFocus=entry?.card.contains(document.activeElement);
       state.pending=state.pending.filter(p=>p.id!==id);
@@ -109,13 +110,16 @@
       else state.nextAt=null;
       removeEntry(id);save();sync();
       if(ownedFocus&&modalId===null)returnFocus();
+      if(entry&&reason==='dismiss')window.dispatchEvent(new CustomEvent('browse:ad-dismiss',{detail:{site:entry.p.site}}));
     };
-    const closeAll=()=>{
+    const closeAll=(duration=5000,reason='escape')=>{
       if(suspended){if(restoring)clearAfterRestore=true;return;}
       const ownedFocus=overlayRoot.contains(document.activeElement);
       for(const id of [...entries.keys()])removeEntry(id);
-      state.pending=[];state.quietUntil=state.activeMs+5000;state.nextAt=state.shown<MAX?state.quietUntil:null;
+      const wait=Number.isFinite(duration)?Math.max(3000,Math.min(5000,duration)):5000;
+      state.pending=[];state.quietUntil=state.activeMs+wait;state.nextAt=state.shown<MAX?state.quietUntil:null;
       save();applyModal();if(ownedFocus)returnFocus();
+      window.dispatchEvent(new CustomEvent('browse:quiet',{detail:{reason}}));
     };
     const taunts={bounce:[['Another little detour.','又来一小段绕路。'],['Yes, I am still here.','没错，我还在这里。'],['Your attention looks busy.','你的注意力好像很忙。'],['Room for one more offer?','还能再放一条优惠吗？']],dodge:[['Nearly! Try the other corner.','差一点！换个角落试试。'],['Oops. New address.','哎呀，我搬家啦。'],['You close. I relocate.','你要关，我就搬。'],['Still following me?','还在追我吗？']]};
     const collide=()=>{
@@ -163,7 +167,7 @@
       stage.querySelectorAll('[data-br-ad]').forEach(link=>link.addEventListener('click',event=>{
         if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
         event.preventDefault();const child=window.open(link.href,'_blank');
-        if(child){try{child.opener=null;}catch{}if(!link.hasAttribute('data-br-decoy'))closeOne(p.id);}
+        if(child){try{child.opener=null;}catch{}if(!link.hasAttribute('data-br-decoy'))closeOne(p.id,'advertiser');}
         else{stage.querySelector('.br-blocked').hidden=false;entry.blockedLink=true;entry.motion?.pause();positionEntry(entry);}
       }));
       if(moving){let line=0;const reserve=closeReserves(p);entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:p.format,slot:(p.id-1)%4,speed:1.25,topReserve:reserve.top,bottomReserve:reserve.bottom,dodgeLimit:p.dodgeLimit,dodgeCount:p.dodgeCount,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
@@ -249,5 +253,6 @@
     const resize=()=>{if(suspended)return;sync();save();};
     window.addEventListener('resize',resize);visualViewport?.addEventListener('resize',resize);visualViewport?.addEventListener('scroll',()=>{for(const entry of entries.values())positionEntry(entry);});
     sync();save();
+    return {snapshot,quiet:(duration)=>{if(suspended)return false;closeAll(duration,'event');return true;}};
   };
 })();

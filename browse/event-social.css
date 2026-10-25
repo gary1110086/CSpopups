@@ -1,0 +1,56 @@
+/* Compact sponsor messages, deliberately different from the main popup catalogue. */
+.br-event-widget.br-social{position:fixed;z-index:10600;left:12px;top:12px;right:auto;bottom:auto;box-sizing:border-box;display:flex;flex-direction:column;max-width:calc(100vw - 24px);overflow:hidden;pointer-events:auto;border:1px solid #c7cbd1;border-radius:5px;background:#fff;color:#263238;box-shadow:0 9px 36px #16232d44;font:13px/1.5 Arial,'Microsoft YaHei',sans-serif;overscroll-behavior:contain;text-align:left;isolation:isolate}
+.br-social *, .br-social *:before,.br-social *:after{box-sizing:border-box}
+.br-social .br-social-head{display:flex;align-items:center;flex:none;gap:10px;min-height:62px;margin:0;padding:10px 10px 10px 14px;border-bottom:1px solid #e0e5e8;background:#f8fafb;color:#243a44;position:relative;z-index:2}
+.br-social .br-social-avatar{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;background:#0b7969;color:#fff;font:bold 23px/1 Georgia,serif}
+.br-social .br-social-identity{flex:1;min-width:0}
+.br-social .br-social-identity strong{display:block;overflow-wrap:anywhere;font-size:13px;font-weight:700;line-height:1.3}
+.br-social .br-social-identity>span{display:block;overflow-wrap:anywhere;color:#6d7b83;font-size:10px;line-height:1.4;margin-top:3px}
+.br-social .br-social-close{display:grid;place-items:center;flex:none;width:32px;height:32px;min-width:32px;min-height:32px;margin:0!important;padding:0!important;border:1px solid #cad2d6;border-radius:3px;background:#fff;color:#3e4d58;cursor:pointer;font:24px/1 Arial,sans-serif;align-self:flex-start}
+.br-social .br-social-close:hover{background:#e9eef0;border-color:#8d9da7;color:#14232c}
+.br-social .br-social-content{padding:16px;min-height:0;flex:1 1 auto;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.br-social .br-social-foot{flex:none;padding:7px 14px;border-top:1px solid #e5e8ea;background:#fafbfc;color:#71808a;font-size:9px;line-height:1.3}
+.br-social .br-social-content h2{margin:8px 0 10px;font-size:22px;line-height:1.18;letter-spacing:-.4px;color:#26363f;font-weight:700}
+.br-social .br-social-content p{margin:0 0 14px;color:#5b6d78;font-size:12px;line-height:1.65;overflow-wrap:anywhere}
+.br-social .br-social-thread{display:flex;flex-direction:column;gap:12px}
+.br-social .br-social-message{max-width:94%;align-self:flex-start;animation:br-social-arrive .16s ease-out}
+.br-social .br-social-message>span{display:block;color:#7a8990;font-size:9px;margin-bottom:4px}
+.br-social .br-social-message>p{margin:0;padding:10px 12px;background:#eef4f3;border:1px solid #dfe9e6;border-radius:0 9px 9px 9px;color:#33464c;font-size:12px;line-height:1.55}
+.br-social .br-social-you{align-self:flex-end}
+.br-social .br-social-you>span{text-align:right}
+.br-social .br-social-you>p{background:#e7eff9;border-color:#d5e3f4;border-radius:9px 0 9px 9px;color:#3c546b}
+.br-social .br-social-chat-actions{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.br-social .br-social-reply-label{display:block;flex-basis:100%;font-size:9px;color:#829098;text-transform:uppercase;letter-spacing:.4px}
+.br-social .br-social-chat-actions>button{flex:1 1 auto;margin:0;padding:8px 10px;border:1px solid #c0d5cf;border-radius:4px;background:#fff;color:#14634f;font-size:11px;line-height:1.45;cursor:pointer}
+.br-social .br-social-chat-actions>button:hover{background:#edf6f2;border-color:#749d8f}
+.br-social .br-social-offer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0;width:100%;padding:11px 13px;background:#0a7967;color:#fff!important;border:1px solid transparent;border-radius:3px;font-size:12px;line-height:1.5;font-weight:700;text-decoration:none!important}
+.br-social .br-social-offer:hover{background:#086451}
+.br-social .br-social-offer>span{font-size:16px;font-weight:400;line-height:1}
+.br-social .br-social-pass{display:block;width:100%;margin:10px 0 0;padding:8px 5px;border:0;background:transparent;color:#697981;font-size:11px;line-height:1.45;text-decoration:underline;cursor:pointer}
+.br-social .br-social-pass:hover{color:#213f48}
+.br-social.br-social-escalation{border-color:#d5c299;background:#fffdf7}
+.br-social-escalation .br-social-head{background:#fff7df;border-color:#e8d9b9}
+.br-social-escalation .br-social-avatar{background:#9a6720;font-family:Arial,sans-serif;font-size:20px}
+.br-social-escalation .br-social-content{padding:16px 20px 15px;text-align:center}
+.br-social .br-social-offer-label{font-size:9px;letter-spacing:1.5px;color:#957145;margin-bottom:4px}
+.br-social .br-social-amount{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px 0 8px;color:#a33425;font:bold 70px/.95 Georgia,serif;letter-spacing:-3px}
+.br-social .br-social-amount>span{font-family:Arial,sans-serif;font-size:24px;letter-spacing:0}
+.br-social-escalation[data-escalation-tier="2"] .br-social-amount{color:#774830}
+.br-social-escalation .br-social-content h2{font:700 23px/1.15 Georgia,'Microsoft YaHei',serif;letter-spacing:-.3px;margin-top:14px}
+.br-social-escalation .br-social-content p{font-size:11px;line-height:1.65;color:#776a54}
+.br-social-escalation .br-social-offer{justify-content:center;background:#a03529;border-radius:0}
+.br-social-escalation .br-social-offer:hover{background:#7e251d}
+.br-social .br-social-conditions{display:block;color:#958974;font-size:9px;line-height:1.5;margin-top:8px}
+.br-social-escalation .br-social-foot{background:#fffaf0;border-color:#e8dfcf;color:#8e8068}
+.br-social.br-social-notice{border-radius:2px;border-color:#c3cad4}
+.br-social-notice .br-social-head{min-height:56px;background:#f3f5f8}
+.br-social-notice .br-social-avatar{border-radius:4px;width:29px;height:29px;background:#3867a0;font-family:Arial,sans-serif;font-size:16px}
+.br-social .br-social-notice-kicker{display:block;font-size:9px;letter-spacing:.9px;color:#7b8b9a;margin-bottom:8px}
+.br-social-notice .br-social-offer{background:#305f95;border-radius:2px}
+.br-social-notice .br-social-offer:hover{background:#254d7a}
+.br-social[data-paused="true"] *{animation-play-state:paused!important}
+.br-social [data-br-event-fallback]{overflow-wrap:anywhere}
+@keyframes br-social-arrive{from{opacity:.2;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:480px){.br-social .br-social-head{min-height:57px;padding:9px 9px 9px 12px}.br-social .br-social-content{padding:14px}.br-social .br-social-amount{font-size:60px}.br-social-escalation .br-social-content h2{font-size:21px}}
+@media(max-height:400px){.br-social .br-social-head{min-height:44px;padding:5px 8px}.br-social .br-social-avatar{width:27px;height:27px;font-size:18px}.br-social .br-social-identity>span{font-size:9px}.br-social .br-social-foot{padding:3px 10px;font-size:8px}.br-social .br-social-content{padding:10px}.br-social .br-social-amount{font-size:40px}.br-social-escalation .br-social-content h2{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.br-social .br-social-message{animation:none}}

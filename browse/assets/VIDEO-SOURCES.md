@@ -1,6 +1,6 @@
 # Playable open-film media
 
-Retrieved and verified against primary project pages on 23 October 2026. The local files include real moving footage and original sound, and use ordinary HTML5 video controls. They are loaded on demand rather than autoplaying. The clips are also usable from the packaged HTTP preview without contacting a third-party streaming provider.
+Retrieved and verified against primary project pages on 23 October 2026. The local files include real moving footage and original sound, and use ordinary HTML5 video controls. Film catalogue and destination players load on demand. The optional events1 sponsored Sintel trailer may start muted during foreground browsing, then move between its inline placement and a small following player. It pauses with the event layer and preserves a user's manual pause. The clips are also usable from the packaged HTTP preview without contacting a third-party streaming provider.
 
 All three source films are licensed under [Creative Commons Attribution3.0](https://creativecommons.org/licenses/by/3.0/). Filmmaker attribution, title, license link and source link appear alongside the player. These creators do not endorse this educational experience. The film excerpt is identified separately from the full film runtime. The source license remains applicable to the footage and frame grabs.
 

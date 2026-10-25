@@ -2,7 +2,7 @@
 
 一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
 
-**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=encounter1)** · [English](README.md)
+**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1)** · [English](README.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
@@ -19,11 +19,11 @@
 
 | 入口 | 用途 |
 | --- | --- |
-| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=encounter1) | 自由探索十个场景。 |
-| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=encounter1) | 随机进入一个任务及对应网站。 |
-| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=encounter1) | 开始前阅读任务要求和预期结果。 |
-| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=encounter1) | 工作人员可在另一台设备核对参与者的结果。 |
-| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=encounter1) | 查看设计对标和已有案例。 |
+| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1) | 自由探索十个场景。 |
+| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=events1) | 随机进入一个任务及对应网站。 |
+| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1) | 开始前阅读任务要求和预期结果。 |
+| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=events1) | 工作人员可在另一台设备核对参与者的结果。 |
+| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=events1) | 查看设计对标和已有案例。 |
 
 任务要求放在独立任务库中；浏览页面顶部的任务／笔记面板目前隐藏。体验没有可见的游戏计时器、自动评分或自动结束。
 
@@ -55,6 +55,19 @@
 
 广告标签页保留原来的任务页面。Browse 中真正的下载、收藏和普通网页导航可以正常使用。
 
+## 随机事件
+
+每次体验从八种事件中选取三种适合当前网站的事件，由浏览操作触发，让同一个任务也能有不同经历：
+
+- 赞助客服先正常搭话，逐渐推荐到其他优惠。
+- 进入广告标签时，原标签标题出现消息提醒；返回后显示赞助消息。
+- 静音影片横幅滚出视野后，缩成跟随式小播放器。
+- 搜索联想同时提供真实检索快捷项和单独标注的赞助链接。
+- 拒绝广告后，优惠从九折升级到八折，再到神秘礼盒。
+- 小型动画角色带来与场景有关的推广。
+- 短暂清静之后，赞助商带着回归消息再次出现。
+- 真正完成收藏或导出后，可能收到可选的额外奖励推广。
+
 ## 本地运行
 
 项目由静态 HTML、CSS 和 JavaScript 组成。使用 Python 3 启动内置预览服务器，它支持视频拖动定位。
@@ -65,7 +78,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=encounter1)。
+打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=events1)。
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 

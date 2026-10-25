@@ -1,0 +1,15 @@
+/* Shared event layer: above nonmodal offers, below the existing modal. */
+#br-event-root{position:fixed;inset:0;pointer-events:none;z-index:10040;font:14px/1.45 Arial,Helvetica,sans-serif;color:#222}
+#br-event-root[hidden]{display:none!important}
+.br-event-widget{pointer-events:auto;box-sizing:border-box}
+body.br-events-suppressed .br-event-widget{visibility:hidden!important;pointer-events:none!important}
+body.br-events-paused .br-event-widget *, .br-event-blocked *{animation-play-state:paused!important}
+.br-event-comeback{position:fixed;right:16px;top:52px;width:min(310px,calc(100vw - 24px));max-height:calc(100dvh - 72px);overflow:auto;background:#fff8d7;border:1px solid #b8a14f;border-radius:3px;box-shadow:0 7px 25px #0003;color:#29251a}
+.br-event-comeback header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;background:#fff2ad;padding:8px 12px;border-bottom:1px solid #c9b877;font-size:11px;color:#65552d}
+.br-event-comeback button{appearance:none;border:1px solid #817143;background:#fffce8;color:#30270d;font:20px/1 Arial;min-width:30px;min-height:30px;cursor:pointer}
+.br-event-comeback>div{padding:14px}.br-event-comeback strong{display:block;font-size:21px;line-height:1.15;margin-bottom:8px}
+.br-event-comeback p{margin:8px 0 14px}.br-event-comeback a{display:inline-block;background:#232b27;color:white;padding:9px 13px;text-decoration:none;font-weight:700}
+.br-event-comeback button:focus-visible,.br-event-comeback a:focus-visible{outline:3px solid #1c62b9;outline-offset:2px}
+.br-event-fallback{font-size:12px;background:#fff3cc;color:#312b19;padding:8px;margin:8px;border:1px solid #a89248}
+.br-event-fallback a{color:#174e8d!important;background:transparent!important;text-decoration:underline!important}
+@media(max-height:320px){.br-event-comeback{top:8px;max-height:calc(100dvh - 16px)}}
