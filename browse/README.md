@@ -1,12 +1,12 @@
-# Browse — events1
+# Browse — events1a
 
 An independent, static multipage browsing exercise. The original Little Daily site and standalone Stillwall version keep their own runtime and entry points.
 
-- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=events1
-- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1
-- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=events1
-- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1
-- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=events1
+- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=events1a
+- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1a
+- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=events1a
+- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=events1a
+- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=events1a
 - **Benchmarks and documented scam cases:** guide.html
 
 ## Ten task websites
@@ -28,7 +28,7 @@ An independent, static multipage browsing exercise. The original Little Daily si
 
 The task library gives participants constrained searches instead of merely asking them to look around. Examples: compare the1968 and1972 Earthrise photographs; find a vegan no-cook chickpea lunch under15minutes; identify an indoor rail-accessible museum route; find Ian Hubert's2012 open film; export a1280-pixel image below100KB.
 
-The independent task library retains all assignment briefs and manual criteria. In events1, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
+The independent task library retains all assignment briefs and manual criteria. In events1a, website pages continue to open without the top task/notes panel. Its implementation and existing stored notes are retained for possible later restoration; task evidence collection is paused while the panel is inactive. Scene-specific notes, saved items and exports continue to work. There is no automatic correctness score, gamebar, visible clock or automatic ending.
 
 A shared URL reproduces the scene and task on another computer. Notes, saved choices and uploaded image pixels **do not sync between computers**. Opening the same URL on another computer starts a fresh browser session.
 
@@ -46,7 +46,7 @@ The first visited scene selects a relevant sponsor, saved locally as `br-data-v1
 
 Signal Garden now has three solvable light puzzles, keyboard/touch controls, hints, undo, restart, saved moves and native level routes. The other five games remain available. Lucky Circle spins a local six-segment wheel and keeps the selected reward consistent through reload, claim and delivery/release review. Perk Basket adds combined search/category/value/channel filters, sorting, a three-offer comparison, selection and the existing survey/activation flow. Its comparison displays minimum spend and recurring membership terms. Prizes, offers and locations remain fictional.
 
-## Random encounters (events1)
+## Random encounters (events1a)
 
 A seed selects three applicable event types from eight locally implemented possibilities. Image tools and the rail planner omit search suggestions because they use file controls or station selectors. The plan follows native scene navigation; seen events do not restart on reload or Back. A shared URL selects the same plan, while each browser tab keeps its own progress.
 
@@ -112,7 +112,7 @@ There is no build step. From repository root, run:
 
     python browse/preview-server.py --port 5175
 
-Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=events1 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
+Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=events1a . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
 
 The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalog.js, wallpapers/assets/*.svg, assets/nightroom-contact-sheet.png, favicon.svg and .nojekyll. Copying browse/ alone is insufficient. The package includes START-HERE.txt and a SHA256 source manifest.
 

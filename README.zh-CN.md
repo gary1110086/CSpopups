@@ -2,7 +2,7 @@
 
 一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
 
-**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1)** · [English](README.md)
+**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1a)** · [English](README.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
@@ -19,11 +19,11 @@
 
 | 入口 | 用途 |
 | --- | --- |
-| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1) | 自由探索十个场景。 |
-| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=events1) | 随机进入一个任务及对应网站。 |
-| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1) | 开始前阅读任务要求和预期结果。 |
-| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=events1) | 工作人员可在另一台设备核对参与者的结果。 |
-| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=events1) | 查看设计对标和已有案例。 |
+| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=events1a) | 自由探索十个场景。 |
+| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=events1a) | 随机进入一个任务及对应网站。 |
+| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=events1a) | 开始前阅读任务要求和预期结果。 |
+| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=events1a) | 工作人员可在另一台设备核对参与者的结果。 |
+| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=events1a) | 查看设计对标和已有案例。 |
 
 任务要求放在独立任务库中；浏览页面顶部的任务／笔记面板目前隐藏。体验没有可见的游戏计时器、自动评分或自动结束。
 
@@ -78,7 +78,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=events1)。
+打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=events1a)。
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 
