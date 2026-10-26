@@ -6,20 +6,23 @@
  * --br-motion-view-height (100dvh fallback), plus border-box and overflow:auto.
  * Keep .br-real-close inside the card. stop() preserves
  * the last position; a new controller on the same element replaces the previous one.
- * Optional numeric slot selects one of four starting quadrants. Omitting it retains
- * the single-card position. Optional speed is bounded to 0.5–1.7 (default 1).
+ * Optional numeric slot selects one of four starting quadrants. Static mode keeps
+ * its measured position when neither slot nor origin is supplied. Optional origin
+ * is an internal [x,y] pair in 0..1.
+ * Optional speed is bounded to 0.5–1.7 (default 1).
  * Dodge state can be persisted from onMove: dodgeLimit, dodgeCount and settled.
  * topReserve/bottomReserve leave room for a genuine close outside the frame.
  * snapshot()/nudge() let the caller resolve occasional card collisions without
  * bypassing the same focus, pointer, reduced-motion and settled-dodge guards.
+ * nudge(dx,dy,{animate:true}) eases a shove over 300ms; the default remains immediate.
  */
 (() => {
   'use strict';
   const controllers = new WeakMap();
-  window.BROWSE_POPUP_MOTION = ({element, mode = 'bounce', isActive = () => true, onMove, slot, speed = 1,
+  window.BROWSE_POPUP_MOTION = ({element, mode = 'bounce', isActive = () => true, onMove, slot, origin = null, speed = 1,
     random = Math.random, dodgeLimit, dodgeCount = 0, topReserve = 0, bottomReserve = 0} = {}) => {
     if (!element?.getBoundingClientRect || !element.style) throw new TypeError('A popup card element is required.');
-    if (!['bounce', 'dodge'].includes(mode)) throw new TypeError('Unknown popup motion mode.');
+    if (!['bounce', 'dodge', 'static'].includes(mode)) throw new TypeError('Unknown popup motion mode.');
     controllers.get(element)?.stop();
     const doc = element.ownerDocument, win = doc.defaultView;
     const reduce = win.matchMedia('(prefers-reduced-motion: reduce)');
@@ -27,7 +30,7 @@
     const viewport = win.visualViewport, margin = 4, listeners = [], held = new Set();
     const originalWillChange = element.style.willChange;
     let stopped = false, manualPause = false, focused = doc.hasFocus(), focusWithin = element.contains(doc.activeElement);
-    let raf = 0, previousTime = 0, settleTimer = 0, pointerSettling = false, pendingPointer = null;
+    let raf = 0, previousTime = 0, settleTimer = 0, pointerSettling = false, pendingPointer = null, shove = null;
     let x = 0, y = 0, tx = 0, ty = 0, baseX = 0, baseY = 0, width = 0, height = 0, bounds;
     const motionSpeed = Number.isFinite(speed) ? Math.max(.5, Math.min(1.7, speed)) : 1;
     const quadrant = Number.isFinite(slot) ? ((Math.trunc(slot) % 4) + 4) % 4 : null;
@@ -48,7 +51,7 @@
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const active = () => { try { return Boolean(isActive()); } catch { return false; } };
     const basicPause = () => stopped || manualPause || doc.hidden || !focused || focusWithin || held.size > 0 || pointerSettling || reduce.matches;
-    const cancelFrame = () => { if (raf) win.cancelAnimationFrame(raf); raf = 0; previousTime = 0; };
+    const cancelFrame = () => { if (raf) win.cancelAnimationFrame(raf); raf = 0; previousTime = 0; shove = null; };
     const apply = () => {
       tx = x - baseX; ty = y - baseY;
       element.style.transform = `translate3d(${tx.toFixed(3)}px, ${ty.toFixed(3)}px, 0)`;
@@ -76,12 +79,12 @@
     };
     const schedule = () => {
       if (!element.isConnected) { stop(); return; }
-      if (!raf && !basicPause() && (mode === 'bounce' || pendingPointer)) raf = win.requestAnimationFrame(tick);
+      if (!raf && !basicPause() && (mode === 'bounce' || pendingPointer || shove)) raf = win.requestAnimationFrame(tick);
     };
     const refresh = reason => {
       if (stopped) return;
       if (!element.isConnected) { stop(); return; }
-      previousTime = 0;
+      cancelFrame();
       measure(); apply();
       if (reason) emit(reason);
       schedule();
@@ -136,18 +139,32 @@
       }
       if (!candidates.length) return;
       const destination = candidates[Math.floor(draw() * candidates.length)];
+      shove = null;
       x = destination[0]; y = destination[1]; lastDodge = now; count++; usedDodges++;
       apply(); emit('dodge');
     };
     function tick(now) {
       raf = 0;
       if (!element.isConnected) { stop(); return; }
-      if (basicPause()) { previousTime = 0; return; }
-      if (!active()) { previousTime = 0; schedule(); return; }
+      if (basicPause()) { previousTime = 0; shove = null; return; }
+      if (!active()) { previousTime = 0; shove = null; schedule(); return; }
+      // A close-hover response takes precedence over a collision already in flight.
       if (mode === 'dodge') {
         const pointer = pendingPointer; pendingPointer = null;
         if (pointer) dodge(pointer, now);
-      } else {
+      }
+      if (shove) {
+        if (!canNudge()) { shove = null; previousTime = 0; schedule(); return; }
+        if (shove.startedAt === null) shove.startedAt = now;
+        const progress = clamp((now - shove.startedAt) / 300, 0, 1),tail = progress - 1;
+        const eased = 1 + 2.1 * tail * tail * tail + 1.1 * tail * tail;
+        x = clamp(shove.fromX + (shove.toX - shove.fromX) * eased, bounds.left, bounds.right);
+        y = clamp(shove.fromY + (shove.toY - shove.fromY) * eased, bounds.top, bounds.bottom);
+        apply();
+        if (progress === 1) { shove = null; previousTime = now; }
+        schedule();return;
+      }
+      if (mode === 'bounce') {
         const dt = previousTime ? Math.max(0, Math.min(.05, (now - previousTime) / 1000)) : 0;
         previousTime = now;
         const horizontal = reflect(x, vx, dt, bounds.left, bounds.right);
@@ -171,14 +188,16 @@
     const resume = () => { if (!stopped) { manualPause = false; refresh('resume'); } };
     const canNudge = () => !basicPause() && active() && mouse.matches && !(mode === 'dodge' && usedDodges >= limit);
     const snapshot = () => ({x, y, width, height, canMove: canNudge(), mode});
-    const nudge = (dx, dy) => {
+    const nudge = (dx, dy, {animate = false} = {}) => {
       if (!canNudge() || !Number.isFinite(dx) || !Number.isFinite(dy)) return false;
       const nextX=clamp(x+Math.max(-64,Math.min(64,dx)),bounds.left,bounds.right);
       const nextY=clamp(y+Math.max(-64,Math.min(64,dy)),bounds.top,bounds.bottom);
       if (Math.hypot(nextX-x,nextY-y)<.5) return false;
       if (nextX!==x) vx=Math.sign(nextX-x)*Math.abs(vx);
       if (nextY!==y) vy=Math.sign(nextY-y)*Math.abs(vy);
-      x=nextX;y=nextY;count++;apply();emit('collision');previousTime=0;schedule();return true;
+      shove=animate?{fromX:x,fromY:y,toX:nextX,toY:nextY,startedAt:null}:null;
+      if(!animate){x=nextX;y=nextY;apply();}
+      count++;emit('collision');previousTime=0;schedule();return true;
     };
     const controller = {stop, pause, resume, snapshot, nudge};
     let resizeObserver = null, detachObserver = null;
@@ -191,10 +210,12 @@
       try { const m = new win.DOMMatrixReadOnly(matrix); tx = m.m41; ty = m.m42; } catch { /* CSS contract excludes other transforms. */ }
     }
     measure();
-    const start = quadrant === null ? (mode === 'bounce' ? [.64, .24] : [.55, .30])
-      : [[.04, .08], [.93, .16], [.08, .90], [.87, .87]][quadrant];
-    x = bounds.left + (bounds.right - bounds.left) * start[0];
-    y = bounds.top + (bounds.bottom - bounds.top) * start[1];
+    if(mode!=='static'||origin||quadrant!==null){
+      const start = origin || (quadrant === null ? (mode === 'bounce' ? [.64, .24] : [.55, .30])
+        : [[.04, .08], [.93, .16], [.08, .90], [.87, .87]][quadrant]);
+      x = bounds.left + (bounds.right - bounds.left) * start[0];
+      y = bounds.top + (bounds.bottom - bounds.top) * start[1];
+    }
     apply(); emit('start');
     listen(doc, 'visibilitychange', () => { pendingPointer = null; cancelFrame(); if (!doc.hidden) refresh('visibility'); });
     listen(win, 'blur', () => { focused = false; held.clear(); pendingPointer = null; cancelFrame(); });

@@ -35,7 +35,7 @@
       travel:['.jt-route-cards','.jt-legs','.jt-planner-layout','.jt-station-layout'],
       market:['.lp-catalogue .lp-grid','.lp-detail','.lp-comparison']
     };
-    const safe=target=>target?.isConnected&&root.contains(target)&&target.parentElement&&target.getBoundingClientRect().width>120&&target.getBoundingClientRect().height>0&&!target.closest('form,table,ul,ol,[data-br-layout],[data-context-ad],.br-pressure-inline-group,.br-inline-ad')&&!['TABLE','TBODY','THEAD','TFOOT','TR','UL','OL','SELECT','PICTURE'].includes(target.parentElement.tagName);
+    const safe=target=>target?.isConnected&&root.contains(target)&&target.parentElement&&target.getBoundingClientRect().width>120&&target.getBoundingClientRect().height>0&&!target.closest('form,table,ul,ol,[data-br-layout],[data-context-ad],[data-br-cleaner-bait],.br-pressure-inline-group,.br-inline-ad')&&!['TABLE','TBODY','THEAD','TFOOT','TR','UL','OL','SELECT','PICTURE'].includes(target.parentElement.tagName);
     const visible=target=>{const r=target.getBoundingClientRect(),top=window.visualViewport?.offsetTop||0,height=window.visualViewport?.height||innerHeight;return r.width>120&&r.height>0&&r.top>=top+44&&r.top<=top+height*.8;};
     const targetFor=first=>{
       for(const selector of [...(targets[scene]||[]),'main h2','main h1'])for(const target of root.querySelectorAll(selector))if(safe(target)&&(!first||visible(target)))return target;

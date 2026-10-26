@@ -2,9 +2,9 @@
 
 一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
 
-**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=refine1)** · [English](README.md)
+**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=cleaner1)** · [English](README.md)
 
-当前版本：**[refine1](https://github.com/gary1110086/CSpopups/releases/tag/v-refine1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip) · [查看更新记录](docs/CHANGELOG.md)
+当前版本：**[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [查看更新记录](docs/CHANGELOG.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
@@ -17,15 +17,15 @@
 3. **处理干扰。** 关闭广告，或进入真实的广告标签页，再返回原来的任务。
 4. **回顾体验。** 讨论什么吸引了注意、哪些控件具有误导性，以及如何恢复原来的工作。
 
-当前的 **Browse** 版本包含 **10 个任务网站、30 项任务和 10 个广告目的地**，使用浏览器本身的地址栏、标签页、历史记录和刷新功能。
+当前的 **Browse** 版本包含 **10 个任务网站、30 项任务和 11 个广告目的地**：十个赞助商参与日常广告轮换，新增 AdSweep 从误导性的开发者开关进入。使用浏览器本身的地址栏、标签页、历史记录和刷新功能。
 
 | 入口 | 用途 |
 | --- | --- |
-| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=refine1) | 自由探索十个场景。 |
-| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=refine1) | 随机进入一个任务及对应网站。 |
-| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=refine1) | 开始前阅读任务要求和预期结果。 |
-| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=refine1) | 工作人员可在另一台设备核对参与者的结果。 |
-| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=refine1) | 查看设计对标和已有案例。 |
+| [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=cleaner1) | 自由探索十个场景。 |
+| [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=cleaner1) | 随机进入一个任务及对应网站。 |
+| [任务库](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=cleaner1) | 开始前阅读任务要求和预期结果。 |
+| [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=cleaner1) | 工作人员可在另一台设备核对参与者的结果。 |
+| [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=cleaner1) | 查看设计对标和已有案例。 |
 
 任务要求放在独立任务库中；浏览页面顶部的任务／笔记面板目前隐藏。体验没有可见的游戏计时器、自动评分或自动结束。
 
@@ -48,9 +48,11 @@
 
 广告分布在检索结果、阅读路径、横幅和叠加浮窗中。文案会结合当前场景与搜索内容，同一赞助商也会跟随页面访问继续出现。
 
-- **移动与闪避：** 屏幕内反弹、随机闪避四至六次，以及部分会话中的碰撞推挤。
+- **移动与闪避：** 屏幕内反弹、随机闪避四至六次，以及部分会话中的碰撞推挤；开发者开关触发的爆发必定启用碰撞。
 - **误导控件：** 小型或透明关闭按钮、不同位置的关闭按钮，以及外形像关闭按钮的广告链接。
 - **退出机制：** 仅有隐蔽关闭按钮的弹窗在前台专注浏览十秒后，显示明显的真关闭，并停止移动。
+- **泄露的开关：** 大号“关闭全部广告”开发者控件反而触发一轮爆发，电脑最多同时十张、手机五张；随后推销 AdSweep。独立推广页有本地检查、结果、套餐和设置演示，可以继续操作。
+- **真正有声：** 第一次真实点击或按键之后，新到达的浮窗播放原创短提示音。左下角声音开关记住本次会话的静音选择；后台、模态框和安静时段暂停，刷新和返回不会补播。跟随视频仍默认静音。
 - **广告内也能操作：** 目的地包含商店、图片下载、可玩小游戏、转盘和优惠比较，以及有明确终点的骗局教学流程。
 
 **按 Esc 可以暂时清除广告。** 键盘聚焦会暂停移动，触屏不会触发闪避。广告节奏只在场景处于前台且获得焦点时推进。
@@ -61,7 +63,7 @@
 
 - 部分网站会延迟加载一块赞助广告，真实挤开列表或正文；每个网站、每次会话只出现一次，真正关闭后会记住。
 - Cookie 横幅突出“接受全部”，“管理偏好”中有分类开关、保存和真正的拒绝入口。必要存储固定开启，可选项默认关闭；选择只在当前会话中保存，不会启用追踪。
-- 工作人员可从网站选择页主动打开[浏览复盘](https://gary1110086.github.io/CSpopups/browse/review.html?lang=zh&v=refine1)，查看广告打开结果、假关闭按钮点击、实际闪避次数、事件时间线和讨论提示，也可以导出 TXT。
+- 工作人员可从网站选择页主动打开[浏览复盘](https://gary1110086.github.io/CSpopups/browse/review.html?lang=zh&v=cleaner1)，查看广告打开结果、假关闭按钮点击、实际闪避次数、事件时间线和讨论提示，也可以导出 TXT。
 
 复盘不会自动结束浏览或判断任务答案对错。记录保存在参与者当前浏览器标签页，不包含搜索文字、草稿或图片内容；可以单独清除，不影响收藏与处理结果。另一台电脑无法读取这份本地记录。
 
@@ -88,11 +90,11 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=refine1)。
+打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=cleaner1)。
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 
-使用[本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip)时，请完整解压 ZIP，并按 `START-HERE.txt` 操作。包内包含媒体、共用依赖和源文件哈希清单。
+使用[本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip)时，请完整解压 ZIP，并按 `START-HERE.txt` 操作。包内包含媒体、共用依赖和源文件哈希清单。
 
 公开演示托管在 GitHub Pages，也可以保持仓库目录结构，在其他静态网站服务上部署。
 

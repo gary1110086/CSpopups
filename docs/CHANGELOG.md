@@ -1,6 +1,17 @@
 # Release history / 版本记录
 
-Current version: **[refine1](https://github.com/gary1110086/CSpopups/releases/tag/v-refine1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current version: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## cleaner1 — 26 October 2026
+
+- Added a large leaked-looking developer “CLOSE ALL ADS” switch. One activation releases up to10 desktop/5 phone cards into the existing layer, then offers an explicit AdSweep advertiser link. Reload and Back do not trigger another burst.
+- Strengthened collisions: all nonmodal cards can be pushed, including stationary ads. Developer-triggered bursts always activate collisions, with smooth bounded movement and a brief compressed-frame reaction. Ordinary sessions retain their seeded30% eligibility.
+- Added AdSweep as an eleventh, independently routed commercial destination: product, local check, results, plans, setup and completion, with usable controls and dismissible promotions.
+- Implemented actual original advertisement sounds. A real click/key press unlocks audio; new arrivals play short cues and the burst uses one phrase. Visible mute persists for the session; modals, background and quiet stop output, and restored cards never replay sound.
+- Extended the existing popup state to v8 for burst flags while importing v7 only when the new key is absent. Existing scene saves, close variants, evasion budgets and ten-second disclosure stay intact.
+- Added burst/cleaner observations and a discussion prompt to the manually opened facilitator review, without recording typed content. Version2 records isolate new data from old cached writers while retaining read-only access to older reports.
+
+新增醒目的开发者式诱饵、一次弹窗爆发、AdSweep完整推广流程与真正有声的广告。此前 Browse 只有默认静音视频，尚无广告提示音；本轮补上实际输出与静音控制。
 
 ## refine1 — 26 October 2026
 

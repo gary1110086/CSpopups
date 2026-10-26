@@ -7,9 +7,9 @@
   const t=(en,zh)=>lang==='zh'?zh:en;
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const scenes=window.BROWSE_SCENE_INDEX||[],sceneName=id=>scenes.find(s=>s.id===id)?.name||t('Website','网站');
-  const sponsors={corn:'Cornhub',desk:'Form & Field',stock:'Framekind',game:'Tiny Arcade',security:'SecureLane',player:'Orbit Player',software:'AppHarbor',prize:'Lucky Circle',coupon:'Perk Basket',parcel:'NorthPost'};
+  const sponsors={corn:'Cornhub',desk:'Form & Field',stock:'Framekind',game:'Tiny Arcade',security:'SecureLane',player:'Orbit Player',software:'AppHarbor',prize:'Lucky Circle',coupon:'Perk Basket',parcel:'NorthPost',cleaner:'AdSweep'};
   const kindNames={chat:t('Sponsor conversation','赞助商对话'),tab:t('Tab-title reminder','标签页提醒'),video:t('Following video','跟随视频'),search:t('Sponsored search suggestion','搜索赞助建议'),escalation:t('Growing offer','逐步升级的优惠'),character:t('Sponsor character','广告角色'),quiet:t('Sponsor comeback','安静后的广告回归'),reward:t('Bonus offer after a task action','任务操作后的额外优惠')};
-  const url=(file,query={})=>{const u=new URL(file,location.href);u.searchParams.set('lang',lang);u.searchParams.set('v','refine1');for(const [key,value]of Object.entries(query))if(value)u.searchParams.set(key,value);return u.href;};
+  const url=(file,query={})=>{const u=new URL(file,location.href);u.searchParams.set('lang',lang);u.searchParams.set('v','cleaner1');for(const [key,value]of Object.entries(query))if(value)u.searchParams.set(key,value);return u.href;};
   const duration=ms=>{const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
   const when=ms=>{if(!Number.isFinite(ms)||ms<=0)return t('Time unavailable','时间未记录');try{return new Intl.DateTimeFormat(lang==='zh'?'zh-CN':'en-GB',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(ms));}catch{return t('Time unavailable','时间未记录');}};
   const requested=params.get('seed');let selected=requested&&data.read(requested)?requested:data.index().find(seed=>data.read(seed))||null;
@@ -17,7 +17,7 @@
   document.documentElement.lang=lang==='zh'?'zh-Hans':'en';
   document.title=t('Browse — facilitator review','Browse · 工作人员复盘');
   const reportName=r=>`${sceneName(r.scene)} · ${when(r.updated||r.created)}`;
-  const advertiserLink=e=>Object.prototype.hasOwnProperty.call(sponsors,e.site)?`<a class="rv-event-link" href="${esc(url('destination.html',{site:e.site,from:scenes.some(s=>s.id===e.scene)?e.scene:null}))}" target="_blank" rel="noopener">${t('View advertiser page','查看广告页面')} ↗</a>`:'';
+  const advertiserLink=e=>Object.prototype.hasOwnProperty.call(sponsors,e.site)?`<a class="rv-event-link" href="${esc(url(e.site==='cleaner'?'cleaner.html':'destination.html',{...(e.site==='cleaner'?{view:'scan'}:{site:e.site}),from:scenes.some(s=>s.id===e.scene)?e.scene:null}))}" target="_blank" rel="noopener">${t('View advertiser page','查看广告页面')} ↗</a>`:'';
   const eventText=e=>{
     const site=sponsors[e.site]||t('Advertiser','广告商');
     if(e.type==='visit')return [t('Opened a task page','打开任务页面'),sceneName(e.scene)];
@@ -30,6 +30,7 @@
     if(e.type==='dodge')return [t('The close control evaded the pointer','关闭控件闪避鼠标'),`${site} · ${t('attempt','第')} ${e.count||1}${lang==='zh'?' 次':''}`];
     if(e.type==='ad-close')return [t('A genuine close was used','使用了真正的关闭控件'),site];
     if(e.type==='close-reveal')return [t('A hidden close became obvious','隐藏关闭按钮变得明显'),site];
+    if(e.type==='burst')return [t('The developer switch triggered an ad burst','开发者开关触发了广告爆发'),t('A promise to remove ads led to more ads and an AdSweep promotion.','关闭广告的承诺带来了更多广告和 AdSweep 推广。')];
     if(e.type==='event')return [kindNames[e.kind]||t('A random encounter appeared','随机事件出现'),sceneName(e.scene)];
     if(e.type==='layout')return [e.action==='dismissed'?t('The inserted ad was dismissed','关闭了插入广告'):t('A delayed ad moved the page content','延迟广告挤开了页面内容'),e.action==='inserted'?t(`Inserted space: ${e.height||0}px`,`新增空间：${e.height||0} 像素`):sceneName(e.scene)];
     if(e.type==='consent'){
@@ -41,6 +42,7 @@
   };
   const mechanisms=r=>{
     const c=r.counts,items=[];
+    if(c.bursts)items.push({id:'cleaner',title:t('A solution sold by the interruption','中断本身兜售解决方案'),illustration:`<div class="rv-demo-consent"><b>${t('CLOSE ALL ADS','关闭全部广告')}</b><span>AdSweep →</span></div>`,body:t('A large developer-looking switch promised to remove ads. Activating it instead released more ads, then offered a separate cleaner product. The commercial page can simulate setup but cannot install an extension or change the original website.','醒目的开发者式开关承诺关闭广告，点击后却出现更多广告，并推销另一款清理工具。推广页只能演示设置，无法安装扩展或改变原网站。'),question:t('Did the developer wording make the switch feel trustworthy? At which point did it become a product offer?','“开发者开关”的说法有没有让你更信任它？从哪里开始变成了产品推广？')});
     if(c.layouts)items.push({id:'layout',title:t('A moving page, without a moving pointer','鼠标没动，页面位置变了'),illustration:`<div class="rv-demo-layout"><span></span><b>${t('Sponsored','赞助')}</b><span></span></div>`,body:t('A delayed advertisement inserted space into the reading path. The content below moved, which can put a different target beneath a pointer.','延迟广告在阅读路径中插入空间，下方内容随之移动，鼠标下面可能已经换成另一个目标。'),question:t('Did the page move just as you were about to click? What helped you check the target again?','准备点击时，页面有没有移动？什么线索帮你重新确认了目标？')});
     if(c.consentShown||c.consentManaged||c.consentSaved||c.consentAccepted||c.consentRejected)items.push({id:'consent',title:t('The easy choice and the extra steps','醒目的选择与额外的步骤'),illustration:`<div class="rv-demo-consent"><i></i><i></i><b>${t('Accept all','接受全部')}</b><span>${t('Manage preferences','管理偏好')}</span></div>`,body:t('The prominent acceptance button and the longer settings route ask for different amounts of effort. In this exercise the switches save a local practice preference; they do not enable tracking.','接受按钮更醒目，进入设置则需要更多步骤。这次练习只保存本地偏好，开关不会启用追踪。'),question:t('Which option did you notice first? Did the settings match the choice you wanted to make?','你先注意到哪个选项？设置里有没有找到你真正想要的选择？')});
     if(c.decoys)items.push({id:'decoy',title:t('A familiar shape with a different action','熟悉的形状，不同的操作'),illustration:`<div class="rv-demo-close"><span>×</span><b>${t('An offer','一条优惠')}</b><i>×</i></div>`,body:t('A close-shaped advertising link was activated. It requests an advertiser tab; a genuine close dismisses its own card. A blocked request is still recorded as an attempt.','形似关闭的广告链接被触发了。它会请求打开广告标签页；真正的关闭控件会移除自己的广告卡片。被浏览器拦截的请求也会记为一次尝试。'),question:t('What made that control look like a close button? Where was the genuine close?','什么让那个控件看起来像关闭按钮？真正的关闭控件在哪里？')});

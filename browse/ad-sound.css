@@ -1,0 +1,10 @@
+.br-ad-sound{position:fixed;z-index:10090;left:12px;bottom:102px;display:flex;align-items:center;justify-content:center;gap:7px;min-height:38px;max-width:calc(100vw - 24px);margin:0;padding:8px 11px;border:1px solid #a6b4bf;border-radius:4px;background:#fff;color:#223648;box-shadow:0 2px 9px #152b3e38;font:600 12px/1.3 Arial,'Microsoft YaHei',sans-serif;cursor:pointer;touch-action:manipulation}
+.br-ad-sound svg{display:block;width:19px;height:19px;flex:0 0 19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.br-ad-sound[data-enabled=true]{border-color:#3c6e8c;background:#edf7fe;color:#174f70}
+.br-ad-sound[data-enabled=false]{background:#f4f5f5;color:#566572}
+.br-ad-sound[data-enabled=true] .br-sound-cross,.br-ad-sound[data-enabled=false] .br-sound-waves{display:none}
+.br-ad-sound:hover{border-color:#245b7b;box-shadow:0 2px 12px #152b3e55}
+.br-ad-sound:focus-visible{outline:3px solid #f2bf38;outline-offset:3px}
+.br-ad-sound:disabled{cursor:default;opacity:.65}
+@media(max-width:640px){.br-ad-sound{left:8px;bottom:103px;padding:7px 9px;font-size:11px;min-height:36px}}
+@media(max-height:300px){.br-ad-sound{bottom:8px;left:8px}}

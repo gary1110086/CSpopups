@@ -2,9 +2,9 @@
 
 A browsing experience about attention, advertising and deceptive design. Complete an everyday task while ordinary promotions and misleading pop-ups compete for your attention.
 
-**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=refine1)** · [中文说明](README.zh-CN.md)
+**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=cleaner1)** · [中文说明](README.zh-CN.md)
 
-Current version: **[refine1](https://github.com/gary1110086/CSpopups/releases/tag/v-refine1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip) · [What changed](docs/CHANGELOG.md)
+Current version: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [What changed](docs/CHANGELOG.md)
 
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 
@@ -17,16 +17,16 @@ Current version: **[refine1](https://github.com/gary1110086/CSpopups/releases/ta
 3. **Handle the interruptions.** Dismiss ads or follow them into real browser tabs, then return to your original task.
 4. **Reflect.** Discuss what attracted attention, which controls were misleading and how the task was recovered.
 
-The current **Browse** experience includes **10 task websites, 30 task briefs and 10 advertiser destinations**. It uses the browser's own address bar, tabs, history and reload controls.
+The current **Browse** experience includes **10 task websites, 30 task briefs and 11 advertiser destinations**. Ten sponsors rotate through regular ads; AdSweep is reached through a misleading developer switch. It uses the browser's own address bar, tabs, history and reload controls.
 
 | Start here | What you get |
 | --- | --- |
-| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=refine1) | Explore any of the ten scenes. |
-| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=refine1) | Open a randomly assigned task and website. |
-| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=refine1) | Read the briefs and expected outcomes before starting. |
-| [Review recent sessions](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=refine1) | On the participant's browser, manually inspect local interaction records and discussion prompts. |
-| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=refine1) | Use a separate device to check participants' results. |
-| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=refine1) | Read the design references and documented mechanisms. |
+| [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=cleaner1) | Explore any of the ten scenes. |
+| [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=cleaner1) | Open a randomly assigned task and website. |
+| [Browse the task library](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=cleaner1) | Read the briefs and expected outcomes before starting. |
+| [Review recent sessions](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=cleaner1) | On the participant's browser, manually inspect local interaction records and discussion prompts. |
+| [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=cleaner1) | Use a separate device to check participants' results. |
+| [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=cleaner1) | Read the design references and documented mechanisms. |
 
 Task briefs stay in the separate library; the top task/notebook panel is currently hidden on browsing pages. Sessions have no visible game timer, automatic score or automatic ending.
 
@@ -49,9 +49,11 @@ Task briefs stay in the separate library; the top task/notebook panel is current
 
 Advertisements appear in search results, reading paths, banners and stacked floating cards. Copy responds to the current scene and search; a recurring sponsor follows visits through the site.
 
-- **Movement:** bouncing cards, mouse-evading cards with a four-to-six-attempt budget, and occasional collisions in selected sessions.
+- **Movement:** bouncing cards, mouse-evading cards with a four-to-six-attempt budget, and physical collisions and squeezing in selected sessions; developer-triggered bursts always enable them.
 - **Deceptive controls:** small or translucent closes, different close corners, and close-shaped links that open an advertiser.
 - **A way out:** hidden-close cards reveal an obvious genuine close after ten seconds of focused viewing and stop moving.
+- **The leaked switch:** a conspicuous “CLOSE ALL ADS” developer control instead releases a burst of up to ten simultaneous cards on desktop or five on phones, then promotes AdSweep. Its separate product pages lead through a local check, results, plans and setup demonstration.
+- **Audible ads:** new floating ads play original short cues after the first real click or key press. A visible sound switch remembers mute for the session. Backgrounds, modals and quiet periods stop cues; reload and Back do not replay old sounds. The following video still starts muted.
 - **More than a landing page:** advertiser tabs include shops, image downloads, playable games, a reward wheel and offer comparisons, alongside bounded scam demonstrations.
 
 **Press Esc to clear ads temporarily.** Keyboard focus pauses moving cards; touch does not trigger evasion. Scheduling advances only while the scene is focused in the foreground.
@@ -89,11 +91,11 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=refine1).
+Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=cleaner1).
 
 Serve the repository root: Browse also uses shared files in `assets/` and `wallpapers/`. A local `127.0.0.1` link works on the host computer; share the published demo link with other computers.
 
-For the [local package](https://github.com/gary1110086/CSpopups/releases/download/v-refine1/Browse-scenarios-refine1.zip), extract the complete ZIP and follow `START-HERE.txt`. It includes the media, shared dependencies and SHA256 source manifest.
+For the [local package](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip), extract the complete ZIP and follow `START-HERE.txt`. It includes the media, shared dependencies and SHA256 source manifest.
 
 The public demo is hosted on GitHub Pages. Other static hosts can serve the same repository tree from its root.
 

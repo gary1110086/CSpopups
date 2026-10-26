@@ -1,28 +1,29 @@
 /* Local facilitator observations. No text inputs, files or browser history are recorded. */
 (() => {
   'use strict';
-  const PREFIX='br-review-v1:',INDEX='br-review-index-v1',MAX_EVENTS=200,MAX_REPORTS=12;
+  const PREFIX='br-review-v2:',INDEX='br-review-index-v2',LEGACY_PREFIX='br-review-v1:',LEGACY_INDEX='br-review-index-v1',MISSING=Symbol('missing'),MAX_EVENTS=200,MAX_REPORTS=12;
   const SCENES=['wallpapers','recipes','tools','movies','events','books','museum','nature','travel','market'];
-  const SITES=['corn','desk','stock','game','security','player','software','prize','coupon','parcel'];
+  const SITES=['corn','desk','stock','game','security','player','software','prize','coupon','parcel','cleaner'];
   const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter','inline','ambient','context','event','layout','fallback','document'];
-  const TYPES=['visit','ad-open','ad-show','dodge','ad-close','close-reveal','event','layout','consent','quiet','complete'];
+  const TYPES=['visit','ad-open','ad-show','dodge','ad-close','close-reveal','event','layout','consent','quiet','complete','burst'];
   const KINDS=['chat','tab','video','search','escalation','character','quiet','reward'];
-  const COUNTERS=['visits','shown','opened','blocked','native','decoys','dodges','closed','revealed','events','layouts','layoutDismissed','consentShown','consentManaged','consentAccepted','consentRejected','consentSaved','quiet','completed'];
+  const COUNTERS=['visits','shown','opened','blocked','native','decoys','dodges','closed','revealed','events','layouts','layoutDismissed','consentShown','consentManaged','consentAccepted','consentRejected','consentSaved','quiet','completed','bursts'];
   const cache=new Map();
   const seedOf=value=>typeof value==='string'&&/^[a-zA-Z0-9_-]{1,40}$/.test(value)?value:null;
   const integer=(value,max=10000)=>Number.isInteger(value)?Math.max(0,Math.min(max,value)):0;
   const clock=value=>Number.isFinite(value)?Math.max(0,Math.min(14400000,value)):0;
   const timestamp=value=>Number.isFinite(value)?Math.max(0,Math.min(100000000000000,value)):0;
   const choice=(value,options)=>options.includes(value)?value:undefined;
-  const readRaw=key=>{let raw;try{raw=sessionStorage.getItem(key);}catch{return cache.get(key)||null;}if(raw===null)return null;try{return JSON.parse(raw);}catch{return null;}};
+  const readRaw=key=>{let raw;try{raw=sessionStorage.getItem(key);}catch{return cache.has(key)?cache.get(key):MISSING;}if(raw===null)return MISSING;try{return JSON.parse(raw);}catch{return null;}};
   const writeRaw=(key,value)=>{cache.set(key,value);try{sessionStorage.setItem(key,JSON.stringify(value));}catch{}};
+  const removeRaw=key=>{cache.delete(key);try{sessionStorage.removeItem(key);}catch{}};
   const eventOf=value=>{
     if(!value||typeof value!=='object'||Array.isArray(value)||!TYPES.includes(value.type))return null;
     const e={type:value.type,at:clock(value.at),seq:integer(value.seq,1000000000)};
     for(const [key,list] of [['scene',SCENES],['site',SITES],['format',FORMATS],['control',['decoy','cta','fallback']],['outcome',['opened','blocked','native']],['kind',KINDS],['reason',['escape','event']],['action',['inserted','dismissed','shown','manage','accept','reject','save']]]){
       const v=choice(value[key],list);if(v!==undefined)e[key]=v;
     }
-    if(Number.isInteger(value.id)&&value.id>=1&&value.id<=30)e.id=value.id;
+    if(Number.isInteger(value.id)&&value.id>=1&&value.id<=40)e.id=value.id;
     if(Number.isInteger(value.count))e.count=integer(value.count,6);
     if(Number.isInteger(value.optional))e.optional=integer(value.optional,3);
     if(Number.isFinite(value.height))e.height=Math.round(Math.max(0,Math.min(1000,value.height)));
@@ -32,21 +33,39 @@
   const normalize=(value,seed)=>{
     const r=value&&typeof value==='object'&&!Array.isArray(value)?value:{};
     const counts={};for(const key of COUNTERS)counts[key]=integer(r.counts?.[key]);
-    const ids=value=>[...new Set((Array.isArray(value)?value:[]).filter(id=>Number.isInteger(id)&&id>=1&&id<=30))].slice(0,30);
-    const dodge={};for(let id=1;id<=30;id++){const count=integer(r.seen?.dodge?.[id],6);if(count)dodge[id]=count;}
-    return {version:1,seed,created:timestamp(r.created),updated:timestamp(r.updated),activeMs:clock(r.activeMs),seq:integer(r.seq,1000000000),scene:choice(r.scene,SCENES)||null,scenes:[...new Set((Array.isArray(r.scenes)?r.scenes:[]).filter(s=>SCENES.includes(s)))].slice(0,10),task:taskOf(r.task),counts,seen:{shown:ids(r.seen?.shown),closed:ids(r.seen?.closed),revealed:ids(r.seen?.revealed),dodge,kinds:[...new Set((Array.isArray(r.seen?.kinds)?r.seen.kinds:[]).filter(k=>KINDS.includes(k)))].slice(0,8)},events:(Array.isArray(r.events)?r.events:[]).slice(-MAX_EVENTS).map(eventOf).filter(Boolean)};
+    const ids=value=>[...new Set((Array.isArray(value)?value:[]).filter(id=>Number.isInteger(id)&&id>=1&&id<=40))].slice(0,40);
+    const dodge={};for(let id=1;id<=40;id++){const count=integer(r.seen?.dodge?.[id],6);if(count)dodge[id]=count;}
+    return {version:2,seed,created:timestamp(r.created),updated:timestamp(r.updated),activeMs:clock(r.activeMs),seq:integer(r.seq,1000000000),scene:choice(r.scene,SCENES)||null,scenes:[...new Set((Array.isArray(r.scenes)?r.scenes:[]).filter(s=>SCENES.includes(s)))].slice(0,10),task:taskOf(r.task),counts,seen:{shown:ids(r.seen?.shown),closed:ids(r.seen?.closed),revealed:ids(r.seen?.revealed),dodge,kinds:[...new Set((Array.isArray(r.seen?.kinds)?r.seen.kinds:[]).filter(k=>KINDS.includes(k)))].slice(0,8)},events:(Array.isArray(r.events)?r.events:[]).slice(-MAX_EVENTS).map(eventOf).filter(Boolean)};
   };
-  const index=()=>{const stored=readRaw(INDEX);return [...new Set((Array.isArray(stored)?stored:[]).map(seedOf).filter(Boolean))].slice(0,MAX_REPORTS);};
-  const get=seed=>{seed=seedOf(seed);if(!seed)return null;const raw=readRaw(PREFIX+seed);return raw&&typeof raw==='object'&&!Array.isArray(raw)?normalize(raw,seed):null;};
+  const seedsOf=stored=>[...new Set((Array.isArray(stored)?stored:[]).map(seedOf).filter(Boolean))].slice(0,MAX_REPORTS);
+  const index=()=>{const stored=readRaw(INDEX);return seedsOf(stored===MISSING?readRaw(LEGACY_INDEX):stored);};
+  const get=seed=>{
+    seed=seedOf(seed);if(!seed)return null;
+    let raw=readRaw(PREFIX+seed);
+    if(raw===MISSING){
+      const current=readRaw(INDEX);
+      // Once v2 owns the index, a deleted or pruned v1 report must stay absent.
+      if(current!==MISSING&&!seedsOf(current).includes(seed))return null;
+      raw=readRaw(LEGACY_PREFIX+seed);
+    }
+    return raw&&typeof raw==='object'&&!Array.isArray(raw)?normalize(raw,seed):null;
+  };
+  const writeIndex=next=>{
+    if(readRaw(INDEX)===MISSING)for(const seed of next){
+      if(readRaw(PREFIX+seed)!==MISSING)continue;
+      const report=get(seed);if(report)writeRaw(PREFIX+seed,report);
+    }
+    writeRaw(INDEX,next);
+  };
   const touch=(seed,value)=>{
     const previous=index(),next=[seed,...previous.filter(item=>item!==seed)].slice(0,MAX_REPORTS);
-    writeRaw(PREFIX+seed,value);writeRaw(INDEX,next);
-    for(const old of previous.filter(item=>!next.includes(item))){cache.delete(PREFIX+old);try{sessionStorage.removeItem(PREFIX+old);}catch{}}
+    writeRaw(PREFIX+seed,value);writeIndex(next);
+    for(const old of previous.filter(item=>!next.includes(item)))removeRaw(PREFIX+old);
   };
   const clear=seed=>{
     seed=seedOf(seed);if(!seed)return;
-    cache.delete(PREFIX+seed);try{sessionStorage.removeItem(PREFIX+seed);}catch{}
-    writeRaw(INDEX,index().filter(item=>item!==seed));
+    const next=index().filter(item=>item!==seed);
+    removeRaw(PREFIX+seed);removeRaw(LEGACY_PREFIX+seed);writeIndex(next);
   };
   window.BROWSE_REVIEW_DATA=Object.freeze({read:get,index,clear,eventOf});
   window.BROWSE_REVIEW_LOG=C=>{
@@ -82,7 +101,8 @@
         if(e.action==='inserted')increment(r,'layouts');else if(e.action==='dismissed')increment(r,'layoutDismissed');else return false;
       }else if(e.type==='consent'){
         const counter={shown:'consentShown',manage:'consentManaged',accept:'consentAccepted',reject:'consentRejected',save:'consentSaved'}[e.action];if(!counter)return false;increment(r,counter);
-      }else if(e.type==='quiet')increment(r,'quiet');
+      }else if(e.type==='burst')increment(r,'bursts');
+      else if(e.type==='quiet')increment(r,'quiet');
       else if(e.type==='complete')increment(r,'completed');
       r.scene=scene;if(!r.scenes.includes(scene))r.scenes.push(scene);
       r.task=taskOf(C.params?.get('task'))||r.task;
