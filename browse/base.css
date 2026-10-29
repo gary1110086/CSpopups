@@ -5,3 +5,9 @@
 
 /* Deep2: actual photographs replace the earlier advertising contact sheets. */
 .br-visual-desk{background:#e5ded2 url('assets/real-shop-shelf-thumb.webp') center/cover no-repeat}.br-visual-corn{background:linear-gradient(90deg,#111d,#1114),url('assets/video-sintel.jpg') center/cover}.br-visual-stock{background:linear-gradient(90deg,#152526db,transparent),url('assets/real-wall-ridge-lake-thumb.webp') center/cover}.br-scene-food .br-scene-art{background-size:cover;background-position:center}.br-scene-film .br-scene-art{background:#242424 url('assets/video-sintel.jpg') center/cover}.br-scene-event .br-scene-art{background:url('assets/journey-rail-klcc-0-thumb.webp') center/cover}
+/* User-supplied Corn portraits: native images, never stretched sprite cells. */
+.br-visual-corn{position:relative;isolation:isolate;overflow:hidden;background:#17130f;min-height:170px}
+.br-visual-corn .br-corn-photo-strip{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;z-index:-2}
+.br-visual-corn .br-corn-photo-strip img{display:block;width:100%;height:100%;min-width:0;object-fit:cover;object-position:50% 25%}
+.br-visual-corn:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#000a,transparent 75%);z-index:-1;pointer-events:none}
+.br-visual-corn>span,.br-visual-corn>i{align-self:flex-end;position:relative;text-shadow:0 1px 5px #000b}

@@ -1,3 +1,23 @@
+# Minute1 verification record
+
+29 October 2026. New independent60-second activity and clean difficulty-testing entry. Current Browse cache version: minute1. Existing free browsing and older independent entries keep their original timing behaviour. The cleaner1 record below describes the previous release snapshot.
+
+## Activity checks
+
+Corn photo integration passed34 actual Chrome checks: all three original JPEG hashes, desktop/phone proportions, native photo detail/Next/Back/search and existing video playback/seeking. Additional23 focused checks cover the real3-second Corn popup with all three photos, native isolated advertiser/retained image workspace, two-round review scoping, deletion/refresh/reload and actual BFCache. An activity review cannot silently switch to another participant after its record is deleted. All49 Browse JavaScript files pass syntax checking;598 local HTML references resolve.
+
+Actual Chrome local checks: all ten tasks124 assertions, UI105 assertions, staff verdict/handoff/mobile13, ad/modal/native-tab11, repeated Chinese movie starts7, and real60-second expiry8. The observed expiry was60,195ms after page-ready observation; stored endedAt equals the original absolute deadline. Independent runtime checks32 and supporting-reference navigation15 passed;53 additional VM assertions exercise storage normalization and API boundaries. Counts refer to separate runners, not unique user journeys.
+
+Verified genuine2560×1440JPEG,1280×853WebP at75quality and AliceTXT downloads; wrong exports do not satisfy criteria. Undo/resave and4→2→4 servings update evidence. A delayed real canvas blob crossing the deadline triggers neither download nor completion evidence. A blocked event loop cannot permit late scene mutations before the timer callback catches up. Native search/detail/reload and actual Chrome BFCache preserve the original deadline. Ended records remain immutable.
+
+Clean mode was checked across all ten task websites, including redraw/detail routes, without initialized commercial modules or authored sponsor blocks. Ads mode retains native isolated advertiser tabs, modal focus/inert controls and a usable390×240 external close. Source/help links open a separate native tab only during a challenge, retaining the clock owner; ordinary free browsing navigation remains native and unchanged.
+
+The older free-browsing Chrome runner passed62 local assertions. No runtime or failed application-asset errors were observed in the successful runs. One Chinese movie renderer fallback during concurrent development did not recur in three fresh contexts; subsequent public checks are recorded in the task's delivery evidence. Chrome coverage does not establish other-browser or OS focus-switching behaviour. Background timer delivery may be delayed by the browser; resuming finalizes against the existing deadline without extra time. Download dispatch is evidence of a generated file, not proof it was saved to disk.
+
+Temporary evidence: minute-qa-local-second-result.json; minute1-ui-result.json; minute-qa-local-ui-third-result.json; minute-qa-local-ads-fixed-result.json; minute-qa-local-expiry-result.json; minute-zh-fresh-contexts-result.json; minute-booth-runtime-browser-result.json; minute-booth-footer-browser-result.json. See [tasks, routes and operation](../docs/MINUTE-BOOTH.md).
+
+---
+
 # Cleaner1 verification record
 
 26 October 2026. Implements the selected leaked developer switch, ad burst, a detailed cleaner advertiser and actual audible advertisements. Strengthens collision movement for stationary as well as moving cards. Current cache version: cleaner1.

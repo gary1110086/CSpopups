@@ -1,14 +1,16 @@
 # Documentation / 文档索引
 
-The current experience is **Browse cleaner1**: 10 task websites, 30 assignments, 11 advertiser destinations and eight possible random encounters. 每次体验选取三种适合当前网站的事件，由相关浏览操作触发；新增泄露式广告开关、弹窗爆发与真实广告提示音。
+The current activity is **One Minute / minute1**: ten bilingual 60-second tasks, a clean test entry, automatic end and staff review. [Tasks, routes and operation / 任务、路线与现场操作](MINUTE-BOOTH.md). The existing free-browsing experience has 10 task websites, 30 assignments, 11 advertiser destinations and eight possible random encounters. 每次体验选取三种适合当前网站的事件，由相关浏览操作触发；新增泄露式广告开关、弹窗爆发与真实广告提示音。
 
 ## Start / 开始
 
 | Entry / 入口 | Links / 链接 |
 | --- | --- |
-| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=cleaner1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=cleaner1) |
-| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=cleaner1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=cleaner1) |
-| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=cleaner1); records stay in that browser tab. |
+| Clean difficulty test / 纯净难度测试 | [Open / 打开](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=minute1) |
+| 60-second ad challenge / 广告挑战 | [Open / 打开](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=minute1) |
+| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=minute1) |
+| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=minute1) |
+| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=minute1); records stay in that browser tab. |
 | Local package / 本地运行包 | [Release and download](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1); extract everything and follow `START-HERE.txt`. |
 
 ## Project documents / 项目文档
@@ -22,7 +24,7 @@ The current experience is **Browse cleaner1**: 10 task websites, 30 assignments,
 | [AdSweep sources](../browse/CLEANER-SOURCES.md) | Product-page references and the deceptive cleaner mechanism. |
 | [Design references](../browse/DESIGN-NOTES.md) | Category-specific layouts and reference decisions. |
 | [Verification record](../browse/VERIFICATION.md) | Recorded checks and their limits, including media, exports, native tabs and cached browser returns. |
-| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=cleaner1) | Benchmark websites and documented deceptive mechanisms. |
+| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=minute1) | Benchmark websites and documented deceptive mechanisms. |
 | [Little Daily runtime](../prototypes/little-daily/README.md) | Earlier article-site implementation and the root HTML routes that still use it. |
 | [Standalone Stillwall](../wallpapers/README.md) | Independent wallpaper prototype, its runtime and original artwork. |
 

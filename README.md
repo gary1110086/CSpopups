@@ -1,10 +1,14 @@
 # CSpopups
 
+**New60-second activity: [Clean difficulty test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=en&v=minute1) · [Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=en&v=minute1)**
+
+Ten short tasks with a briefing, a durable60-second clock, native website navigation, an automatic result page and staff review. Clean mode removes commercial interruptions for difficulty testing. [Tasks, finding routes and booth operation](docs/MINUTE-BOOTH.md). The cleaner1 ZIP linked below is an earlier snapshot; use the online activity or current repository source for minute1.
+
 A browsing experience about attention, advertising and deceptive design. Complete an everyday task while ordinary promotions and misleading pop-ups compete for your attention.
 
 **[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=cleaner1)** · [中文说明](README.zh-CN.md)
 
-Current version: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [What changed](docs/CHANGELOG.md)
+Current online activity: **minute1** · Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [What changed](docs/CHANGELOG.md)
 
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 

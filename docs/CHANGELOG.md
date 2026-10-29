@@ -1,6 +1,15 @@
 # Release history / 版本记录
 
-Current version: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current online activity: **minute1**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## minute1 — 29 October 2026
+
+- Added an independent bilingual 60-second activity: choose/read a task, enter a real site, automatically end, check recorded evidence, assign a staff verdict and open the matching review. Ten simplified tasks include staff routes and answers.
+- Added a clean entry without commercial modules or authored sponsor blocks. The ad version retains the current encounters. Ordinary free browsing keeps its existing flow.
+- Keep one wall-clock deadline across native navigation, reload, Back and advertiser tabs. Freeze evidence at the deadline; late image encoding cannot trigger a download or claim completion. Undoing a save or reverting servings updates the result.
+- Added fresh-seed participant handoff, scoped TXT records and native supporting-reference tabs that keep the active timer.
+- Added the three user-supplied Corn portraits to popup visuals and the Corn website.
+- The existing cleaner1 release ZIP remains the earlier snapshot; use online activity entries or current source for minute1.
 
 ## cleaner1 — 26 October 2026
 

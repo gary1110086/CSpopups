@@ -52,24 +52,25 @@
     const state=normalize(initial),entries=new Map();
     const overlayRoot=document.getElementById('interrupt-root')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'interrupt-root'}));
     overlayRoot.dataset.collisions=String(collisionEnabled);
-    let suspended=false,last=performance.now(),lastOutsideFocus=null,modalId=null,externalModal=false;
+    let suspended=false,destroyed=false,last=performance.now(),lastOutsideFocus=null,modalId=null,externalModal=false;
     let restoreFrame=0,restoreGeneration=0,restoring=false,clearAfterRestore=false;
-    const save=()=>{if(!suspended)C.rawWrite(KEY,state);};
+    const save=()=>{if(!suspended&&!destroyed)C.rawWrite(KEY,state);};
     const burstActive=()=>state.pending.some(p=>p.burst===true);
     const phone=()=>matchMedia('(max-width: 640px)').matches;
     const limit=()=>burstActive()?(phone()?5:10):(phone()?2:4);
     const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write,adOffer,campaignSite});
-    const foreground=()=>!suspended&&!externalModal&&!document.hidden&&document.hasFocus();
+    const foreground=()=>!destroyed&&!suspended&&!externalModal&&!document.hidden&&document.hasFocus();
     const snapshot=()=>({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:externalModal||modalId!==null,externalModal,suspended,restoring,shown:state.shown,pending:state.pending.length,burstUsed:state.burstUsed,burstActive:burstActive()});
     const observe=detail=>window.dispatchEvent(new CustomEvent('browse:review',{detail}));
-    const pressureUpdate=()=>{const current=snapshot();overlayRoot.dataset.collisions=String(collisionEnabled||current.burstActive);pressure.update(current);C.onState?.(current);};
+    const pressureUpdate=()=>{if(destroyed)return;const current=snapshot();overlayRoot.dataset.collisions=String(collisionEnabled||current.burstActive);pressure.update(current);C.onState?.(current);};
     const stopEntry=entry=>{entry.squeeze?.cancel();entry.motion?.stop();entry.motion=null;};
     const removeEntry=id=>{const entry=entries.get(id);if(!entry)return;stopEntry(entry);entry.stage.remove();entries.delete(id);};
     const stopAll=()=>{for(const entry of entries.values())stopEntry(entry);};
     const rememberFocus=()=>{const el=document.activeElement;if(el&&el!==document.body&&root.contains(el))lastOutsideFocus=el;};
     const returnFocus=()=>{if(lastOutsideFocus?.isConnected&&!lastOutsideFocus.inert)lastOutsideFocus.focus({preventScroll:true});};
     const viewport=()=>({left:visualViewport?.offsetLeft||0,top:visualViewport?.offsetTop||0,width:visualViewport?.width||innerWidth,height:visualViewport?.height||innerHeight});
-    const closeReserves=p=>p.closeStyle==='visible'?{top:0,bottom:0}:p.closeCorner==='bottom-right'?{top:0,bottom:30}:{top:30,bottom:0};
+    const boothOffset=()=>Math.max(0,parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--br-booth-offset'))||0);
+    const closeReserves=p=>({top:boothOffset()+(p.closeStyle!=='visible'&&p.closeCorner!=='bottom-right'?30:0),bottom:p.closeStyle!=='visible'&&p.closeCorner==='bottom-right'?30:0});
     const burstSlots=[[.02,.06],[.72,.08],[.28,.48],[.97,.88],[.05,.94],[.64,.56],[.4,.02],[.98,.32],[.15,.44],[.5,.91]];
     const positionEntry=entry=>{
       const v=viewport(),reserve=closeReserves(entry.p);entry.card.style.setProperty('--br-motion-view-width',v.width+'px');entry.card.style.setProperty('--br-motion-view-height',v.height+'px');
@@ -237,6 +238,7 @@
     document.addEventListener('focusin',event=>{if(root.contains(event.target))lastOutsideFocus=event.target;});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!externalModal){event.preventDefault();closeAll();}});
     const tick=()=>{
+      if(destroyed)return;
       const now=performance.now(),delta=Math.max(0,Math.min(1100,now-last));last=now;
       if(!foreground()){pressureUpdate();return;}
       state.activeMs+=delta;
@@ -260,18 +262,20 @@
       }else pressureUpdate();
       collide();
     };
-    setInterval(tick,250);setInterval(()=>{if(!suspended)save();},2000);
+    const tickInterval=setInterval(tick,250),saveInterval=setInterval(()=>{if(!suspended)save();},2000);
     const resetClock=()=>{last=performance.now();if(!foreground())for(const entry of entries.values())entry.squeeze?.cancel();if(!suspended)save();pressureUpdate();};
     document.addEventListener('visibilitychange',resetClock);window.addEventListener('blur',resetClock);window.addEventListener('focus',resetClock);
     const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
     motionPreference.addEventListener('change',()=>{if(motionPreference.matches)for(const entry of entries.values())entry.squeeze?.cancel();});
     window.addEventListener('pagehide',()=>{
+      if(destroyed)return;
       const wasLive=!suspended;suspended=true;restoring=false;externalModal=false;restoreGeneration++;
       cancelAnimationFrame(restoreFrame);restoreFrame=0;stopAll();
       if(wasLive)C.rawWrite(KEY,state);
       pressureUpdate();
     });
     window.addEventListener('pageshow',event=>{
+      if(destroyed)return;
       last=performance.now();if(!event.persisted){suspended=false;return;}
       suspended=true;restoring=true;overlayRoot.hidden=true;overlayRoot.dataset.restoring='true';stopAll();
       cancelAnimationFrame(restoreFrame);const generation=++restoreGeneration;
@@ -293,7 +297,14 @@
     const resize=()=>{if(suspended)return;for(const entry of entries.values())entry.squeeze?.cancel();sync();save();};
     window.addEventListener('resize',resize);visualViewport?.addEventListener('resize',resize);visualViewport?.addEventListener('scroll',()=>{for(const entry of entries.values())positionEntry(entry);});
     sync();save();
-    return {snapshot,burst,quiet:(duration)=>{if(suspended)return false;closeAll(duration,'event');return true;},setExternalModal:(value)=>{
+    return {snapshot,burst,destroy(){
+      if(destroyed)return;destroyed=true;suspended=true;restoring=false;restoreGeneration++;cancelAnimationFrame(restoreFrame);
+      clearInterval(tickInterval);clearInterval(saveInterval);stopAll();for(const id of [...entries.keys()])removeEntry(id);
+      state.pending=[];modalId=null;externalModal=false;root.inert=false;
+      const taskShell=document.querySelector('.br-task-shell');if(taskShell)taskShell.inert=false;
+      pressure.destroy();overlayRoot.replaceChildren();
+    },quiet:(duration)=>{if(suspended)return false;closeAll(duration,'event');return true;},setExternalModal:(value)=>{
+      if(destroyed)return;
       const next=value===true;if(next===externalModal)return;externalModal=next;last=performance.now();
       // Dialog cleanup must release the lock even after pagehide has suspended writers.
       applyModal();

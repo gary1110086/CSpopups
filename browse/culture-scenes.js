@@ -3,7 +3,14 @@
   'use strict';
   const validList = (C,key,records) => { const raw=C.read(key,[]); return Array.isArray(raw)?[...new Set(raw.filter(x=>typeof x==='string'&&records.some(r=>r.id===x)))]:[]; };
   const wordsMatch = (text,q) => q.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean).every(w=>text.toLocaleLowerCase().includes(w));
-  const downloadText = (name,text) => { const blob=new Blob(['\uFEFF'+text],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a'); a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500); };
+  const downloadText = (name,text) => {
+    if(window.BROWSE_BOOTH?.canAct()===false)return false;
+    const blob=new Blob(['\uFEFF'+text],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);
+    const excerpt=/^folio-([a-z-]+)-excerpt\.txt$/.exec(name);
+    if(excerpt)window.BROWSE_BOOTH?.recordExport({kind:'book',id:excerpt[1],format:'text/plain',bytes:blob.size});
+    return true;
+  };
   function catalogue(C,type) {
     const {root,params,t,esc}=C,book=type==='books',records=book?window.CULTURE_BOOKS:window.CULTURE_ART,file=book?'book.html':'museum.html',key=book?'culture-reading-list':'culture-exhibition',compareKey='culture-comparison';
     if(!Array.isArray(records))return;

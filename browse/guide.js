@@ -3,12 +3,12 @@
  const p=new URLSearchParams(location.search),zh=p.get('lang')==='zh',t=(a,b)=>zh?b:a;
  document.documentElement.lang=zh?'zh-Hans':'en';
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const u=(file,q={})=>{const x=new URL(file,location.href);x.searchParams.set('lang',zh?'zh':'en');x.searchParams.set('v','cleaner1');if(p.has('seed')&&file!=='review.html')x.searchParams.set('seed',p.get('seed'));Object.entries(q).forEach(([k,v])=>x.searchParams.set(k,String(v)));return x.href;};
+ const u=(file,q={})=>{const x=new URL(file,location.href);x.searchParams.set('lang',zh?'zh':'en');x.searchParams.set('v','minute1');if(p.has('seed')&&file!=='review.html')x.searchParams.set('seed',p.get('seed'));Object.entries(q).forEach(([k,v])=>x.searchParams.set(k,String(v)));return x.href;};
  const root=document.getElementById('guide-root'),section=(title,body)=>`<section><h2>${title}</h2>${body}</section>`;
  const links=items=>`<div class="br-dest-links">${items.map(([label,url])=>`<a href="${esc(url)}">${label} ↗</a>`).join('')}</div>`;
  const sources=items=>(items||[]).map(s=>`<p><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a><br><small>${esc(s.observed||s.pattern||'')}</small></p>`).join('');
  try{
-  const rs=await Promise.all(['scene-references.json','destination-references.json'].map(f=>fetch(f+'?v=cleaner1')));if(rs.some(r=>!r.ok))throw Error('references');
+  const rs=await Promise.all(['scene-references.json','destination-references.json'].map(f=>fetch(f+'?v=minute1')));if(rs.some(r=>!r.ok))throw Error('references');
   const [data,ads]=await Promise.all(rs.map(r=>r.json()));if(!Array.isArray(data.scenes)||!Array.isArray(ads))throw Error('schema');
   const scenes=window.BROWSE_SCENE_INDEX||[],names={corn:'Cornhub',desk:'Form & Field',stock:'Framekind',game:'Tiny Arcade',security:'SecureLane',player:'Orbit Player',software:'AppHarbor',prize:'Lucky Circle',coupon:'Perk Basket',parcel:'NorthPost'};
   document.title=t('Browse — facilitator notes & sources','Browse · 主持人说明与来源');

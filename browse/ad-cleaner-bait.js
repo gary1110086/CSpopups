@@ -41,6 +41,6 @@
       dismissed=true;write('cleaner-bait-dismissed',true);node.remove();
     });
     reconcile();update(current);
-    return {reconcile,update};
+    return {reconcile,update,destroy(){dismissed=true;node.remove();}};
   };
 })();
