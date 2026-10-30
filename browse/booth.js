@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'corn2a';
+  const VERSION = 'corn3';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];

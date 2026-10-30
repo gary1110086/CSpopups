@@ -1,6 +1,12 @@
 # Release history / 版本记录
 
-Current activity source: **corn2a**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source: **corn3**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## corn3 — 30 October 2026
+
+- Download and self-host complete Caminandes1/2/3 films from official Blender Studio assets explicitly marked CC BY4.0. The960×540 faststart H.264/AAC files retain original sound and end credits, matching film posters, native controls and real downloads.
+- Retain the official online Upin & Ipin player and both My Little Pony live side destinations as requested. Each supplied cover appears once; Caminandes2 uses an additional matching poster card. There are seven catalogue records, six self-hosted and one online.
+- Preserve native navigation, saved cover IDs, progress and legacy URL compatibility. Cache version corn3; activity deadlines, independent clean entry and other scenes retain existing behavior. Public deployment is verified separately before publication is reported.
 
 ## corn2a — 30 October 2026
 

@@ -10,7 +10,7 @@ The design was informed by the following first-party interface descriptions. The
 - [Updated Site Navigation](https://de.pornhub.lifestyle/blog/updated-site-navigation),17 July2022: compact navigation and account-menu structure.
 - [Tablet Site Revamp](https://www.pornhub.lifestyle/blog/tablet-site-revamp): category navigation, sorting, search and playback-page actions.
 
-Corn uses its own fictional brand, local implementation and existing project media. No third-party tube-site code is copied into the portal. The three official animation embeds load YouTube's player inside their frames; account and payment surfaces remain local demonstrations.
+Corn uses its own fictional brand, local implementation and existing project media. No third-party tube-site code is copied into the portal. Six catalogue records use same-site MP4 files with native controls; Upin & Ipin retains its official YouTube embed; account and payment surfaces remain local demonstrations.
 
 ## Routes and interactions
 
@@ -18,14 +18,16 @@ The native destination URL remains `browse/destination.html?site=corn`. Search, 
 
 ## Media
 
-The three user-supplied JPEGs remain unchanged. Each now appears once in the catalogue as an activity cover linking to an official regional animation player. The watch page names the actual animation and explains the illustrative cover. No duplicate close-up/portrait-crop records or invented animation durations remain. Old crop URLs open the corresponding video; old crop favourites merge into the canonical item without duplication. Licensed local film previews retain matching posters, playback and creator/source information. See [cover sources](../browse/assets/CORN-PORTRAITS.md), [regional animation sources](../browse/assets/REGIONAL-ANIMATION-SOURCES.md) and [local video sources](../browse/assets/VIDEO-SOURCES.md).
+The three user-supplied JPEGs remain unchanged. Each appears once in the catalogue. Two covers open complete local Caminandes1/3 shorts; Upin & Ipin keeps its official online player. Caminandes2 has a separate matching poster card. The watch page names the actual animation and explains the illustrative cover. No duplicate close-up/portrait-crop records or invented animation durations remain. Old crop URLs open the corresponding video; old crop favourites merge into the canonical item without duplication. Licensed local film previews retain matching posters, playback and creator/source information. See [cover sources](../browse/assets/CORN-PORTRAITS.md), [self-hosted animation sources](../browse/assets/REGIONAL-ANIMATION-SOURCES.md) and [local video sources](../browse/assets/VIDEO-SOURCES.md).
 
-## Side live-room promotions (corn2a)
+## Playback and side live promotions (corn3)
 
 Two independently dismissible floating cards sit beside the desktop catalogue, with pink lounge and violet screening-room treatments. They do not repeat the three supplied covers. On smaller screens they become compact lower-left/lower-right cards, with additional document space so content can scroll above them. Each genuine close dismisses only its own card; Escape dismisses both. Dismissals persist within the tab and are reconciled on native navigation, reload and BFCache render.
 
-Both side promotion anchors now open the [My Little Pony official YouTube live entry](https://www.youtube.com/channel/UC9qgVkKRZUXcgHdf35Z-8dw/live?hl=en) in isolated native tabs. The channel endpoint follows the current live selection. The visual treatments and individual genuine close controls remain. Original `view=live&room=lounge|screening` URLs and the header LIVE tab retain their compatible local licensed preview rooms. No live account, camera, microphone or payment is requested by this site.
+Both side promotions retain the My Little Pony official YouTube channel live entry, opening isolated native tabs with noopener/noreferrer. Upin & Ipin retains its official youtube-nocookie.com player, strict-origin-when-cross-origin referrer identity and official-watch fallback. These two online services need internet; neither is downloaded or offered as a local file.
 
-The three regional animations use online official YouTube embeds, with visible official-watch fallback links. These three videos require a connection to YouTube; the existing three local licensed clips and live-room previews remain self-hosted.
+Three complete Caminandes shorts are1:30,2:26 and2:30, with original sound and full ending credits. They were downloaded from official Blender Studio assets explicitly marked CC BY4.0 and re-encoded to960×540 H.264/AAC with faststart. Matching film posters, native controls, real MP4 downloads, attribution and per-tab progress restoration are included. The original three licensed excerpts remain. These six self-hosted video records can play from a local HTTP preview with external internet blocked. The public site still needs its own files to load.
+
+Original local room URLs and the header screening tab play the first/third complete shorts. Old regional and portrait/crop URLs remain compatible. The retained Upin cover keeps its online player; new clip=animation&id=1 opens the separate local Caminandes2 record.
 
 This change is limited to the Corn advertiser. The pure activity,60-second clock, per-round review and other advertising websites keep their existing flows.

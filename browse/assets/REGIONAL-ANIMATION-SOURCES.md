@@ -1,19 +1,21 @@
-# Cornhub regional animation sources
+# Cornhub self-hosted animation sources
 
-Selected and checked on 30 October 2026. The three existing activity cover JPEGs each link to one official online animation. The covers are illustrative activity assets, not stills from these productions. The player page names the actual animation and links to its official publisher.
+Updated on 30 October 2026 for corn3. The user approved replacing the earlier named online cartoons with films that permit downloading and local playback. The three supplied activity covers each appear once. Two open self-hosted Caminandes1/3 shorts; Upin & Ipin keeps its official online player. Caminandes2 has an additional matching film-poster card. They are illustrative covers rather than frames from these films. The player names the actual animation.
 
-| Region | Official video | Official publisher | YouTube ID |
+| Film | Official asset and explicit licence | Local MP4 | Duration |
 | --- | --- | --- | --- |
-| Indonesia | [NUSSA: TIDUR SENDIRI, GAK TAKUT!](https://www.youtube.com/watch?v=Cxdx5vibsTg) | [NussaOfficial](https://www.youtube.com/@NussaOfficialSeries) | `Cxdx5vibsTg` |
-| Malaysia | [Upin & Ipin — Gong Xi Fa Cai](https://www.youtube.com/watch?v=uv8Y3sNCXK8) | [Les’ Copaque Production](https://www.youtube.com/@lescopaque) | `uv8Y3sNCXK8` |
-| China | [喜羊羊与灰太狼 · 奇趣外星客 EP29 惊喜](https://www.youtube.com/watch?v=TKWp9BcD560) | [喜羊羊與灰太狼動畫-官方中文頻道](https://www.youtube.com/@XYY-Cartoon) | `TKWp9BcD560` |
+| Caminandes 1: Llama Drama | [Blender Studio asset2362](https://studio.blender.org/projects/api/assets/2362/) · [CC BY4.0](https://creativecommons.org/licenses/by/4.0/) | video-caminandes-1.mp4 | 1:30 |
+| Caminandes 2: Gran Dillama | [Blender Studio asset2363](https://studio.blender.org/projects/api/assets/2363/) · [CC BY4.0](https://creativecommons.org/licenses/by/4.0/) | video-caminandes-2.mp4 | 2:26 |
+| Caminandes 3: Llamigos | [Blender Studio asset2417](https://studio.blender.org/projects/api/assets/2417/) · [CC BY4.0](https://creativecommons.org/licenses/by/4.0/) | video-caminandes-3.mp4 | 2:30 |
 
-YouTube's official oEmbed endpoint returned HTTP200 and the matching video title, publisher and embed HTML for all three IDs. These videos are embedded from the official channels, not redistributed as downloaded files or represented as Creative Commons material. No duration or current audience count is inferred from an oEmbed response. Catalogue statistics remain illustrative, as stated in the site footer.
+Downloaded from the public MP4 source exposed by each official asset page. Each asset explicitly links CC BY4.0 and requests attribution to Blender Studio. See the official [Gran Dillama project](https://studio.blender.org/projects/caminandes-2/), [Llamigos project](https://studio.blender.org/projects/caminandes-3/) and [remixing policy](https://studio.blender.org/remixing/). Credit: Blender Studio / Caminandes team. The complete original end credits remain in every film; no endorsement is implied.
 
-The embeds use `youtube-nocookie.com`, native playback controls, `playsinline=1`, fullscreen permission and `referrerpolicy="strict-origin-when-cross-origin"`. The provider needs network access and can change availability, regional restrictions or embedding permission. Each player has a permanently visible official-watch link. No unrelated clip silently replaces an unavailable regional video.
+The complete films were re-encoded to960×540 H.264/AAC with faststart. Original sound and full ending credits are retained; no time excerpt was selected. Matching JPEG player posters were extracted at12seconds. Source and delivered SHA256, byte counts, codec/dimension/duration records and stable official asset identifiers are recorded in [CORN-LOCAL-ANIMATION.json](CORN-LOCAL-ANIMATION.json). Expiring signed download URLs are not used by the website.
 
-Implementation references: [YouTube player parameters](https://developers.google.com/youtube/player_parameters), [API client identity and referrer requirements](https://developers.google.com/youtube/terms/required-minimum-functionality#referer).
+Six catalogue records use native HTML5 players and same-site MP4 files: these three complete shorts and the existing three licensed excerpts. The retained Upin & Ipin card uses the official [Les’ Copaque video](https://www.youtube.com/watch?v=uv8Y3sNCXK8) through youtube-nocookie.com, with a visible official-watch fallback and a strict-origin-when-cross-origin referrer policy. It is not downloaded, redistributed or offered as a local MP4. The online player needs internet access.
 
-Both side promotion links now open the [My Little Pony official channel live entry](https://www.youtube.com/channel/UC9qgVkKRZUXcgHdf35Z-8dw/live?hl=en) in isolated native YouTube tabs. The channel endpoint follows its current live selection rather than a fixed archived broadcast. Checked on 30 October 2026: the official channel ID is `UC9qgVkKRZUXcgHdf35Z-8dw`, and the endpoint returned its Halloween Equestria Girls marathon player. Live availability remains controlled by the publisher.
+Both side promotions retain the [My Little Pony official channel live entry](https://www.youtube.com/channel/UC9qgVkKRZUXcgHdf35Z-8dw/live?hl=en), opening isolated native YouTube tabs. Live availability follows the publisher. Those broadcasts are not downloaded or presented as local films.
 
-Side promotions retain the existing generated `ad-video.jpg` cover and original CSS/SVG camera illustration. These are illustrative activity assets. Existing local room preview URLs remain compatible and use the licensed Big Buck Bunny and Tears of Steel excerpts, credited in [VIDEO-SOURCES.md](VIDEO-SOURCES.md).
+The self-hosted film flows can run from a local HTTP preview with external internet blocked. The public site still needs its own files to load. The older local room URLs remain compatible and play Caminandes1/3. Old clip=regional and portrait/crop URLs map to the corresponding cover; Upin keeps its online player. New clip=animation&id=1 opens the additional local Caminandes2 card.
+
+The earlier Nussa and Pleasant Goat online references were replaced, and neither was downloaded. Side cards retain the generated ad-video.jpg cover and original CSS/SVG camera illustration as illustrative activity assets. Those images are not frames from the animations.
