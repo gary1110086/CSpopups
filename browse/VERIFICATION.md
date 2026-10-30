@@ -1,3 +1,7 @@
+# Corn1b prompt-close regression
+
+30 October2026. The older upper-left header rule used static positioning; a zero-height prompt header could therefore lift a visible close13px above its frame. A scoped prompt rule retains absolute positioning at5px. Local97 Chrome assertions cover24 combinations: four formats × three close styles × two corners, including every visible genuine cross, reload/deadline retention and actual closing. Corn1a public25 bar-restore checks, the short ghost-captcha close/Continue hit-test and another real60-second expiry8 passed. Current cache version is corn1b; schema remains v9. The first release's portal/media features are unchanged.
+
 # Corn1a activity-strip regression
 
 30 October2026. A public short-screen fixture exposed an ordering issue: pending cards mount before booth.start adds the56px activity strip. The engine now reserves that strip immediately after validating the round, before either scroll limits or motion controllers measure the viewport. The activity deadline still starts at the existing booth.start call. The v9 state schema is unchanged.
@@ -6,7 +10,7 @@ Local49 Chrome assertions cover all eight old/new formats, top-left and bottom-r
 
 # Corn1 local verification record
 
-30 October2026. Cornhub portal redesign and four additional teaching prompts. Current Browse cache version: corn1a. Browser plugin not available; validation uses installed Playwright with actual Chrome. The original root and standalone wallpapers runtimes remain independent.
+30 October2026. Cornhub portal redesign and four additional teaching prompts. Current Browse cache version: corn1b. Browser plugin not available; validation uses installed Playwright with actual Chrome. The original root and standalone wallpapers runtimes remain independent.
 
 - Corn portal:70 actual Chrome assertions, including desktop1440 and phones390/320 in both languages, native filters, categories/channels, filtered-favourite removal, all three original photo routes, real licensed video playback/20-second seeking, real BFCache, native advertiser isolation and retained processed workspace/deadline. Twenty unrelated destination snapshots compare unchanged, plus one health assertion.
 - Prompt integration:60 assertions cover all four actual3-second arrivals, click/Space spinner→check, disabled Continue, genuine Decline/Escape, blocked popup/native Ctrl-click fallback, real390×240 activity layouts, two-hop native children and fixed landing URLs, actual processed image/settings retained, original round deadline, exact-round review and clean mode. Final external requests in this suite are intercepted with neutral HTML so third-party resources do not affect the application checks. For native Ctrl-click, Chrome's first document is observed at the child-page event; later documents are observed as requests.

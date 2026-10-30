@@ -16,10 +16,10 @@ When popup opening is blocked, the original card remains and exposes a genuine n
 
 Start any of these URLs without a seed to create a fresh inspection session. The selected format is the first floating arrival after3 active focused seconds. Ordinary ambient advertisements remain present.
 
-- [Robot illustration](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=robot&landing=trip&lang=en&v=corn1a)
-- [Player error](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=player-error&landing=shop&lang=en&v=corn1a)
-- [Bonus balance](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=bonus&landing=games&lang=en&v=corn1a)
-- [Animated checkbox](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=captcha&landing=trip&lang=en&v=corn1a)
+- [Robot illustration](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=robot&landing=trip&lang=en&v=corn1b)
+- [Player error](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=player-error&landing=shop&lang=en&v=corn1b)
+- [Bonus balance](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=bonus&landing=games&lang=en&v=corn1b)
+- [Animated checkbox](https://gary1110086.github.io/CSpopups/browse/tools.html?prompt=captcha&landing=trip&lang=en&v=corn1b)
 
 Normal arrival order is bounce, robot, dodge, player-error, bonus, captcha, tiny, drawer, panel, newsletter. Only one modal can exist at a time; a conflicting modal slot falls back to a moving card. Existing density, close styles, ten-second visible-close rescue, evasion budgets, audio and one-time manual burst remain. A pending prompt retains its fixed landing category through reload/native navigation.
 

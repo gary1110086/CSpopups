@@ -26,7 +26,7 @@ window.BROWSE_CORN_PORTAL = function (D) {
   const pageItem=()=>view==='watch'?titleOf('v'+(id%Math.max(1,media.length))):titleOf('p'+(id%3)+(get('frame')==='close'?'-close':get('frame')==='portrait'?'-portrait':''));
   const itemHref=x=>href(x.kind==='video'?'watch':'portrait',{id:x.index,...(x.kind==='photo'?{frame:x.frame}:{})});
   const allContext=()=>Object.fromEntries(['seed','campaign','phase','interest','topic','from'].filter(k=>get(k)).map(k=>[k,String(get(k)).slice(0,160)]));
-  const hidden=fields=>Object.entries({site:'corn',lang,v:get('v')||'corn1a',...allContext(),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('');
+  const hidden=fields=>Object.entries({site:'corn',lang,v:get('v')||'corn1b',...allContext(),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('');
   const queryValues=()=>Object.fromEntries(['q','category','sort','time','channel'].filter(k=>get(k)).map(k=>[k,String(get(k)).slice(0,160)]));
   const languageURL=()=>{const q=new URLSearchParams(p);q.set('lang',lang==='zh'?'en':'zh');q.set('site','corn');return 'destination.html?'+q;};
   const button=(act,label,token='',pressed=false,extra='')=>`<button type="button" data-cp-action="${act}"${token?` data-token="${esc(token)}"`:''} aria-pressed="${pressed}" ${extra}>${label}</button>`;

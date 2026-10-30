@@ -2,9 +2,9 @@
 
 活动版入口把选题、读题、真实网站、60秒倒计时、本轮结果和复盘连在同一个原生浏览器标签页里。
 
-- [纯净难度测试 / Clean test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn1a)
-- [广告挑战 / Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn1a)
-- [English clean test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=en&v=corn1a)
+- [纯净难度测试 / Clean test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn1b)
+- [广告挑战 / Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn1b)
+- [English clean test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=en&v=corn1b)
 
 ## 工作人员怎么用
 
@@ -50,7 +50,7 @@
 python browse/preview-server.py --port 5210
 ```
 
-打开 `http://127.0.0.1:5210/browse/clean.html?lang=zh&v=corn1a`。需从仓库根目录提供共享的assets与wallpapers资源。
+打开 `http://127.0.0.1:5210/browse/clean.html?lang=zh&v=corn1b`。需从仓库根目录提供共享的assets与wallpapers资源。
 
 GitHub Release中的cleaner1 ZIP是此前的版本，不包含minute1活动入口。需要活动版时使用上方在线入口或当前仓库源码。
 

@@ -1,4 +1,5 @@
 /* These teaching prompts are isolated from the scene and advertiser styles. */
+.br-ad.br-stack-card.br-prompt-shell[data-close-corner="top-left"] .br-ad-top>.br-real-close{position:absolute;top:5px;left:5px;right:auto;bottom:auto;margin:0}
 .br-prompt-shell .br-prompt p{color:inherit}.br-prompt-shell .br-prompt-error-body p{color:#777}
 .br-prompt-shell>.br-prompt-bonus-badge{z-index:3;pointer-events:none;font-family:Arial,sans-serif}@media(max-height:320px){.br-prompt-shell>.br-prompt-bonus-badge{top:0;left:0}}
 .br-prompt-shell .br-ad-top{position:absolute;inset:0 0 auto;height:0;min-height:0;padding:0;border:0;z-index:2;overflow:visible;background:transparent}.br-prompt-shell .br-ad-top .br-real-close{position:absolute;right:5px;top:5px;width:26px;height:26px;background:#ffffffb8;color:#777;border:0;border-radius:3px;font:25px/1 Arial,sans-serif}.br-prompt-shell .br-blocked{margin:0;padding:10px 15px;background:#fff;color:#333;border-radius:0 0 10px 10px}.br-prompt-shell .br-blocked a{color:#1769b4}.br-prompt-shell .br-ad-top:has(.br-real-close){pointer-events:none}.br-prompt-shell .br-ad-top .br-real-close{pointer-events:auto}

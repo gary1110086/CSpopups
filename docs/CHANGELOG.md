@@ -1,6 +1,11 @@
 # Release history / 版本记录
 
-Current online activity: **corn1a**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current online activity: **corn1b**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## corn1b — 30 October 2026
+
+- Keep the genuine upper-left close absolutely positioned in the four new prompt shells. This avoids the older flex-header rule lifting that button into the activity strip on very short screens. Other formats keep their existing close layout.
+- Local97 Chrome assertions cover all four new formats, visible/dual/ghost styles, upper-left/lower-right controls, real short activity strips and native reload. Current cache version is corn1b.
 
 ## corn1a — 30 October 2026
 

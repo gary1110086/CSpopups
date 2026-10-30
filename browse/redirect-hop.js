@@ -12,10 +12,10 @@
   if(!valid){
     document.querySelector('.spinner').hidden=true;
     title.textContent=t('Link unavailable','链接不可用');status.textContent=t('Choose a website to continue.','请选择网站继续。');
-    next.href='launch.html?lang='+lang+'&v=corn1a';next.textContent=t('Website chooser','网站入口');next.hidden=false;return;
+    next.href='launch.html?lang='+lang+'&v=corn1b';next.textContent=t('Website chooser','网站入口');next.hidden=false;return;
   }
   const second=new URL('redirect-hop.html',location.href);
-  second.search=new URLSearchParams({step:'2',target,lang,v:'corn1a'}).toString();
+  second.search=new URLSearchParams({step:'2',target,lang,v:'corn1b'}).toString();
   const destination=step==='1'?second.href:destinations[target];
   title.textContent=t(step==='1'?'Checking connection…':'Opening page…',step==='1'?'正在检查连接…':'正在打开页面…');
   document.title=title.textContent;
