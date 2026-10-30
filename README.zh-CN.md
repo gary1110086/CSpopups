@@ -2,13 +2,13 @@
 
 一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
 
-**新增60秒活动入口： [纯净难度测试](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn1) · [广告挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn1)**
+**新增60秒活动入口： [纯净难度测试](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn1a) · [广告挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn1a)**
 
 10项一分钟任务：选题 → 读题 → 进入真实网站 → 到时自动结束 → 工作人员核对与本轮复盘。纯净模式关闭商业干扰，便于先测试任务难度。[任务、寻找路线与现场操作](docs/MINUTE-BOOTH.md)。下方cleaner1下载包是此前快照，不含新活动入口；活动版使用在线入口或当前仓库源码。
 
 **[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=cleaner1)** · [English](README.md)
 
-当前在线活动：**corn1** · 此前下载快照：**[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [查看更新记录](docs/CHANGELOG.md)
+当前在线活动：**corn1a** · 此前下载快照：**[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [查看更新记录](docs/CHANGELOG.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 

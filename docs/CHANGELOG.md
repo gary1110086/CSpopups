@@ -1,6 +1,11 @@
 # Release history / 版本记录
 
-Current online activity: **corn1**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current online activity: **corn1a**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## corn1a — 30 October 2026
+
+- Reserve the activity strip before restored pending advertisements measure the viewport. This keeps external close controls below the timer on short screens after reload, including both top and bottom close corners.
+- Updated cache URLs to corn1a; pending state remains v9 and round deadlines remain unchanged.
 
 ## corn1 — 30 October 2026
 

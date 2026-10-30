@@ -9,6 +9,9 @@
   }
   const round=roundContext?.round;
   if(round&&['ended','void'].includes(round.status)){location.replace(booth.resultURL(round));return;}
+  // Restored pending cards mount before booth.start(). Reserve the strip before
+  // either their scroll limits or motion controllers measure the viewport.
+  if(round){document.documentElement.classList.add('br-booth-running');document.documentElement.style.setProperty('--br-booth-offset','56px');}
   if(round){params.set('seed',round.seed);params.set('mode',round.mode);params.set('lang',round.lang);}
   const clean=Boolean(round&&round.mode==='clean');
   if(clean)document.documentElement.classList.add('br-booth-clean');
@@ -25,7 +28,7 @@
   }
   const url = (file, query = {}) => {
     const u = new URL(file, location.href);
-    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'corn1');
+    u.searchParams.set('lang', lang); u.searchParams.set('seed', seed); u.searchParams.set('v', 'corn1a');
     if(params.has('task')&&['index.html',...(window.BROWSE_SCENE_INDEX||[]).map(s=>s.file)].includes(u.pathname.split('/').pop()))u.searchParams.set('task',params.get('task'));
     Object.entries(query).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') u.searchParams.set(k, String(v)); });
     return round?booth.decorate(u.href):u.href;
@@ -60,7 +63,7 @@
   }
   if (page === 'launch') {
     document.title = t('Browse — choose a website', 'Browse · 选择网站');
-    const reviewHref=new URL('review.html',location.href);reviewHref.searchParams.set('lang',lang);reviewHref.searchParams.set('v','corn1');
+    const reviewHref=new URL('review.html',location.href);reviewHref.searchParams.set('lang',lang);reviewHref.searchParams.set('v','corn1a');
     root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><p class="br-task-entry"><a href="${url('booth.html',{mode:'ads'})}">${t('60-second challenge','60秒任务挑战')} →</a> · <a href="${url('booth.html',{mode:'clean'})}">${t('Clean difficulty test','纯净难度测试')} →</a></p><p class="br-task-entry"><a href="${url('tasks.html')}">${t('Choose a specific search task','选择具体检索任务')} →</a> · <a href="${url('index.html',{task:'random',seed:randomSeed()})}">${t('Random task','随机任务')}</a></p><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" style="${s[6]?'background-image:url('+esc(s[6])+');background-size:cover;background-position:center;':''}" aria-hidden="true"></div><div><small>${s[5]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a><a href="${esc(reviewHref.href)}">${t('Review recent sessions','工作人员 · 浏览复盘')} →</a></footer></main>`;
     return;
   }
@@ -75,7 +78,7 @@
   const wireForms = () => {
     for (const form of root.querySelectorAll('form')) {
       if ((form.getAttribute('method') || 'get').toLowerCase() !== 'get') continue;
-      for (const [name,value] of [['lang',lang],['seed',seed],['v','corn1'],...(brief?[['task',brief.id]]:[]),...(round?[['round',round.id],['mode',round.mode]]:[])]) {
+      for (const [name,value] of [['lang',lang],['seed',seed],['v','corn1a'],...(brief?[['task',brief.id]]:[]),...(round?[['round',round.id],['mode',round.mode]]:[])]) {
         const existing=form.querySelector(`[name="${name}"]`);
         if (existing) {if(round&&existing.type==='hidden')existing.value=value;continue;}
         const input = document.createElement('input'); input.type='hidden'; input.name=name; input.value=value; form.append(input);
@@ -131,7 +134,7 @@
   const adOffer=(site,ordinal)=>campaign?.adOffer(site,ordinal)||{brand:ads[site][0],title:ads[site][1],cta:ads[site][2],eyebrow:ads[site][3],description:adDescription(site)};
   const campaignSite=campaign?.campaignSite;
   const adURL = site => url('destination.html', {site, from:scene,...(campaign?.adURLMeta(site)||{})});
-  const redirectURL = target => 'redirect-hop.html?'+new URLSearchParams({step:'1',target:['trip','shop','games'].includes(target)?target:'trip',lang,v:'corn1'});
+  const redirectURL = target => 'redirect-hop.html?'+new URLSearchParams({step:'1',target:['trip','shop','games'].includes(target)?target:'trip',lang,v:'corn1a'});
   const wireAds = node => { for (const a of node.querySelectorAll('[data-br-ad]')) { const id = validSites.includes(a.dataset.brAd) ? a.dataset.brAd : deck[0]; a.href=adURL(id); a.target='_blank'; a.rel='noopener'; } };
   wireAds(root);
   // Scene controls can redraw a document region (servings, saved filters, etc.).

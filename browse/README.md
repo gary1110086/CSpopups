@@ -1,6 +1,6 @@
 # One Minute activity / 一分钟活动
 
-Current online activity: **corn1**. [Clean difficulty test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn1) · [Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn1) · [Tasks, routes and staff operation](../docs/MINUTE-BOOTH.md). Ten bilingual tasks; read before starting, then60seconds, automatic result, staff verdict and this round’s review. Supporting references open in separate native tabs.
+Current online activity: **corn1a**. [Clean difficulty test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn1a) · [Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn1a) · [Tasks, routes and staff operation](../docs/MINUTE-BOOTH.md). Ten bilingual tasks; read before starting, then60seconds, automatic result, staff verdict and this round’s review. Supporting references open in separate native tabs.
 
 Cornhub now uses a dense tube-style catalogue and watch page. Four additional local verification/error/bonus prompts use bounded two-hop native-tab routes. [Design references](../docs/CORN-PORTAL.md) · [Prompt flow and inspection links](../docs/REDIRECT-PROMPTS.md).
 
@@ -10,11 +10,11 @@ The cleaner1 ZIP below is an older free-browsing snapshot and does not include t
 
 An independent, static multipage browsing exercise. The original Little Daily site and standalone Stillwall version keep their own runtime and entry points.
 
-- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=corn1
-- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=corn1
-- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=corn1
-- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=corn1
-- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=corn1
+- **Task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=corn1a
+- **Chinese task library:** https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=corn1a
+- **Random task:** https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=corn1a
+- **Free browsing:** https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=corn1a
+- **Facilitator answers:** tasks.html?mode=host&lang=zh&v=corn1a
 - **Benchmarks and documented scam cases:** guide.html
 
 ## Ten task websites
@@ -132,7 +132,7 @@ There is no build step. From repository root, run:
 
     python browse/preview-server.py --port 5175
 
-Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=corn1 . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
+Open http://127.0.0.1:5175/browse/tasks.html?lang=en&v=corn1a . This dependency-free preview server supports byte ranges for video seeking. A basic `python -m http.server` can display the pages but may limit video seeking in this environment. A file:// double click is not a supported preview for image exports and media.
 
 The release ZIP includes browse/ plus its shared dependencies: wallpapers/catalog.js, wallpapers/assets/*.svg, assets/nightroom-contact-sheet.png, favicon.svg and .nojekyll. Copying browse/ alone is insufficient. The package includes START-HERE.txt and a SHA256 source manifest.
 
@@ -157,6 +157,6 @@ Selected scenes add one delayed sponsored document block after 8–12 focused se
 
 Cookie banners are eligible in roughly 70% of seed+scene pairs and wait 6.5 focused seconds. Preferences can always be reopened from a footer control. The native settings dialog freezes/inerts advertisements; essential storage is locked and optional choices default off. Accept, reject and custom save are real local choices, not switches for third-party services.
 
-Open `review.html?lang=en&v=corn1` from the chooser to inspect the latest available session in this browser tab. The report separates confirmed opening requests, blocked requests and native modifier actions whose result was not observed. It counts real evasion attempts and close-shaped links, presents a bounded timeline and discussion prompts, and exports a local text record. It does not score task correctness, record user-entered text, synchronize to another device or automatically end a visit. Clearing a report leaves scene preferences and saved work intact.
+Open `review.html?lang=en&v=corn1a` from the chooser to inspect the latest available session in this browser tab. The report separates confirmed opening requests, blocked requests and native modifier actions whose result was not observed. It counts real evasion attempts and close-shaped links, presents a bounded timeline and discussion prompts, and exports a local text record. It does not score task correctness, record user-entered text, synchronize to another device or automatically end a visit. Clearing a report leaves scene preferences and saved work intact.
 
 Consent, layout and review data remain separate from pacing: consent and layout records use `br-data-v1:<seed>:consent-v1:<scene>` and `layout-v1:<scene>`; review uses `br-review-v2:<seed>` and `br-review-index-v2`. Existing v1 reports are readable without writes and are copied into v2 during actual recording. Old cached v1 pages cannot overwrite the new event fields; deletion and pruning do not revive old reports. All restored writers remain suspended until two animation frames have passed and current state has been reread.
