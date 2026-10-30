@@ -1,3 +1,13 @@
+# Corn2 targeted verification
+
+30 October 2026. Browser plugin not available; installed Playwright1.62.1 with actual Chrome used. Static source, Range-capable local preview at http://127.0.0.1:5210/browse/.
+
+- 54 local UI assertions: six unique covers, all3 official iframe destinations/fallbacks, one real card close preserving its sibling, native isolated room tab with actual local playback, reload/Escape, actual BFCache reconciliation, search/category routes, legacy crop favourite/like migration, malformed storage, and real hit targets at2252×1282,1024×768,390×844,320×640 and390×240. English/Chinese and reduced motion checked. These UI assertions stub only the remote iframe documents.
+- Separate unmocked playback: Nussa, Upin & Ipin and Pleasant Goat all advanced over3 seconds, unpaused, readyState4, no media error, using the official YouTube-nocookie players. Metadata and authors were also confirmed through official oEmbed HTTP200 responses. Screenshots saved in TEMP/corn2-regional-*-playing.png.
+- Eight real activity/native-tab assertions: actual processed city image at800px, actual Corn advertiser child, all6 video cards/two promotions, actual official Upin & Ipin playback inside that isolated child, null opener, unchanged original round deadline/seed, retained image/output/settings, existing result page and separate clean entry. No application runtime/HTTP errors in the successful local suites.
+- Desktop/phone/room renders reviewed. Screenshots and temporary scripts remain outside committed source. Initial media automation selected a retired YouTube button class; inspection found the current Play video control, and corrected unmocked checks passed. This was a fixture issue, not a player or source change.
+- Online regional videos depend on YouTube availability and provider restrictions. Official-watch links remain visible. No other-browser claim and no new ZIP archive. Publication is checked separately against the exact committed bytes and public runtime.
+
 # Corn1b prompt-close regression
 
 30 October2026. The older upper-left header rule used static positioning; a zero-height prompt header could therefore lift a visible close13px above its frame. A scoped prompt rule retains absolute positioning at5px. Local97 Chrome assertions cover24 combinations: four formats × three close styles × two corners, including every visible genuine cross, reload/deadline retention and actual closing. Corn1a public25 bar-restore checks, the short ghost-captcha close/Continue hit-test and another real60-second expiry8 passed. Current cache version is corn1b; schema remains v9. The first release's portal/media features are unchanged.

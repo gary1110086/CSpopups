@@ -1,6 +1,12 @@
 # Release history / 版本记录
 
-Current online activity: **corn1b**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current online activity: **corn2**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## corn2 — 30 October 2026
+
+- Keep each supplied cover once. All three now open actual official animation players: Nussa (Indonesia), Upin & Ipin (Malaysia), and Pleasant Goat (China). The original three local film excerpts remain. Legacy crop favourites merge into canonical items; old photo URLs open the corresponding player.
+- Add independently closable pink/violet live-room invitations beside the desktop content, with compact phone variants, genuine keyboard close/Escape, per-tab dismissal and native isolated room tabs. Room previews actually play credited local clips and identify themselves as previews.
+- The three regional animations use official online embeds and visible official-watch fallbacks. Local Chrome54 UI assertions,8 real activity/native-tab assertions and all3 unmocked official video playback checks pass. UI-only iframe documents are stubbed separately from actual playback checks. Cache version is corn2; activity state schemas and deadlines are unchanged.
 
 ## corn1b — 30 October 2026
 

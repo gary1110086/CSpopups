@@ -3,7 +3,7 @@ window.BROWSE_DESTINATION_DEPTH=function(D){
   'use strict';
   const {root,t,esc,get,site,view,id,href,a,read,write,safeArray,photo,productArt,products,prices,productSpecs,apps,appIcon,gameArt,games,getCart,complete,section,stepbar,tags}=D;
   const action=(name,label,extra='')=>`<button type="button" data-depth="${name}" ${extra}>${label}</button>`;
-  const form=(fields,body)=>`<form class="dd-filter-form" method="get" action="destination.html">${Object.entries({site,lang:D.lang,seed:get('seed')||'',v:get('v')||'corn1b',...Object.fromEntries(['campaign','phase','interest','topic','from'].filter(k=>get(k)).map(k=>[k,get(k)])),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('')}${body}<button>${t('Apply','应用')}</button></form>`;
+  const form=(fields,body)=>`<form class="dd-filter-form" method="get" action="destination.html">${Object.entries({site,lang:D.lang,seed:get('seed')||'',v:get('v')||'corn2',...Object.fromEntries(['campaign','phase','interest','topic','from'].filter(k=>get(k)).map(k=>[k,get(k)])),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('')}${body}<button>${t('Apply','应用')}</button></form>`;
   const options=(list,current)=>list.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(current)?'selected':''}>${esc(l)}</option>`).join('');
   const notice=(message)=>{let e=root.querySelector('[data-depth-status]');if(!e){e=document.createElement('p');e.dataset.depthStatus='';e.className='dd-status';e.role='status';root.querySelector('.d-main').prepend(e);}e.textContent=message;};
   const arr=(key,max)=>{const v=read(key,[]);return Array.isArray(v)?v.filter(i=>Number.isInteger(i)&&i>=0&&i<max):[];};
