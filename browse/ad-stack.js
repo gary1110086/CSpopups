@@ -2,10 +2,14 @@
 (() => {
   'use strict';
   window.BROWSE_AD_STACK = C => {
-    const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,wireAds,deck,chosen,adOffer,campaignSite}=C;
-    const KEY='br-run-v8:'+seed, MISSING=Symbol('missing'), AUTO_MAX=30, ID_MAX=40, REVEAL_MS=10000;
+    const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,redirectURL,wireAds,deck,chosen,adOffer,campaignSite}=C;
+    const KEY='br-run-v9:'+seed, MISSING=Symbol('missing'), AUTO_MAX=30, ID_MAX=40, REVEAL_MS=10000;
     const GAPS=[2200,2800,2500,3200,2300,3000];
-    const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter'];
+    const FORMATS=['bounce','robot','dodge','player-error','bonus','captcha','tiny','drawer','panel','newsletter'];
+    const prompts=window.BROWSE_REDIRECT_PROMPTS;
+    const isPrompt=format=>prompts?.formats.includes(format)===true;
+    const query=new URLSearchParams(location.search),previewFormat=query.get('prompt'),previewTarget=query.get('landing');
+    const TARGETS=['trip','shop','games'];
     const hash=salt=>{let value=2166136261;for(const c of seed+salt)value=Math.imul(value^c.charCodeAt(0),16777619);return value>>>0;};
     const closeStyles=['visible','dual','ghost'].sort((a,b)=>hash('close:'+a)-hash('close:'+b));
     // Each ten-card cycle retains four conventional corners, five left corners
@@ -14,7 +18,9 @@
       .map((layout,index)=>({layout,order:hash('layout:'+index)})).sort((a,b)=>a.order-b.order).map(p=>p.layout);
     const collisionEnabled=hash('collision-session')/4294967296<.3,collisionPairs=new Map();
     const dodgeLimit=id=>4+hash('dodge:'+id)%3;
-    const validSites=Object.keys(ads), modal=p=>p.format==='panel'||p.format==='newsletter';
+    const hopDeck=TARGETS.slice().sort((a,b)=>hash('hop:'+a)-hash('hop:'+b));
+    const hopTarget=id=>hopDeck[(id-1)%hopDeck.length];
+    const validSites=Object.keys(ads), modal=p=>p.format==='panel'||p.format==='newsletter'||prompts?.isModal(p.format)===true;
     const readRun=key=>{
       try {const raw=sessionStorage.getItem(key);if(raw===null)return MISSING;try{return JSON.parse(raw);}catch{return {};}}
       catch {return C.rawRead(key,{});}
@@ -29,6 +35,7 @@
         const closeStyle=['visible','dual','ghost'].includes(p.closeStyle)?p.closeStyle:'visible';
         const decoy=p.decoy===true,closeCorner=decoy?'top-left':['top-right','top-left','bottom-right'].includes(p.closeCorner)?p.closeCorner:'top-right';
         const extra=p.format==='dodge'?{dodgeLimit:Number.isInteger(p.dodgeLimit)&&p.dodgeLimit>=4&&p.dodgeLimit<=6?p.dodgeLimit:dodgeLimit(p.id)}:{};
+        if(isPrompt(p.format))extra.hopTarget=TARGETS.includes(p.hopTarget)?p.hopTarget:hopTarget(p.id);
         if(p.burst===true&&!modal(p))extra.burst=true;
         if(p.format==='dodge')extra.dodgeCount=Number.isInteger(p.dodgeCount)?Math.max(0,Math.min(extra.dodgeLimit,p.dodgeCount)):0;
         if(closeStyle==='ghost')extra.closeElapsedMs=Number.isFinite(p.closeElapsedMs)?Math.max(0,Math.min(REVEAL_MS,p.closeElapsedMs)):0;
@@ -39,12 +46,12 @@
       const autoShown=Number.isInteger(obj.autoShown)?Math.max(0,Math.min(AUTO_MAX,shown,obj.autoShown)):Math.min(AUTO_MAX,shown);
       const quietUntil=Number.isFinite(obj.quietUntil)&&obj.quietUntil>=0&&obj.quietUntil<=activeMs+5000?obj.quietUntil:0;
       const nextAt=autoShown>=AUTO_MAX?null:Math.max(quietUntil,Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=activeMs+5000?obj.nextAt:activeMs+(shown?2500:3000));
-      return {pacingVersion:8,activeMs,shown,autoShown,nextAt,quietUntil,burstUsed:obj.burstUsed===true||pending.some(p=>p.burst),pending};
+      return {pacingVersion:9,activeMs,shown,autoShown,nextAt,quietUntil,burstUsed:obj.burstUsed===true||pending.some(p=>p.burst),pending};
     };
     const stored=readRun(KEY);
     let initial=stored;
     if(stored===MISSING){
-      let legacy=readRun('br-run-v7:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v6:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v5:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v4:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
+      let legacy=readRun('br-run-v8:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v7:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v6:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v5:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v4:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v3:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v2:'+seed);if(legacy===MISSING)legacy=readRun('br-run-v1:'+seed);
       const old=legacy&&typeof legacy==='object'&&!Array.isArray(legacy)?legacy:{};
       const shown=Number.isInteger(old.shown)?Math.max(0,Math.min(AUTO_MAX,old.shown)):0;
       initial=Array.isArray(old.pending)?old:{activeMs:old.activeMs,shown,pending:old.pending&&typeof old.pending==='object'?[{...old.pending,id:Math.max(1,shown)}]:[]};
@@ -63,8 +70,8 @@
     const snapshot=()=>({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:externalModal||modalId!==null,externalModal,suspended,restoring,shown:state.shown,pending:state.pending.length,burstUsed:state.burstUsed,burstActive:burstActive()});
     const observe=detail=>window.dispatchEvent(new CustomEvent('browse:review',{detail}));
     const pressureUpdate=()=>{if(destroyed)return;const current=snapshot();overlayRoot.dataset.collisions=String(collisionEnabled||current.burstActive);pressure.update(current);C.onState?.(current);};
-    const stopEntry=entry=>{entry.squeeze?.cancel();entry.motion?.stop();entry.motion=null;};
-    const removeEntry=id=>{const entry=entries.get(id);if(!entry)return;stopEntry(entry);entry.stage.remove();entries.delete(id);};
+    const stopEntry=entry=>{entry.squeeze?.cancel();entry.motion?.stop();entry.motion=null;entry.prompt?.suspend();};
+    const removeEntry=id=>{const entry=entries.get(id);if(!entry)return;stopEntry(entry);entry.prompt?.destroy();entry.stage.remove();entries.delete(id);};
     const stopAll=()=>{for(const entry of entries.values())stopEntry(entry);};
     const rememberFocus=()=>{const el=document.activeElement;if(el&&el!==document.body&&root.contains(el))lastOutsideFocus=el;};
     const returnFocus=()=>{if(lastOutsideFocus?.isConnected&&!lastOutsideFocus.inert)lastOutsideFocus.focus({preventScroll:true});};
@@ -90,6 +97,7 @@
       for(const entry of entries.values()){
         const blocked=externalModal||(modalId!==null&&entry.p.id!==modalId);
         entry.stage.inert=blocked;
+        if(blocked||suspended||document.hidden)entry.prompt?.suspend();else entry.prompt?.resume();
         const paused=blocked||entry.blockedLink||entry.revealed;
         if(entry.paused!==paused){entry.paused=paused;if(paused){entry.squeeze?.cancel();entry.motion?.pause();}else entry.motion?.resume();}
       }
@@ -181,7 +189,8 @@
     };
     const createEntry=p=>{
       rememberFocus();
-      const a=ads[p.site],isModal=modal(p),moving=p.format==='bounce'||p.format==='dodge';
+      const a=ads[p.site],isModal=modal(p),moving=p.format==='bounce'||p.format==='dodge',prompt=isPrompt(p.format);
+      const hopURL=prompt?redirectURL(p.hopTarget):null;
       const offer=typeof adOffer==='function'?adOffer(p.site,p.id):{brand:a[0],title:a[1],cta:a[2],eyebrow:a[3],description:adDescription(p.site)};
       const lower=p.closeCorner==='bottom-right';
       const genuine=`<button class="br-real-close${lower?' br-corner-close':''}" type="button" data-br-close ${p.closeStyle==='ghost'?'hidden':''} aria-label="${t('Dismiss advertisement','关闭广告')}">×</button>`;
@@ -197,9 +206,19 @@
         <div class="br-ad-bottom">${p.format==='tiny'&&p.closeStyle!=='ghost'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}<span class="br-stack-hint">${t('Esc clears all offers','Esc 关闭全部广告')}</span></div>
         <p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener" href="${adURL(p.site)}">${t('Open page','打开页面')} ↗</a></p></div></section>`;
       overlayRoot.append(stage);const card=stage.querySelector('.br-ad');
+      if(prompt){
+        card.classList.add('br-prompt-shell');
+        const scroll=card.querySelector('.br-ad-scroll'),top=card.querySelector('.br-ad-top');
+        for(const child of [...top.children])if(!child.matches('[data-br-close]'))child.remove();
+        scroll.replaceChildren(top);
+        scroll.insertAdjacentHTML('beforeend',prompts.html(p.format,{t,esc,url:()=>hopURL}));
+        const badge=scroll.querySelector('.br-prompt-bonus-badge');if(badge)card.append(badge);
+        scroll.insertAdjacentHTML('beforeend',`<p class="br-blocked" hidden>${t('This link opens in another tab.','链接将在另一个标签页打开。')} <a data-br-fallback target="_blank" rel="noopener noreferrer" href="${esc(hopURL)}">${t('Open page','打开页面')} ↗</a></p>`);
+      }
       const entry={p,stage,card,moving,motion:null,paused:false,blockedLink:false,revealed:false};entries.set(p.id,entry);positionEntry(entry);wireAds(stage);
+      if(prompt)entry.prompt=prompts.mount(card,{format:p.format,t});
       card.addEventListener('focusin',()=>entry.squeeze?.cancel());card.addEventListener('pointerdown',()=>entry.squeeze?.cancel(),{passive:true});
-      observe({type:'ad-show',id:p.id,site:p.site,format:p.format,count:p.dodgeCount||0});
+      observe({type:'ad-show',id:p.id,site:p.site,format:p.format,...(prompt?{landing:p.hopTarget}:{}),count:p.dodgeCount||0});
       stage.querySelectorAll('[data-br-close]').forEach(button=>button.addEventListener('click',()=>closeOne(p.id)));
       stage.querySelectorAll('[data-br-ad]').forEach(link=>link.addEventListener('click',event=>{
         if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
@@ -208,6 +227,20 @@
         if(child){try{child.opener=null;}catch{}if(!link.hasAttribute('data-br-decoy'))closeOne(p.id,'advertiser');}
         else{stage.querySelector('.br-blocked').hidden=false;entry.blockedLink=true;entry.motion?.pause();positionEntry(entry);}
       }));
+      stage.querySelectorAll('[data-br-hop],[data-br-fallback]').forEach(link=>{
+        const allowed=()=>!destroyed&&!suspended&&entries.has(p.id)&&(!window.BROWSE_BOOTH||window.BROWSE_BOOTH.canAct())&&(!prompt||entry.prompt.canContinue());
+        const guard=event=>{if(!allowed()){event.preventDefault();event.stopImmediatePropagation();}};
+        link.addEventListener('auxclick',guard,{capture:true});
+        link.addEventListener('click',event=>{
+          if(!allowed()){event.preventDefault();event.stopImmediatePropagation();return;}
+          if(!prompt)return;
+          if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey){observe({type:'ad-open',id:p.id,site:p.site,format:p.format,landing:p.hopTarget,control:link.hasAttribute('data-br-fallback')?'fallback':'cta',outcome:'native'});return;}
+          event.preventDefault();const child=window.open(link.href,'_blank');
+          observe({type:'ad-open',id:p.id,site:p.site,format:p.format,landing:p.hopTarget,control:link.hasAttribute('data-br-fallback')?'fallback':'cta',outcome:child?'opened':'blocked'});
+          if(child){try{child.opener=null;}catch{}closeOne(p.id,'advertiser');}
+          else{stage.querySelector('.br-blocked').hidden=false;entry.blockedLink=true;entry.motion?.pause();positionEntry(entry);}
+        });
+      });
       if(!isModal){let line=0;const reserve=closeReserves(p);entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:moving?p.format:'static',slot:(p.id-1)%4,origin:p.burst?burstSlots[(p.id-1)%10]:moving?null:[[.04,.10],[.96,.16],[.07,.94],[.9,.88]][(p.id-1)%4],speed:1.25,topReserve:reserve.top,bottomReserve:reserve.bottom,dodgeLimit:p.dodgeLimit,dodgeCount:p.dodgeCount,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
         card.dataset.motionMoves=String(meta.count);card.dataset.motionReason=meta.reason;
         if(p.format==='dodge'){
@@ -230,7 +263,7 @@
     overlayRoot.addEventListener('keydown',event=>{
       if(event.key!=='Tab'||modalId===null||externalModal)return;
       const dialog=entries.get(modalId)?.card;if(!dialog)return;
-      const controls=[...dialog.querySelectorAll('a[href],button:not([disabled])')].filter(el=>el.getClientRects().length);
+      const controls=[...dialog.querySelectorAll('a[href]:not([aria-disabled=true]),button:not([disabled])')].filter(el=>el.getClientRects().length);
       const first=controls[0],end=controls.at(-1);if(!first)return;
       if(event.shiftKey&&document.activeElement===first){event.preventDefault();end.focus();}
       else if(!event.shiftKey&&document.activeElement===end){event.preventDefault();first.focus();}
@@ -250,12 +283,14 @@
       if(justRevealed){for(const entry of entries.values())updateClose(entry);applyModal();save();}
       if(!burstActive()&&state.autoShown<AUTO_MAX&&state.shown<ID_MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
         let format=FORMATS[state.autoShown%FORMATS.length];
-        if((format==='panel'||format==='newsletter')&&state.pending.some(modal))format=state.autoShown%2?'dodge':'bounce';
+        if(state.autoShown===0&&isPrompt(previewFormat))format=previewFormat;
+        if(modal({format})&&state.pending.some(modal))format=state.autoShown%2?'dodge':'bounce';
         state.shown++;state.autoShown++;const closeStyle=closeStyles[(state.shown-1)%closeStyles.length],layout=closeLayouts[(state.shown-1)%closeLayouts.length];
         const recurring=validSites.includes(campaignSite)&&(state.autoShown-1)%6===0;
         const normalIndex=state.autoShown-1-(validSites.includes(campaignSite)?Math.ceil((state.autoShown-1)/6):0);
         const site=chosen||(recurring?campaignSite:deck[normalIndex%deck.length]);
         const p={id:state.shown,site,format,closeStyle,closeCorner:layout==='decoy'?'top-left':layout,decoy:layout==='decoy',...(closeStyle==='ghost'?{closeElapsedMs:0}:{}),...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})};
+        if(isPrompt(format)){p.hopTarget=state.autoShown===1&&TARGETS.includes(previewTarget)?previewTarget:hopTarget(p.id);p.decoy=false;}
         state.pending.push(p);
         state.nextAt=state.autoShown<AUTO_MAX?state.activeMs+GAPS[(state.autoShown-1)%GAPS.length]:null;
         sync();save();C.onArrival?.(p);
@@ -263,7 +298,7 @@
       collide();
     };
     const tickInterval=setInterval(tick,250),saveInterval=setInterval(()=>{if(!suspended)save();},2000);
-    const resetClock=()=>{last=performance.now();if(!foreground())for(const entry of entries.values())entry.squeeze?.cancel();if(!suspended)save();pressureUpdate();};
+    const resetClock=()=>{last=performance.now();for(const entry of entries.values()){if(!foreground()){entry.squeeze?.cancel();entry.prompt?.suspend();}else entry.prompt?.resume();}if(!suspended)save();pressureUpdate();};
     document.addEventListener('visibilitychange',resetClock);window.addEventListener('blur',resetClock);window.addEventListener('focus',resetClock);
     const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
     motionPreference.addEventListener('change',()=>{if(motionPreference.matches)for(const entry of entries.values())entry.squeeze?.cancel();});
@@ -288,7 +323,7 @@
           const current=readRun(KEY);Object.assign(state,normalize(current===MISSING?state:current));
           for(const id of [...entries.keys()])removeEntry(id);
           overlayRoot.hidden=false;
-          sync();restoring=false;suspended=false;last=performance.now();
+          sync();restoring=false;suspended=false;last=performance.now();applyModal();
           delete overlayRoot.dataset.restoring;
           if(clearAfterRestore){clearAfterRestore=false;closeAll();}else{save();pressureUpdate();}
         });

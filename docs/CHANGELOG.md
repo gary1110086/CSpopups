@@ -1,6 +1,13 @@
 # Release history / 版本记录
 
-Current online activity: **minute1**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current online activity: **corn1**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## corn1 — 30 October 2026
+
+- Reworked Cornhub into a compact black/orange tube-style portal: native search, category/channel directories, sort/time filters, favourites and a watch page with related content. The three supplied photos and actual licensed clips retain their identities and sources. See [Corn design references](CORN-PORTAL.md).
+- Added robot confirmation, player error, bonus balance and an animated checkbox prompt. Genuine dismissals remain real; promotional CTAs open isolated tabs through exactly two bounded local redirects to fixed travel, shopping or game homepages. See [prompt flow and inspection links](REDIRECT-PROMPTS.md).
+- Added v9 pending state with absent-only migration and fixed landing categories. Preserved suspended BFCache writers, modal focus, native fallback, clean rounds and the real activity deadline. Facilitator review now names the prompt and intended destination.
+- Online cache version is corn1. The cleaner1 downloadable ZIP remains the earlier snapshot.
 
 ## minute1 — 29 October 2026
 

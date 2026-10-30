@@ -4,7 +4,7 @@
   const PREFIX='br-review-v2:',INDEX='br-review-index-v2',LEGACY_PREFIX='br-review-v1:',LEGACY_INDEX='br-review-index-v1',MISSING=Symbol('missing'),MAX_EVENTS=200,MAX_REPORTS=12;
   const SCENES=['wallpapers','recipes','tools','movies','events','books','museum','nature','travel','market'];
   const SITES=['corn','desk','stock','game','security','player','software','prize','coupon','parcel','cleaner'];
-  const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter','inline','ambient','context','event','layout','fallback','document'];
+  const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter','robot','player-error','bonus','captcha','inline','ambient','context','event','layout','fallback','document'];
   const TYPES=['visit','ad-open','ad-show','dodge','ad-close','close-reveal','event','layout','consent','quiet','complete','burst'];
   const KINDS=['chat','tab','video','search','escalation','character','quiet','reward'];
   const COUNTERS=['visits','shown','opened','blocked','native','decoys','dodges','closed','revealed','events','layouts','layoutDismissed','consentShown','consentManaged','consentAccepted','consentRejected','consentSaved','quiet','completed','bursts'];
@@ -20,7 +20,7 @@
   const eventOf=value=>{
     if(!value||typeof value!=='object'||Array.isArray(value)||!TYPES.includes(value.type))return null;
     const e={type:value.type,at:clock(value.at),seq:integer(value.seq,1000000000)};
-    for(const [key,list] of [['scene',SCENES],['site',SITES],['format',FORMATS],['control',['decoy','cta','fallback']],['outcome',['opened','blocked','native']],['kind',KINDS],['reason',['escape','event']],['action',['inserted','dismissed','shown','manage','accept','reject','save']]]){
+    for(const [key,list] of [['scene',SCENES],['site',SITES],['format',FORMATS],['landing',['trip','shop','games']],['control',['decoy','cta','fallback']],['outcome',['opened','blocked','native']],['kind',KINDS],['reason',['escape','event']],['action',['inserted','dismissed','shown','manage','accept','reject','save']]]){
       const v=choice(value[key],list);if(v!==undefined)e[key]=v;
     }
     if(Number.isInteger(value.id)&&value.id>=1&&value.id<=40)e.id=value.id;

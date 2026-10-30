@@ -1,3 +1,16 @@
+# Corn1 local verification record
+
+30 October2026. Cornhub portal redesign and four additional teaching prompts. Current Browse cache version: corn1. Browser plugin not available; validation uses installed Playwright with actual Chrome. The original root and standalone wallpapers runtimes remain independent.
+
+- Corn portal:70 actual Chrome assertions, including desktop1440 and phones390/320 in both languages, native filters, categories/channels, filtered-favourite removal, all three original photo routes, real licensed video playback/20-second seeking, real BFCache, native advertiser isolation and retained processed workspace/deadline. Twenty unrelated destination snapshots compare unchanged, plus one health assertion.
+- Prompt integration:60 assertions cover all four actual3-second arrivals, click/Space spinner→check, disabled Continue, genuine Decline/Escape, blocked popup/native Ctrl-click fallback, real390×240 activity layouts, two-hop native children and fixed landing URLs, actual processed image/settings retained, original round deadline, exact-round review and clean mode. Final external requests in this suite are intercepted with neutral HTML so third-party resources do not affect the application checks. For native Ctrl-click, Chrome's first document is observed at the child-page event; later documents are observed as requests.
+- Additional focused checks:39 cover prompt loading/localization/Escape in all ten scenes, modal Tab wrapping, full notification badge, the actual short-screen activity and three unmocked external document commits. Trip.com localized itself to my.trip.com; IKEA and Steam reached their official homepages. Later third-party navigation/resources are outside the two application redirects.
+- Restore/storage:15 checks include absent-only v8 import, corrupt-present-v9 repair, one-modal normalization, fixed landing enums, actual Chrome BFCache during an unfinished spinner, reload, retained category and repeated restore without duplicated controllers.
+- Existing activity:153 Chrome assertions repeated all ten tasks, genuine JPEG/WebP/TXT downloads, staff judgement and handoff, modal/native-tab behaviour and a real60-second expiry. No activity deadline change was introduced by this release.
+- All52 Browse JavaScript files pass syntax checks;630 local HTML references resolve. Application runners observed no JavaScript or failed application-asset requests. Desktop and phone screenshots were inspected. Only Chrome was exercised; explicit blur/visibility fixtures do not prove OS-level focus behaviour.
+
+Temporary runners and JSON evidence are outside the repository: `corn-portal-root-local-result.json`, `corn-unrelated-root-result.json`, `corn1-prompts-local-result.json`, `corn1-focused-local-result.json`, `corn1-restore-local-result.json`, `minute-qa-corn1-root-result.json`. Publication is checked separately against the exact Pages build and committed file bytes.
+
 # Minute1 verification record
 
 29 October 2026. New independent60-second activity and clean difficulty-testing entry. Current Browse cache version: minute1. Existing free browsing and older independent entries keep their original timing behaviour. The cleaner1 record below describes the previous release snapshot.

@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'minute1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'corn1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute-wall-aurora': {scene:'wallpapers',file:'wallpaper.html',target:'orbital-aurora',key:'wall-saved'},
     'minute-recipe-lunch': {scene:'recipes',file:'recipe.html',target:'chickpea-salad',key:'bp-recipes-saved'},

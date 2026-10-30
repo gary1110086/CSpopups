@@ -6,7 +6,7 @@ window.BROWSE_DESTINATIONS = function (C) {
   const get=k=>typeof p.get==='function'?p.get(k):p[k], site=['corn','desk','stock','game','security','player','software','prize','coupon','parcel'].includes(get('site'))?get('site'):'desk';
   const view=get('view')||'home', id=Math.max(0,Math.min(11,Math.floor(Number(get('id'))||0)));
   const contextFields=()=>Object.fromEntries(['seed','campaign','phase','interest','topic','from'].filter(k=>get(k)).map(k=>[k,String(get(k)).slice(0,160)]));
-  const href=(v='home',extra={})=>{const q=new URLSearchParams({site,view:v,lang,v:'minute1',...contextFields(),...extra});return 'destination.html?'+q;};
+  const href=(v='home',extra={})=>{const q=new URLSearchParams({site,view:v,lang,v:'corn1',...contextFields(),...extra});return 'destination.html?'+q;};
   const a=(v,label,cls='',extra={})=>`<a class="${cls}" href="${href(v,extra)}">${label}</a>`;
   const btn=(action,label,extra='')=>`<button type="button" data-dest-action="${action}" ${extra}>${label}</button>`;
   const read=(key,fallback)=>{try{const v=JSON.parse(sessionStorage.getItem('browse-dest-'+site+'-'+key));return v===null?fallback:v;}catch{return fallback;}};
@@ -22,6 +22,7 @@ window.BROWSE_DESTINATIONS = function (C) {
   document.title=title;document.documentElement.lang=lang;
   const nav={corn:[['home',t('Videos','视频')],['channels',t('Channels','频道')],['saved',t('Saved','收藏')],['premium','Premium']],desk:[['home',t('Shop','选购')],['collection',t('Workspace edit','工作空间')],['journal',t('Journal','灵感手记')],['cart',t('Bag','购物袋')]],stock:[['home',t('Explore','发现')],['collections',t('Collections','专题')],['saved',t('Your library','素材库')],['pricing',t('Pricing','价格')]],game:[['home',t('Discover','发现')],['free',t('Free games','免费游戏')],['collection',t('Your shelf','游戏架')],['journal',t('Developer notes','开发日志')]],security:[['home',t('Overview','概览')],['scan',t('Scan results','扫描结果')],['support',t('Support','支持')]],player:[['home',t('Overview','概览')],['features',t('Features','功能')],['releases',t('Release notes','更新日志')]],software:[['home',t('Discover','发现')],['tools',t('Utilities','实用工具')],['versions',t('Latest updates','最近更新')]],prize:[['home',t('Your reward','你的奖励')],['rewards',t('Rewards catalogue','奖品目录')],['faq',t('Help','帮助')]],coupon:[['home',t('Offers','优惠')],['categories',t('Categories','分类')],['wallet',t('My vouchers','优惠券夹')]],parcel:[['home',t('Tracking','追踪')],['delivery',t('Delivery options','派送选项')],['help',t('Help centre','帮助中心')]]}[site];
   const head=()=>{
+    if(cornPortal)return cornPortal.head();
     const logo=`<a class="d-brand" href="${href()}">${brand}</a>`, links=`<nav aria-label="${t('Main navigation','主导航')}">${nav.map(([v,l])=>a(v,l,view===v?'active':'')).join('')}</nav>`, language=`<a class="d-language" href="${href(view,{id,lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'EN':'中文'}</a>`;
     if(site==='desk')return `<div class="d-utility"><span>MY | ${t('English','中文')}</span><span>${t('Delivery from RM12 · Free on orders RM150+','运费 RM12 起 · 满 RM150 免运费')}</span>${a('shipping',t('Delivery & collection','配送与自提'))}</div><header class="d-header">${logo}${search(t('What are you looking for?','你在找什么？'))}${a('cart',t('Bag','购物袋')+' ('+getCart().reduce((n,x)=>n+x.qty,0)+')','d-bag')}${language}${links}</header>`;
     if(site==='corn')return `<div class="d-corn-utility">${t('Video & portrait collections','视频与肖像图集')}<span>${a('channels',t('Channels','频道'))}　${a('premium','Premium')}</span></div><header class="d-header">${logo}${search(t('Search videos','搜索视频'))}${language}${links}</header>`;
@@ -34,10 +35,11 @@ window.BROWSE_DESTINATIONS = function (C) {
     return `<header class="d-header">${logo}${links}${language}</header>`;
   };
   const footer=()=>{
+    if(cornPortal)return cornPortal.footer();
     const labels={corn:['Videos · Channels · Studio releases','视频 · 频道 · 工作室更新'],desk:['Delivery & returns · Product care · Customer service','配送与退换 · 产品保养 · 客户服务'],stock:['Original illustration library · Standard and extended licences','原创插画库 · 标准与扩展许可'],game:['Independent games for your browser','独立浏览器游戏'],security:['Protection centre · Session SL-2048','保护中心 · 会话 SL-2048'],player:['Orbit Player 4.2.1 · Windows / macOS / Linux','Orbit Player 4.2.1 · Windows / macOS / Linux'],software:['Desktop software · Version information and release history','桌面软件 · 版本资料与更新记录'],prize:['Rewards programme · Allocation LC-2048','奖励计划 · 分配编号 LC-2048'],coupon:['Local offers · Terms apply to every promotion','本地优惠 · 每项活动均有适用条件'],parcel:['Domestic delivery · Shipment management','国内派送 · 包裹管理']};
     return `<footer class="d-footer"><div><strong>${brand}</strong><p>${t(...labels[site])}</p></div><div>${a('about',t('About','关于'))}${a('terms',t('Terms & privacy','条款与隐私'))}${a('guide',t('Site information','网站信息'))}</div><small>© 2026 ${title.split(' —')[0]}</small></footer>`;
   };
-  const search=(placeholder)=>`<form class="d-search" action="destination.html" method="get">${Object.entries({site,view:'home',lang,v:'minute1',...contextFields()}).map(([k,v])=>`<input type="hidden" name="${k}" value="${esc(v)}">`).join('')}<input name="q" aria-label="${placeholder}" placeholder="${placeholder}" value="${esc(get('q')||'')}"><button>${t('Search','搜索')}</button></form>`;
+  const search=(placeholder)=>`<form class="d-search" action="destination.html" method="get">${Object.entries({site,view:'home',lang,v:'corn1',...contextFields()}).map(([k,v])=>`<input type="hidden" name="${k}" value="${esc(v)}">`).join('')}<input name="q" aria-label="${placeholder}" placeholder="${placeholder}" value="${esc(get('q')||'')}"><button>${t('Search','搜索')}</button></form>`;
   const section=(eyebrow,title,text='')=>`<div class="d-section-heading"><small>${eyebrow}</small><h1>${title}</h1>${text?`<p>${text}</p>`:''}</div>`;
   const stepbar=(n,labels)=>`<ol class="d-steps">${labels.map((l,i)=>`<li class="${i+1<=n?'done':''}"><b>${i+1}</b>${l}</li>`).join('')}</ol>`;
   const complete=(heading,text)=>`<section class="d-final"><div class="d-final-icon">✓</div><small>${t('BROWSING EXERCISE · FINAL STEP','浏览练习 · 最后一步')}</small><h1>${heading}</h1><p>${text}</p><p class="d-fine">${t('This fictional site is part of a browsing exercise. No payment was taken, no personal information was submitted, and nothing was installed. You can close this tab and return to your original task.','这是浏览练习中的虚构网站。没有付款、没有提交个人资料，也没有安装任何内容。你可以关闭这个标签页，回到原本的任务。')}</p>${a('guide',t('Understand this page','了解这个页面'),'d-primary')} ${a('home',t('Explore the site','继续浏览'),'d-text-link')}</section>`;
@@ -213,12 +215,14 @@ window.BROWSE_DESTINATIONS = function (C) {
     }
     return null;
   }
-  const depth=window.BROWSE_DESTINATION_DEPTH?.({C,root,p,lang,t,esc,get,site,view,id,href,a,btn,read,write,safeArray,photo,productArt,products,prices,productSpecs,apps,appIcon,assets,wall,clipNames,cornCards,gameArt,games,getCart,complete,section,stepbar,stockCards,offerCards,rewardCards,tags,search});
+  const cornPortal=site==='corn'?window.BROWSE_CORN_PORTAL?.({C,root,p,lang,t,esc,get,site,view,id,href,a,read,write,safeArray}):null;
+  const depth=cornPortal?null:window.BROWSE_DESTINATION_DEPTH?.({C,root,p,lang,t,esc,get,site,view,id,href,a,btn,read,write,safeArray,photo,productArt,products,prices,productSpecs,apps,appIcon,assets,wall,clipNames,cornCards,gameArt,games,getCart,complete,section,stepbar,stockCards,offerCards,rewardCards,tags,search});
   const experiences=window.BROWSE_DESTINATION_EXPERIENCES?.({C,root,p,lang,t,esc,get,site,view,id,href,a,read,write,section,offers,voucher,prizeNames,rewardArt,complete,stepbar});
   const render = () => {
     const result=common();
-    root.className='dest dest-'+site;
-    root.innerHTML=head()+`<main class="d-main">${experiences?.banner()||''}${result===null?cornPortraitFeature():''}${result===null?(experiences?.render()??depth?.render()??redesign()??({corn,desk,stock,game,security,player,software,prize,coupon,parcel}[site])()):result}</main>`+footer()+`<div class="d-toast" role="status" aria-live="polite"></div>`;
+    root.className='dest dest-'+site+(cornPortal?' cp-portal':'');
+    root.innerHTML=head()+`<main class="d-main">${experiences?.banner()||''}${result===null?(cornPortal?.render()??experiences?.render()??depth?.render()??redesign()??({corn,desk,stock,game,security,player,software,prize,coupon,parcel}[site])()):result}</main>`+footer()+`<div class="d-toast" role="status" aria-live="polite"></div>`;
+    cornPortal?.afterRender?.();
     depth?.afterRender?.();
     experiences?.afterRender?.();
   };
