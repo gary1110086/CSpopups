@@ -1,3 +1,7 @@
+## Corn side links — corn2a,30 October 2026
+
+Local Chrome17 targeted assertions pass at1440×1000 and390×844: both side anchors open native isolated My Little Pony official channel live tabs; both actual unmocked players advance; original catalogue remains; independent close/reload/Escape and phone keyboard close work; old local room routes remain. No application runtime or HTTP errors were observed. The Browser plugin was absent, so regular Playwright was used. Ten modified JavaScript files pass syntax checks;29 other runtime files differ only by cache version. Eight additional real activity assertions pass, including retained60-second deadline, processed800px image, genuine advertiser isolation, actual regional animation playback, result submission and independent clean entry. Public deployment verification is separate.
+
 # Corn2 targeted verification
 
 30 October 2026. Browser plugin not available; installed Playwright1.62.1 with actual Chrome used. Static source, Range-capable local preview at http://127.0.0.1:5210/browse/.

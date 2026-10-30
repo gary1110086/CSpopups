@@ -31,7 +31,7 @@ window.BROWSE_CORN_PORTAL = function (D) {
   const pageItem=()=>view==='watch'&&get('clip')!=='regional'?titleOf('v'+(id%Math.max(1,media.length))):titleOf('p'+(id%3));
   const itemHref=x=>href('watch',{id:x.index,...(x.kind==='regional'?{clip:'regional'}:{})});
   const allContext=()=>Object.fromEntries(['seed','campaign','phase','interest','topic','from'].filter(k=>get(k)).map(k=>[k,String(get(k)).slice(0,160)]));
-  const hidden=fields=>Object.entries({site:'corn',lang,v:get('v')||'corn2',...allContext(),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('');
+  const hidden=fields=>Object.entries({site:'corn',lang,v:get('v')||'corn2a',...allContext(),...fields}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('');
   const queryValues=()=>Object.fromEntries(['q','category','sort','time','channel'].filter(k=>get(k)).map(k=>[k,String(get(k)).slice(0,160)]));
   const languageURL=()=>{const q=new URLSearchParams(p);q.set('lang',lang==='zh'?'en':'zh');q.set('site','corn');return 'destination.html?'+q;};
   const button=(act,label,token='',pressed=false,extra='')=>`<button type="button" data-cp-action="${act}"${token?` data-token="${esc(token)}"`:''} aria-pressed="${pressed}" ${extra}>${label}</button>`;
@@ -48,6 +48,7 @@ window.BROWSE_CORN_PORTAL = function (D) {
   }
   const grid=list=>`<div class="cp-grid">${list.map(x=>card(x)).join('')}</div>`;
   const promo=(small=false)=>`<aside class="cp-promo${small?' cp-promo-small':''}" aria-label="${t('Premium advertisement','高级会员广告')}"><small>${t('ADVERTISEMENT','广告')}</small><a href="${esc(href('premium'))}"><span class="cp-promo-brand">corn<b>hub</b></span><strong>${t('WATCH YOUR WAY.','随心观看。')}</strong><em>PREMIUM</em><span>${t('RM1 / first 3 days','RM1 / 前3天')}</span><b class="cp-promo-cta">${t('VIEW PLANS','查看方案')} ›</b></a></aside>`;
+  const ponyLiveURL='https://www.youtube.com/channel/UC9qgVkKRZUXcgHdf35Z-8dw/live?hl=en';
   const rooms=[
     {key:'lounge',name:['After-hours lounge','夜聊放映室'],headline:['Come hang out.','今晚，来这里坐坐。'],detail:['A little conversation. A movie break.','换个房间，放松片刻。'],video:0},
     {key:'screening',name:['Midnight screening','午夜放映室'],headline:['Your next room is open.','下一个房间，等你入座。'],detail:['Something different is playing here.','另一场放映，马上开始。'],video:2}
@@ -58,7 +59,7 @@ window.BROWSE_CORN_PORTAL = function (D) {
     const dismissed=dismissedLive();
     return rooms.map((room,i)=>`<aside class="cp-live-pop cp-live-${i?'right':'left'}" data-cp-live="${room.key}" aria-label="${t('Live room promotion','直播间推广')} · ${esc(text(room.name))}" ${dismissed.includes(room.key)?'hidden':''}>
       <div class="cp-live-pop-top"><span><i aria-hidden="true"></i>${t('LIVE ROOMS','直播推荐')}</span><small>${t('AD','广告')}</small><button type="button" data-cp-action="dismiss-live" data-room="${room.key}" aria-label="${t('Close this live promotion','关闭这张直播推广卡')}">×</button></div>
-      <a class="cp-live-invite" href="${esc(href('live',{room:room.key}))}" target="_blank" rel="noopener noreferrer">
+      <a class="cp-live-invite" href="${esc(ponyLiveURL)}" target="_blank" rel="noopener noreferrer">
         <div class="cp-live-visual">${i?'<svg class="cp-live-camera" viewBox="0 0 120 100" fill="none" aria-hidden="true"><rect x="14" y="25" width="62" height="50" rx="13" stroke="currentColor" stroke-width="4"/><path d="m78 39 27-14v50L78 61" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><circle cx="34" cy="42" r="5" fill="currentColor"/></svg>':`<img src="assets/ad-video.jpg" alt="${t('Illustrative lounge cover','放映室示意封面')}" width="418" height="313">`}<span class="cp-live-preview-tag">${t('ROOM PREVIEW','房间预览')}</span><span class="cp-live-play" aria-hidden="true">▶</span></div>
         <div class="cp-live-pop-copy"><span class="cp-live-room-name">${esc(text(room.name))}</span><strong>${esc(text(room.headline))}</strong><p>${esc(text(room.detail))}</p><span class="cp-live-enter">${t('ENTER ROOM','进入直播间')} <b aria-hidden="true">›</b></span></div>
       </a></aside>`).join('');

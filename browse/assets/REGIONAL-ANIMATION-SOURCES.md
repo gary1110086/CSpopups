@@ -14,4 +14,6 @@ The embeds use `youtube-nocookie.com`, native playback controls, `playsinline=1`
 
 Implementation references: [YouTube player parameters](https://developers.google.com/youtube/player_parameters), [API client identity and referrer requirements](https://developers.google.com/youtube/terms/required-minimum-functionality#referer).
 
-Side promotions use the existing generated `ad-video.jpg` cover and an original CSS/SVG camera illustration. They do not imply that a photographed person is actually live. The two local room previews use the already licensed Big Buck Bunny and Tears of Steel excerpts, credited in [VIDEO-SOURCES.md](VIDEO-SOURCES.md).
+Both side promotion links now open the [My Little Pony official channel live entry](https://www.youtube.com/channel/UC9qgVkKRZUXcgHdf35Z-8dw/live?hl=en) in isolated native YouTube tabs. The channel endpoint follows its current live selection rather than a fixed archived broadcast. Checked on 30 October 2026: the official channel ID is `UC9qgVkKRZUXcgHdf35Z-8dw`, and the endpoint returned its Halloween Equestria Girls marathon player. Live availability remains controlled by the publisher.
+
+Side promotions retain the existing generated `ad-video.jpg` cover and original CSS/SVG camera illustration. These are illustrative activity assets. Existing local room preview URLs remain compatible and use the licensed Big Buck Bunny and Tears of Steel excerpts, credited in [VIDEO-SOURCES.md](VIDEO-SOURCES.md).
