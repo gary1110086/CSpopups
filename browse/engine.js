@@ -5,7 +5,7 @@
   const booth=window.BROWSE_BOOTH;
   const roundContext=booth?.context(params,document.body.dataset.scene);
   if(roundContext?.requested&&!roundContext.valid){
-    const recover=new URL('booth.html',location.href);recover.searchParams.set('lang',params.get('lang')==='zh'?'zh':'en');recover.searchParams.set('mode','clean');recover.searchParams.set('notice','missing-round');location.replace(recover.href);return;
+    const recover=new URL('booth.html',location.href);recover.searchParams.set('lang',params.get('lang')==='en'?'en':'zh');if(params.get('mode')==='clean')recover.searchParams.set('mode','clean');recover.searchParams.set('notice','missing-round');location.replace(recover.href);return;
   }
   const round=roundContext?.round;
   if(round&&['ended','void'].includes(round.status)){location.replace(booth.resultURL(round));return;}
@@ -64,7 +64,7 @@
   if (page === 'launch') {
     document.title = t('Browse — choose a website', 'Browse · 选择网站');
     const reviewHref=new URL('review.html',location.href);reviewHref.searchParams.set('lang',lang);reviewHref.searchParams.set('v','corn3');
-    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><p class="br-task-entry"><a href="${url('booth.html',{v:'booth2'})}">${t('60-second challenge','60秒任务挑战')} →</a></p><p class="br-task-entry"><a href="${url('tasks.html')}">${t('Choose a specific search task','选择具体检索任务')} →</a> · <a href="${url('index.html',{task:'random',seed:randomSeed()})}">${t('Random task','随机任务')}</a></p><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" style="${s[6]?'background-image:url('+esc(s[6])+');background-size:cover;background-position:center;':''}" aria-hidden="true"></div><div><small>${s[5]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a><a href="${esc(reviewHref.href)}">${t('Review recent sessions','工作人员 · 浏览复盘')} →</a></footer></main>`;
+    root.innerHTML = `<main class="br-launch"><header class="br-launch-head"><a class="br-wordmark" href="${url('launch.html')}">Browse<span> / website selection</span></a><a href="${url('launch.html',{lang:lang==='zh'?'en':'zh'})}">${lang==='zh'?'English':'中文'}</a></header><div class="br-launch-intro"><div><h1>${t('Choose a website','选择一个网站')}</h1><p>${t('Open a website below and complete its task. Or start with a randomly selected website.','打开下方网站并完成一个小任务，也可以随机开始。')}</p></div><a class="br-start" href="${url('index.html',{seed:randomSeed()})}">${t('Random website','随机开始')} →</a></div><p class="br-task-entry"><a href="${url('booth.html',{v:'booth3'})}">${t('60-second challenge','60秒任务挑战')} →</a></p><p class="br-task-entry"><a href="${url('tasks.html')}">${t('Choose a specific search task','选择具体检索任务')} →</a> · <a href="${url('index.html',{task:'random',seed:randomSeed()})}">${t('Random task','随机任务')}</a></p><div class="br-scene-grid">${scenes.map((s,i)=>`<a class="br-scene-card br-scene-${s[4]}" href="${url(s[1],{seed:randomSeed()})}"><div class="br-scene-art" style="${s[6]?'background-image:url('+esc(s[6])+');background-size:cover;background-position:center;':''}" aria-hidden="true"></div><div><small>${s[5]}</small><h2>${s[2]}</h2><p>${s[3]}</p><span class="br-card-arrow">${t('Open website','打开网站')} →</span></div></a>`).join('')}</div><footer class="br-launch-foot"><p>${t('A fictional browsing experience. Your files and progress stay in this browser.','虚构浏览体验。文件和进度保留在此浏览器。')}</p><a href="${url('guide.html')}">${t('Facilitator notes & references','主持人说明与参考来源')} ↗</a><a href="${esc(reviewHref.href)}">${t('Review recent sessions','工作人员 · 浏览复盘')} →</a></footer></main>`;
     return;
   }
   if (document.body.dataset.destination) { window.BROWSE_DESTINATIONS?.(C); return; }
@@ -72,6 +72,9 @@
   const renderer = window.BROWSE_SCENES?.[scene];
   if (!renderer) { root.innerHTML = `<main class="br-guide"><h1>${t('This page could not be loaded.','此页面未能加载。')}</h1><a href="${url('launch.html')}">${t('Choose a website','选择网站')}</a></main>`; return; }
   const review=window.BROWSE_REVIEW_LOG?.({...C,seed,scene});
+  const currentTask=round&&window.BROWSE_BOOTH_TASKS?.some(task=>task.id===round.taskId);
+  const boothAds=round?.mode==='ads'&&currentTask?window.BROWSE_BOOTH_ADS?.(scene,lang):null;
+  if(boothAds)document.documentElement.classList.add('br-booth-campus');
   renderer(C);
   // Keep briefs in the task library; website pages currently open without the task/notes panel.
   // Native GET navigation carries the same context after a scene redraw.
@@ -98,11 +101,12 @@
   };
   wireForms();
   wireRoundLinks();
+  const removeScenePromos=()=>root.querySelectorAll('.swb-sponsor,.pp-ad-banner,.ot-top-ad,.ot-ad-banner,.cu-sponsor,.lp-sponsored,.br-inline-ad,[data-context-ad],[data-br-ad]').forEach(node=>node.remove());
   if(clean){
     // Author-authored sponsor containers must also disappear after scene redraws.
     // Keep the filtering sidebar itself: only its nested commercial block is removed.
     const sanitize=()=>{
-      root.querySelectorAll('.swb-sponsor,.pp-ad-banner,.ot-top-ad,.ot-ad-banner,.cu-sponsor,.lp-sponsored,.br-inline-ad,[data-context-ad],[data-br-ad]').forEach(node=>node.remove());
+      removeScenePromos();
       wireForms();wireRoundLinks();
     };
     sanitize();
@@ -129,14 +133,15 @@
     parcel:['NorthPost',t('Delivery details need a quick update','派送信息需要更新'),t('View delivery','查看派送'),'Delivery notification']
   };
   const adDescription = site => ({corn:t('Browse new releases, channels and member picks.','浏览新片、频道及会员推荐。'),desk:t('Desk lamps, organizers and mats. Browse the new workspace range.','台灯、收纳与桌垫，查看最新办公桌系列。'),stock:t('Search photos, illustrations and image collections.','搜索照片、插画及素材合集。'),game:t('Try a quick round of Signal Garden in your browser.','直接在浏览器试玩 Signal Garden。'),security:t('Review recent device warnings and protection status.','查看设备近期提示及防护状态。'),player:t('Install the latest player package to continue playback.','安装新版播放器程序包以继续播放。'),software:t('Your file utility package is available. Choose a download.','文件工具程序包已就绪，请选择下载。'),prize:t('Your visitor reward is waiting. Check your eligibility.','访客奖励待领取，立即查看资格。'),coupon:t('Complete the member survey to view this offer.','填写会员问卷，查看优惠领取方式。'),parcel:t('Action required: confirm the delivery details for your parcel.','需要处理：请确认包裹派送资料。')}[site]);
-  const adVisual = site => `<div class="br-ad-visual br-visual-${site}" aria-hidden="true">${({corn:'<div class="br-corn-photo-strip"><img src="assets/corn-portrait-01.jpg" alt=""><img src="assets/corn-portrait-02.jpg" alt=""><img src="assets/corn-portrait-03.jpg" alt=""></div><span>Corn<b>hub</b></span><i>▶</i>',desk:'<span>FROM <b>RM39</b></span>',stock:'<span>Framekind<br><b>STOCK IMAGES</b></span>',game:'<span>SIGNAL<br>GARDEN</span><i>▦</i>',security:'<span>!</span>',player:'<span>▶</span>',software:'<span>ZIP</span>',prize:'<span>REWARD<br><b>RM800</b></span>',coupon:'<span>RM<b>100</b><small>SHOPPING VOUCHER</small></span>',parcel:'<span>NorthPost<br><b>DELIVERY UPDATE</b></span>'})[site]}</div>`;
-  const campaign=window.BROWSE_AD_CONTEXT?.({...C,seed,scene,ads,adDescription});
-  const adOffer=(site,ordinal)=>campaign?.adOffer(site,ordinal)||{brand:ads[site][0],title:ads[site][1],cta:ads[site][2],eyebrow:ads[site][3],description:adDescription(site)};
-  const campaignSite=campaign?.campaignSite;
+  const defaultAdVisual = site => `<div class="br-ad-visual br-visual-${site}" aria-hidden="true">${({corn:'<div class="br-corn-photo-strip"><img src="assets/corn-portrait-01.jpg" alt=""><img src="assets/corn-portrait-02.jpg" alt=""><img src="assets/corn-portrait-03.jpg" alt=""></div><span>Corn<b>hub</b></span><i>▶</i>',desk:'<span>FROM <b>RM39</b></span>',stock:'<span>Framekind<br><b>STOCK IMAGES</b></span>',game:'<span>SIGNAL<br>GARDEN</span><i>▦</i>',security:'<span>!</span>',player:'<span>▶</span>',software:'<span>ZIP</span>',prize:'<span>REWARD<br><b>RM800</b></span>',coupon:'<span>RM<b>100</b><small>SHOPPING VOUCHER</small></span>',parcel:'<span>NorthPost<br><b>DELIVERY UPDATE</b></span>'})[site]}</div>`;
+  const campaign=boothAds?null:window.BROWSE_AD_CONTEXT?.({...C,seed,scene,ads,adDescription});
+  const adOffer=(site,ordinal)=>boothAds?.offer(site,ordinal)||campaign?.adOffer(site,ordinal)||{brand:ads[site][0],title:ads[site][1],cta:ads[site][2],eyebrow:ads[site][3],description:adDescription(site)};
+  const adVisual=(site,ordinal)=>boothAds?(ordinal===1?'':`<div class="br-ad-visual br-campus-ad-visual" aria-hidden="true">XMUM · ${esc(adOffer(site,ordinal).eyebrow)}</div>`):defaultAdVisual(site);
+  const campaignSite=boothAds?.site(0)||campaign?.campaignSite;
   const adURL = site => url('destination.html', {site, from:scene,...(campaign?.adURLMeta(site)||{})});
   const redirectURL = target => 'redirect-hop.html?'+new URLSearchParams({step:'1',target:['trip','shop','games'].includes(target)?target:'trip',lang,v:'corn3'});
   const wireAds = node => { for (const a of node.querySelectorAll('[data-br-ad]')) { const id = validSites.includes(a.dataset.brAd) ? a.dataset.brAd : deck[0]; a.href=adURL(id); a.target='_blank'; a.rel='noopener'; } };
-  wireAds(root);
+  if(boothAds)removeScenePromos();else wireAds(root);
   // Scene controls can redraw a document region (servings, saved filters, etc.).
   // Reconcile newly created native links/forms without replacing scene handlers.
   const ensureInlineAd=()=>{
@@ -153,20 +158,21 @@
     layout?.reconcile();
     consent?.reconcile();
     bait?.reconcile();
-    ensureInlineAd();
-    wireAds(root);
+    if(boothAds)removeScenePromos();else{ensureInlineAd();wireAds(root);}
     wireForms();
     wireRoundLinks();
   });contentObserver.observe(root,{childList:true,subtree:true});
   campaign?.reconcile();
-  ensureInlineAd();
-  const stack=window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adOffer,campaignSite,adURL,redirectURL,wireAds,deck,chosen,rawRead,rawWrite,onState:state=>{
+  if(!boothAds)ensureInlineAd();
+  const stack=window.BROWSE_AD_STACK({...C,seed,ads,adVisual,adDescription,adOffer,campaignSite,boothAds,adURL,redirectURL,wireAds,deck,chosen,rawRead,rawWrite,onState:state=>{
     review?.update(state);events?.update(state);layout?.update(state);consent?.update(state);sound?.update(state);bait?.update(state);
-  },onArrival:item=>sound?.arrival(item),onBurst:()=>{sound?.burst();review?.record({type:'burst'});}});
-  events=window.BROWSE_EVENTS?.({...C,seed,scene,ads,adURL,adOffer,campaignSite,stack});
-  layout=window.BROWSE_LAYOUT_EVENT?.({...C,seed,scene,adURL,adOffer,campaignSite,wireAds,stack});
-  consent=window.BROWSE_CONSENT?.({...C,seed,scene,stack});
-  bait=window.BROWSE_CLEANER_BAIT?.({...C,seed,scene,stack});
+  },onArrival:item=>{if(!boothAds||item.id>1)sound?.arrival(item);},onBurst:()=>{sound?.burst();review?.record({type:'burst'});}});
+  if(!boothAds){
+    events=window.BROWSE_EVENTS?.({...C,seed,scene,ads,adURL,adOffer,campaignSite,stack});
+    layout=window.BROWSE_LAYOUT_EVENT?.({...C,seed,scene,adURL,adOffer,campaignSite,wireAds,stack});
+    consent=window.BROWSE_CONSENT?.({...C,seed,scene,stack});
+    bait=window.BROWSE_CLEANER_BAIT?.({...C,seed,scene,stack});
+  }
   window.addEventListener('browse:booth-dialog',event=>stack.setExternalModal(event.detail?.open===true));
   window.addEventListener('browse:booth-end',()=>{contentObserver.disconnect();events?.destroy();layout?.destroy();consent?.destroy();bait?.destroy();sound?.destroy();stack.destroy?.();},{once:true});
   // Observe the actual outcome for document advertisements as well as floating cards.

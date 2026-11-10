@@ -1,12 +1,12 @@
 # CSpopups
 
-**[玩一分钟挑战 →](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth2)** · [English](README.md)
+**[玩一分钟挑战 →](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth3)** · [English](README.md)
 
 在 60 秒内完成一项普通的网页任务，同时应对不断出现的推广和误导弹窗。
 
-活动有十道题。选题和读题时不计时，网页就绪后才开始。无广告难度测试、自由浏览和最近轮次都在选题页底部的「工作人员工具」里。[现场操作说明](docs/MINUTE-BOOTH.md)。
+十道题会用到筛选、详情核对、比较和导出。网页就绪后才开始计时。每题有一组虚构的校园广告，约 15 秒前台操作后开始加密。选题页底部的「工作人员工具」里可以打开无广告难度测试、自由浏览和最近轮次。[现场操作说明](docs/MINUTE-BOOTH.md)。
 
-当前活动界面 **booth2** · [早期 cleaner1 下载包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [更新记录](docs/CHANGELOG.md)
+活动版本 **booth3** · [早期 cleaner1 下载包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [更新记录](docs/CHANGELOG.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
@@ -92,7 +92,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-打开[本地一分钟挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=booth2)。
+打开[本地一分钟挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=booth3)。
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 

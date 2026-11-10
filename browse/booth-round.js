@@ -1,18 +1,45 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'corn3', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'booth3', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
-    'minute-wall-aurora': {scene:'wallpapers',file:'wallpaper.html',target:'orbital-aurora',key:'wall-saved'},
+    'minute-wall-aurora': {scene:'wallpapers',file:'wallpaper.html',target:'orbital-aurora',key:'wall-saved',exportKind:'wallpaper'},
     'minute-recipe-lunch': {scene:'recipes',file:'recipe.html',target:'chickpea-salad',key:'bp-recipes-saved'},
-    'minute-tool-webp': {scene:'tools',file:'tools.html',target:'city'},
+    'minute-tool-webp': {scene:'tools',file:'tools.html',target:'city',exportKind:'tool'},
     'minute-movie-steel': {scene:'movies',file:'movie.html',target:'steel',key:'frame-watchlist'},
     'minute-outing-museum': {scene:'events',file:'events.html',target:'museum-four-galleries',key:'bp-outings-saved'},
-    'minute-book-alice': {scene:'books',file:'book.html',target:'alice',key:'culture-reading-list'},
+    'minute-book-alice': {scene:'books',file:'book.html',target:'alice',key:'culture-reading-list',exportKind:'book'},
     'minute-museum-wave': {scene:'museum',file:'museum.html',target:'56353',key:'culture-exhibition'},
     'minute-nature-cardinal': {scene:'nature',file:'nature.html',target:'cardinal',key:'nature-sightings'},
-    'minute-travel-klcc': {scene:'travel',file:'travel.html',target:'klcc'},
-    'minute-market-starter': {scene:'market',file:'market.html',target:'canon-good',key:'loop-saved'}
+    'minute-travel-klcc': {scene:'travel',file:'travel.html',target:'klcc',trip:{from:'sentral-kj',to:'klcc',time:'10:00',changes:0}},
+    'minute-market-starter': {scene:'market',file:'market.html',target:'canon-good',key:'loop-saved'},
+    'minute2-wall-earthrise': {scene:'wallpapers',file:'wallpaper.html',target:'earthrise-1972',exportKind:'wallpaper',checks:[
+      {key:'wall-compare',items:['earthrise-1968','earthrise-1972'],label:['Both Earthrise photographs are in Compare','两张「地出」照片均已加入对比']}
+    ]},
+    'minute2-recipe-budget': {scene:'recipes',file:'recipe.html',target:'red-lentil-soup',key:'bp-recipes-saved',checks:[
+      {key:'bp-recipe-servings-red-lentil-soup',value:6,label:['Six servings selected','已设为六人份']},
+      {key:'bp-recipe-ingredients-red-lentil-soup',items:[0],label:['Red lentils ticked in the ingredient list','已在食材清单勾选红扁豆']}
+    ]},
+    'minute2-tool-webp': {scene:'tools',file:'tools.html',target:'sunroom',exportKind:'tool'},
+    'minute2-movie-animation': {scene:'movies',file:'movie.html',target:'sintel',key:'frame-watchlist',checks:[
+      {key:'frame-watchlist',items:['elephants-dream'],count:2,label:['Elephants Dream is on the two-film watchlist','双片片单中包含《大象之梦》']}
+    ]},
+    'minute2-outing-craft': {scene:'events',file:'events.html',target:'market-craft',key:'bp-outings-saved',checks:[
+      {key:'bp-outing-checks-market-craft',items:[1,2],label:['Return plan and weather checks ticked','已勾选返程安排和天气方案']}
+    ]},
+    'minute2-book-verne': {scene:'books',file:'book.html',target:'around-world-fr',key:'culture-reading-list',exportKind:'book',checks:[
+      {key:'culture-reading-list',items:['around-world'],label:['English edition saved','已收藏英文版']}
+    ]},
+    'minute2-museum-manet': {scene:'museum',file:'museum.html',target:'436965',key:'culture-exhibition',checks:[
+      {key:'culture-comparison',items:['436947','436965'],label:['Both Manet works are in Compare','两幅马奈作品均已加入对比']}
+    ]},
+    'minute2-nature-woodpeckers': {scene:'nature',file:'nature.html',target:'downy',key:'nature-sightings',checks:[
+      {key:'nature-compare',items:['downy','red-bellied'],label:['Both woodpeckers are in Compare','两种啄木鸟均已加入对比']}
+    ]},
+    'minute2-travel-interchange': {scene:'travel',file:'travel.html',target:'bukit-kg',trip:{from:'klcc',to:'bukit-kg',time:'17:20',pref:'walking',changes:1}},
+    'minute2-market-lens': {scene:'market',file:'market.html',target:'canon-excellent',key:'loop-saved',checks:[
+      {key:'loop-compare',items:['canon-good','canon-excellent'],label:['Both Canon listings are in Compare','两条佳能刊登均已加入对比']}
+    ]}
   };
   const FILES = new Set(Object.values(RULES).map(r => r.file));
   const isObject = v => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -20,12 +47,18 @@
   const time = v => finite(v) && v > 0 && v < 9000000000000000;
   const idOK = v => typeof v === 'string' && /^r_[a-f0-9]{24}$/.test(v);
   const seedOK = v => typeof v === 'string' && /^m_[a-f0-9]{24}$/.test(v);
-  const taskData = id => (window.BROWSE_BOOTH_TASKS || []).find(t => t.id === id);
+  const taskData = id => (window.BROWSE_BOOTH_TASKS || []).find(t => t.id === id) || (window.BROWSE_BOOTH_LEGACY_TASKS || []).find(t => t.id === id);
   const clone = v => JSON.parse(JSON.stringify(v));
   const escape = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const emptyEvidence = taskId => ({targetId:RULES[taskId].target,saved:false,found:false,servings:null,trip:null,exports:[],capturedAt:0});
+  const emptyEvidence = taskId => {
+    const rule = RULES[taskId];
+    return {targetId:rule.target,saved:false,found:false,servings:null,trip:null,exports:[],capturedAt:0,
+      ...(rule.checks ? {checks:rule.checks.map(() => false)} : {})};
+  };
   const validDate = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v+'T00:00:00Z')) && new Date(v+'T00:00:00Z').toISOString().slice(0,10) === v;
-  const validTrip = v => isObject(v) && v.from === 'sentral-kj' && v.to === 'klcc' && v.time === '10:00' && validDate(v.date) && ['fastest','changes','walking'].includes(v.pref);
+  const validTrip = (v, trip) => isObject(v) && v.from === trip.from && v.to === trip.to && v.time === trip.time
+    && validDate(v.date) && (trip.pref ? v.pref === trip.pref : ['fastest','changes','walking'].includes(v.pref));
+  const tripEvidence = (v, trip) => ({from:v.from,to:v.to,date:v.date,time:v.time,pref:v.pref,changes:trip.changes});
   const exportValue = value => {
     if (!isObject(value) || !['wallpaper','tool','book'].includes(value.kind) || !Number.isInteger(value.bytes) || value.bytes < 1 || value.bytes > 200000000) return null;
     if (value.kind === 'book') return typeof value.id === 'string' && /^[a-z0-9-]{1,70}$/.test(value.id) && value.format === 'text/plain' ? {kind:'book',id:value.id,format:'text/plain',bytes:value.bytes} : null;
@@ -43,7 +76,9 @@
       e.saved = v.saved === true;
       e.found = v.found === true;
       e.servings = record.taskId === 'minute-recipe-lunch' && [1,2,4,6].includes(v.servings) ? v.servings : null;
-      if (record.taskId === 'minute-travel-klcc' && validTrip(v.trip)) e.trip = {from:v.trip.from,to:v.trip.to,date:v.trip.date,time:v.trip.time,pref:v.trip.pref,changes:0};
+      const rule = RULES[record.taskId];
+      if (rule.trip && validTrip(v.trip,rule.trip)) e.trip = tripEvidence(v.trip,rule.trip);
+      if (rule.checks && Array.isArray(v.checks)) e.checks = rule.checks.map((_,index) => v.checks[index] === true);
     }
     if (Array.isArray(v.exports)) e.exports = v.exports.slice(-12).map(x => {
       const out = exportValue(x);
@@ -135,9 +170,29 @@
       case 'minute-book-alice':saved('Required book added to reading list','符合题目的书籍已加入阅读清单');add('Required opening excerpt TXT download dispatched','所需开篇片段TXT已发起下载',e.exports.some(x=>x.kind==='book'&&x.id==='alice'&&x.format==='text/plain'),e.exports.filter(x=>x.kind==='book').map(x=>`TXT · ${x.bytes} B`).join('; '));break;
       case 'minute-museum-wave':saved('Required artwork added to My exhibition','符合题目的作品已加入我的展览');break;
       case 'minute-nature-cardinal':saved('Required bird added to observation list','符合题目的鸟类已加入观察清单');break;
-      case 'minute-travel-klcc':add('Saved KL Sentral (KJ) → KLCC at 10:00','已保存KL Sentral（KJ）→ KLCC、10:00的行程',e.saved&&validTrip(e.trip),e.trip?`${e.trip.from} → ${e.trip.to} · ${e.trip.date} ${e.trip.time}`:'—');add('Direct route: zero changes','直达路线：0次换乘',Boolean(e.trip)&&e.trip.changes===0,e.trip?'0':'—');break;
+      case 'minute-travel-klcc':add('Saved KL Sentral (KJ) → KLCC at 10:00','已保存KL Sentral（KJ）→ KLCC、10:00的行程',e.saved&&Boolean(e.trip),e.trip?`${e.trip.from} → ${e.trip.to} · ${e.trip.date} ${e.trip.time}`:'—');add('Direct route: zero changes','直达路线：0次换乘',Boolean(e.trip)&&e.trip.changes===0,e.trip?'0':'—');break;
       case 'minute-market-starter':saved('Required listing saved','符合题目的刊登已收藏');break;
+      case 'minute2-wall-earthrise':add('Apollo 16 photograph exported as a 3840 × 2160 JPG','已发起阿波罗 16 号照片的 3840 × 2160 JPG 下载',e.exports.some(x=>x.kind==='wallpaper'&&x.id===e.targetId&&x.width===3840&&x.height===2160));break;
+      case 'minute2-recipe-budget':saved('Red lentil and tomato soup saved','已收藏红扁豆番茄汤');break;
+      case 'minute2-tool-webp': {
+        const exports=e.exports.filter(x=>x.kind==='tool'&&x.sample===e.targetId);
+        add('Reading-space example exported','已导出阅读空间示例',exports.length>0);
+        add('800 px WebP at 70% quality downloaded','已发起宽 800 px、画质 70% 的 WebP 下载',exports.some(x=>x.width===800&&x.height===1052&&x.format==='image/webp'&&x.quality===70),
+          exports.map(x=>`${x.width} × ${x.height} · ${x.format} · ${x.quality}%`).join('; '));
+        break;
+      }
+      case 'minute2-movie-animation':saved('Sintel is on the watchlist','《辛特尔》已加入想看片单');break;
+      case 'minute2-outing-craft':saved('Central Market craft outing saved','已保存中央艺术坊手作行程');break;
+      case 'minute2-book-verne':
+        saved('French edition saved','已收藏法文版');
+        add('French opening excerpt TXT downloaded','已发起法文开篇 TXT 下载',e.exports.some(x=>x.kind==='book'&&x.id===e.targetId&&x.format==='text/plain'));
+        break;
+      case 'minute2-museum-manet':saved('Narrower canvas added to My Exhibition','较窄的作品已加入我的展览');break;
+      case 'minute2-nature-woodpeckers':saved('Smaller woodpecker added to the observation list','较小的啄木鸟已加入观察清单');break;
+      case 'minute2-travel-interchange':add('17:20 KLCC (KJ) → Bukit Bintang (KG) saved with Less walking','已用「较少步行」保存 17:20 KLCC（KJ）至武吉免登（KG）',e.saved&&Boolean(e.trip),e.trip?.date||'');break;
+      case 'minute2-market-lens':saved('Canon kit with lens saved','已收藏附镜头的佳能套机');break;
     }
+    RULES[record.taskId].checks?.forEach(({label},index)=>add(...label,e.checks[index]));
     return {checks,allMet:checks.length>0&&checks.every(c=>c.met)};
   };
 
@@ -196,10 +251,15 @@
       e.saved=Array.isArray(values)&&values.some(x=>rule.key==='nature-sightings'?isObject(x)&&x.id===rule.target:x===rule.target);
     }
     if (record.taskId==='minute-recipe-lunch') {const value=read('bp-recipe-servings-chickpea-salad',2);e.servings=[1,2,4,6].includes(value)?value:2;}
-    if (record.taskId==='minute-travel-klcc') {
-      const values=read('travel-trips',[]),trip=Array.isArray(values)?values.find(validTrip):null;
-      e.saved=Boolean(trip);e.trip=trip?{from:trip.from,to:trip.to,date:trip.date,time:trip.time,pref:trip.pref,changes:0}:null;
+    if (rule.trip) {
+      const values=read('travel-trips',[]),trip=Array.isArray(values)?values.find(v=>validTrip(v,rule.trip)):null;
+      e.saved=Boolean(trip);e.trip=trip?tripEvidence(trip,rule.trip):null;
     }
+    if (rule.checks) e.checks=rule.checks.map(({key,items,value,count})=>{
+      const stored=read(key,null);
+      if (!items) return stored===value;
+      return Array.isArray(stored)&&(count===undefined||stored.length===count)&&items.every(item=>stored.includes(item));
+    });
     const selected=C.params?.get('id');
     e.found=e.found||selected===rule.target||record.taskId==='minute-tool-webp'&&C.params?.get('sample')==='city';
     e.capturedAt=now;
@@ -210,8 +270,7 @@
     if (!active || !canAct()) return false;
     const item=exportValue({...detail,kind:detail?.kind || 'tool'}),record=current(),now=Date.now();
     if (!item || !record || now>=record.deadline) {if(record&&now>=record.deadline)end('timeout');return false;}
-    const allowed=record.taskId==='minute-wall-aurora'&&item.kind==='wallpaper'||record.taskId==='minute-book-alice'&&item.kind==='book'||record.taskId==='minute-tool-webp'&&item.kind==='tool';
-    if (!allowed) return false;
+    if (RULES[record.taskId].exportKind!==item.kind) return false;
     record.evidence.exports=[...record.evidence.exports,{...item,at:now}].slice(-12);
     record.evidence.found=record.evidence.found||(item.id || item.sample)===RULES[record.taskId].target;
     record.updatedAt=Math.max(record.updatedAt,now);

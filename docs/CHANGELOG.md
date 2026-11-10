@@ -1,6 +1,12 @@
 # Release history / 版本记录
 
-Current activity layout: **booth2**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **booth3**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## booth3 — 10 November 2026
+
+- Replaced the ten public briefs with tasks that combine catalogue clues and verifiable actions. Earlier round records and direct briefs retain their original requirements.
+- Added one bilingual campus ad deck per task. The opening card is compact and silent. Faster arrivals start after 15 focused seconds, and the third card has a close-shaped link that opens an advertiser.
+- The activity clock still uses a single 60-second deadline. Popup arrivals use focused browsing time. The ad-free test and ordinary browsing retain their own ad behavior.
 
 ## booth2 — 10 November 2026
 

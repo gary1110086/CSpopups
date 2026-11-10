@@ -13,6 +13,8 @@
 .br-pressure-ticker-copy{font-size:11px;font-weight:bold;letter-spacing:.2px;min-width:0}
 .br-pressure-ticker-cta{color:#17210d!important;font-size:11px;font-weight:bold;white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
 .br-pressure-ticker .br-pressure-close{margin-left:10px}
+.br-pressure-campus .br-pressure-ticker{top:var(--br-booth-offset,56px)}
+.br-pressure-campus .br-pressure-ticker-copy{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .br-pressure-leaderboard{position:fixed;z-index:7000;bottom:0;left:0;right:0;height:90px;display:grid;grid-template-columns:160px 150px minmax(0,1fr) 180px;gap:23px;align-items:center;padding:0 max(38px,calc((100vw - 1180px)/2));background:#f4d921;color:#181912;border-top:3px solid #1a1b14;box-shadow:0 -4px 18px #0003;overflow:hidden}
 .br-pressure-leaderboard>.br-pressure-close{position:absolute;right:6px;top:5px;width:24px;height:24px;background:#f4d921}
 .br-pressure-leader-photo{position:relative;height:87px;overflow:hidden;background:#3c4140;align-self:stretch}

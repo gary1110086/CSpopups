@@ -1,17 +1,19 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'booth2';
+  const VERSION = 'booth3';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
+  const legacy = Array.isArray(window.BROWSE_BOOTH_LEGACY_TASKS) ? window.BROWSE_BOOTH_LEGACY_TASKS : [];
+  const findTask = id => tasks.find(item => item.id === id) || legacy.find(item => item.id === id);
   const api = window.BROWSE_BOOTH;
   const lang = params.get('lang') === 'en' ? 'en' : 'zh';
   const li = lang === 'en' ? 0 : 1;
   const mode = params.get('mode') === 'clean' ? 'clean' : 'ads';
   const view = params.get('view') || 'choose';
   const taskId = params.get('task');
-  const task = tasks.find(item => item.id === taskId);
+  const task = findTask(taskId);
   let starting = false;
   const t = (en, zh) => li === 0 ? en : zh;
   const txt = pair => Array.isArray(pair) ? String(pair[li] ?? pair[0] ?? '') : String(pair ?? '');
@@ -71,7 +73,7 @@
       <h2>${t('Recent rounds', '最近轮次')}</h2>
       <p class="booth-note">${t('Records are stored in this browser tab.', '记录保存在当前浏览器标签页。')}</p>
       ${records.length ? `<ol class="booth-history-list">${records.map(record => {
-      const item = tasks.find(candidate => candidate.id === record.taskId);
+      const item = findTask(record.taskId);
       return `<li><a href="${esc(localisedURL(api.resultURL(record)))}"><span>${esc(item ? txt(item.title) : t('Unavailable task', '题目不可用'))}<small>${esc(record.id)}</small></span><span>${esc(record.status === 'running' ? t('In progress', '进行中') : record.status === 'armed' ? t('Ready', '尚未开始') : record.status === 'void' ? t('Voided', '已作废') : t('Ended', '已结束'))} ↗</span></a></li>`;
     }).join('')}</ol>` : `<p>${t('No rounds have been started in this tab yet.', '此标签页还没有开始过的轮次。')}</p>`}</div></details>`;
   }
@@ -85,7 +87,7 @@
             <h1 id="booth-title">${t('One minute.', '一分钟挑战')}</h1>
             <p>${mode === 'clean'
               ? t('Try a task without interruptions to check its difficulty.', '先关掉广告，试一试题目难不难。')
-              : t('You have 60 seconds to finish a task while pop-up ads compete for your attention.', '60 秒内完成一项网页任务，弹窗会来打扰你。')}</p>
+              : t('Find the right result in 60 seconds while simulated campus ads compete for your attention.', '在 60 秒内找对结果，同时应对模拟校园广告。')}</p>
             <button id="booth-random" class="booth-button booth-button-inverse" type="button">${t('Draw a task', '随机抽题')} <span aria-hidden="true">→</span></button>
           </div>
           <span class="booth-hero-clock" aria-hidden="true">1:00</span>
@@ -273,7 +275,7 @@
   if (view === 'result') {
     let round;
     try { round = params.get('round') ? api.get(params.get('round')) : null; } catch (_) { round = null; }
-    const item = round && tasks.find(candidate => candidate.id === round.taskId);
+    const item = round && findTask(round.taskId);
     if (!round || !item) renderError('round'); else renderResult(round, item);
   } else if (view === 'brief') {
     if (task) renderBrief(task); else renderError('task');

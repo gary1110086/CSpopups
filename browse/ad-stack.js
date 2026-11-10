@@ -2,10 +2,12 @@
 (() => {
   'use strict';
   window.BROWSE_AD_STACK = C => {
-    const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,redirectURL,wireAds,deck,chosen,adOffer,campaignSite}=C;
+    const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,redirectURL,wireAds,deck,chosen,adOffer,campaignSite,boothAds}=C;
     const KEY='br-run-v9:'+seed, MISSING=Symbol('missing'), AUTO_MAX=30, ID_MAX=40, REVEAL_MS=10000;
     const GAPS=[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','robot','dodge','player-error','bonus','captcha','tiny','drawer','panel','newsletter'];
+    const formats=boothAds?['tiny','drawer','dodge','bounce','panel','newsletter']:FORMATS;
+    const firstAt=boothAds?4500:3000, rampAt=15000;
     const prompts=window.BROWSE_REDIRECT_PROMPTS;
     const isPrompt=format=>prompts?.formats.includes(format)===true;
     const query=new URLSearchParams(location.search),previewFormat=query.get('prompt'),previewTarget=query.get('landing');
@@ -45,7 +47,8 @@
       const shown=Math.max(Number.isInteger(obj.shown)?Math.max(0,Math.min(ID_MAX,obj.shown)):0,...pending.map(p=>p.id));
       const autoShown=Number.isInteger(obj.autoShown)?Math.max(0,Math.min(AUTO_MAX,shown,obj.autoShown)):Math.min(AUTO_MAX,shown);
       const quietUntil=Number.isFinite(obj.quietUntil)&&obj.quietUntil>=0&&obj.quietUntil<=activeMs+5000?obj.quietUntil:0;
-      const nextAt=autoShown>=AUTO_MAX?null:Math.max(quietUntil,Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=activeMs+5000?obj.nextAt:activeMs+(shown?2500:3000));
+      const latestNext=Math.max(activeMs+5000,boothAds?rampAt:0);
+      const nextAt=autoShown>=AUTO_MAX?null:Math.max(quietUntil,Number.isFinite(obj.nextAt)&&obj.nextAt>=0&&obj.nextAt<=latestNext?obj.nextAt:activeMs+(shown?2500:firstAt));
       return {pacingVersion:9,activeMs,shown,autoShown,nextAt,quietUntil,burstUsed:obj.burstUsed===true||pending.some(p=>p.burst),pending};
     };
     const stored=readRun(KEY);
@@ -64,8 +67,8 @@
     const save=()=>{if(!suspended&&!destroyed)C.rawWrite(KEY,state);};
     const burstActive=()=>state.pending.some(p=>p.burst===true);
     const phone=()=>matchMedia('(max-width: 640px)').matches;
-    const limit=()=>burstActive()?(phone()?5:10):(phone()?2:4);
-    const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write,adOffer,campaignSite});
+    const limit=()=>boothAds&&state.activeMs<rampAt?1:burstActive()?(phone()?5:10):(phone()?2:4);
+    const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write,adOffer,campaignSite,campus:Boolean(boothAds)});
     const foreground=()=>!destroyed&&!suspended&&!externalModal&&!document.hidden&&document.hasFocus();
     const snapshot=()=>({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:externalModal||modalId!==null,externalModal,suspended,restoring,shown:state.shown,pending:state.pending.length,burstUsed:state.burstUsed,burstActive:burstActive()});
     const observe=detail=>window.dispatchEvent(new CustomEvent('browse:review',{detail}));
@@ -79,6 +82,8 @@
     const boothOffset=()=>Math.max(0,parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--br-booth-offset'))||0);
     const closeReserves=p=>({top:boothOffset()+(p.closeStyle!=='visible'&&p.closeCorner!=='bottom-right'?30:0),bottom:p.closeStyle!=='visible'&&p.closeCorner==='bottom-right'?30:0});
     const burstSlots=[[.02,.06],[.72,.08],[.28,.48],[.97,.88],[.05,.94],[.64,.56],[.4,.02],[.98,.32],[.15,.44],[.5,.91]];
+    const staticSlots=[[.04,.10],[.96,.16],[.07,.94],[.9,.88]];
+    const staticOrigin=p=>boothAds&&p.id===1?[.98,.97]:staticSlots[(p.id-1)%4];
     const positionEntry=entry=>{
       const v=viewport(),reserve=closeReserves(entry.p);entry.card.style.setProperty('--br-motion-view-width',v.width+'px');entry.card.style.setProperty('--br-motion-view-height',v.height+'px');
       if(modal(entry.p)){
@@ -86,7 +91,7 @@
         Object.assign(entry.stage.style,{left:v.left+'px',top:v.top+'px',width:v.width+'px',height:v.height+'px',paddingTop:(pad+reserve.top)+'px',paddingBottom:(pad+reserve.bottom)+'px'});return;
       }
       if(entry.motion||entry.moving)return;
-      const rect=entry.card.getBoundingClientRect(),slots=[[.04,.10],[.96,.16],[.07,.94],[.9,.88]],slot=entry.p.burst?burstSlots[(entry.p.id-1)%10]:slots[(entry.p.id-1)%4];
+      const rect=entry.card.getBoundingClientRect(),slot=entry.p.burst?burstSlots[(entry.p.id-1)%10]:staticOrigin(entry.p);
       entry.card.style.left=(v.left+4+Math.max(0,v.width-rect.width-8)*slot[0])+'px';
       entry.card.style.top=(v.top+4+reserve.top+Math.max(0,v.height-rect.height-8-reserve.top-reserve.bottom)*slot[1])+'px';
     };
@@ -200,7 +205,7 @@
         ${p.closeStyle!=='visible'?`<button class="br-ghost-close" type="button" data-br-close aria-label="${t('Dismiss advertisement','关闭广告')}">×</button>`:''}${lower?genuine:''}<div class="br-ad-scroll">
         <div class="br-ad-top"><span>${t('Sponsored','赞助内容')} · ${esc(offer.brand)}</span>${!lower?genuine:''}${p.decoy?`<a class="br-false-close br-decoy-close" data-br-ad="${p.site}" data-br-decoy aria-label="${t('Open sponsor offer','打开赞助推广')}">×</a>`:p.format==='panel'&&p.closeStyle!=='ghost'?`<a class="br-false-close" data-br-ad="${p.site}" aria-label="${t('Open sponsor offer','打开赞助推广')}">×</a>`:''}</div>
         ${moving?`<div class="br-motion-label">${p.format==='bounce'?t('↗ ONE MORE OFFER','↗ 再来一条优惠'):t('✦ CATCH ME FIRST','✦ 先追上我再说')}</div>`:''}
-        ${adVisual(p.site)}<div class="br-ad-body"><span class="br-ad-eyebrow">${esc(offer.eyebrow)}</span><h2>${esc(offer.title)}</h2><p>${esc(offer.description)}</p>
+        ${adVisual(p.site,p.id)}<div class="br-ad-body"><span class="br-ad-eyebrow">${esc(offer.eyebrow)}</span><h2>${esc(offer.title)}</h2><p>${esc(offer.description)}</p>
         ${moving?`<p class="br-motion-taunt">${moving&&p.format==='dodge'?t('Looking for the ×?','在找那个 × 吗？'):t('Just passing through. Again.','只是路过，又路过。')}</p>`:''}
         <a class="br-ad-cta" data-br-ad="${p.site}">${esc(offer.cta)} →</a>${p.format==='newsletter'&&p.closeStyle!=='ghost'?`<button class="br-ad-decline" data-br-close>${t('Maybe another time','下次再说')}</button>`:''}</div>
         <div class="br-ad-bottom">${p.format==='tiny'&&p.closeStyle!=='ghost'?`<button data-br-close class="br-small-dismiss">${t('close ad','关闭广告')}</button>`:t('Advertisement','广告')}<span class="br-stack-hint">${t('Esc clears all offers','Esc 关闭全部广告')}</span></div>
@@ -241,7 +246,7 @@
           else{stage.querySelector('.br-blocked').hidden=false;entry.blockedLink=true;entry.motion?.pause();positionEntry(entry);}
         });
       });
-      if(!isModal){let line=0;const reserve=closeReserves(p);entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:moving?p.format:'static',slot:(p.id-1)%4,origin:p.burst?burstSlots[(p.id-1)%10]:moving?null:[[.04,.10],[.96,.16],[.07,.94],[.9,.88]][(p.id-1)%4],speed:1.25,topReserve:reserve.top,bottomReserve:reserve.bottom,dodgeLimit:p.dodgeLimit,dodgeCount:p.dodgeCount,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
+      if(!isModal){let line=0;const reserve=closeReserves(p);entry.motion=window.BROWSE_POPUP_MOTION({element:card,mode:moving?p.format:'static',slot:(p.id-1)%4,origin:p.burst?burstSlots[(p.id-1)%10]:moving?null:staticOrigin(p),speed:1.25,topReserve:reserve.top,bottomReserve:reserve.bottom,dodgeLimit:p.dodgeLimit,dodgeCount:p.dodgeCount,isActive:()=>foreground()&&modalId===null&&state.pending.some(item=>item.id===p.id),onMove:meta=>{
         card.dataset.motionMoves=String(meta.count);card.dataset.motionReason=meta.reason;
         if(p.format==='dodge'){
           card.dataset.dodgeLimit=String(meta.dodgeLimit);card.dataset.dodgeCount=String(meta.dodgeCount);card.dataset.dodgeSettled=String(meta.settled);
@@ -281,18 +286,23 @@
         if(before<REVEAL_MS&&p.closeElapsedMs>=REVEAL_MS)justRevealed=true;
       }
       if(justRevealed){for(const entry of entries.values())updateClose(entry);applyModal();save();}
-      if(!burstActive()&&state.autoShown<AUTO_MAX&&state.shown<ID_MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
-        let format=FORMATS[state.autoShown%FORMATS.length];
-        if(state.autoShown===0&&isPrompt(previewFormat))format=previewFormat;
+      const warmingUp=boothAds&&state.autoShown>0&&state.activeMs<rampAt;
+      if(!warmingUp&&!burstActive()&&state.autoShown<AUTO_MAX&&state.shown<ID_MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
+        const openingCard=boothAds&&state.autoShown===0;
+        let format=formats[state.autoShown%formats.length];
+        if(!boothAds&&state.autoShown===0&&isPrompt(previewFormat))format=previewFormat;
         if(modal({format})&&state.pending.some(modal))format=state.autoShown%2?'dodge':'bounce';
-        state.shown++;state.autoShown++;const closeStyle=closeStyles[(state.shown-1)%closeStyles.length],layout=closeLayouts[(state.shown-1)%closeLayouts.length];
+        state.shown++;state.autoShown++;
+        const closeStyle=openingCard?'visible':closeStyles[(state.shown-1)%closeStyles.length];
+        const layout=openingCard?'top-right':boothAds&&state.autoShown===3?'decoy':closeLayouts[(state.shown-1)%closeLayouts.length];
         const recurring=validSites.includes(campaignSite)&&(state.autoShown-1)%6===0;
         const normalIndex=state.autoShown-1-(validSites.includes(campaignSite)?Math.ceil((state.autoShown-1)/6):0);
-        const site=chosen||(recurring?campaignSite:deck[normalIndex%deck.length]);
+        const site=boothAds?.site(state.shown)||chosen||(recurring?campaignSite:deck[normalIndex%deck.length]);
         const p={id:state.shown,site,format,closeStyle,closeCorner:layout==='decoy'?'top-left':layout,decoy:layout==='decoy',...(closeStyle==='ghost'?{closeElapsedMs:0}:{}),...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})};
         if(isPrompt(format)){p.hopTarget=state.autoShown===1&&TARGETS.includes(previewTarget)?previewTarget:hopTarget(p.id);p.decoy=false;}
         state.pending.push(p);
-        state.nextAt=state.autoShown<AUTO_MAX?state.activeMs+GAPS[(state.autoShown-1)%GAPS.length]:null;
+        const next=state.activeMs+GAPS[(state.autoShown-1)%GAPS.length];
+        state.nextAt=state.autoShown<AUTO_MAX?(openingCard?Math.max(next,rampAt):next):null;
         sync();save();C.onArrival?.(p);
       }else pressureUpdate();
       collide();

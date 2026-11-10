@@ -14,3 +14,15 @@
 .br-stack-stage[inert]{pointer-events:none}
 .br-stack-stage[inert]>.br-ad{pointer-events:none}
 @media(max-width:640px){.br-ad.br-stack-card{width:calc(100vw - 24px)}.br-ad.br-stack-card:not(.br-stack-modal) .br-ad-visual{height:70px}.br-ad.br-stack-card:not(.br-stack-modal) h2{font-size:23px}.br-interrupt.br-stack-modal-stage{padding:12px}.br-ad.br-stack-card.br-stack-modal{width:calc(100vw - 24px)}.br-ad.br-stack-modal h2{font-size:27px}}
+.br-ad.br-stack-card .br-campus-ad-visual.br-ad-visual{
+  height:auto;
+  min-height:40px;
+  justify-content:flex-start;
+  padding:8px 14px;
+  border-block:1px solid #a9bbec;
+  background:#e4ebff;
+  color:#1c347e;
+  font:700 12px/1.35 Tahoma,"Microsoft YaHei",sans-serif;
+}
+.br-campus-ad-visual + .br-ad-body > .br-ad-eyebrow{display:none}
+.br-booth-campus .br-ad-sound{z-index:8999;bottom:12px}

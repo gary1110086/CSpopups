@@ -1,3 +1,10 @@
+## Task-specific campus interruptions — booth3, 10 November 2026
+
+- Guided Chrome runs exercised each of the ten revised challenges through submission. Checked actual 3840 × 2160 JPEG and 800 × 1052 WebP files, the French excerpt TXT, comparison lists, saved items, serving and checklist changes, and the one-transfer Less walking route via Pasar Seni. Removing a recipe checklist tick before submission revoked its evidence. An earlier brief, result and round history still worked.
+- Independent local Chrome checks exercised each task's first two ads in English and Chinese. Real desktop arrivals were observed at approximately 4.8, 15.3, 18.3 and 20.8 seconds. A separate timeout check verified the original 60-second deadline. A native advertiser tab had no opener, and Back restored a real cached task page without duplicating its pending card. Escape, clean mode and free browsing were also checked.
+- Touch-emulated Chrome at 390 × 844 and 320 × 568 verified readable ticker disclosure and working dismissal controls. Moved the audio toggle below floating cards after finding that it covered part of a button. A top card can overlap the lower card on short screens.
+- Guided automation checks whether each route is achievable and recorded. The 45–55 second target still needs first-time participant data. See the [staff guide](../docs/MINUTE-BOOTH.md#广告节奏与难度试跑).
+
 ## Corn native films and retained online players — corn3,30 October2026
 
 Local Chrome45 self-hosted assertions pass with external internet blocked: three complete960×540 films actually play with audio, seek, restore/resume progress and download with exact SHA256; actual206 ranges match bytes; native Back/BFCache, cover uniqueness, seven records, old URLs, search, genuine close and desktop/mobile bounds work. Eight additional actual Upin YouTube assertions and17 actual official Pony-live assertions pass. Eight native activity assertions retain the processed800px image, original60-second deadline, result submission and independent clean entry. No application runtime or HTTP errors were observed.

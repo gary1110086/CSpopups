@@ -1,5 +1,5 @@
-/* The activity has its own short briefs. Answers are for the staff disclosure only. */
-window.BROWSE_BOOTH_TASKS = [
+/* Earlier round records still resolve their original briefs and answers. */
+window.BROWSE_BOOTH_LEGACY_TASKS = [
   {
     id: 'minute-wall-aurora', scene: 'wallpapers', file: 'wallpaper.html', site: 'Stillwall',
     title: ['Green light from orbit', '绿色轨道壁纸'],
@@ -89,5 +89,99 @@ window.BROWSE_BOOTH_TASKS = [
     route: [['Filter Canon + Good + maximum RM500 + Kuala Lumpur.', '筛选Canon＋Good＋最高价500＋Kuala Lumpur。'], ['Open the RM420 Canon EOS 550D and read what is included.', '打开RM420的Canon EOS 550D，阅读附带物品。'], ['Save the listing and confirm it is body only.', '收藏，并核对是body only。']],
     answer: ['canon-good · RM420. Body, battery, charger and body cap; no lens. This is a fictional practice listing; the reference photograph is illustrative.', 'canon-good · RM420。包含机身、电池、充电器、机身盖，不含镜头。这是练习用虚构刊登，参考照片仅作展示。'],
     cover: 'assets/market-canon-eos-550d.webp', advanced: true
+  }
+];
+
+/* Current booth briefs. Cover images illustrate each site without revealing its answer. */
+window.BROWSE_BOOTH_TASKS = [
+  {
+    id: 'minute2-wall-earthrise', scene: 'wallpapers', file: 'wallpaper.html', site: 'Stillwall',
+    title: ['A photograph for the space booth', '太空展台选图'],
+    brief: ['Compare the two NASA Earthrise photographs. The booth needs the one taken with a handheld camera during Apollo 16. Export it as a 3840 × 2160 JPG.', '对比两张 NASA 的「地出」照片。展台要的是阿波罗 16 号任务中用手持相机拍的那张。把它导出为 3840 × 2160 JPG。'],
+    goals: [['Put both Earthrise photographs in the comparison.', '把两张「地出」都加入对比。'], ['Export the Apollo 16 photograph as a 3840 × 2160 JPG.', '将阿波罗 16 号的照片导出为 3840 × 2160 JPG。']],
+    route: [['Search Earthrise and add both results to Compare.', '搜「地出」或 Earthrise，把两张结果都加入对比。'], ['Check the mission in the photograph description. Open the Apollo 16 result.', '在照片说明里核对任务，打开阿波罗 16 号的结果。'], ['Select 3840 × 2160 and download the wallpaper.', '选择 3840 × 2160，下载壁纸。']],
+    answer: ['earthrise-1968 (Apollo 8) and earthrise-1972 (Apollo 16). Export only earthrise-1972 at 3840 × 2160.', '对比 earthrise-1968（阿波罗 8 号）和 earthrise-1972（阿波罗 16 号）。只导出后者的 3840 × 2160 JPG。'],
+    cover: 'assets/nasa-iss030e119777-thumb.webp', advanced: false
+  },
+  {
+    id: 'minute2-recipe-budget', scene: 'recipes', file: 'recipe.html', site: 'Pantry & Plate',
+    title: ['A budget dinner for six', '六人的省钱晚餐'],
+    brief: ['Find a vegan soup made in one pot, with tomatoes in the ingredient list, ready within 35 minutes and estimated at RM5 or less per serving. Save it, scale it to six, and tick the dried lentils in its ingredient list.', '找一款只用一口锅的纯素汤。配料有番茄，35 分钟内做好，每份估算不超过 RM5。收藏食谱，改成六人份，并在食材清单勾选干扁豆。'],
+    goals: [['Save the matching recipe.', '收藏符合条件的食谱。'], ['Set six servings and tick the lentils.', '设成六人份，并勾选扁豆。']],
+    route: [['Start with the one-pot or vegan category. Narrow by budget and check the total time.', '从「一锅料理」或纯素筛选入手，核对预算和总用时。'], ['Open the red lentil and tomato soup, jump to its recipe and set six servings.', '打开红扁豆番茄汤，跳到食谱并设为六人份。'], ['Tick red lentils and save the recipe.', '勾选红扁豆并收藏食谱。']],
+    answer: ['red-lentil-soup · RM5 per serving, 35 minutes, vegan, one pot. At six servings the checklist shows 420 g of red lentils.', 'red-lentil-soup · 每份 RM5，35 分钟，纯素，一口锅。六人份的食材清单显示 420 g 红扁豆。'],
+    cover: 'assets/real-food-chickpea-salad-thumb.webp', advanced: false
+  },
+  {
+    id: 'minute2-tool-webp', scene: 'tools', file: 'tools.html', site: 'Pixelpress',
+    title: ['A portrait photo for the club page', '社团网页的竖版照片'],
+    brief: ['From the example photos, find the tall indoor reading-space photo. The club page needs a WebP export at 800 px wide and 70% quality. Keep the original proportions.', '在示例照片里找一张竖版的室内阅读空间照。社团网页需要宽 800 px、画质 70% 的 WebP，保持原图比例。'],
+    goals: [['Export the matching example.', '导出符合描述的示例。'], ['Download the generated WebP at 800 px wide and 70% quality.', '下载生成的 WebP，宽 800 px，画质 70%。']],
+    route: [['Look through the example photos and load the sunroom study.', '浏览示例照片，载入日光书房。'], ['Select WebP, width 800 and quality 70%. The settings update the preview automatically.', '设为 WebP、宽 800、画质 70%，预览会自动更新。'], ['Check the result and download it.', '核对结果后下载。']],
+    answer: ['sunroom (sunroom-study). The 1558 × 2048 source scales to 800 × 1052. Use custom settings.', 'sunroom（日光书房）。原图 1558 × 2048，按比例生成 800 × 1052。使用自定义设置。'],
+    cover: 'assets/real-wall-blue-hour-street-thumb.webp', advanced: false
+  },
+  {
+    id: 'minute2-movie-animation', scene: 'movies', file: 'movie.html', site: 'Frame Movies',
+    title: ['Two shorts for a club screening', '社团放映的两部短片'],
+    brief: ['Build a two-film watchlist of English-language animated fantasy shorts under 16 minutes. One follows a young traveller looking for a dragon. The other follows two men inside a strange machine.', '为社团建一份双片片单。两部都要是不到 16 分钟的英语奇幻动画。一部讲年轻旅人寻找龙，另一部讲两个人在一台古怪的机器里。'],
+    goals: [['Use the synopses to identify both films and add them to the watchlist.', '根据剧情简介找出两部影片，并把它们加入想看片单。'], ['Leave just those two films on the watchlist.', '片单只保留这两部。']],
+    route: [['Narrow to Fantasy and check the language and running time.', '先筛选奇幻，核对语言和片长。'], ['Check the two story clues against the film descriptions.', '把两条剧情线索与影片简介对应起来。'], ['Add Sintel and Elephants Dream to the watchlist.', '将《辛特尔》和《大象之梦》加入想看片单。']],
+    answer: ['sintel (15 min) and elephants-dream (11 min). The catalogue runtimes describe the works, not the embedded preview lengths.', 'sintel（15 分钟）和 elephants-dream（11 分钟）。用目录的正片片长核对，无需播放影片。'],
+    cover: 'assets/video-steel.jpg', advanced: false
+  },
+  {
+    id: 'minute2-outing-craft', scene: 'events', file: 'events.html', site: 'Out There KL',
+    title: ['A rainy-afternoon gift hunt', '雨天去找一件手作礼物'],
+    brief: ['Find a KL craft outing that can be reached by rail, mostly indoors, with an allowance under RM25 before shopping. The route must let you skip its outdoor strip if it rains. Save the outing and tick the return journey and weather entries in its departure checklist.', '找一条吉隆坡的手作礼物路线。可以坐轨道交通，大部分在室内，购物前的参考预算低于 RM25。下雨时要能跳过户外路段。保存路线，在出发清单勾选返程和天气两项。'],
+    goals: [['Save the matching outing to your weekend plan.', '把符合条件的行程加入周末计划。'], ['Tick the return journey and weather entries in its departure checklist.', '在出发清单勾选返程和天气两项。']],
+    route: [['Filter for KL, indoor outings and rail access. Check the budget and craft theme.', '筛选 KL、室内和轨道交通，核对预算及手作主题。'], ['Open the Central Market craft outing and check the optional outdoor strip in its rain plan.', '打开中央艺术坊的手作路线，从雨天方案核对可跳过的室外路段。'], ['Save it and tick the return journey and weather entries in the departure checklist.', '收藏，并在出发清单勾选返程和天气。']],
+    answer: ['market-craft · Central Market & Kasturi Walk, RM20, 2.5 hours. The outdoor strip is optional. Record the two specified checklist entries.', 'market-craft · 中央艺术坊与 Kasturi Walk，RM20，2.5 小时。室外步行街可跳过，核对指定两项出发检查。'],
+    cover: 'assets/real-outing-museum-four-galleries-thumb.webp', advanced: false
+  },
+  {
+    id: 'minute2-book-verne', scene: 'books', file: 'book.html', site: 'Folio',
+    title: ['Two languages for a reading group', '读书会的双语选本'],
+    brief: ['Find the English and French editions of the same 1873 adventure about a timed trip around the world. Save both editions to the reading list, then download the French opening excerpt as TXT.', '找出同一部 1873 年冒险小说的英文和法文版本。故事讲一场限时环球旅行。把两个版本都加入阅读清单，再下载法文开篇的 TXT。'],
+    goals: [['Save both language editions of the work.', '收藏这部作品的两个语言版本。'], ['Download the French opening excerpt as TXT.', '下载法文开篇的 TXT。']],
+    route: [['Browse Adventure or search for Jules Verne once identified from an edition.', '浏览「冒险」类别，认出作者后也可以搜 Jules Verne。'], ['Check the language on both 1873 editions and save both.', '核对两个 1873 年版本的语言，并分别收藏。'], ['Download the opening excerpt from the French edition.', '从法文版下载开篇片段。']],
+    answer: ['around-world (English) and around-world-fr (French). Correct excerpt: folio-around-world-fr-excerpt.txt.', 'around-world（英文）与 around-world-fr（法文）。正确片段是 folio-around-world-fr-excerpt.txt。'],
+    cover: 'assets/culture-book-alice-thumb.webp', advanced: false
+  },
+  {
+    id: 'minute2-museum-manet', scene: 'museum', file: 'museum.html', site: 'Open Collection',
+    title: ['Which canvas fits the display?', '哪幅画能放进展位？'],
+    brief: ['Find two Manet oils from 1874, one showing a boat on the water and one showing a family in a garden. Put them side by side. Check the actual canvas widths in the object records and add the narrower one to My Exhibition.', '找到马奈的两幅 1874 年油画。一幅画船在水上，另一幅画一家人在花园。把两幅加入对比，按藏品记录核对画布宽度，把较窄的一幅加入「我的展览」。'],
+    goals: [['Compare both Manet works side by side.', '把两幅马奈作品加入对比。'], ['Add the narrower canvas to My Exhibition.', '把较窄的画布加入「我的展览」。']],
+    route: [['Search Manet and check the date and subject.', '搜索 Manet 或马奈，核对年份与题材。'], ['Add Boating and The Monet Family in Their Garden at Argenteuil to Compare.', '把《划船》和《莫奈一家在阿让特伊的花园里》加入对比。'], ['Compare the second measurement in the dimensions and save the narrower work.', '对比尺寸的第二个数值，收藏较窄的作品。']],
+    answer: ['436947 Boating: 130.2 cm wide. 436965 The Monet Family in Their Garden at Argenteuil: 99.7 cm wide. Save 436965.', '436947《划船》宽 130.2 cm，436965《莫奈一家在阿让特伊的花园里》宽 99.7 cm。收藏 436965。'],
+    cover: 'assets/culture-art-56353-thumb.webp', advanced: false
+  },
+  {
+    id: 'minute2-nature-woodpeckers', scene: 'nature', file: 'nature.html', site: 'Field Guide',
+    title: ['Two lookalike woodpeckers', '两种容易混淆的啄木鸟'],
+    brief: ['Compare two woodpeckers by their back markings: one has a broad white stripe down its back, and the other has zebra-like bars across it. Use the length ranges to choose the smaller species and add it to your observation list.', '根据背纹找出两种啄木鸟。一种背部有宽白纵纹，另一种背上是斑马般的横纹。看体长范围，选出较小的一种并加入观察清单。'],
+    goals: [['Add both matching woodpeckers to Compare.', '把两种符合描述的啄木鸟加入对比。'], ['Add the smaller species to the observation list.', '把较小的种类加入观察清单。']],
+    route: [['Search woodpecker or 啄木鸟. Check each candidate’s field marks.', '搜「啄木鸟」或 woodpecker，核对候选的外观特征。'], ['Compare Downy and Red-bellied Woodpecker and check their lengths.', '对比绒啄木鸟和红腹啄木鸟，核对体长。'], ['Add the shorter species to the observation list.', '把较短的一种加入观察清单。']],
+    answer: ['downy (14–17 cm, broad white stripe) and red-bellied (23–27 cm, barred back). Observe downy.', 'downy 绒啄木鸟（14–17 cm，宽白纵纹）与 red-bellied 红腹啄木鸟（23–27 cm，背部横纹）。记录绒啄木鸟。'],
+    cover: 'assets/journey-cardinal-0-thumb.webp', advanced: false
+  },
+  {
+    id: 'minute2-travel-interchange', scene: 'travel', file: 'travel.html', site: 'Trackside',
+    title: ['Find the right interchange', '分清同名车站再换乘'],
+    brief: ['Plan a 17:20 journey from KLCC on the Kelana Jaya line to the Kajang MRT platform at Bukit Bintang. You want to limit walking, so use Less walking. Look at the detailed route to see where you switch lines, then save the trip.', '规划 17:20 从格拉那再也线的双峰塔（KLCC）出发的行程。终点是武吉免登的加影线 MRT 站台。选择「较少步行」，打开路线详情核对换乘站，再保存行程。'],
+    goals: [['Use the correct Bukit Bintang platform and Less walking.', '选对武吉免登站台，并选择「较少步行」。'], ['Save the 17:20 journey.', '保存 17:20 的行程。']],
+    route: [['Choose KLCC (KJ) and Bukit Bintang (KG). Keep the date and set 17:20.', '选 KLCC（KJ）和武吉免登（KG），保留日期并设为 17:20。'], ['Select Less walking and plan.', '选择「较少步行」，规划路线。'], ['Check the connection and save the journey.', '核对换乘站并保存行程。']],
+    answer: ['klcc → bukit-kg, 17:20, Less walking. The practice route switches from KJ to KG at Pasar Seni and shows 9 minutes total walking.', 'klcc → bukit-kg，17:20，较少步行。练习路线在中央艺术坊站由 KJ 换乘 KG，全程步行 9 分钟。'],
+    cover: 'assets/journey-rail-train-0-thumb.webp', advanced: true
+  },
+  {
+    id: 'minute2-market-lens', scene: 'market', file: 'market.html', site: 'loop',
+    title: ['Same camera, different kit', '同款相机，配件不同'],
+    brief: ['Compare the Good and Excellent listings for the same Canon DSLR. The club has RM700 and needs a lens included. Use the included-items row to choose and save the listing that can shoot straight away.', '对比同款佳能单反状态为 Good（良好）和 Excellent（极佳）的两条刊登。社团预算 RM700，必须包含镜头。核对「附带物品」，收藏能直接拍摄的一条。'],
+    goals: [['Compare the Good and Excellent listings.', '对比「良好」与「极佳」的两条刊登。'], ['Save the listing that includes a lens within RM700.', '收藏 RM700 以内包含镜头的那条。']],
+    route: [['Filter Canon + DSLR and set the maximum price to RM700.', '筛选 Canon＋单反，最高价设 RM700。'], ['Compare the Good and Excellent copies of the EOS 550D.', '对比 EOS 550D 的良好和极佳两条刊登。'], ['Read the included-items row and save the kit listing.', '核对「附带物品」，收藏包含镜头的一条。']],
+    answer: ['canon-good: RM420, body only. canon-excellent: RM680, with EF-S 18–55mm, battery and charger. Save canon-excellent.', 'canon-good：RM420，仅机身。canon-excellent：RM680，附 EF-S 18–55mm 镜头、电池和充电器。收藏 canon-excellent。'],
+    cover: 'assets/market-nikon-d3200.webp', advanced: true
   }
 ];
