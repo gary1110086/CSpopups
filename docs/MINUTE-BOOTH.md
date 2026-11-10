@@ -1,19 +1,17 @@
 # 60秒任务挑战 / One Minute
 
-活动版入口把选题、读题、真实网站、60秒倒计时、本轮结果和复盘连在同一个原生浏览器标签页里。
+从一分钟挑战进入。随机抽题或自己选题，读完后开始。题目网站、倒计时和结果都在同一个浏览器标签页。
 
-- [纯净难度测试 / Clean test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn3)
-- [广告挑战 / Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn3)
-- [English clean test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=en&v=corn3)
+- [一分钟挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth2) · [One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth2)
 
 ## 工作人员怎么用
 
-1. 先在纯净入口选一题或随机抽题。纯净模式不初始化广告、声音、Cookie干扰和误导开关，也移除网站自带的赞助推荐。
+1. 正式挑战直接选题或随机抽题。想先试题目难度，在选题页底部展开「工作人员工具」并进入「难度测试 · 无广告」。这里也可以打开自由浏览、查看最近轮次，或将进阶题加入随机抽题。
 2. 让参与者读完题目及完成条件，再点击开始。读题期间不计时。
 3. 网站首次可操作后开始60秒。浏览、搜索、详情、刷新、返回以及广告标签页消耗的时间都算在同一轮中。顶部有“查看任务”和“我完成了”。
 4. 到时自动在原任务标签页显示结束页；也可提前交卷。若参与者正在广告标签页，工作人员提示返回原任务页。浏览器后台调度可能延迟画面切换，恢复后按原截止时间立即结束，不补时间。
-5. 结果页给出截止前记录到的收藏/参数/导出证据。工作人员核对后选择已完成、部分完成或未完成，再进入对应seed的本轮复盘。机器证据不是阅读理解或文件落盘证明。
-6. 关闭上一轮广告标签，在交接区确认后点击下一位。新一轮生成新seed，收藏与任务状态独立；不会清空整个标签页的旧记录。
+5. 结果页先显示截止前记录到的收藏、参数和导出证据。展开「工作人员 · 核对与交接」查看答案和路线，再选择已完成、部分完成或未完成。点击「查看本轮复盘」可以回看本轮广告互动。导出记录可与实际下载文件一起核对。
+6. 关闭本轮广告标签，在「工作人员 · 核对与交接」里确认，再点击「下一位」。新一轮有独立的收藏与任务状态，旧记录仍可在工作人员工具中查看。
 
 来源、图片署名与其他辅助说明会另开原生标签，原任务页的60秒继续计时。
 
@@ -50,7 +48,7 @@
 python browse/preview-server.py --port 5210
 ```
 
-打开 `http://127.0.0.1:5210/browse/clean.html?lang=zh&v=corn3`。需从仓库根目录提供共享的assets与wallpapers资源。
+打开 `http://127.0.0.1:5210/browse/booth.html?lang=zh&v=booth2`。需从仓库根目录提供共享的 assets 与 wallpapers 资源。
 
 GitHub Release中的cleaner1 ZIP是此前的版本，不包含minute1活动入口。需要活动版时使用上方在线入口或当前仓库源码。
 

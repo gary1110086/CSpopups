@@ -1,13 +1,12 @@
 # Documentation / 文档索引
 
-The current activity is **One Minute / minute1**: ten bilingual 60-second tasks, a clean test entry, automatic end and staff review. [Tasks, routes and operation / 任务、路线与现场操作](MINUTE-BOOTH.md). The existing free-browsing experience has 10 task websites, 30 assignments, 11 advertiser destinations and eight possible random encounters. 每次体验选取三种适合当前网站的事件，由相关浏览操作触发；新增泄露式广告开关、弹窗爆发与真实广告提示音。
+**One Minute / 一分钟挑战** has ten bilingual 60-second tasks. Staff tools sit below the task list and include an ad-free difficulty test, free browsing and recent rounds. [Tasks, routes and operation / 任务、路线与现场操作](MINUTE-BOOTH.md).
 
 ## Start / 开始
 
 | Entry / 入口 | Links / 链接 |
 | --- | --- |
-| Clean difficulty test / 纯净难度测试 | [Open / 打开](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=minute1) |
-| 60-second ad challenge / 广告挑战 | [Open / 打开](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=minute1) |
+| One Minute / 一分钟挑战 | [English](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth2) · [中文](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth2) |
 | Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=minute1) |
 | Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=minute1) |
 | Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=minute1); records stay in that browser tab. |

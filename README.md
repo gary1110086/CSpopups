@@ -1,16 +1,12 @@
 # CSpopups
 
-**Cornhub update:** [Open the video portal](https://gary1110086.github.io/CSpopups/browse/destination.html?site=corn&lang=en&v=corn3). Each supplied cover appears once. Three complete Caminandes shorts play as same-site MP4s with original sound, native seeking and downloads. Upin & Ipin keeps its official online player, and both side links keep the official My Little Pony live entry. Those two online services require internet. [Sources](browse/assets/REGIONAL-ANIMATION-SOURCES.md).
+**[Play One Minute →](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth2)** · [中文说明](README.zh-CN.md)
 
-**New60-second activity: [Clean difficulty test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=en&v=corn3) · [Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=en&v=corn3)**
+A 60-second challenge about attention, advertising and deceptive design. Pick a task, read the brief and try to finish on a real website while pop-up ads compete for your attention.
 
-Ten short tasks with a briefing, a durable60-second clock, native website navigation, an automatic result page and staff review. Clean mode removes commercial interruptions for difficulty testing. [Tasks, finding routes and booth operation](docs/MINUTE-BOOTH.md). The cleaner1 ZIP linked below is an earlier snapshot; use the online activity or current repository source for minute1.
+The activity has ten tasks. The clock starts when the website is ready. Open **Staff tools** under the task list for difficulty testing without ads, free browsing and recent local rounds. [Staff instructions](docs/MINUTE-BOOTH.md).
 
-A browsing experience about attention, advertising and deceptive design. Complete an everyday task while ordinary promotions and misleading pop-ups compete for your attention.
-
-**[Try the demo →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=cleaner1)** · [中文说明](README.zh-CN.md)
-
-Current online activity: **corn3** · Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [Download the local package](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [What changed](docs/CHANGELOG.md)
+Current activity layout: **booth2** · [Earlier cleaner1 download](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [What changed](docs/CHANGELOG.md)
 
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 
@@ -25,7 +21,7 @@ Current online activity: **corn3** · Previous downloadable snapshot: **[cleaner
 
 The current **Browse** experience includes **10 task websites, 30 task briefs and 11 advertiser destinations**. Ten sponsors rotate through regular ads; AdSweep is reached through a misleading developer switch. It uses the browser's own address bar, tabs, history and reload controls.
 
-| Start here | What you get |
+| Staff and free-browsing resources | What you get |
 | --- | --- |
 | [Choose a website](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=cleaner1) | Explore any of the ten scenes. |
 | [Get a random task](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=en&v=cleaner1) | Open a randomly assigned task and website. |
@@ -34,7 +30,7 @@ The current **Browse** experience includes **10 task websites, 30 task briefs an
 | [Facilitator answers](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=en&v=cleaner1) | Use a separate device to check participants' results. |
 | [References and scam cases](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=cleaner1) | Read the design references and documented mechanisms. |
 
-Task briefs stay in the separate library; the top task/notebook panel is currently hidden on browsing pages. Sessions have no visible game timer, automatic score or automatic ending.
+Free browsing has its own task library and no timer. One Minute uses the ten shorter booth tasks and automatically shows the round record at the deadline.
 
 ## Ten everyday websites
 
@@ -97,7 +93,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-Open [the local chooser](http://127.0.0.1:5175/browse/launch.html?lang=en&v=cleaner1).
+Open [One Minute locally](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth2).
 
 Serve the repository root: Browse also uses shared files in `assets/` and `wallpapers/`. A local `127.0.0.1` link works on the host computer; share the published demo link with other computers.
 
@@ -118,7 +114,7 @@ assets/                     Shared images, icons and README preview
 
 [Documentation index](docs/README.md) · [Implementation check](docs/IMPLEMENTATION-STATUS.md) · [Browse details](browse/README.md) · [Design notes](browse/DESIGN-NOTES.md) · [Verification record](browse/VERIFICATION.md)
 
-The root [Little Daily entry](https://gary1110086.github.io/CSpopups/) and the [standalone Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=en&v=wallpaper1) keep their own behaviour and session state. Old HTML URLs stay in place; Little Daily's scripts and styles are grouped under `prototypes/little-daily/`. **Start at `browse/launch.html` for the current experience.**
+The root [Little Daily entry](https://gary1110086.github.io/CSpopups/) and the [standalone Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=en&v=wallpaper1) keep their own behaviour and session state. Old HTML URLs stay in place. Little Daily's scripts and styles are grouped under `prototypes/little-daily/`.
 
 ## Media and privacy
 

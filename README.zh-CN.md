@@ -1,16 +1,12 @@
 # CSpopups
 
-**Cornhub 更新：** [打开视频站](https://gary1110086.github.io/CSpopups/browse/destination.html?site=corn&lang=zh&v=corn3)。三张封面各保留一次；三部完整 Caminandes 短片已保存为站内 MP4，支持原声、拖动进度和下载。Upin & Ipin 保留官方 YouTube 播放器，左右入口保留小马宝莉官方直播；这两项需联网。[视频来源](browse/assets/REGIONAL-ANIMATION-SOURCES.md)。
+**[玩一分钟挑战 →](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth2)** · [English](README.md)
 
-一个围绕注意力、广告与误导设计的浏览体验。参与者完成普通的网页任务，同时处理不断出现的正常推广和误导弹窗。
+在 60 秒内完成一项普通的网页任务，同时应对不断出现的推广和误导弹窗。
 
-**新增60秒活动入口： [纯净难度测试](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn3) · [广告挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn3)**
+活动有十道题。选题和读题时不计时，网页就绪后才开始。无广告难度测试、自由浏览和最近轮次都在选题页底部的「工作人员工具」里。[现场操作说明](docs/MINUTE-BOOTH.md)。
 
-10项一分钟任务：选题 → 读题 → 进入真实网站 → 到时自动结束 → 工作人员核对与本轮复盘。纯净模式关闭商业干扰，便于先测试任务难度。[任务、寻找路线与现场操作](docs/MINUTE-BOOTH.md)。下方cleaner1下载包是此前快照，不含新活动入口；活动版使用在线入口或当前仓库源码。
-
-**[立即试玩 →](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=cleaner1)** · [English](README.md)
-
-当前在线活动：**corn3** · 此前下载快照：**[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)** · [下载本地运行包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [查看更新记录](docs/CHANGELOG.md)
+当前活动界面 **booth2** · [早期 cleaner1 下载包](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [更新记录](docs/CHANGELOG.md)
 
 ![Stillwall 壁纸浏览页面上同时出现多张广告](assets/readme-preview.png)
 
@@ -25,7 +21,7 @@
 
 当前的 **Browse** 版本包含 **10 个任务网站、30 项任务和 11 个广告目的地**：十个赞助商参与日常广告轮换，新增 AdSweep 从误导性的开发者开关进入。使用浏览器本身的地址栏、标签页、历史记录和刷新功能。
 
-| 入口 | 用途 |
+| 工作人员与自由浏览资源 | 用途 |
 | --- | --- |
 | [选择网站](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=cleaner1) | 自由探索十个场景。 |
 | [随机分配任务](https://gary1110086.github.io/CSpopups/browse/?task=random&lang=zh&v=cleaner1) | 随机进入一个任务及对应网站。 |
@@ -33,7 +29,7 @@
 | [主持人答案](https://gary1110086.github.io/CSpopups/browse/tasks.html?mode=host&lang=zh&v=cleaner1) | 工作人员可在另一台设备核对参与者的结果。 |
 | [参考网页与骗局案例](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=cleaner1) | 查看设计对标和已有案例。 |
 
-任务要求放在独立任务库中；浏览页面顶部的任务／笔记面板目前隐藏。体验没有可见的游戏计时器、自动评分或自动结束。
+自由浏览有独立任务库，全程不限时。一分钟挑战使用十道活动题，到时自动显示本轮记录。
 
 ## 十个日常网站
 
@@ -96,7 +92,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-打开[本地网站选择器](http://127.0.0.1:5175/browse/launch.html?lang=zh&v=cleaner1)。
+打开[本地一分钟挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=booth2)。
 
 需要从仓库根目录提供文件：Browse 还使用 `assets/` 和 `wallpapers/` 中的共享资源。`127.0.0.1` 是本机地址；给其他电脑分享时，请使用上面的公开试玩链接。
 
@@ -117,7 +113,7 @@ assets/                     共用图片、图标与 README 预览图
 
 [文档索引](docs/README.md) · [功能核对](docs/IMPLEMENTATION-STATUS.md) · [Browse 详细说明](browse/README.md) · [设计说明](browse/DESIGN-NOTES.md) · [验证记录](browse/VERIFICATION.md)
 
-根目录的 [Little Daily 入口](https://gary1110086.github.io/CSpopups/)与[独立 Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=zh&v=wallpaper1)保留各自的行为和会话状态。原 HTML 网址继续保留，Little Daily 的脚本与样式集中在 `prototypes/little-daily/`。**当前体验请从 `browse/launch.html` 开始。**
+根目录的 [Little Daily 入口](https://gary1110086.github.io/CSpopups/)与[独立 Stillwall](https://gary1110086.github.io/CSpopups/wallpapers/?lang=zh&v=wallpaper1)保留各自的行为和会话状态。原 HTML 网址继续保留，Little Daily 的脚本与样式集中在 `prototypes/little-daily/`。
 
 ## 素材与隐私
 

@@ -1,6 +1,6 @@
 # One Minute activity / 一分钟活动
 
-Current activity source: **corn3**. [Clean difficulty test](https://gary1110086.github.io/CSpopups/browse/clean.html?lang=zh&v=corn3) · [Ad challenge](https://gary1110086.github.io/CSpopups/browse/booth.html?mode=ads&lang=zh&v=corn3) · [Tasks, routes and staff operation](../docs/MINUTE-BOOTH.md). Ten bilingual tasks; read before starting, then60seconds, automatic result, staff verdict and this round’s review. Supporting references open in separate native tabs.
+Current activity layout is **booth2**. [Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth2). Staff tools below the ten-task list provide the ad-free difficulty test, free browsing and recent rounds. [Tasks, routes and staff operation](../docs/MINUTE-BOOTH.md).
 
 Cornhub now uses a dense tube-style catalogue and watch page. Four additional local verification/error/bonus prompts use bounded two-hop native-tab routes. [Design references](../docs/CORN-PORTAL.md) · [Prompt flow and inspection links](../docs/REDIRECT-PROMPTS.md).
 

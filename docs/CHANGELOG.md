@@ -1,6 +1,12 @@
 # Release history / 版本记录
 
-Current activity source: **corn3**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity layout: **booth2**. Previous downloadable snapshot: **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文功能概览](../README.zh-CN.md#随机事件) · [Detailed verification](../browse/VERIFICATION.md).
+
+## booth2 — 10 November 2026
+
+- The activity opens directly to the ad challenge. Staff tools below the task list hold difficulty testing, free browsing and recent rounds.
+- The task list, briefing and results use a shared layout. The briefing puts the completion conditions and start button first. Results show recorded evidence and the review link before staff judgement, export and handoff.
+- Existing clean-mode and free-browsing URLs remain available.
 
 ## corn3 — 30 October 2026
 
