@@ -34,7 +34,7 @@
     }
     if(e.type==='dodge')return [t('The close control evaded the pointer','关闭控件闪避鼠标'),`${site} · ${t('attempt','第')} ${e.count||1}${lang==='zh'?' 次':''}`];
     if(e.type==='ad-close')return [t('A genuine close was used','使用了真正的关闭控件'),site];
-    if(e.type==='close-reveal')return [t('A hidden close became obvious','隐藏关闭按钮变得明显'),site];
+    if(e.type==='close-reveal')return [t('The ten-second close assist activated','10 秒关闭辅助已触发'),site];
     if(e.type==='burst')return [t('The developer switch triggered an ad burst','开发者开关触发了广告爆发'),t('A promise to remove ads led to more ads and an AdSweep promotion.','关闭广告的承诺带来了更多广告和 AdSweep 推广。')];
     if(e.type==='event')return [kindNames[e.kind]||t('A random encounter appeared','随机事件出现'),sceneName(e.scene)];
     if(e.type==='layout')return [e.action==='dismissed'?t('The inserted ad was dismissed','关闭了插入广告'):t('A delayed ad moved the page content','延迟广告挤开了页面内容'),e.action==='inserted'?t(`Inserted space: ${e.height||0}px`,`新增空间：${e.height||0} 像素`):sceneName(e.scene)];

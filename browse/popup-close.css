@@ -37,7 +37,7 @@
   max-height: calc(var(--br-motion-view-height, 100dvh) - var(--br-close-reserve) - 36px);
 }
 
-/* A genuine target above the frame. Hover/focus alters visibility, never geometry. */
+/* The genuine external close stays visible in its reserved hitbox. */
 .br-ad.br-stack-card > button.br-ghost-close {
   position: absolute;
   top: -28px;
@@ -54,12 +54,11 @@
   min-height: 26px;
   margin: 0;
   padding: 0 0 2px;
-  border: 1px solid transparent;
+  border: 1px solid #182333;
   border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  color: #101820;
-  opacity: .06;
+  box-shadow: 0 1px 6px #0005;
+  background: #fff;
+  color: #182333;
   font: 24px/1 Tahoma, 'Microsoft YaHei', sans-serif;
   text-align: center;
   text-decoration: none;
@@ -69,30 +68,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.br-ad.br-stack-card > button.br-ghost-close:hover {
-  opacity: .65;
-}
-
-.br-ad.br-stack-card > button.br-ghost-close:active {
-  opacity: .9;
-}
-
 .br-ad.br-stack-card > button.br-ghost-close:focus-visible {
-  opacity: 1;
-  color: #182333;
-  border-color: #182333;
-  background: #fff;
   outline: 2px solid #397b9b;
   outline-offset: 2px;
-}
-
-/* A timed genuine close stays conspicuous and in the same reserved hitbox. */
-.br-ad.br-stack-card[data-close-revealed="true"] > button.br-ghost-close {
-  opacity: 1;
-  color: #182333;
-  border-color: #182333;
-  background: #fff;
-  box-shadow: 0 1px 6px #0005;
 }
 
 .br-ad.br-stack-card > button.br-ghost-close[hidden] {

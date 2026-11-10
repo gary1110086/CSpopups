@@ -56,8 +56,8 @@ Task briefs stay in the separate library; the top task/notebook panel is current
 Advertisements appear in search results, reading paths, banners and stacked floating cards. Copy responds to the current scene and search; a recurring sponsor follows visits through the site.
 
 - **Movement:** bouncing cards, mouse-evading cards with a four-to-six-attempt budget, and physical collisions and squeezing in selected sessions; developer-triggered bursts always enable them.
-- **Deceptive controls:** small or translucent closes, different close corners, and close-shaped links that open an advertiser.
-- **A way out:** hidden-close cards reveal an obvious genuine close after ten seconds of focused viewing and stop moving.
+- **Deceptive controls:** small closes, different close corners, and close-shaped links that open an advertiser.
+- **A way out:** external closes are visible from the start. Cards that rely on an external close stop moving after ten seconds of focused viewing.
 - **The leaked switch:** a conspicuous “CLOSE ALL ADS” developer control instead releases a burst of up to ten simultaneous cards on desktop or five on phones, then promotes AdSweep. Its separate product pages lead through a local check, results, plans and setup demonstration.
 - **Audible ads:** new floating ads play original short cues after the first real click or key press. A visible sound switch remembers mute for the session. Backgrounds, modals and quiet periods stop cues; reload and Back do not replay old sounds. The following video still starts muted.
 - **More than a landing page:** advertiser tabs include shops, image downloads, playable games, a reward wheel and offer comparisons, alongside bounded scam demonstrations.
