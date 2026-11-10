@@ -12,7 +12,7 @@ You have a minute to do something ordinary on a website. Find a wallpaper, compa
 
 Ads start to pile up after about **10 seconds** of focused browsing. Some look like the search or download button you're looking for. Ad links open in a new tab while the round clock keeps running. Press **Esc** for a short break from the ads.
 
-![A One Minute round with the timer, task website and campus ads on screen](assets/readme-preview.png)
+![A One Minute round with the timer, task website and campus ads on screen](assets/one-minute-booth4.png)
 
 ## Running a session
 
