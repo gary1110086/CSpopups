@@ -1,12 +1,12 @@
 # CSpopups
 
-**[Play One Minute →](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth3)** · [中文说明](README.zh-CN.md)
+**[Play One Minute →](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth4)** · [中文说明](README.zh-CN.md)
 
 A 60-second challenge about attention, advertising and deceptive design. Pick a task, read the brief and try to finish on a real website while pop-up ads compete for your attention.
 
-The ten tasks involve filtering, comparing, checking details and saving or exporting a result. Each task has its own fictional campus promotions, which become more frequent after 15 seconds of focused browsing. Open **Staff tools** under the task list for the ad-free difficulty test, free browsing and recent rounds. [Staff instructions](docs/MINUTE-BOOTH.md).
+The ten tasks involve filtering, comparing, checking details and saving or exporting a result. Each task has its own fictional campus promotions, which become more frequent after 10 seconds of focused browsing. Open **Staff tools** under the task list for the ad-free difficulty test, free browsing and recent rounds. [Staff instructions](docs/MINUTE-BOOTH.md).
 
-Activity release **booth3** · [Earlier cleaner1 download](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [What changed](docs/CHANGELOG.md)
+Activity release **booth4** · [Earlier cleaner1 download](https://github.com/gary1110086/CSpopups/releases/download/v-cleaner1/Browse-scenarios-cleaner1.zip) · [What changed](docs/CHANGELOG.md)
 
 ![Stillwall wallpaper browsing interrupted by several advertisements](assets/readme-preview.png)
 
@@ -93,7 +93,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-Open [One Minute locally](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth3).
+Open [One Minute locally](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth4).
 
 Serve the repository root: Browse also uses shared files in `assets/` and `wallpapers/`. A local `127.0.0.1` link works on the host computer; share the published demo link with other computers.
 

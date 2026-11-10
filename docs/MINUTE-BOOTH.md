@@ -2,7 +2,7 @@
 
 从一分钟挑战进入。随机抽题或自己选题，读完后开始。题目网站、倒计时和结果都在同一个浏览器标签页。
 
-- [一分钟挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth3) · [One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth3)
+- [一分钟挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth4) · [One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth4)
 
 ## 工作人员怎么用
 
@@ -38,7 +38,7 @@
 
 ## 广告节奏与难度试跑
 
-每题使用一组虚构校园推广。前台约 4.5 秒出现一张小型静音广告，前 15 秒最多一张。之后每约 2–3 秒可出现一张，约 18 秒出现顶部广告条。浮窗同时最多四张，手机最多两张。达到上限时暂停增加。广告可能模仿这道题的筛选、对比或导出按钮。真正的关闭按钮清晰可见，部分广告另有会打开推广页的假叉。
+每题使用一组虚构校园推广。前台约 4.5 秒出现一张小型静音广告，前 10 秒最多一张。之后每约 2–3 秒可出现一张，约 13 秒出现顶部广告条。浮窗同时最多四张，手机最多两张。达到上限时暂停增加。广告可能模仿这道题的筛选、对比或导出按钮。真正的关闭按钮清晰可见，部分广告另有会打开推广页的假叉。
 
 45–55 秒是首次游玩、正确完成的设计目标。试跑时给未见过题目的同学指定关卡，读完再开始，过程中不给路线提示。分别记录有广告和无广告的用时、完成状态、卡住的步骤，以及是否误开推广页。按题看正确完成的中位用时和超时比例，再决定调整题目线索还是广告密度。同一位同学用两种模式试玩时，给不同的题以减少记忆路线带来的影响。
 
@@ -54,7 +54,7 @@
 python browse/preview-server.py --port 5210
 ```
 
-打开 `http://127.0.0.1:5210/browse/booth.html?lang=zh&v=booth3`。需从仓库根目录提供共享的 assets 与 wallpapers 资源。
+打开 `http://127.0.0.1:5210/browse/booth.html?lang=zh&v=booth4`。需从仓库根目录提供共享的 assets 与 wallpapers 资源。
 
 GitHub Release 中的 cleaner1 ZIP 对应早期版本。本轮试玩使用上方入口或当前仓库源码。
 

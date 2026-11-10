@@ -7,7 +7,7 @@
     const GAPS=[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','robot','dodge','player-error','bonus','captcha','tiny','drawer','panel','newsletter'];
     const formats=boothAds?['tiny','drawer','dodge','bounce','panel','newsletter']:FORMATS;
-    const firstAt=boothAds?4500:3000, rampAt=15000;
+    const firstAt=boothAds?4500:3000, rampAt=10000;
     const prompts=window.BROWSE_REDIRECT_PROMPTS;
     const isPrompt=format=>prompts?.formats.includes(format)===true;
     const query=new URLSearchParams(location.search),previewFormat=query.get('prompt'),previewTarget=query.get('landing');
