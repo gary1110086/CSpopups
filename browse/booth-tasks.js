@@ -96,18 +96,18 @@ window.BROWSE_BOOTH_LEGACY_TASKS = [
 window.BROWSE_BOOTH_TASKS = [
   {
     id: 'minute2-wall-earthrise', scene: 'wallpapers', file: 'wallpaper.html', site: 'Stillwall',
-    title: ['A photograph for the space booth', '太空展台选图'],
-    brief: ['Find the two Earthrise photographs and add both to Compare. Read their descriptions to find the Apollo 16 photograph, then download that one at 3840 × 2160.', '找到两张「地出」照片，都加入对比。看照片说明，选阿波罗 16 号拍的那张，再下载 3840 × 2160 的 JPG。'],
-    hint: ['Search Earthrise in the catalogue search box. The two results have different years. Mission names are in their descriptions.', '先在目录搜索框输入 Earthrise，会看到两个不同年份的候选。阿波罗任务编号在照片说明里。'],
-    goals: [['Put both Earthrise photographs in the comparison.', '把两张「地出」都加入对比。'], ['Export the Apollo 16 photograph as a 3840 × 2160 JPG.', '将阿波罗 16 号的照片导出为 3840 × 2160 JPG。']],
+    title: ["A 4K backdrop for the club booth", "给社团展台下载高清背景"],
+    brief: ["Your club needs the 1972 Earthrise photo for its screen. Search Earthrise, compare the two versions, then download the 1972 photo as a 3840 × 2160 JPG.", "社团展台缺一张高清地球背景。搜 Earthrise，把两张照片加入对比，再下载标为 1972 年的那张，尺寸 3840 × 2160 JPG。"],
+    hint: ["Search Earthrise. The years are shown on the results; no astronomy knowledge is needed. Add both to Compare, then open the 1972 photograph.", "在目录搜索 Earthrise，结果会标年份，不需要懂航天知识。两张都加入对比后，打开 1972 年那张。"],
+    goals: [["Compare the two available versions.", "对比两个版本。"], ["Download the 1972 photograph at 3840 × 2160.", "下载 1972 年照片的 3840 × 2160 JPG。"]],
     route: [['Search Earthrise and add both results to Compare.', '搜「地出」或 Earthrise，把两张结果都加入对比。'], ['Check the mission in the photograph description. Open the Apollo 16 result.', '在照片说明里核对任务，打开阿波罗 16 号的结果。'], ['Select 3840 × 2160 and download the wallpaper.', '选择 3840 × 2160，下载壁纸。']],
     answer: ['earthrise-1968 (Apollo 8) and earthrise-1972 (Apollo 16). Export only earthrise-1972 at 3840 × 2160.', '对比 earthrise-1968（阿波罗 8 号）和 earthrise-1972（阿波罗 16 号）。只导出后者的 3840 × 2160 JPG。'],
     cover: 'assets/nasa-as08-14-2383-thumb.webp', advanced: false
   },
   {
     id: 'minute2-recipe-budget', scene: 'recipes', file: 'recipe.html', site: 'Pantry & Plate',
-    title: ['A budget dinner for six', '六人的省钱晚餐'],
-    brief: ['Find the lentil soup with tomatoes, costing RM5 per serving. Open the recipe, set six servings, tick red lentils in the ingredient list and save the recipe.', '找一款每份 RM5、配料有番茄的扁豆汤。打开食谱，设成六人份，在食材清单勾选红扁豆，再收藏食谱。'],
+    title: ["Plan dinner for six", "安排六人份晚餐"],
+    brief: ["Six friends are cooking together tonight. Find Red lentil & tomato soup (RM5 per serving), set six servings, tick red lentils on the shopping list and save the recipe.", "今晚六个朋友一起做饭。找到每份 RM5 的「红扁豆番茄汤」，设为六人份，在采购清单勾选红扁豆，再收藏食谱。"],
     hint: ['Search lentil. Open the soup result, then use Jump to recipe to reach servings and the ingredient checklist.', '先搜「扁豆」。打开汤的详情，点「跳到食谱」，就能找到份量和食材清单。'],
     goals: [['Save the matching recipe.', '收藏符合条件的食谱。'], ['Set six servings and tick the lentils.', '设成六人份，并勾选扁豆。']],
     route: [['Start with the one-pot or vegan category. Narrow by budget and check the total time.', '从「一锅料理」或纯素筛选入手，核对预算和总用时。'], ['Open the red lentil and tomato soup, jump to its recipe and set six servings.', '打开红扁豆番茄汤，跳到食谱并设为六人份。'], ['Tick red lentils and save the recipe.', '勾选红扁豆并收藏食谱。']],
@@ -117,7 +117,7 @@ window.BROWSE_BOOTH_TASKS = [
   {
     id: 'minute2-tool-webp', scene: 'tools', file: 'tools.html', site: 'Pixelpress',
     title: ['A portrait photo for the club page', '社团网页的竖版照片'],
-    brief: ['Load the Sunroom study example. Export it as WebP, 800 px wide, at 70% quality, and download the result.', '载入「日光书房」示例，设为 WebP、宽 800 px、画质 70%，然后下载结果。'],
+    brief: ["Your club page needs a smaller photo. Use the Sunroom study example, set WebP, width 800 px and quality 70%, then download it. You do not need to upload your own photo.", "社团网页需要一张小一点的照片。使用「日光书房」示例，选 WebP、宽 800 px、画质 70%，再下载。不用上传自己的照片。"],
     hint: ['The example photos are below the upload area. Choose Sunroom study, then adjust format, width and quality in the settings.', '从上传区下方的示例照片里找「日光书房」。载入后，在设置区改格式、宽度和画质。'],
     goals: [['Export the matching example.', '导出符合描述的示例。'], ['Download the generated WebP at 800 px wide and 70% quality.', '下载生成的 WebP，宽 800 px，画质 70%。']],
     route: [['Look through the example photos and load the sunroom study.', '浏览示例照片，载入日光书房。'], ['Select WebP, width 800 and quality 70%. The settings update the preview automatically.', '设为 WebP、宽 800、画质 70%，预览会自动更新。'], ['Check the result and download it.', '核对结果后下载。']],
@@ -126,18 +126,18 @@ window.BROWSE_BOOTH_TASKS = [
   },
   {
     id: 'minute2-movie-animation', scene: 'movies', file: 'movie.html', site: 'Frame Movies',
-    title: ['Two shorts for a club screening', '社团放映的两部短片'],
-    brief: ['Find two fantasy shorts: one about looking for a dragon, and one about two men in a strange machine. Both are under 16 minutes. Read their synopses and add just those two films to your watchlist.', '找两部不到 16 分钟的奇幻短片。一部讲寻找龙，另一部讲两个人在古怪机器里。读简介确认后，把这两部加入想看片单。'],
-    hint: ['Choose Fantasy under Genre and 15 minutes under Maximum runtime, then Apply filters. Open the remaining film cards to read their synopses.', '先把「类型」选为「奇幻」，「最大片长」选为「15分钟」，点「应用筛选」。打开候选影片卡片，才能看到剧情简介。'],
-    goals: [['Use the synopses to identify both films and add them to the watchlist.', '根据剧情简介找出两部影片，并把它们加入想看片单。'], ['Leave just those two films on the watchlist.', '片单只保留这两部。']],
-    route: [['Narrow to Fantasy and check the language and running time.', '先筛选奇幻，核对语言和片长。'], ['Check the two story clues against the film descriptions.', '把两条剧情线索与影片简介对应起来。'], ['Add Sintel and Elephants Dream to the watchlist.', '将《辛特尔》和《大象之梦》加入想看片单。']],
+    title: ["Save two films for movie night", "为电影夜存好两部短片"],
+    brief: ["Your friends chose Sintel and Elephants Dream for movie night. Find both and leave just those two in your watchlist so you can return later.", "朋友们决定电影夜看《辛特尔》和《大象之梦》。找到它们，把想看片单整理成只保留这两部，方便稍后回来。"],
+    hint: ["Search Sintel and Elephants Dream one at a time. Each film page has an Add to watchlist button. Use Watchlist to check your saved films.", "分别搜索 Sintel 和 Elephants Dream。影片详情有「加入想看」按钮，最后打开想看片单检查。"],
+    goals: [["Save Sintel and Elephants Dream.", "收藏《辛特尔》和《大象之梦》。"], ["Keep only these two in the watchlist.", "想看片单只保留这两部。"]],
+    route: [['Narrow to Fantasy and check the language and running time.', '先筛选奇幻，核对语言和片长。'], ['Search Sintel and Elephants Dream by name.', '分别搜索 Sintel 和 Elephants Dream。'], ['Add Sintel and Elephants Dream to the watchlist.', '将《辛特尔》和《大象之梦》加入想看片单。']],
     answer: ['sintel (15 min) and elephants-dream (11 min). The catalogue runtimes describe the works, not the embedded preview lengths.', 'sintel（15 分钟）和 elephants-dream（11 分钟）。用目录的正片片长核对，无需播放影片。'],
     cover: 'assets/video-sintel.jpg', advanced: false
   },
   {
     id: 'minute2-outing-craft', scene: 'events', file: 'events.html', site: 'Out There KL',
     title: ['A rainy-afternoon gift hunt', '雨天去找一件手作礼物'],
-    brief: ['Find the Central Market craft outing with a RM20 planning budget. Save it to your weekend plan, then tick the return journey and weather items in its departure checklist.', '找中央艺术坊参考预算 RM20 的手作路线。加入周末计划，再在出发清单勾选返程和天气两项。'],
+    brief: ["You want to buy a handmade gift this weekend without getting caught in the rain. Find the Central Market craft guide (RM20 planning budget), save it, and tick return journey and weather on its departure list.", "周末想去买一件手作礼物，又怕下雨。找到中央艺术坊的手作路线（参考预算 RM20），加入周末计划，并在出发清单勾选返程和天气。"],
     hint: ['Search Central Market. The matching guide is called Batik, baskets & a sheltered craft browse. Its departure checklist is on the detail page.', '先搜「中央艺术坊」，打开「蜡染、编篮与室内手作慢逛」。出发清单在路线详情里。'],
     goals: [['Save the matching outing to your weekend plan.', '把符合条件的行程加入周末计划。'], ['Tick the return journey and weather entries in its departure checklist.', '在出发清单勾选返程和天气两项。']],
     route: [['Filter for KL, indoor outings and rail access. Check the budget and craft theme.', '筛选 KL、室内和轨道交通，核对预算及手作主题。'], ['Open the Central Market craft outing and check the optional outdoor strip in its rain plan.', '打开中央艺术坊的手作路线，从雨天方案核对可跳过的室外路段。'], ['Save it and tick the return journey and weather entries in the departure checklist.', '收藏，并在出发清单勾选返程和天气。']],
@@ -147,7 +147,7 @@ window.BROWSE_BOOTH_TASKS = [
   {
     id: 'minute2-book-verne', scene: 'books', file: 'book.html', site: 'Folio',
     title: ['Two languages for a reading group', '读书会的双语选本'],
-    brief: ['Find Jules Verne’s Around the World in Eighty Days in English and French. Save both editions, then open the French edition and download its opening excerpt as TXT.', '找凡尔纳《八十天环游地球》的英文和法文版。两版都收藏，再打开法文版，下载开篇 TXT。'],
+    brief: ["Your reading group needs English and French copies of Around the World in Eighty Days. Save both editions, then download the French opening excerpt as TXT to bring to the meeting.", "读书会要用《八十天环游地球》的英文和法文版。收藏两个版本，再下载法文开篇 TXT，带去讨论。"],
     hint: ['Search Verne to see the two editions. Check the Language field for English and French. The TXT download is in the reading excerpt.', '搜索框输入 Verne，会看到两个版本。看「语言」区分英文和法文；TXT 下载在法文版的阅读片段里。'],
     goals: [['Save both language editions of the work.', '收藏这部作品的两个语言版本。'], ['Download the French opening excerpt as TXT.', '下载法文开篇的 TXT。']],
     route: [['Browse Adventure or search for Jules Verne once identified from an edition.', '浏览「冒险」类别，认出作者后也可以搜 Jules Verne。'], ['Check the language on both 1873 editions and save both.', '核对两个 1873 年版本的语言，并分别收藏。'], ['Download the opening excerpt from the French edition.', '从法文版下载开篇片段。']],
@@ -156,18 +156,18 @@ window.BROWSE_BOOTH_TASKS = [
   },
   {
     id: 'minute2-museum-manet', scene: 'museum', file: 'museum.html', site: 'Open Collection',
-    title: ['Which canvas fits the display?', '哪幅画能放进展位？'],
-    brief: ['Find Manet’s two 1874 paintings of a boat and a family in a garden. Add both to Compare, check their dimensions and save the narrower canvas to My Exhibition.', '找马奈 1874 年画船和花园里一家人的两幅画。都加入对比，查看尺寸，把较窄的一幅加入「我的展览」。'],
-    hint: ['Search Manet. Pick the two 1874 results and open Compare. In the dimensions, the second number is the width.', '先在搜索框输入 Manet。找到两件 1874 年的作品，加入后打开「对比」。尺寸第二个数是宽度。'],
-    goals: [['Compare both Manet works side by side.', '把两幅马奈作品加入对比。'], ['Add the narrower canvas to My Exhibition.', '把较窄的画布加入「我的展览」。']],
+    title: ["Choose a picture for a one-metre wall", "给一米宽展墙选一幅画"],
+    brief: ["Your display wall is only one metre wide. Search Manet, compare Boating and The Monet Family in Their Garden at Argenteuil, then save the canvas under 100 cm wide to My Exhibition.", "展墙只有一米宽。搜索 Manet，把《划船》和《莫奈一家在阿让特伊的花园里》加入对比，再把宽度不到 100 cm 的那幅加入「我的展览」。"],
+    hint: ["Search Manet. Add the two named works to Compare. The second number in Dimensions is width; compare it with 100 cm.", "搜索 Manet，把题目中的两幅画加入对比。「尺寸」第二个数是宽度，与 100 cm 比较即可。"],
+    goals: [["Compare the two named works.", "对比题目指定的两幅画。"], ["Save the work that fits the one-metre wall.", "收藏能放进一米展墙的作品。"]],
     route: [['Search Manet and check the date and subject.', '搜索 Manet 或马奈，核对年份与题材。'], ['Add Boating and The Monet Family in Their Garden at Argenteuil to Compare.', '把《划船》和《莫奈一家在阿让特伊的花园里》加入对比。'], ['Compare the second measurement in the dimensions and save the narrower work.', '对比尺寸的第二个数值，收藏较窄的作品。']],
     answer: ['436947 Boating: 130.2 cm wide. 436965 The Monet Family in Their Garden at Argenteuil: 99.7 cm wide. Save 436965.', '436947《划船》宽 130.2 cm，436965《莫奈一家在阿让特伊的花园里》宽 99.7 cm。收藏 436965。'],
     cover: 'assets/culture-art-436947-thumb.webp', advanced: false
   },
   {
     id: 'minute2-nature-woodpeckers', scene: 'nature', file: 'nature.html', site: 'Field Guide',
-    title: ['Two lookalike woodpeckers', '两种容易混淆的啄木鸟'],
-    brief: ['Find the Downy and Red-bellied Woodpeckers and add both to Compare. Check their length ranges and add the smaller species to your observation list.', '找到绒啄木鸟和红腹啄木鸟，都加入对比。看体长范围，把较小的那种加入观察清单。'],
+    title: ["Prepare a bird-walk reference", "准备散步时用的辨鸟清单"],
+    brief: ["A friend recommends a reference for small birds on your walk. Search woodpecker, compare Downy and Red-bellied Woodpecker, and add the shorter bird to your observation list. All sizes are listed on the site.", "朋友建议散步前备一份小型鸟类参考。搜索 woodpecker，对比绒啄木鸟和红腹啄木鸟，把体长较短的加入观察清单。尺寸都在网站里，无需认鸟经验。"],
     hint: ['Search woodpecker. Add both results to Compare, open the comparison page and look for Length.', '先搜 woodpecker，会出现两种啄木鸟。都加入后，打开「对比」，看「体长」。'],
     goals: [['Add both matching woodpeckers to Compare.', '把两种符合描述的啄木鸟加入对比。'], ['Add the smaller species to the observation list.', '把较小的种类加入观察清单。']],
     route: [['Search woodpecker or 啄木鸟. Check each candidate’s field marks.', '搜「啄木鸟」或 woodpecker，核对候选的外观特征。'], ['Compare Downy and Red-bellied Woodpecker and check their lengths.', '对比绒啄木鸟和红腹啄木鸟，核对体长。'], ['Add the shorter species to the observation list.', '把较短的一种加入观察清单。']],
@@ -176,8 +176,8 @@ window.BROWSE_BOOTH_TASKS = [
   },
   {
     id: 'minute2-travel-interchange', scene: 'travel', file: 'travel.html', site: 'Trackside',
-    title: ['Find the right interchange', '分清同名车站再换乘'],
-    brief: ['Plan KLCC (KJ) to Bukit Bintang (KG), leaving at 17:20 with Less walking. Open the route details, check the interchange and save the trip.', '从双峰塔（KLCC / KJ）到武吉免登（KG），设为 17:20 出发、较少步行。打开路线详情，核对换乘站并保存行程。'],
+    title: ["Save the route to meet your friends", "存好去见朋友的路线"],
+    brief: ["Meet friends at Bukit Bintang after class. Plan KLCC (KJ) to Bukit Bintang (KG), departing 17:20 with Less walking, then save the route.", "下课后要去武吉免登见朋友。规划 KLCC（KJ）到武吉免登（KG），17:20 出发、较少步行，再保存路线。"],
     hint: ['Use the From and To selectors in the planner. Bukit Bintang has two entries: choose KG. Set time and preference, then Find a route.', '从左边的出发站、到达站下拉框开始。武吉免登有两项，选 KG。设好时间和偏好后，点「查找路线」。'],
     goals: [['Use the correct Bukit Bintang platform and Less walking.', '选对武吉免登站台，并选择「较少步行」。'], ['Save the 17:20 journey.', '保存 17:20 的行程。']],
     route: [['Choose KLCC (KJ) and Bukit Bintang (KG). Keep the date and set 17:20.', '选 KLCC（KJ）和武吉免登（KG），保留日期并设为 17:20。'], ['Select Less walking and plan.', '选择「较少步行」，规划路线。'], ['Check the connection and save the journey.', '核对换乘站并保存行程。']],
@@ -186,12 +186,96 @@ window.BROWSE_BOOTH_TASKS = [
   },
   {
     id: 'minute2-market-lens', scene: 'market', file: 'market.html', site: 'loop',
-    title: ['Same camera, different kit', '同款相机，配件不同'],
-    brief: ['Find the two Canon EOS 550D listings and add both to Compare. You have RM700 and need a lens included. Check Included items, then save the listing that fits.', '找到两条 Canon EOS 550D 刊登，都加入对比。预算 RM700，必须包含镜头。核对「附带物品」，收藏符合条件的那条。'],
+    title: ["Buy a camera within RM700", "用 RM700 挑一套相机"],
+    brief: ["You have RM700 for a club camera and need a lens included. Search EOS 550D, compare the Good and Excellent listings, and save the one whose included items cover both camera and lens.", "社团买相机的预算是 RM700，还需要镜头。搜 EOS 550D，对比「良好」和「极佳」两条刊登，检查附带物品，收藏预算内含机身和镜头的那套。"],
     hint: ['Search EOS 550D. Add the Good and Excellent copies to Compare, open the comparison and read the price and Included items rows.', '先搜 EOS 550D。把「良好」和「极佳」两条加入对比，打开比较页，查看价格和「附带物品」。'],
     goals: [['Compare the Good and Excellent listings.', '对比「良好」与「极佳」的两条刊登。'], ['Save the listing that includes a lens within RM700.', '收藏 RM700 以内包含镜头的那条。']],
     route: [['Filter Canon + DSLR and set the maximum price to RM700.', '筛选 Canon＋单反，最高价设 RM700。'], ['Compare the Good and Excellent copies of the EOS 550D.', '对比 EOS 550D 的良好和极佳两条刊登。'], ['Read the included-items row and save the kit listing.', '核对「附带物品」，收藏包含镜头的一条。']],
     answer: ['canon-good: RM420, body only. canon-excellent: RM680, with EF-S 18–55mm, battery and charger. Save canon-excellent.', 'canon-good：RM420，仅机身。canon-excellent：RM680，附 EF-S 18–55mm 镜头、电池和充电器。收藏 canon-excellent。'],
     cover: 'assets/market-canon-eos-550d.webp', advanced: true
+  },
+  {
+    "id": "minute3-courier-redelivery",
+    "scene": "courier",
+    "file": "courier.html",
+    "site": "TrackMY",
+    "title": [
+      "Reschedule your parcel",
+      "把包裹改约到明天下午"
+    ],
+    "brief": [
+      "Your parcel TM24081301 could not be delivered today. Track it and save a free redelivery for tomorrow afternoon (14:00–18:00), keeping the campus parcel desk address.",
+      "包裹 TM24081301 今天未能派送。查到包裹，把派送改为明天下午（14:00–18:00），保留校园收件处地址并保存。"
+    ],
+    "hint": [
+      "Enter TM24081301 in Track a parcel. Open Reschedule delivery below the tracking timeline.",
+      "从单号查询框输入 TM24081301 开始。物流轨迹下方有「改约派送」。"
+    ],
+    "goals": [
+      [
+        "Save tomorrow afternoon at the existing address.",
+        "保存明天下午、原地址的免费改约。"
+      ]
+    ],
+    "route": [
+      [
+        "Track TM24081301, then open Reschedule delivery.",
+        "查询 TM24081301，再打开改约派送。"
+      ],
+      [
+        "Choose tomorrow, 14:00–18:00. Keep the address and save.",
+        "选择明天、14:00–18:00，保留地址并保存。"
+      ]
+    ],
+    "answer": [
+      "TM24081301, tomorrow, afternoon, Campus parcel desk, Sepang. Confirm the saved TrackMY status. NorthPost RM3 / identity popups are a separate simulated advertiser and do not reschedule this parcel.",
+      "TM24081301，明天、下午、Campus parcel desk, Sepang。核对 TrackMY 保存状态。NorthPost 的 RM3／身份验证弹窗是独立模拟广告，不会改约本包裹。"
+    ],
+    "cover": "assets/courier-route.svg",
+    "advanced": false
+  },
+  {
+    "id": "minute3-search-official",
+    "scene": "search",
+    "file": "search.html",
+    "site": "Findline",
+    "title": [
+      "Find the official download",
+      "找到软件的官方来源"
+    ],
+    "brief": [
+      "Your club needs Pixelpress image tools. Search for Pixelpress, open its official site (pixelpress.example) and download its free getting-started TXT file. No installer is needed in this demonstration.",
+      "社团需要 Pixelpress 图片工具。搜索 Pixelpress，打开官网 pixelpress.example，下载免费的入门说明 TXT。本演示不需要安装程序。"
+    ],
+    "hint": [
+      "Use the domain shown under each search result. Sponsored listings are separate offers; the official reference domain is pixelpress.example.",
+      "看搜索结果下的域名。「赞助」结果是独立推广；本题的官方参考域名为 pixelpress.example。"
+    ],
+    "goals": [
+      [
+        "Open the official Pixelpress result.",
+        "打开 Pixelpress 的官方结果。"
+      ],
+      [
+        "Download the getting-started TXT from the normal page.",
+        "从正常页面下载入门说明 TXT。"
+      ]
+    ],
+    "route": [
+      [
+        "Search Pixelpress; inspect domains and sponsored labels.",
+        "搜索 Pixelpress，核对域名与赞助标记。"
+      ],
+      [
+        "Open pixelpress.example and download the TXT guide.",
+        "打开 pixelpress.example，下载 TXT 入门说明。"
+      ]
+    ],
+    "answer": [
+      "Organic Pixelpress result: pixelpress.example. The normal local page downloads a harmless TXT, not executable software. AppHarbor / SecureLane sponsored links lead to separate demonstration pages and never count as completing this task. A download event proves dispatch, not a file saved on disk.",
+      "自然结果 Pixelpress，参考域名 pixelpress.example。正常本地页面下载无害 TXT，不是可执行软件。AppHarbor／SecureLane 赞助链接进入独立演示页，不计完成。下载事件只证明发起下载，需工作人员核对磁盘文件。"
+    ],
+    "cover": "assets/search-software.svg",
+    "advanced": false
   }
 ];

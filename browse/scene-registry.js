@@ -1,5 +1,7 @@
 /* One catalogue shared by native navigation, random assignment and the task library. */
 window.BROWSE_SCENE_INDEX=[
+ {id:'courier',file:'courier.html',name:'TrackMY',kicker:['PARCEL TRACKING','快递查询'],brief:['Track your parcel and reschedule delivery.','查包裹，免费改约派送。'],art:'courier',cover:'assets/courier-route.svg'},
+ {id:'search',file:'search.html',name:'Findline',kicker:['WEB SEARCH','网页搜索'],brief:['Find the official source for a download.','搜索并找到官方下载来源。'],art:'search',cover:'assets/search-software.svg'},
  {id:'wallpapers',file:'wallpaper.html',name:'Stillwall',kicker:['WALLPAPERS','桌面壁纸'],brief:['Find a wallpaper for your desktop.','选一张喜欢的桌面壁纸。'],art:'wall',cover:'assets/nasa-iss030e119777-thumb.webp'},
  {id:'recipes',file:'recipe.html',name:'Pantry & Plate',kicker:['RECIPES','家常食谱'],brief:['Find something good to cook tonight.','找一道今晚想做的菜。'],art:'food',cover:'assets/real-food-chickpea-salad-thumb.webp'},
  {id:'tools',file:'tools.html',name:'Pixelpress',kicker:['IMAGE TOOLS','图片处理'],brief:['Compress an image to meet an upload limit.','压缩图片，满足上传尺寸限制。'],art:'tool',cover:null},

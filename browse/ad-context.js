@@ -5,6 +5,8 @@
     const {root,params,scene,t,esc,read,write,url,ads,adDescription}=C;
     const KEY='ad-campaign-v1';
     const profiles={
+      courier:['parcel','Delivery failed: pay RM3 to reschedule.','派送失败：支付 RM3 改约。','Parcel redelivery','包裹改约'],
+      search:['software','Pixelpress high-speed download.','Pixelpress 高速下载。','Software downloads','软件下载'],
       wallpapers:['stock','Find the bigger picture.','发现更大的画面。','Desktop backgrounds','桌面背景'],
       recipes:['coupon','A little extra for your next shop.','给下一次采购，多一点优惠。','Kitchen & everyday shopping','厨房与日常采购'],
       tools:['software','One more tool for your files.','为你的文件，再添一个工具。','Image & file utilities','图片与文件工具'],
@@ -46,6 +48,8 @@
     const adURLMeta=site=>({campaign:load().site,phase:String(phase()),interest:scene,topic:topic()});
     const destination=site=>url('destination.html',{site,from:scene,...adURLMeta(site)});
     const placements={
+      courier:{detail:'.tm-reschedule',fallback:'.tm-main'},
+      search:{fallback:'.fl-results'},
       wallpapers:{grid:'.swb-browse .swb-grid',detail:'.swb-detail-info',inside:true,fallback:'.swb-browse,.swb-story'},
       recipes:{grid:'.pp-grid',detail:'.pp-ingredient-heading',before:true,fallback:'.pp-main'},
       tools:{detail:'.pp-tool-heading',fallback:'.pp-main'},

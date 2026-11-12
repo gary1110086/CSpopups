@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const PREFIX='br-review-v2:',INDEX='br-review-index-v2',LEGACY_PREFIX='br-review-v1:',LEGACY_INDEX='br-review-index-v1',MISSING=Symbol('missing'),MAX_EVENTS=200,MAX_REPORTS=12;
-  const SCENES=['wallpapers','recipes','tools','movies','events','books','museum','nature','travel','market'];
+  const SCENES=['wallpapers','recipes','tools','movies','events','books','museum','nature','travel','market','courier','search'];
   const SITES=['corn','desk','stock','game','security','player','software','prize','coupon','parcel','cleaner'];
   const FORMATS=['bounce','tiny','dodge','drawer','panel','newsletter','robot','player-error','bonus','captcha','inline','ambient','context','event','layout','fallback','document'];
   const TYPES=['visit','ad-open','ad-show','dodge','ad-close','close-reveal','event','layout','consent','quiet','complete','burst'];
@@ -35,7 +35,7 @@
     const counts={};for(const key of COUNTERS)counts[key]=integer(r.counts?.[key]);
     const ids=value=>[...new Set((Array.isArray(value)?value:[]).filter(id=>Number.isInteger(id)&&id>=1&&id<=40))].slice(0,40);
     const dodge={};for(let id=1;id<=40;id++){const count=integer(r.seen?.dodge?.[id],6);if(count)dodge[id]=count;}
-    return {version:2,seed,created:timestamp(r.created),updated:timestamp(r.updated),activeMs:clock(r.activeMs),seq:integer(r.seq,1000000000),scene:choice(r.scene,SCENES)||null,scenes:[...new Set((Array.isArray(r.scenes)?r.scenes:[]).filter(s=>SCENES.includes(s)))].slice(0,10),task:taskOf(r.task),counts,seen:{shown:ids(r.seen?.shown),closed:ids(r.seen?.closed),revealed:ids(r.seen?.revealed),dodge,kinds:[...new Set((Array.isArray(r.seen?.kinds)?r.seen.kinds:[]).filter(k=>KINDS.includes(k)))].slice(0,8)},events:(Array.isArray(r.events)?r.events:[]).slice(-MAX_EVENTS).map(eventOf).filter(Boolean)};
+    return {version:2,seed,created:timestamp(r.created),updated:timestamp(r.updated),activeMs:clock(r.activeMs),seq:integer(r.seq,1000000000),scene:choice(r.scene,SCENES)||null,scenes:[...new Set((Array.isArray(r.scenes)?r.scenes:[]).filter(s=>SCENES.includes(s)))].slice(0,SCENES.length),task:taskOf(r.task),counts,seen:{shown:ids(r.seen?.shown),closed:ids(r.seen?.closed),revealed:ids(r.seen?.revealed),dodge,kinds:[...new Set((Array.isArray(r.seen?.kinds)?r.seen.kinds:[]).filter(k=>KINDS.includes(k)))].slice(0,8)},events:(Array.isArray(r.events)?r.events:[]).slice(-MAX_EVENTS).map(eventOf).filter(Boolean)};
   };
   const seedsOf=stored=>[...new Set((Array.isArray(stored)?stored:[]).map(seedOf).filter(Boolean))].slice(0,MAX_REPORTS);
   const index=()=>{const stored=readRaw(INDEX);return seedsOf(stored===MISSING?readRaw(LEGACY_INDEX):stored);};

@@ -1,8 +1,10 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'booth7', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'realism1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
+    'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
+    'minute3-search-official': {scene:'search',file:'search.html',target:'pixelpress',key:'search-official-downloads',checks:[{key:'search-official-visits',items:['pixelpress'],label:['Official Pixelpress page opened','已打开 Pixelpress 官方页']}]},
     'minute-wall-aurora': {scene:'wallpapers',file:'wallpaper.html',target:'orbital-aurora',key:'wall-saved',exportKind:'wallpaper'},
     'minute-recipe-lunch': {scene:'recipes',file:'recipe.html',target:'chickpea-salad',key:'bp-recipes-saved'},
     'minute-tool-webp': {scene:'tools',file:'tools.html',target:'city',exportKind:'tool'},
@@ -162,6 +164,8 @@
     const e=record.evidence,checks=[], add=(en,zh,met,detail='')=>checks.push({label:[en,zh],met:Boolean(met),detail});
     const saved=(en,zh)=>add(en,zh,e.saved,e.saved?'✓':'—');
     switch (record.taskId) {
+      case 'minute3-courier-redelivery':saved('Free redelivery saved for tomorrow afternoon at the existing address','已保存明天下午、原地址的免费改约');break;
+      case 'minute3-search-official':saved('Official getting-started TXT download dispatched','已从官方页发起入门说明 TXT 下载');break;
       case 'minute-wall-aurora': saved('Required photograph saved','符合题目的照片已收藏'); add('2560 × 1440 JPG download dispatched','2560 × 1440 JPG 已发起下载',e.exports.some(x=>x.kind==='wallpaper'&&x.id==='orbital-aurora'&&x.width===2560&&x.height===1440&&x.format==='image/jpeg'),e.exports.filter(x=>x.kind==='wallpaper').map(x=>`${x.width} × ${x.height} · JPG · ${x.bytes} B`).join('; ')); break;
       case 'minute-recipe-lunch': saved('Correct chickpea salad saved','正确的鹰嘴豆沙拉已收藏');add('Recipe set to four servings','食谱设为4人份',e.servings===4,e.servings===null?'—':`${e.servings} · ${e.servings*120} g chickpeas / 鹰嘴豆`);break;
       case 'minute-tool-webp': {const out=e.exports.filter(x=>x.kind==='tool'),target=out.some(x=>x.sample==='city');add('Chinatown after dark example exported','已导出“唐人街入夜”示例',target,target?'✓':'—');add('WebP, width 1280, quality 75% download dispatched','WebP、宽1280、质量75%已发起下载',out.some(x=>x.sample==='city'&&x.width===1280&&x.height===853&&x.format==='image/webp'&&x.quality===75),out.map(x=>`${x.width} × ${x.height} · ${x.format} · ${x.quality}% · ${x.bytes} B`).join('; '));break;}
@@ -172,7 +176,7 @@
       case 'minute-nature-cardinal':saved('Required bird added to observation list','符合题目的鸟类已加入观察清单');break;
       case 'minute-travel-klcc':add('Saved KL Sentral (KJ) → KLCC at 10:00','已保存KL Sentral（KJ）→ KLCC、10:00的行程',e.saved&&Boolean(e.trip),e.trip?`${e.trip.from} → ${e.trip.to} · ${e.trip.date} ${e.trip.time}`:'—');add('Direct route: zero changes','直达路线：0次换乘',Boolean(e.trip)&&e.trip.changes===0,e.trip?'0':'—');break;
       case 'minute-market-starter':saved('Required listing saved','符合题目的刊登已收藏');break;
-      case 'minute2-wall-earthrise':add('Apollo 16 photograph exported as a 3840 × 2160 JPG','已发起阿波罗 16 号照片的 3840 × 2160 JPG 下载',e.exports.some(x=>x.kind==='wallpaper'&&x.id===e.targetId&&x.width===3840&&x.height===2160));break;
+      case 'minute2-wall-earthrise':add('1972 Earthrise photograph exported as a 3840 × 2160 JPG','已发起 1972 年地出照片的 3840 × 2160 JPG 下载',e.exports.some(x=>x.kind==='wallpaper'&&x.id===e.targetId&&x.width===3840&&x.height===2160));break;
       case 'minute2-recipe-budget':saved('Red lentil and tomato soup saved','已收藏红扁豆番茄汤');break;
       case 'minute2-tool-webp': {
         const exports=e.exports.filter(x=>x.kind==='tool'&&x.sample===e.targetId);
@@ -249,6 +253,13 @@
     if (rule.key) {
       const values=read(rule.key,[]);
       e.saved=Array.isArray(values)&&values.some(x=>rule.key==='nature-sightings'?isObject(x)&&x.id===rule.target:x===rule.target);
+    }
+    // Judge the normal host record itself, never a stale derived completion flag.
+    if (record.taskId==='minute3-courier-redelivery') {
+      const values=read('courier-reschedules',{}),schedule=isObject(values)?values[rule.target]:null;
+      const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);
+      const date=[tomorrow.getFullYear(),String(tomorrow.getMonth()+1).padStart(2,'0'),String(tomorrow.getDate()).padStart(2,'0')].join('-');
+      e.saved=isObject(schedule)&&validDate(schedule.date)&&schedule.date===date&&schedule.slot==='afternoon'&&schedule.address==='Campus parcel desk, Sepang';
     }
     if (record.taskId==='minute-recipe-lunch') {const value=read('bp-recipe-servings-chickpea-salad',2);e.servings=[1,2,4,6].includes(value)?value:2;}
     if (rule.trip) {

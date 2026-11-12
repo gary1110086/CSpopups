@@ -421,3 +421,9 @@ window.BROWSE_TASKS = [
     "answer": "klcc-architecture. Read exact route distance and rain alternative from the detailed guide; do not confuse it with the paid indoor skyline route."
   }
 ];
+
+/* Everyday tasks for the two new normal hosts; untimed library stays optional. */
+window.BROWSE_TASKS.push(
+ {id:'courier-redelivery',scene:'courier',level:'1',title:['Reschedule a parcel','免费改约包裹'],brief:['Track TM24081301 and save tomorrow afternoon at the existing address.','查询 TM24081301，保留原地址并保存明天下午的改约。'],steps:[['Track the parcel.','查询包裹。'],['Save tomorrow, afternoon, existing address.','保存明天、下午、原地址。']],answer:'TrackMY: TM24081301, tomorrow, afternoon. NorthPost promotions are separate simulated offers.'},
+ {id:'search-official',scene:'search',level:'1',title:['Find the official source','找到官方来源'],brief:['Find Pixelpress at pixelpress.example and download the free TXT guide.','找到 pixelpress.example 的 Pixelpress，下载免费 TXT 指南。'],steps:[['Search Pixelpress and inspect domains and labels.','搜索 Pixelpress，检查域名与标记。'],['Open the organic official result and download the guide.','打开自然结果的官网，下载指南。']],answer:'pixelpress.example → local official page → harmless TXT, no installer.'}
+);

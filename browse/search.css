@@ -1,0 +1,76 @@
+/* Findline keeps the familiar text-result hierarchy; Pixelpress is a plain download site. */
+.fl-site{--fl-blue:#153b9f;--fl-line:#dfe2e7;--fl-muted:#606771;color:#24272d;background:#fff;min-height:100vh;font:14px/1.55 Arial,'Microsoft YaHei',sans-serif;padding-bottom:28px}
+.fl-site a{color:var(--fl-blue)}
+.fl-site button{cursor:pointer}
+.fl-site .fl-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.fl-header{display:grid;grid-template-columns:126px minmax(240px,720px) 1fr;align-items:center;gap:18px;padding:28px 25px 22px}
+.fl-brand{font-size:28px;font-weight:700;letter-spacing:-1.2px;color:#2f4258!important;text-decoration:none;line-height:1}
+.fl-brand span{color:#326da5}
+.fl-search-form{display:flex;height:44px;max-width:720px;border:1px solid #b9bec8;background:#fff;box-shadow:0 1px 2px #17233b10}
+.fl-search-form:focus-within{border-color:#6c8ebd;box-shadow:0 1px 4px #293f6a24}
+.fl-search-form input{flex:1;min-width:0;width:100%;border:0;padding:10px 13px;font-size:16px;color:#24272d;background:transparent;outline-offset:-4px}
+.fl-search-form button{border:0;border-left:1px solid #b9bec8;background:#f1f4f8;color:#234f87;padding:0 20px;font-size:13px;font-weight:600;white-space:nowrap}
+.fl-search-form button:hover{background:#e7edf5}
+.fl-language{justify-self:end;font-size:12px;white-space:nowrap;text-decoration:none}
+.fl-language:hover{text-decoration:underline}
+.fl-tabs{display:flex;gap:30px;padding:0 25px 0 169px;border-bottom:1px solid var(--fl-line);font-size:13px}
+.fl-tabs a{padding:10px 2px 12px;text-decoration:none;color:#626975;border-bottom:3px solid transparent;margin-bottom:-1px}
+.fl-tabs a[aria-current=page]{border-color:#326da5;color:#24558b;font-weight:600}
+.fl-results{width:min(720px,calc(100% - 194px));margin:0 25px 44px 169px;padding-top:16px}
+.fl-result-count{font-size:12px;color:#777e87;margin:0 0 23px;overflow-wrap:anywhere}
+.fl-result{margin:0 0 27px;max-width:720px;overflow-wrap:anywhere}
+.fl-result h2{font-weight:400;font-size:20px;line-height:1.3;margin:0 0 4px}
+.fl-result h2 a{text-decoration:none}
+.fl-result h2 a:hover{text-decoration:underline}
+.fl-domain{font-size:13px;color:#34634c;line-height:1.45;margin:0 0 6px}
+.fl-domain span{color:#757b80}
+.fl-result>p{font-size:14px;line-height:1.55;color:#4d535d;margin:0;max-width:660px}
+.fl-sponsored{background:#f8f7ee;padding:12px 17px 15px;margin-left:-17px;margin-right:-17px;border-top:1px solid #efeddf;border-bottom:1px solid #efeddf;margin-bottom:14px}
+.fl-sponsor-meta{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:23px;margin:0 0 5px;color:#5d625d;font-size:11px}
+.fl-dismiss{flex:0 0 26px;align-self:flex-start;width:26px;height:26px;line-height:23px;padding:0;background:none;border:1px solid transparent;color:#818474;font-size:20px;font-weight:400}
+.fl-dismiss:hover{border-color:#d2d0be;background:#efeee1;color:#33392e}
+.fl-organic{margin-top:29px}
+.fl-sitelinks{display:flex;gap:23px;margin-top:9px;font-size:13px}
+.fl-sitelinks a{text-decoration:none}
+.fl-sitelinks a:hover{text-decoration:underline}
+.fl-no-results{padding:7px 0 50px}
+.fl-no-results h2{font-size:21px;font-weight:400;margin:0 0 16px;overflow-wrap:anywhere}
+.fl-no-results p{font-size:14px;color:#545d67;max-width:600px}
+.fl-help h1{font-size:25px;line-height:1.3;font-weight:500;margin:0 0 22px}
+.fl-help h2{font-size:18px;font-weight:500;margin:25px 0 8px}
+.fl-help>p:not(.fl-result-count){max-width:650px;color:#545d67}
+.fl-status{font-size:13px;color:#425c42;margin:0 25px 15px 169px;max-width:720px;overflow-wrap:anywhere}
+.fl-status:empty{display:none}
+.fl-footer{border-top:1px solid var(--fl-line);margin-top:25px;padding:19px 25px 8px 169px;max-width:1100px;color:#777e87;font-size:11px;line-height:1.6}
+.fl-footer p{max-width:730px;margin:0 0 8px}
+.fl-footer>a{color:#656e7c;text-decoration:none}
+.fl-footer>a:hover{text-decoration:underline}
+.fl-product-header{display:flex;align-items:center;gap:40px;max-width:1050px;margin:auto;padding:23px 30px;border-bottom:1px solid var(--fl-line)}
+.fl-product-brand{font-size:25px;font-weight:700;letter-spacing:-.8px;text-decoration:none;color:#283e4d!important}
+.fl-product-header nav{display:flex;gap:24px;font-size:13px;flex:1}
+.fl-product-header nav a{text-decoration:none;color:#4c5967}
+.fl-product-header nav a:hover{text-decoration:underline}
+.fl-product-main{max-width:860px;margin:0 auto;padding:24px 30px 12px}
+.fl-back{display:inline-block;font-size:12px;text-decoration:none;margin-bottom:30px}
+.fl-back:hover{text-decoration:underline}
+.fl-origin{font-size:12px;color:#53705c;margin:0 0 8px;overflow-wrap:anywhere}
+.fl-product-main h1{font-size:34px;line-height:1.2;font-weight:500;letter-spacing:-.6px;margin:0 0 12px}
+.fl-product-intro{color:#626c77;font-size:16px;margin:0 0 28px}
+.fl-download-section{padding:23px 0 26px;border-top:2px solid #405d78;border-bottom:1px solid var(--fl-line);scroll-margin-top:75px}
+.fl-product-main h2{font-size:21px;line-height:1.3;font-weight:500;margin:0 0 12px}
+.fl-download-section>p{color:#5b6570;margin:0 0 21px}
+.fl-file-details{max-width:620px;font-size:13px;margin:20px 0 23px}
+.fl-file-details>div{display:grid;grid-template-columns:110px minmax(0,1fr);border-bottom:1px solid #edf0f3;padding:8px 0;gap:15px}
+.fl-file-details dt{color:#68727e}
+.fl-file-details dd{margin:0;overflow-wrap:anywhere}
+.fl-download{border:1px solid #244d70;padding:12px 22px;background:#2d5d85;color:#fff;font-size:14px;font-weight:600;line-height:1.3}
+.fl-download:hover{background:#234c70}
+.fl-download-section .fl-download-note{font-size:12px;margin:13px 0 0;color:#6b737d}
+.fl-product-section{padding:27px 0 9px;scroll-margin-top:75px}
+.fl-product-section>p,.fl-product-section li{color:#56616d;font-size:14px;line-height:1.8;max-width:720px}
+.fl-product-section ol{padding-left:22px;margin-bottom:0}
+.fl-product-site>.fl-footer,.fl-product-site>.fl-status{max-width:860px;margin-left:auto;margin-right:auto;padding-left:30px;padding-right:30px}
+.fl-product-site>.fl-status{margin-top:15px}
+@media(max-width:900px){.fl-header{grid-template-columns:106px minmax(0,1fr) auto;gap:16px;padding-left:20px;padding-right:20px}.fl-brand{font-size:26px}.fl-tabs{padding-left:142px}.fl-results{margin-left:142px;width:calc(100% - 184px)}.fl-footer{padding-left:142px}.fl-status{margin-left:142px}.fl-product-header{gap:25px}.fl-product-header nav{gap:18px}}
+@media(max-width:640px){.fl-header{grid-template-columns:1fr auto;padding:21px 16px 14px;gap:17px 12px}.fl-brand{font-size:27px}.fl-search-form{grid-column:1/-1;grid-row:2;height:43px}.fl-search-form button{padding:0 16px}.fl-language{grid-column:2;grid-row:1}.fl-tabs{padding:0 16px;gap:26px}.fl-tabs a{padding-top:9px}.fl-results{width:auto;margin:0 17px 34px;padding-top:17px}.fl-result-count{margin-bottom:20px}.fl-result{margin-bottom:26px}.fl-result h2{font-size:19px}.fl-result>p{font-size:13px;line-height:1.65}.fl-sponsored{margin-left:-5px;margin-right:-5px;padding:10px 11px 14px;margin-bottom:13px}.fl-organic{margin-top:26px}.fl-domain{font-size:12px}.fl-sitelinks{gap:20px;flex-wrap:wrap}.fl-footer{padding:17px 17px 8px}.fl-status{margin:0 17px 15px}.fl-help h1{font-size:23px}.fl-product-header{padding:20px 17px 13px;gap:16px;flex-wrap:wrap}.fl-product-brand{font-size:25px;flex:1}.fl-product-header .fl-language{order:2}.fl-product-header nav{flex:0 0 100%;order:3;gap:22px;padding-top:4px;font-size:12px}.fl-product-main{padding:20px 17px 12px}.fl-back{margin-bottom:26px}.fl-product-main h1{font-size:29px}.fl-product-intro{font-size:15px}.fl-file-details>div{grid-template-columns:75px minmax(0,1fr);gap:12px}.fl-download{max-width:100%;padding:12px 17px}.fl-product-site>.fl-footer,.fl-product-site>.fl-status{padding-left:17px;padding-right:17px}.fl-product-section{padding-top:24px}}
+@media(max-width:360px){.fl-search-form button{padding:0 12px}.fl-result h2{font-size:18px}.fl-result>p{font-size:13px}.fl-product-header nav{gap:17px}.fl-product-main h1{font-size:27px}.fl-file-details>div{grid-template-columns:64px minmax(0,1fr)}.fl-file-details{font-size:12px}}

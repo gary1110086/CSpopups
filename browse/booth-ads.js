@@ -4,6 +4,24 @@
   'use strict';
 
   const campaigns = {
+    courier: {
+      brand: ['Delivery notice desk', '派送通知台'],
+      cards: [
+        ['parcel', ['Delivery update','派送更新'], ['Delivery failed: address incomplete','派送失败：地址不完整'], ['Arrange redelivery','安排改派'], ['Pay RM3 to release your parcel for another delivery attempt.','支付 RM3 手续费，释放包裹并再次派送。']],
+        ['desk', ['Everyday supplies','日常用品'], ['Organise your parcel corner','整理你的收件角'], ['Browse storage','浏览收纳用品'], ['Shelves and storage accessories for your shared space.','为公共空间挑选置物架和收纳配件。']],
+        ['parcel', ['Recipient check','收件人核验'], ['Verify identity before rescheduling','改约前验证身份'], ['Verify recipient','验证收件人'], ['Open a separate recipient verification to continue delivery.','打开独立的收件人核验页面以继续派送。']],
+        ['coupon', ['Shipping offer','运费推广'], ['A voucher for your next parcel','下次寄件的优惠券'], ['Claim voucher','领取优惠券'], ['Activate a shipping offer before your next order.','下次下单前激活寄件优惠。']]
+      ]
+    },
+    search: {
+      brand: ['Software download desk', '软件下载台'],
+      cards: [
+        ['software', ['Download shortcut','下载快捷入口'], ['Pixelpress high-speed download','Pixelpress 高速下载'], ['Get installer','获取安装器'], ['Open the recommended download assistant for this search.','为本次搜索打开推荐下载助手。']],
+        ['stock', ['Design resources','设计素材'], ['Images for your next club page','社团网页图片素材'], ['Browse images','浏览图片'], ['A separate collection of photos for your next project.','为下次项目浏览独立图片素材集。']],
+        ['security', ['Security notice','安全通知'], ['Your download needs a security check','下载需要安全检查'], ['Verify now','立即验证'], ['Run a browser verification before continuing your download.','继续下载前先进行浏览器验证。']],
+        ['software', ['Recommended update','推荐更新'], ['Install the download helper','安装下载辅助工具'], ['Continue download','继续下载'], ['Use the download assistant to unlock the file.','使用下载助手解锁文件。']]
+      ]
+    },
     wallpapers: {
       brand: ['Campus Canvas', '校园画布'],
       cards: [
@@ -120,9 +138,13 @@
     if (typeof scene !== 'string' || !Object.hasOwn(campaigns, scene)) return null;
     const {brand, cards} = campaigns[scene];
     const language = lang === 'zh' ? 1 : 0;
+    const immediate = scene === 'courier' || scene === 'search';
     const cardAt = ordinal => {
       if (!Number.isInteger(ordinal) || ordinal < 1) return cards[0];
-      return cards[1 + (ordinal - 1) % (cards.length - 1)];
+      // Put the task-matched lure first on the two new hosts, then keep the
+      // ordinary-ad/scam contrast deck. Existing ten hosts retain their order.
+      if (immediate && ordinal === 1) return cards[0];
+      return cards[1 + (ordinal - (immediate ? 2 : 1)) % (cards.length - 1)];
     };
     return {
       site(ordinal) { return cardAt(ordinal)[0]; },

@@ -4,9 +4,11 @@
 
 You have a minute to do something ordinary on a website. Find a wallpaper, compare two used cameras, or put together a watchlist while fictional XMUM campus ads try to pull you away from the task.
 
+Source update `realism1` adds TrackMY parcel redelivery and Findline official-download searches. Use the local preview for this branch; publication must be verified separately. [New scene guide](docs/REALISM-SCENES.md).
+
 ## How to play
 
-1. Pick one of the ten tasks or draw one at random. Read the brief, then press **Start the challenge**. The timer starts when the task website is ready.
+1. Pick one of the twelve tasks or draw one at random. Read the brief, then press **Start the challenge**. The timer starts when the task website is ready.
 2. Use the site's search, filters or comparisons to find what you need. Follow the brief to save or download the result.
 3. Press **Submit** when you're done. If time runs out, the round record opens automatically.
 
@@ -18,7 +20,7 @@ Two or three ads arrive in the first **1–3 seconds** of focused browsing. From
 
 Open **Staff tools** at the bottom of the task list. Use the ad-free mode to check how difficult a task is on its own. After a round, you can check what the browser recorded and talk through any ads that caught the player's attention. [Staff guide and answer key](docs/MINUTE-BOOTH.md)
 
-The same menu opens **Free browsing**, where you can explore the ten sites at your own pace. It has a separate library of 30 briefs. [Free-browsing guide](browse/README.md)
+The same menu opens **Free browsing**, where you can explore the twelve sites at your own pace. It has a separate library of 32 briefs. [Free-browsing guide](browse/README.md)
 
 ## Run locally
 
@@ -30,7 +32,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth7)
+[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=realism1)
 
 ## Further reading
 

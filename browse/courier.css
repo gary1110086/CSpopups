@@ -1,0 +1,88 @@
+/* TrackMY is an independent logistics scene; all rules stay within its namespace. */
+.tm-page{background:#f4f5f6;color:#14263e;font-family:Arial,'Microsoft YaHei',sans-serif}
+.tm-site{--tm-navy:#14263e;--tm-orange:#eb6b18;--tm-muted:#596575;--tm-line:#d8dfe5;font-size:14px;line-height:1.6;min-height:100vh}
+.tm-site a{color:#124f80;text-underline-offset:3px}
+.tm-site button{border:1px solid #b74703;background:#ce5206;color:#fff;font-weight:700;padding:11px 20px;border-radius:2px;cursor:pointer;min-height:44px}
+.tm-site button:hover{background:#b74703}
+.tm-site input,.tm-site select{border:1px solid #99a7b5;background:#fff;color:var(--tm-navy);border-radius:2px;padding:10px 12px;min-height:44px;max-width:100%}
+.tm-site input:focus-visible,.tm-site select:focus-visible,.tm-site button:focus-visible,.tm-site a:focus-visible{outline:3px solid #e88338;outline-offset:3px}
+.tm-site h1,.tm-site h2,.tm-site p{overflow-wrap:anywhere}
+.tm-site h1{font-size:26px;line-height:1.3;margin:0 0 10px;letter-spacing:-.4px}
+.tm-site h2{font-size:18px;line-height:1.4;margin:0 0 14px}
+.tm-service-line{display:flex;justify-content:space-between;gap:20px;background:var(--tm-navy);color:#e1e6eb;padding:5px max(24px,calc((100% - 1040px)/2));font-size:10px;letter-spacing:1.1px}
+.tm-service-line a{color:#fff;letter-spacing:0;white-space:nowrap}
+.tm-header{background:#fff;display:flex;align-items:center;justify-content:space-between;gap:35px;padding:18px max(24px,calc((100% - 1040px)/2));border-bottom:4px solid var(--tm-orange)}
+.tm-site .tm-brand{font-weight:800;font-size:31px;line-height:1;letter-spacing:-1.4px;text-decoration:none;color:var(--tm-navy);flex-shrink:0}
+.tm-brand>span{color:#c85108}
+.tm-brand>small{display:block;font-size:8px;line-height:1.4;letter-spacing:2.6px;margin-top:6px;font-weight:400}
+.tm-header nav{display:flex;gap:27px;align-self:stretch;align-items:center}
+.tm-header nav a{font-size:13px;white-space:nowrap;text-decoration:none;color:var(--tm-navy);padding:8px 0;border-bottom:2px solid transparent}
+.tm-header nav a[aria-current=page]{border-color:var(--tm-orange);font-weight:700}
+.tm-main{max-width:1088px;padding:24px;margin:auto}
+.tm-track-form{background:var(--tm-navy);color:#fff;padding:23px 28px;margin-bottom:26px}
+.tm-track-form>label{display:block;font-size:17px;font-weight:700;margin-bottom:10px}
+.tm-track-form>div{display:flex;max-width:710px;gap:10px}
+.tm-track-form input[type=search]{min-width:0;flex:1;font-size:17px;letter-spacing:.8px}
+.tm-track-form button{flex-shrink:0}
+.tm-track-form>p{color:#d1d8e0;font-size:11px;margin:10px 0 0;line-height:1.5}
+.tm-intro{margin:30px 0;padding-bottom:10px}
+.tm-intro p,.tm-info>p,.tm-help p{color:var(--tm-muted);max-width:850px}
+.tm-result,.tm-reschedule,.tm-info,.tm-empty{padding:26px 28px;background:#fff;border:1px solid var(--tm-line);margin-bottom:24px}
+.tm-section-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--tm-line);padding-bottom:16px;margin-bottom:17px}
+.tm-section-heading h1,.tm-section-heading h2{margin:0}
+.tm-eyebrow{font-size:10px;letter-spacing:1.2px;color:var(--tm-muted);margin:0 0 7px}
+.tm-status-badge{font-weight:700;font-size:12px;padding:6px 12px;background:#edf1f4;border:1px solid #c6d0db;white-space:nowrap}
+.tm-attention{background:#fff2e5;border-color:#efb884;color:#8a3900}
+.tm-delivered{background:#e7f3ed;border-color:#a2c7b2;color:#1a5e3e}
+.tm-returned{background:#f1edf3;border-color:#c4b9cb;color:#67426f}
+.tm-shipment-facts{display:flex;gap:35px;margin:0 0 20px;flex-wrap:wrap}
+.tm-shipment-facts>div{min-width:120px}
+.tm-shipment-facts dt{font-size:10px;color:var(--tm-muted);margin-bottom:3px}
+.tm-shipment-facts dd{margin:0;font-size:12px}
+.tm-result-note{background:#fff7ed;border-left:3px solid var(--tm-orange);padding:13px 17px;margin-bottom:27px}
+.tm-result-note p{margin:0;font-size:13px}
+.tm-result-note a{display:inline-block;font-size:12px;font-weight:700;margin-top:8px}
+.tm-timeline{list-style:none;padding:0;margin:22px 0 0}
+.tm-timeline>li{position:relative;display:grid;grid-template-columns:172px minmax(0,1fr);gap:25px;padding:0 0 24px 24px;border-left:1px solid #c9d2db;margin-left:5px}
+.tm-timeline>li:last-child{padding-bottom:3px;border-color:transparent}
+.tm-timeline>li:before{content:'';position:absolute;top:5px;left:-5px;width:9px;height:9px;border:2px solid #fff;border-radius:50%;background:#a1adba;box-shadow:0 0 0 1px #b6c1cd}
+.tm-timeline>.tm-current:before{background:var(--tm-orange);box-shadow:0 0 0 1px var(--tm-orange)}
+.tm-timeline time{font-size:11px;color:var(--tm-muted);white-space:nowrap}
+.tm-timeline strong{display:block;font-size:13px;line-height:1.5}
+.tm-timeline span{display:block;font-size:11px;color:var(--tm-muted);margin-top:4px}
+.tm-current strong{color:#a84305}
+.tm-reschedule>.tm-section-heading>strong{font-size:14px;color:#236345;white-space:nowrap}
+.tm-reschedule>p{font-size:12px;color:var(--tm-muted);margin-bottom:20px}
+.tm-reschedule form{max-width:700px}
+.tm-reschedule label{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:700}
+.tm-reschedule input,.tm-reschedule select{font-weight:400;width:100%}
+.tm-form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:17px}
+.tm-site .tm-field-note{font-size:11px;line-height:1.6;color:var(--tm-muted);margin:8px 0 19px}
+.tm-form-footer{display:flex;gap:15px;align-items:center;flex-wrap:wrap}
+.tm-form-footer>span{font-size:11px;color:var(--tm-muted)}
+.tm-saved-summary{border-left:3px solid #397d59;background:#edf5f0;padding:12px 16px;margin:0 0 20px}
+.tm-saved-summary>strong{font-size:13px;color:#205238}
+.tm-saved-summary p{font-size:12px;margin:5px 0}
+.tm-saved-summary small{font-size:10px;color:#496451}
+.tm-samples{margin:28px 0 12px}
+.tm-samples h2{font-size:16px}
+.tm-table-scroll{overflow-x:auto;border:1px solid var(--tm-line);margin:15px 0 24px;background:#fff}
+.tm-site table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}
+.tm-site th,.tm-site td{padding:11px 15px;vertical-align:top;border-bottom:1px solid var(--tm-line)}
+.tm-site thead th{font-size:10px;text-transform:uppercase;letter-spacing:.3px;background:#e9eef2;color:#405266;font-weight:700;white-space:nowrap}
+.tm-site tbody th{font-weight:700;white-space:nowrap}
+.tm-site tbody tr:last-child th,.tm-site tbody tr:last-child td{border-bottom:0}
+.tm-site tbody tr:nth-child(even){background:#f9fafb}
+.tm-info>h1{margin-bottom:17px}
+.tm-info .tm-table-scroll{margin-top:22px}
+.tm-help h2{margin:27px 0 8px;font-size:16px}
+.tm-help p{font-size:13px;margin:0 0 18px}
+.tm-empty p{font-size:13px;color:var(--tm-muted)}
+.tm-feedback{font-size:13px;font-weight:700;color:#224e3a;line-height:1.7}
+.tm-feedback:empty{display:none}
+.tm-footer{max-width:1040px;margin:0 auto;padding:22px 0 30px;border-top:1px solid #cbd4dd;display:flex;align-items:start;gap:25px;font-size:10px;color:var(--tm-muted)}
+.tm-footer>strong{font-size:17px;color:var(--tm-navy)}
+.tm-footer p{margin:0;max-width:690px;flex:1}
+.tm-footer a{white-space:nowrap}
+@media(max-width:700px){.tm-service-line{padding-left:18px;padding-right:18px}.tm-header{padding:15px 18px;gap:20px;flex-wrap:wrap}.tm-header nav{gap:22px;width:100%;justify-content:space-between}.tm-header nav a{font-size:12px;padding:3px 0}.tm-main{padding:18px}.tm-track-form{padding:19px}.tm-track-form>label{font-size:16px}.tm-track-form input[type=search]{font-size:14px}.tm-track-form>div{gap:7px}.tm-track-form button{font-size:12px;padding:10px 12px}.tm-result,.tm-reschedule,.tm-info,.tm-empty{padding:21px 19px}.tm-section-heading{align-items:flex-start;flex-wrap:wrap;gap:12px}.tm-site h1{font-size:23px}.tm-timeline>li{grid-template-columns:1fr;gap:4px;padding-bottom:24px}.tm-shipment-facts{gap:18px 25px}.tm-shipment-facts>div:last-child{flex-basis:100%}.tm-form-row{grid-template-columns:1fr;gap:16px}.tm-site th,.tm-site td{padding:10px 12px}.tm-site table{min-width:570px}.tm-samples table{min-width:520px}.tm-footer{margin:0 18px;flex-wrap:wrap;gap:10px 20px}.tm-footer p{flex-basis:100%;order:2}.tm-service-line{font-size:8px}.tm-reschedule>.tm-section-heading>strong{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.tm-site{scroll-behavior:auto}}
