@@ -4,10 +4,10 @@
   window.BROWSE_AD_STACK = C => {
     const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,redirectURL,wireAds,deck,chosen,adOffer,campaignSite,boothAds}=C;
     const KEY='br-run-v9:'+seed, MISSING=Symbol('missing'), AUTO_MAX=30, ID_MAX=40, REVEAL_MS=10000;
-    const GAPS=[2200,2800,2500,3200,2300,3000];
+    const GAPS=boothAds?[1500,2000,1750,2500,2000,2250]:[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','robot','dodge','player-error','bonus','captcha','tiny','drawer','panel','newsletter'];
     const formats=boothAds?['tiny','drawer','dodge','bounce','panel','newsletter']:FORMATS;
-    const firstAt=boothAds?4500:3000, rampAt=10000;
+    const firstAt=boothAds?1000:3000, rampAt=4000;
     const prompts=window.BROWSE_REDIRECT_PROMPTS;
     const isPrompt=format=>prompts?.formats.includes(format)===true;
     const query=new URLSearchParams(location.search),previewFormat=query.get('prompt'),previewTarget=query.get('landing');
@@ -67,7 +67,7 @@
     const save=()=>{if(!suspended&&!destroyed)C.rawWrite(KEY,state);};
     const burstActive=()=>state.pending.some(p=>p.burst===true);
     const phone=()=>matchMedia('(max-width: 640px)').matches;
-    const limit=()=>boothAds&&state.activeMs<rampAt?1:burstActive()?(phone()?5:10):(phone()?2:4);
+    const limit=()=>boothAds?(state.activeMs<rampAt?(phone()?2:3):(phone()?3:5)):burstActive()?(phone()?5:10):(phone()?2:4);
     const pressure=window.BROWSE_AD_PRESSURE({root,lang:C.lang,t,esc,adURL,read,write,adOffer,campaignSite,campus:Boolean(boothAds)});
     const foreground=()=>!destroyed&&!suspended&&!externalModal&&!document.hidden&&document.hasFocus();
     const snapshot=()=>({activeMs:state.activeMs,quietUntil:state.quietUntil,active:foreground(),modalOpen:externalModal||modalId!==null,externalModal,suspended,restoring,shown:state.shown,pending:state.pending.length,burstUsed:state.burstUsed,burstActive:burstActive()});
@@ -286,8 +286,7 @@
         if(before<REVEAL_MS&&p.closeElapsedMs>=REVEAL_MS)justRevealed=true;
       }
       if(justRevealed){for(const entry of entries.values())updateClose(entry);applyModal();save();}
-      const warmingUp=boothAds&&state.autoShown>0&&state.activeMs<rampAt;
-      if(!warmingUp&&!burstActive()&&state.autoShown<AUTO_MAX&&state.shown<ID_MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
+      if(!burstActive()&&state.autoShown<AUTO_MAX&&state.shown<ID_MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
         const openingCard=boothAds&&state.autoShown===0;
         let format=formats[state.autoShown%formats.length];
         if(!boothAds&&state.autoShown===0&&isPrompt(previewFormat))format=previewFormat;
@@ -301,8 +300,11 @@
         const p={id:state.shown,site,format,closeStyle,closeCorner:layout==='decoy'?'top-left':layout,decoy:layout==='decoy',...(closeStyle==='ghost'?{closeElapsedMs:0}:{}),...(format==='dodge'?{dodgeLimit:dodgeLimit(state.shown),dodgeCount:0}:{})};
         if(isPrompt(format)){p.hopTarget=state.autoShown===1&&TARGETS.includes(previewTarget)?previewTarget:hopTarget(p.id);p.decoy=false;}
         state.pending.push(p);
-        const next=state.activeMs+GAPS[(state.autoShown-1)%GAPS.length];
-        state.nextAt=state.autoShown<AUTO_MAX?(openingCard?Math.max(next,rampAt):next):null;
+        // Opening arrivals aim for 1/2/3s, then 4s; delayed ticks never queue a burst.
+        const next=boothAds&&state.autoShown<=3
+          ?Math.max(state.activeMs+800,(state.autoShown+1)*1000)
+          :state.activeMs+GAPS[(state.autoShown-1)%GAPS.length];
+        state.nextAt=state.autoShown<AUTO_MAX?next:null;
         sync();save();C.onArrival?.(p);
       }else pressureUpdate();
       collide();
