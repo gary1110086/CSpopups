@@ -1,6 +1,11 @@
 # Release history / 版本记录
 
-Current activity source **booth4**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **booth5**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+
+## booth5 — 12 November 2026
+
+- Shortened all ten briefs and added visible starting clues with search terms or control names. The same clues appear when reopening the task during a round.
+- Task pictures now show the relevant subject or a candidate to compare.
 
 ## booth4 — 10 November 2026
 

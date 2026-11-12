@@ -1,6 +1,6 @@
 # CSpopups · 一分钟挑战
 
-**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth4)** · [English](README.md)
+**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth5)** · [English](README.md)
 
 给你一分钟，在网页上办完一件小事。比如找一张壁纸、对比两台二手相机，或给社团选两部短片。过程中会跳出虚构的 XMUM 校园广告，有些按钮看起来还挺像你正要找的那个。
 
@@ -30,7 +30,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=booth4)
+[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=booth5)
 
 ## 其他资料
 

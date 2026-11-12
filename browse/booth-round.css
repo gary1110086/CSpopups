@@ -28,6 +28,7 @@ html.br-booth-running .br-ad.br-stack-card.br-stack-modal > .br-ad-scroll { max-
 .br-booth-dialog-kicker { color:#547669; font-size:11px; letter-spacing:.13em; font-weight:700; }
 #br-booth-task-dialog h1 { margin:14px 0 18px; font-size:27px; line-height:1.25; font-weight:700; color:#183c38; }
 #br-booth-task-dialog p { margin:0 0 18px; font-size:16px; line-height:1.65; }
+#br-booth-task-dialog .br-booth-start-hint { padding:12px 14px; border:1px solid #c6d9b7; background:#eff5e7; font-size:14px; }
 #br-booth-task-dialog ul { margin:20px 0; padding-left:22px; font-size:15px; line-height:1.6; }
 #br-booth-task-dialog li { margin:9px 0; }
 #br-booth-task-dialog p.br-booth-dialog-rule { padding-top:16px; border-top:1px solid #d9e0d4; font-size:12px; color:#5e7066; }

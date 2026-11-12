@@ -6,7 +6,7 @@
 
 | Entry / 入口 | Links / 链接 |
 | --- | --- |
-| One Minute / 一分钟挑战 | [English](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth4) · [中文](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth4) |
+| One Minute / 一分钟挑战 | [English](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth5) · [中文](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth5) |
 | Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=minute1) |
 | Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=minute1) |
 | Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=minute1); records stay in that browser tab. |

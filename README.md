@@ -1,6 +1,6 @@
 # CSpopups · One Minute
 
-**[Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth4)** · [简体中文](README.zh-CN.md)
+**[Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth5)** · [简体中文](README.zh-CN.md)
 
 You have a minute to do something ordinary on a website. Find a wallpaper, compare two used cameras, or put together a watchlist while fictional XMUM campus ads try to pull you away from the task.
 
@@ -30,7 +30,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth4)
+[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth5)
 
 ## Further reading
 

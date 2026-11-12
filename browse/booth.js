@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'booth4';
+  const VERSION = 'booth5';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
@@ -120,6 +120,7 @@
             <p class="booth-eyebrow">${esc(item.site)}${item.advanced ? ` · ${t('Advanced', '进阶')}` : ''}${mode === 'clean' ? ` · ${esc(modeName(mode))}` : ''}</p>
             <h1 id="booth-title">${esc(txt(item.title))}</h1>
             <p class="booth-brief-text">${esc(txt(item.brief))}</p>
+            ${item.hint ? `<aside class="booth-start-hint"><strong>${t('Start here', '从这里开始')}</strong><p>${esc(txt(item.hint))}</p></aside>` : ''}
             <div class="booth-goals">
               <h2>${t('What counts as finished', '完成条件')}</h2>
               <ol>${item.goals.map(goal => `<li>${esc(txt(goal))}</li>`).join('')}</ol>

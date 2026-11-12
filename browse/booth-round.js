@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'booth4', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'booth5', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute-wall-aurora': {scene:'wallpapers',file:'wallpaper.html',target:'orbital-aurora',key:'wall-saved',exportKind:'wallpaper'},
     'minute-recipe-lunch': {scene:'recipes',file:'recipe.html',target:'chickpea-salad',key:'bp-recipes-saved'},
@@ -301,7 +301,7 @@
     bar.innerHTML=`<div class="br-booth-time"><small>${translate('TIME LEFT','剩余时间')}</small><strong data-booth-clock role="timer" aria-live="off">1:00</strong></div><div class="br-booth-current"><span>${record.mode==='clean'?translate('CLEAN ROUND','无广告挑战'):translate('AD CHALLENGE','广告挑战')}</span><b>${escape(text(task.title))}</b></div><div class="br-booth-actions"><button type="button" data-booth-task>${translate('View task','查看任务')}</button><button type="button" data-booth-submit>${translate('Submit','我完成了')}</button><button type="button" data-booth-void aria-label="${translate('Staff: void this round','工作人员：作废本轮')}">${translate('Staff','工作人员')}</button></div>`;
     dialog=document.createElement('dialog');dialog.id='br-booth-task-dialog';dialog.setAttribute('aria-labelledby','br-booth-dialog-title');
     const goals=task.goals || [];
-    dialog.innerHTML=`<div class="br-booth-dialog-inner"><div class="br-booth-dialog-kicker">${translate('YOUR 60-SECOND TASK','你的60秒任务')}</div><h1 id="br-booth-dialog-title">${escape(text(task.title))}</h1><p>${escape(text(task.brief))}</p><ul>${goals.map(x=>`<li>${escape(text(x))}</li>`).join('')}</ul><p class="br-booth-dialog-rule">${translate('The clock continues while this task or another tab is open. Submission is checked by a staff member.','查看题目或打开其他标签页时，计时继续。交卷后由工作人员核对结果。')}</p><button type="button" data-booth-dialog-close>${translate('Continue challenge','继续挑战')}</button></div>`;
+    dialog.innerHTML=`<div class="br-booth-dialog-inner"><div class="br-booth-dialog-kicker">${translate('YOUR 60-SECOND TASK','你的60秒任务')}</div><h1 id="br-booth-dialog-title">${escape(text(task.title))}</h1><p>${escape(text(task.brief))}</p>${task.hint?`<p class="br-booth-start-hint"><strong>${translate('Start here','从这里开始')}</strong><br>${escape(text(task.hint))}</p>`:''}<ul>${goals.map(x=>`<li>${escape(text(x))}</li>`).join('')}</ul><p class="br-booth-dialog-rule">${translate('The clock continues while this task or another tab is open. Submission is checked by a staff member.','查看题目或打开其他标签页时，计时继续。交卷后由工作人员核对结果。')}</p><button type="button" data-booth-dialog-close>${translate('Continue challenge','继续挑战')}</button></div>`;
     document.body.append(bar,dialog);document.documentElement.classList.add('br-booth-running');document.documentElement.style.setProperty('--br-booth-offset','56px');
     bar.querySelector('[data-booth-task]').addEventListener('click',()=>{if(!canAct()||modalActive())return;emit('browse:booth-dialog',{open:true});dialog.showModal();});
     bar.querySelector('[data-booth-submit]').addEventListener('click',()=>{if(!modalActive()&&canAct())end('submitted');});
