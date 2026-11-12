@@ -1,6 +1,6 @@
 # CSpopups · 一分钟挑战
 
-**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth6)** · [English](README.md)
+**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth7)** · [English](README.md)
 
 给你一分钟，在网页上办完一件小事。比如找一张壁纸、对比两台二手相机，或给社团选两部短片。过程中会跳出虚构的 XMUM 校园广告，有些按钮看起来还挺像你正要找的那个。
 
@@ -10,7 +10,7 @@
 2. 按题目要求搜索、筛选或对比，把找到的结果收藏或下载。
 3. 做完点「我完成了」。时间到了，网页会自动显示本轮记录。
 
-进入任务后，前 **1–3 秒**先来两三张弹窗；从第 **4 秒**起加密，有空位时每约 1.5–2.5 秒补一张，电脑最多五张、手机最多三张。点到广告链接会另开标签页，原来的倒计时照常走。想腾出一点时间找东西，可以按 **Esc** 暂时清掉广告。
+进入任务后，前 **1–3 秒**先来两三张弹窗；从第 **4 秒**起加密，每约 1.5–2.5 秒来一张新广告，不关也会继续来。屏幕满了就换掉较早的广告，电脑同时五张、手机三张。点到广告链接会另开标签页，原来的倒计时照常走。想腾出一点时间找东西，可以按 **Esc** 暂时清掉广告。
 
 ![一分钟挑战进行中，画面显示倒计时、任务网页和校园广告](assets/one-minute-booth4.png)
 
@@ -30,7 +30,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=booth6)
+[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=booth7)
 
 ## 其他资料
 

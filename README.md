@@ -1,6 +1,6 @@
 # CSpopups · One Minute
 
-**[Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth6)** · [简体中文](README.zh-CN.md)
+**[Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth7)** · [简体中文](README.zh-CN.md)
 
 You have a minute to do something ordinary on a website. Find a wallpaper, compare two used cameras, or put together a watchlist while fictional XMUM campus ads try to pull you away from the task.
 
@@ -10,7 +10,7 @@ You have a minute to do something ordinary on a website. Find a wallpaper, compa
 2. Use the site's search, filters or comparisons to find what you need. Follow the brief to save or download the result.
 3. Press **Submit** when you're done. If time runs out, the round record opens automatically.
 
-Two or three ads arrive in the first **1–3 seconds** of focused browsing. From **4 seconds**, they keep coming every 1.5–2.5 seconds when there is room (up to five on desktop, three on a phone). Some look like the search or download button you're looking for. Ad links open in a new tab while the round clock keeps running. Press **Esc** for a short break from the ads.
+Two or three ads arrive in the first **1–3 seconds** of focused browsing. From **4 seconds**, a new ad arrives every 1.5–2.5 seconds, even if you leave them open. When the screen is full, older ads make way for new ones (five visible on desktop, three on a phone). Some look like the search or download button you're looking for. Ad links open in a new tab while the round clock keeps running. Press **Esc** for a short break from the ads.
 
 ![A One Minute round with the timer, task website and campus ads on screen](assets/one-minute-booth4.png)
 
@@ -30,7 +30,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth6)
+[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=booth7)
 
 ## Further reading
 

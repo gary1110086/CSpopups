@@ -3,7 +3,7 @@
   'use strict';
   window.BROWSE_AD_STACK = C => {
     const {root,seed,t,esc,read,write,ads,adVisual,adDescription,adURL,redirectURL,wireAds,deck,chosen,adOffer,campaignSite,boothAds}=C;
-    const KEY='br-run-v9:'+seed, MISSING=Symbol('missing'), AUTO_MAX=30, ID_MAX=40, REVEAL_MS=10000;
+    const KEY='br-run-v9:'+seed, MISSING=Symbol('missing'), AUTO_MAX=boothAds?60:30, ID_MAX=boothAds?70:40, REVEAL_MS=10000;
     const GAPS=boothAds?[1500,2000,1750,2500,2000,2250]:[2200,2800,2500,3200,2300,3000];
     const FORMATS=['bounce','robot','dodge','player-error','bonus','captcha','tiny','drawer','panel','newsletter'];
     const formats=boothAds?['tiny','drawer','dodge','bounce','panel','newsletter']:FORMATS;
@@ -122,6 +122,15 @@
       const keep=new Set([...(current?[current]:[]),...others.slice(-(count-(current?1:0)))].map(p=>p.id));
       state.pending=state.pending.filter(p=>keep.has(p.id));
       if(state.autoShown<AUTO_MAX)state.nextAt=Math.max(state.nextAt??0,state.activeMs+800,state.quietUntil);
+    };
+    const retireOldest=()=>{
+      // Keep the modal and the card currently being used; rotate the oldest other ad.
+      const oldest=state.pending.find(p=>!modal(p)&&!entries.get(p.id)?.card.contains(document.activeElement));
+      if(!oldest)return false;
+      state.pending=state.pending.filter(p=>p.id!==oldest.id);
+      removeEntry(oldest.id);
+      observe({type:'ad-retire',id:oldest.id,site:oldest.site,format:oldest.format});
+      return true;
     };
     const closeOne=(id,reason='dismiss')=>{
       if(suspended)return;
@@ -286,7 +295,8 @@
         if(before<REVEAL_MS&&p.closeElapsedMs>=REVEAL_MS)justRevealed=true;
       }
       if(justRevealed){for(const entry of entries.values())updateClose(entry);applyModal();save();}
-      if(!burstActive()&&state.autoShown<AUTO_MAX&&state.shown<ID_MAX&&state.pending.length<limit()&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil){
+      const due=!burstActive()&&state.autoShown<AUTO_MAX&&state.shown<ID_MAX&&state.activeMs>=state.nextAt&&state.activeMs>=state.quietUntil;
+      if(due&&(state.pending.length<limit()||(boothAds&&state.activeMs>=rampAt&&retireOldest()))){
         const openingCard=boothAds&&state.autoShown===0;
         let format=formats[state.autoShown%formats.length];
         if(!boothAds&&state.autoShown===0&&isPrompt(previewFormat))format=previewFormat;
