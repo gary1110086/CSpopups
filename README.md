@@ -6,13 +6,15 @@ You have a minute to do something ordinary on a website. Find a wallpaper, compa
 
 Source update `realism1` adds TrackMY parcel redelivery and Findline official-download searches. Use the local preview for this branch; publication must be verified separately. [New scene guide](docs/REALISM-SCENES.md).
 
+Local source `transit1` adds Trackside's interactive rail map and expands Out There to 39 destination/food guides across Malaysia, Taiwan and Thailand. [Changes and desktop verification](docs/TRANSIT-TRAVEL.md).
+
 ## How to play
 
 1. Pick one of the twelve tasks or draw one at random. Read the brief, then press **Start the challenge**. The timer starts when the task website is ready.
 2. Use the site's search, filters or comparisons to find what you need. Follow the brief to save or download the result.
 3. Press **Submit** when you're done. If time runs out, the round record opens automatically.
 
-Two or three ads arrive in the first **1–3 seconds** of focused browsing. From **4 seconds**, a new ad arrives every 1.5–2.5 seconds, even if you leave them open. When the screen is full, older ads make way for new ones (five visible on desktop, three on a phone). Some look like the search or download button you're looking for. Ad links open in a new tab while the round clock keeps running. Press **Esc** for a short break from the ads.
+Two or three ads arrive in the first **1–3 seconds** of focused browsing. From **4 seconds**, a new ad arrives every 1.5–2.5 seconds, even if you leave them open. When the screen is full, older ads make way for new ones (up to five visible on desktop). Some look like the search or download button you're looking for. Ad links open in a new tab while the round clock keeps running. Press **Esc** for a short break from the ads. Current development and verification target desktop use.
 
 ![A One Minute round with the timer, task website and campus ads on screen](assets/one-minute-booth4.png)
 
@@ -32,7 +34,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=realism1)
+[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=transit1)
 
 ## Further reading
 

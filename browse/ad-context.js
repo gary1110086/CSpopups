@@ -11,11 +11,11 @@
       recipes:['coupon','A little extra for your next shop.','给下一次采购，多一点优惠。','Kitchen & everyday shopping','厨房与日常采购'],
       tools:['software','One more tool for your files.','为你的文件，再添一个工具。','Image & file utilities','图片与文件工具'],
       movies:['player','Settle in for your next watch.','下一场观影，准备好了。','Playback & movie night','播放与观影'],
-      events:['coupon','Take a little perk into the weekend.','带着一点优惠，开始周末。','Weekend plans','周末计划'],
+      events:['coupon','Room & attraction offers: 70% off with a deposit.','客房与景点优惠：付订金享三折。','Destination & food guides','目的地与餐饮指南'],
       books:['desk','Make a little room for reading.','为阅读，留出一小片空间。','The reading corner','阅读角落'],
       museum:['stock','Find an image worth looking at twice.','找一张值得多看一眼的图片。','Images & collections','图片与收藏'],
       nature:['stock','Bring the outside into your next project.','把自然，放进下一个创作。','Nature photography','自然摄影'],
-      travel:['coupon','A small perk for your next stop.','下一站，发现一点小优惠。','Days out & everyday journeys','出游与日常行程'],
+      travel:['parcel','Transit card balance low: top up RM10.','交通卡余额不足：充值 RM10。','Rail routes & interchanges','轨道路线与换乘'],
       market:['stock','Give your next photograph a place.','为下一张照片，找到好位置。','Photography & creative work','摄影与创作']
     };
     const profile=profiles[scene]||profiles.wallpapers;
@@ -43,7 +43,18 @@
         if(stage>1)description+=t(' The '+data[0]+' collection is still here to explore.',' '+data[0]+' 的精选内容仍可继续浏览。');
         eyebrow=stage===1?t('Selected for this page','本页相关推广'):stage===2?t('A second look','再看一眼'):t('From a familiar sponsor','来自熟悉的赞助商');
       }
-      return {brand:data[0],title,cta:data[2],eyebrow,description};
+      let cta=data[2];
+      if(scene==='travel'&&['parcel','security'].includes(site)){
+        title=site==='security'?t('Verify your account to claim a fare rebate.','验证账号，领取车资回扣。'):ordinal%2?t('Fare evasion notice: settle the penalty now.','逃票通知：立即缴清罚款。'):t('Transit card balance low: top up RM10.','交通卡余额不足：充值 RM10。');
+        description=site==='security'?t('Account check required before this advertised rebate can be released.','此推广声称领取回扣前须完成账号检查。'):t('This sponsored notice asks for a payment before your next journey.','这条赞助通知要求你在下一趟行程前付款。');
+        eyebrow=t('Sponsored transit offer','交通主题赞助');cta=site==='security'?t('Check account','检查账号'):t('Continue to payment','前往付款');
+      }
+      if(scene==='events'&&['coupon','prize','parcel'].includes(site)){
+        title=site==='prize'?t('A free Penang or Taiwan trip: claim your draw.','免费槟城或台湾之旅：领取抽选资格。'):t('Room & attraction offers: 70% off with a deposit.','客房与景点优惠：付订金享三折。');
+        description=t('An advertised offer alongside your destination search. Read its deposit, claim and renewal terms.','与目的地搜索一同出现的推广。查看其订金、领取和续费条款。');
+        eyebrow=t('Sponsored travel offer','旅游主题赞助');cta=site==='prize'?t('View travel draw','查看旅行抽选'):t('View deposit offer','查看订金优惠');
+      }
+      return {brand:data[0],title,cta,eyebrow,description};
     };
     const adURLMeta=site=>({campaign:load().site,phase:String(phase()),interest:scene,topic:topic()});
     const destination=site=>url('destination.html',{site,from:scene,...adURLMeta(site)});

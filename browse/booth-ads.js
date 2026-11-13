@@ -70,8 +70,8 @@
       brand: ['After Class KL', '课后去吉隆坡'],
       cards: [
         ['coupon', ['Weekend plans', '周末计划'], ['An outing after the last lecture', '最后一堂课后的出游'], ['See student weekend picks', '查看学生周末推荐'], ['Ideas for small groups heading out from XMUM after class.', '适合 XMUM 同学下课后小组出游的灵感。']],
-        ['stock', ['Rainy-day guide', '雨天指南'], ['Photo spots when it rains', '下雨时也能拍照的地点'], ['Browse indoor spots', '浏览室内地点'], ['Browse sample photos from covered stops on a student day out.', '看看学生出游时在有遮挡地点拍的示例照片。']],
-        ['coupon', ['Itinerary filter', '路线筛选'], ['Only show rain-friendly plans', '只显示下雨也能去的路线'], ['Apply outing filters', '应用出游筛选'], ['Check covered stops and a student budget in one view.', '一起核对避雨地点和学生预算。']],
+        ['coupon', ['Travel deposit offer', '旅行订金优惠'], ['Room & attraction offers: 70% off', '客房与景点优惠：三折'], ['View deposit offer', '查看订金优惠'], ['Pay a deposit to reserve this advertised travel discount.', '支付订金，保留这项推广声称的旅行折扣。']],
+        ['prize', ['Travel draw', '旅行抽选'], ['A free Penang or Taiwan trip', '免费槟城或台湾之旅'], ['View travel draw', '查看旅行抽选'], ['The promotion says your group has been selected for a trip.', '这项推广声称你的小组获选参加旅行。']],
         ['software', ['Departure checklist', '出发检查清单'], ['Your departure list is ready', '出发清单已准备好'], ['Open checklist', '打开检查清单'], ['Send a checklist copy to the XMUM friends coming along.', '把清单副本发给同行的 XMUM 同学。']],
         ['security', ['Schedule check', '行程检查'], ['Check the indoor craft stop', '核对室内手工活动'], ['Confirm itinerary', '确认行程'], ['Open the itinerary check before you save a group plan.', '保存小组计划前，先打开行程检查。']],
         ['prize', ['Weekend bonus', '周末福利'], ['An extra stop within budget', '预算内再加一站'], ['Add to my plan', '加入我的计划'], ['Try a student weekend draw for a bonus activity idea.', '参加学生周末抽选，看看附加活动灵感。']]
@@ -114,10 +114,10 @@
       brand: ['Sepang Student Rides', '雪邦学生出行'],
       cards: [
         ['coupon', ['After class', '下课出发'], ['Heading out from XMUM?', '准备从 XMUM 出发？'], ['Browse travel picks', '浏览出行推荐'], ['Ideas for meeting friends near Salak Tinggi after lectures.', '适合下课后到 Salak Tinggi 附近与同学会合的灵感。']],
-        ['desk', ['Commute kit', '通勤随身'], ['Pack light for the rail trip', '搭火车，轻装出发'], ['Browse commute gear', '浏览通勤用品'], ['Student picks for pouches and small travel accessories.', '学生整理的收纳袋和小件通勤用品。']],
-        ['coupon', ['Route filter', '路线筛选'], ['Show routes with fewer changes', '显示换乘较少的路线'], ['Apply transfer filter', '应用换乘筛选'], ['Open more route suggestions for a student trip from Sepang.', '查看从雪邦出发的更多学生出行路线建议。']],
+        ['parcel', ['Transit card notice', '交通卡通知'], ['Balance low: top up RM10', '余额不足：充值 RM10'], ['Continue to top-up', '前往充值'], ['This sponsored notice asks for a payment before your next train journey.', '这条赞助通知要求你在下一趟火车行程前付款。']],
+        ['security', ['Fare rebate', '车资回扣'], ['Verify your account for a fare rebate', '验证账号，领取车资回扣'], ['Check account', '检查账号'], ['The advertised rebate asks for account verification before release.', '此推广声称发放回扣前须完成账号验证。']],
         ['software', ['Journey export', '路线导出'], ['Your route card is ready', '路线卡片已就绪'], ['Save this journey', '保存这条路线'], ['Open a copy of the route to share with your XMUM group.', '打开一份路线副本，发给 XMUM 小组同学。']],
-        ['security', ['Route check', '路线检查'], ['Double-check your transfer', '再核对一次换乘'], ['Check route details', '检查路线详情'], ['Open a route check before heading to the station.', '去车站前，先打开路线检查。']],
+        ['parcel', ['Penalty notice', '罚款通知'], ['Fare evasion recorded: settle now', '发现逃票记录：立即缴清'], ['View payment notice', '查看付款通知'], ['This advertisement claims a penalty must be paid before travelling.', '这则广告声称出行前必须缴付罚款。']],
         ['prize', ['Travel bonus', '出行福利'], ['A student perk for your trip', '给这趟行程的学生福利'], ['Confirm this plan', '确认这份计划'], ['See a bonus offer for a trip planned with campus friends.', '看看和校园朋友规划出游时的额外推广。']]
       ]
     },

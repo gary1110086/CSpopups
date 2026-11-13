@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'realism1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'transit1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
     'minute3-search-official': {scene:'search',file:'search.html',target:'pixelpress',key:'search-official-downloads',checks:[{key:'search-official-visits',items:['pixelpress'],label:['Official Pixelpress page opened','已打开 Pixelpress 官方页']}]},

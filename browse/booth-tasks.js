@@ -140,7 +140,7 @@ window.BROWSE_BOOTH_TASKS = [
     brief: ["You want to buy a handmade gift this weekend without getting caught in the rain. Find the Central Market craft guide (RM20 planning budget), save it, and tick return journey and weather on its departure list.", "周末想去买一件手作礼物，又怕下雨。找到中央艺术坊的手作路线（参考预算 RM20），加入周末计划，并在出发清单勾选返程和天气。"],
     hint: ['Search Central Market. The matching guide is called Batik, baskets & a sheltered craft browse. Its departure checklist is on the detail page.', '先搜「中央艺术坊」，打开「蜡染、编篮与室内手作慢逛」。出发清单在路线详情里。'],
     goals: [['Save the matching outing to your weekend plan.', '把符合条件的行程加入周末计划。'], ['Tick the return journey and weather entries in its departure checklist.', '在出发清单勾选返程和天气两项。']],
-    route: [['Filter for KL, indoor outings and rail access. Check the budget and craft theme.', '筛选 KL、室内和轨道交通，核对预算及手作主题。'], ['Open the Central Market craft outing and check the optional outdoor strip in its rain plan.', '打开中央艺术坊的手作路线，从雨天方案核对可跳过的室外路段。'], ['Save it and tick the return journey and weather entries in the departure checklist.', '收藏，并在出发清单勾选返程和天气。']],
+    route: [['Choose Malaysia → Kuala Lumpur, then filter for indoor outings and rail access. Check the budget and craft theme.', '先选马来西亚 → 吉隆坡，再筛选室内和轨道交通，核对预算及手作主题。'], ['Open the Central Market craft outing and check the optional outdoor strip in its rain plan.', '打开中央艺术坊的手作路线，从雨天方案核对可跳过的室外路段。'], ['Save it and tick the return journey and weather entries in the departure checklist.', '收藏，并在出发清单勾选返程和天气。']],
     answer: ['market-craft · Central Market & Kasturi Walk, RM20, 2.5 hours. The outdoor strip is optional. Record the two specified checklist entries.', 'market-craft · 中央艺术坊与 Kasturi Walk，RM20，2.5 小时。室外步行街可跳过，核对指定两项出发检查。'],
     cover: 'assets/real-outing-market-craft-thumb.webp', advanced: false
   },
@@ -180,7 +180,7 @@ window.BROWSE_BOOTH_TASKS = [
     brief: ["Meet friends at Bukit Bintang after class. Plan KLCC (KJ) to Bukit Bintang (KG), departing 17:20 with Less walking, then save the route.", "下课后要去武吉免登见朋友。规划 KLCC（KJ）到武吉免登（KG），17:20 出发、较少步行，再保存路线。"],
     hint: ['Use the From and To selectors in the planner. Bukit Bintang has two entries: choose KG. Set time and preference, then Find a route.', '从左边的出发站、到达站下拉框开始。武吉免登有两项，选 KG。设好时间和偏好后，点「查找路线」。'],
     goals: [['Use the correct Bukit Bintang platform and Less walking.', '选对武吉免登站台，并选择「较少步行」。'], ['Save the 17:20 journey.', '保存 17:20 的行程。']],
-    route: [['Choose KLCC (KJ) and Bukit Bintang (KG). Keep the date and set 17:20.', '选 KLCC（KJ）和武吉免登（KG），保留日期并设为 17:20。'], ['Select Less walking and plan.', '选择「较少步行」，规划路线。'], ['Check the connection and save the journey.', '核对换乘站并保存行程。']],
+    route: [['Choose KLCC (KJ) and Bukit Bintang (KG). Keep the date and set 17:20.', '选 KLCC（KJ）和武吉免登（KG），保留日期并设为 17:20。'], ['Select Less walking and plan. Inspect the highlighted connection on the network map.', '选择「较少步行」并规划，在网络图查看高亮换乘段。'], ['Check the interchange and line codes, then save the journey.', '核对换乘站与线路代号，再保存行程。']],
     answer: ['klcc → bukit-kg, 17:20, Less walking. The practice route switches from KJ to KG at Pasar Seni and shows 9 minutes total walking.', 'klcc → bukit-kg，17:20，较少步行。练习路线在中央艺术坊站由 KJ 换乘 KG，全程步行 9 分钟。'],
     cover: 'assets/journey-rail-train-0-thumb.webp', advanced: true
   },

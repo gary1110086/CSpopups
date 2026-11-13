@@ -1,6 +1,8 @@
 # One Minute activity / 一分钟活动
 Source branch `realism1`: two additional everyday hosts, 12 booth tasks and 32 optional briefs. Local preview and true/false paths: [scene guide](../docs/REALISM-SCENES.md). Publication is not inferred from these source changes.
 
+Local source `transit1` upgrades the existing Trackside and Out There scenes: SVG rail map, 39 guides across three countries, and contextual transit/travel lures. [Scope, desktop verification and limits](../docs/TRANSIT-TRAVEL.md). Historical release descriptions below refer to earlier snapshots.
+
 Activity version **booth7** has ten revised tasks and a fictional campus ad campaign for each. Staff tools below the task list provide the ad-free difficulty test, free browsing and recent rounds. [Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth7) · [Tasks, routes and staff operation](../docs/MINUTE-BOOTH.md).
 
 Cornhub now uses a dense tube-style catalogue and watch page. Four additional local verification/error/bonus prompts use bounded two-hop native-tab routes. [Design references](../docs/CORN-PORTAL.md) · [Prompt flow and inspection links](../docs/REDIRECT-PROMPTS.md).
