@@ -1,53 +1,51 @@
-# Trackside and Out There — transit1
+# Trackside and Out There — transit2
 
-Local source revision, 13 November 2026. This document does not establish a Pages deployment. The project now targets desktop use; this revision was checked in Chrome at 1440×960 and 1280×800.
+13 November 2026. Desktop Chrome implementation and verification. Release deployment is checked separately against the exact Git commit and public bytes.
 
 ## Trackside
 
-The existing planner, time-dependent routing model and rail data remain in place. Its inline SVG now shows all 28 platform records, 25 ride segments and five dashed walking links. Nine interchange platforms use double rings. The selected route highlights its actual graph edges; other segments fade. Line controls emphasize KJ, KG or MR without changing the selected route preference.
+The existing time-dependent route model is unchanged. The SVG shows 28 platforms, 25 ride segments, five dashed walking links with minute labels and nine double-ring interchange platforms. Six colored signs identify the ends of the modeled corridors, not actual line termini. KJ, KG and MR emphasis links preserve the selected journey.
 
-Platform circles and labels are native station links, including keyboard navigation. Platform pages retain their existing origin/destination controls. The complete text station and interchange list remains below the diagram. The map is a schematic of three modeled corridors, not a geographical map or the complete Klang Valley network.
+Each platform dot and name opens a native HTML popover with three ordinary GET links: set origin, set destination and station details. Keyboard Enter/Space opens it; native Escape closes it. The ad stack lets an open popover own Escape. No station-click interception is used. Names and code badges render above 12 pixels at both tested desktop widths; interchange names are bold.
 
-The existing KLCC (KJ) → Bukit Bintang (KG), 17:20, Less walking task retains its original answer and assessment. Its route instructions now refer to the map and line codes. The model still selects the Pasar Seni KJ/KG connection and nine minutes of total walking.
+Route highlighting comes from the actual selected graph edges. A change label identifies the destination line of each selected walking interchange. The existing task remains KLCC (KJ) → Bukit Bintang (KG), 17:20, Less walking: Pasar Seni KJ/KG transfer, nine minutes of total walking. Bukit Bintang's separate platforms are **KG and MR**, correcting the proposal's KJ/KG typo. Native navigation, refresh and actual BFCache keep the URL-defined endpoints and route.
 
 ## Out There
 
-The existing 24 guides are retained, with country and guide-type fields added. Fifteen new original bilingual outlines bring the catalogue to 39 guides. The destination directory and native GET form support country, region, attraction/eatery, theme, allowance, duration, setting, transport and walking filters. Region choices update when the country changes. Results separate attractions from places to eat in editorial rows.
+The original 39 guides remain. Twenty-eight new bilingual attraction/food outlines and 13 hotel-comparison guides bring the catalogue to **80 guides in 13 regions**. Every region has at least two attractions, two food guides and one accommodation guide:
 
-Required region coverage:
-
-| Country | Regions with both attraction and eatery guides |
+| Country | Regions |
 | --- | --- |
-| Malaysia | KL, Selangor, Perak/Ipoh, Penang, Melaka, Johor/Johor Bahru, Sabah, Sarawak |
-| Taiwan | Taipei |
-| Thailand | Bangkok |
+| Malaysia | KL, Selangor, Putrajaya, Perak/Ipoh, Penang, Melaka, Johor/Johor Bahru, Sabah, Sarawak |
+| Taiwan | Taipei, Taichung |
+| Thailand | Bangkok, Chiang Mai |
 
-The three original Putrajaya outing guides also remain available. New regions generally have one attraction and one restaurant/food-market outline; this is a small prototype corpus. “Eatery” includes named restaurants and food-market stops, not accommodation.
+The native GET form combines country, dependent region, type, theme, budget, time, setting, transport and walking filters. Results are ordered as attractions, food and accommodation, with separate counts. New hotel outlines give a named official property reference and comparison/check-in guidance; they make no reservation, availability or rate claim. The displayed hotel hour covers comparison/arrival preparation, not the overnight stay.
 
-All budgets are illustrative personal allowances in RM. They are not local ticket/menu prices, live quotes or currency conversions. Suggested times, durations and settings are planning examples. Venue access, trading sessions, transport and actual prices require separate confirmation.
+Meals show a per-person reference budget, new attractions an admission reference budget, and hotels a per-room/per-night reference budget. Original activity allowances retain their honest activity label because they can include purchases rather than tickets. All amounts are illustrative RM allocations, **reference budget, not a quote**. They are not verified local prices or currency conversions. Hotel references are examples to compare, not claims that a property meets the selected allowance.
 
-Saved places, departure checks, planning dates and actual TXT/ICS downloads use the existing scene storage and handlers. The Central Market task retains its original required save and checklist entries; its instructions now start with Malaysia → Kuala Lumpur.
+The 15 previously sourced location photographs retain adjacent credits and their exact [source register](../browse/TRAVEL-GUIDE-SOURCES.md). No new venue photo is invented or substituted: new entries use compact text rows and an explicit text-only detail note. The task cover is an original gallery illustration, not a photograph of a venue.
 
-Fifteen location-matched photographs are self-hosted as JPEGs plus WebP previews. Every new image has adjacent author, source and licence links. Exact records, dimensions, adaptations and hashes are in [TRAVEL-GUIDE-SOURCES.md](../browse/TRAVEL-GUIDE-SOURCES.md). Satok and Or Tor Kor use explicitly captioned produce details photographed at those markets. The Taipei image is a view from the memorial hall across Liberty Square. One incorrect Kek Lok Tong caption year was corrected to match the source record, 2012.
+Saved IDs, checklists, dates and actual TXT/ICS exports retain their handlers. Saving also records the selected guide's real planning fields in `bp-outing-details`, reading authoritative storage before mutation. This additional scene record does not change the booth record schema.
 
-## Advertisements and integration
+## Thirteenth booth task
 
-Travel lures use the existing parcel/security destinations: RM10 top-up, alleged fare penalty and account verification for a fare rebate. Outing lures use coupon/prize: a deposit for a claimed 70% discount and a free Penang/Taiwan trip. They remain sponsored teaching demonstrations. Genuine planning, saves and downloads require no payment or identity submission.
+`minute4-penang-indoor`: Malaysia → Penang, attraction, indoors, no more than three hours and RM30, then save. The unique result is `penang-state-gallery` (RM20, two hours). Three controlled alternatives each miss one condition: Glass Museum RM45, outdoor Botanic Gardens, and the four-hour gallery plan.
 
-The first actual booth popup and the next popup were checked for each scene. Native advertiser tabs clear their opener; fake paths do not satisfy the task. Genuine close, Escape, blocked-tab fallback, modal inert/focus handling and the task dialog continue to work.
+Assessment checks the actual saved ID plus its country, area, type, setting, cost, hours and access fields. A completion marker or saved ID alone is insufficient. The 12 earlier current tasks and ten legacy briefs are preserved. The optional untimed library remains 32 briefs.
 
-Browser testing exposed a shared-link integration bug: `SVGAElement.href` is an animated object with a read-only property, so assigning it aborted booth startup. `engine.js` now decorates native HTML/SVG links using `getAttribute`/`setAttribute`. Keyboard station navigation preserves the active round. No timer or assessment algorithm changed.
+## Integration and protected behavior
 
-Changed asset references and generated navigation use `transit1`. There are 16 current engine documents, rather than the 14 in the older specification. The new guide data and media load before `scenes-a.js` and `engine.js` in `events.html`.
+The contextual parcel/security and coupon/prize lures reuse the existing destinations. Real planning and exports require no payment or identity submission. New advert links open isolated native tabs and do not count as successful task work.
 
-The advertisement state remains `br-run-v9:<seed>` and scene data remains `br-data-v1:<seed>:...`; the specification's v8 reference was stale. Courier/search implementations, rail source data, existing media credits, booth poster CSS, root Little Daily and independent Stillwall remain unchanged. `booth-round.js` differs only in its release URL token.
+Runtime references use `transit2` in all 16 engine documents (the proposal's count of 14 was stale). The earlier SVG attribute decoration fix is retained. The 60-second deadline, `br-booth-v1` schema, `br-run-v9` pacing, original host implementations, rail source data, poster CSS and independent older prototypes are preserved.
 
 ## Verification
 
-- 121 Chrome flow assertions: actual route save and existing booth assessment, combined guide filters, all required regions, all new detail photos/credits, TXT/ICS file contents, native Back and true BFCache, authoritative sibling saves, advertiser isolation, fallback and desktop layouts. No runtime or failed-resource errors.
-- 37 further Chrome assertions: actual contextual booth popup sequences, genuine close, fake-path evidence, Escape, native/modal keyboard behavior, corrupt storage, current chooser metadata, repository-prefix routes and SVG keyboard navigation with the active round retained. No runtime errors. Explicit corrupt/modal fixtures are not timing claims.
-- Two actual 60-second rounds, one per task, passed 13 assertions. Reload preserved each original deadline. Observed result navigation occurred after 60,224 ms and 60,097 ms; recorded end times equal the original 60,000 ms deadlines, and completed evidence remains frozen at timeout.
-- 259 static/source assertions cover current asset versions and script order, unchanged protected sources, JavaScript syntax, all 15 photo pairs, dimensions and source-register SHA-256 hashes. The map implementer's separate 13 VM checks compared route results with the prior revision and checked segment geometry and exact highlighted edge sets.
-- Desktop screenshots of the map, destination directory, Chinese guide detail and 1280-pixel layouts were inspected. No mobile adaptation or mobile tests were performed. Chrome is the tested browser; OS focus switching and other browsers are not established by these checks.
+- 226 desktop Chrome assertions: all 28 native menus and their GET destinations, keyboard/Escape, two viewport text sizes, signs/transfer labels, native origin/destination, refresh and actual BFCache, 80 unique guides, all 13 region counts, ordered sections, compound filters, unique answer/distractors, actual saved fields, TXT/ICS contents, saved checklist restoration and malformed evidence rejection. No runtime or failed asset errors.
+- Three genuine 60-second rounds completed in 60,224 / 60,112 / 60,074 ms. Original deadlines survived reload; timeout result records retained successful travel, Central Market and Penang evidence. The recorded end remains exactly the original deadline.
+- 12 staff-flow assertions checked the three actual ended records: verdict save, real record TXT and next-participant handoff. 26 additional checks exercised actual relevant ad sequences/native tabs, non-completion of fake paths, Escape, modal focus/inert and corrupt storage.
+- 129 static checks cover every current JavaScript file, consistent runtime references, unchanged protected sources and legacy briefs. Independent read-only review exercised all 80 details in both languages (160 routes) and all station dot/label hit targets. Its one hotel-link finding was corrected.
+- Map screenshots at 1440 and 1280 pixels and guide renders were inspected. No mobile implementation or testing was performed. Chrome is the tested browser; OS focus switching and other browsers are not established.
 
-Temporary QA scripts, downloads, result JSONs and screenshots remain outside tracked source. Earlier release ZIPs and the public Pages site are separate from this local source revision.
+QA scripts, result records and screenshots are in the ignored local `output/transit-polish/` directory. Prior transit1 verification remains historical evidence for the underlying map, imagery and existing tasks. Earlier ZIPs are separate snapshots, not this delivery.

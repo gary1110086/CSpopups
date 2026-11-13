@@ -1,8 +1,9 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'transit1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'transit2', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
+    'minute4-penang-indoor': {scene:'events',file:'events.html',target:'penang-state-gallery',key:'bp-outings-saved'},
     'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
     'minute3-search-official': {scene:'search',file:'search.html',target:'pixelpress',key:'search-official-downloads',checks:[{key:'search-official-visits',items:['pixelpress'],label:['Official Pixelpress page opened','已打开 Pixelpress 官方页']}]},
     'minute-wall-aurora': {scene:'wallpapers',file:'wallpaper.html',target:'orbital-aurora',key:'wall-saved',exportKind:'wallpaper'},
@@ -186,6 +187,7 @@
         break;
       }
       case 'minute2-movie-animation':saved('Sintel is on the watchlist','《辛特尔》已加入想看片单');break;
+      case 'minute4-penang-indoor':saved('Two-hour indoor Penang gallery saved within RM30','已保存RM30以内的槟城室内两小时美术馆指南');break;
       case 'minute2-outing-craft':saved('Central Market craft outing saved','已保存中央艺术坊手作行程');break;
       case 'minute2-book-verne':
         saved('French edition saved','已收藏法文版');
@@ -260,6 +262,10 @@
       const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);
       const date=[tomorrow.getFullYear(),String(tomorrow.getMonth()+1).padStart(2,'0'),String(tomorrow.getDate()).padStart(2,'0')].join('-');
       e.saved=isObject(schedule)&&validDate(schedule.date)&&schedule.date===date&&schedule.slot==='afternoon'&&schedule.address==='Campus parcel desk, Sepang';
+    }
+    if (record.taskId==='minute4-penang-indoor') {
+      const values=read('bp-outing-details',{}),plan=isObject(values)?values[rule.target]:null;
+      e.saved=e.saved&&isObject(plan)&&plan.id===rule.target&&plan.country==='Malaysia'&&plan.area==='Penang'&&plan.kind==='attraction'&&plan.shelter==='indoor'&&plan.cost===20&&plan.hours===2&&plan.transit==='connection';
     }
     if (record.taskId==='minute-recipe-lunch') {const value=read('bp-recipe-servings-chickpea-salad',2);e.servings=[1,2,4,6].includes(value)?value:2;}
     if (rule.trip) {

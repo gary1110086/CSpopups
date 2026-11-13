@@ -1,16 +1,16 @@
 # CSpopups · 一分钟挑战
 
-**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth7)** · [English](README.md)
+**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=transit2)** · [English](README.md)
 
 给你一分钟，在网页上办完一件小事。比如找一张壁纸、对比两台二手相机，或给社团选两部短片。过程中会跳出虚构的 XMUM 校园广告，有些按钮看起来还挺像你正要找的那个。
 
-源码更新 `realism1` 新增 TrackMY 快递改约与 Findline 官网检索。此分支先用本地预览，线上发布需另行核验。[新增场景说明](docs/REALISM-SCENES.md)。
+新增 TrackMY 快递改约与 Findline 官网检索。[新增场景说明](docs/REALISM-SCENES.md)。
 
-本地源码 `transit1` 补上 Trackside 可交互线路图，并把 Out There 扩为马来西亚、台湾与泰国的 39 篇景点及餐饮指南。[改动与电脑端验证](docs/TRANSIT-TRAVEL.md)。
+`transit2` 完善 Trackside 原生站点菜单与线路图，并把 Out There 扩为三国 13 地区的 80 篇景点、餐饮与酒店住宿指南，新增一条槟城筛选任务。[改动与电脑端验证](docs/TRANSIT-TRAVEL.md)。
 
 ## 怎么玩
 
-1. 十二道题里挑一道，也可以随机抽。先读完题目再点「开始挑战」，任务网页就绪后才开始计时。
+1. 十三道题里挑一道，也可以随机抽。先读完题目再点「开始挑战」，任务网页就绪后才开始计时。
 2. 按题目要求搜索、筛选或对比，把找到的结果收藏或下载。
 3. 做完点「我完成了」。时间到了，网页会自动显示本轮记录。
 
@@ -34,7 +34,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=transit1)
+[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=transit2)
 
 ## 其他资料
 

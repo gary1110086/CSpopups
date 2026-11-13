@@ -1,3 +1,7 @@
+## Transit2 desktop polish — 13 November 2026
+
+See [Trackside / Out There verification](../docs/TRANSIT-TRAVEL.md#verification): 226 desktop integration checks, three actual 60-second rounds, 12 staff-flow checks, 26 ad/modal/corrupt-state checks and 129 static checks. Independent read-only review exercised all 160 bilingual detail routes and station hit targets. No mobile work. Deployment is independently checked against exact commit/public bytes.
+
 ## Task-specific campus interruptions — booth3, 10 November 2026
 
 - Guided Chrome runs exercised each of the ten revised challenges through submission. Checked actual 3840 × 2160 JPEG and 800 × 1052 WebP files, the French excerpt TXT, comparison lists, saved items, serving and checklist changes, and the one-transfer Less walking route via Pasar Seni. Removing a recipe checklist tick before submission revoked its evidence. An earlier brief, result and round history still worked.

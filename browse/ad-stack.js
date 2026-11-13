@@ -283,7 +283,7 @@
       else if(!event.shiftKey&&document.activeElement===end){event.preventDefault();first.focus();}
     });
     document.addEventListener('focusin',event=>{if(root.contains(event.target))lastOutsideFocus=event.target;});
-    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!externalModal){event.preventDefault();closeAll();}});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!externalModal){if(document.querySelector('[popover]:popover-open'))return;event.preventDefault();closeAll();}});
     const tick=()=>{
       if(destroyed)return;
       const now=performance.now(),delta=Math.max(0,Math.min(1100,now-last));last=now;

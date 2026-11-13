@@ -189,3 +189,12 @@ Photos are dated evidence of a named subject, not current availability, opening 
 - Adaptation: Proportionally resized; JPEG/WebP re-encoded. No crop or compositing. Acquisition: official Wikimedia 1280px thumbnail.
 - Original dimensions: 4032×2268; Commons original SHA-1 `5385cad9df5906af67b71311e9259d8b745ee145`.
 - Local JPEG SHA-256 `78c9e8a7799000a6459d24e640c06b325bd977e5d02864f63720562889ea57b6`; WebP SHA-256 `4260dca5bcbd8d1d547a3ecd01a37ecc230e626191944f49f30cac7813179eed`.
+
+
+## Transit2 text guides and original task illustration
+
+`travel-guide-depth.js` adds original bilingual planning outlines without new venue photographs. Their source links are official venue, tourism authority or hotel references, not licences to reuse those websites' photographs. No image from those pages is copied. Named hotels provide a concrete starting point for comparison; their real room rates and availability are not represented by the prototype's illustrative RM allowances.
+
+`assets/guide-gallery.svg` is an original geometric gallery illustration authored for this project on 13 November 2026. It is a task cover, not a photograph or depiction of the actual Penang State Art Gallery. Existing photo credits and hashes above remain unchanged.
+
+The Penang gallery venue reference is [Penang State Museum Board](https://penangmuseum.gov.my/gallery/). The guide explicitly asks visitors to confirm the current exhibition venue during building works. Taichung references use the [city tourism bureau](https://travel.taichung.gov.tw/en/attractions/listbyclassification); Chiang Mai references include [Warorot Market](https://www.tourismthailand.org/Attraction/warorot-market) and [Wat Chedi Luang](https://www.tourismthailand.org/Attraction/wat-chedi-luang-varavihara) from the Tourism Authority of Thailand. These establish place identity, not the editor's example duration or budget.

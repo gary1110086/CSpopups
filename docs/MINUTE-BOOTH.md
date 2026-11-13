@@ -2,7 +2,7 @@
 
 从一分钟挑战进入。随机抽题或自己选题，读完后开始。题目网站、倒计时和结果都在同一个浏览器标签页。
 
-- [一分钟挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth7) · [One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth7)
+- [一分钟挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=transit2) · [One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=transit2)
 
 ## 工作人员怎么用
 
@@ -19,7 +19,7 @@
 
 ## 本轮任务与建议路线
 
-参与者会看到题目、「从这里开始」和完成条件。开始线索会给搜索词或操作入口，游戏中点「查看任务」也能再看。工作人员路线及答案默认收起，可主动展开。源码 realism1 提供 12 道展台题；独立任务库保留原 30 题并增补两道日常任务，共 32 题。新增场景与真假路径见 [REALISM-SCENES.md](REALISM-SCENES.md)。
+参与者会看到题目、「从这里开始」和完成条件。开始线索会给搜索词或操作入口，游戏中点「查看任务」也能再看。工作人员路线及答案默认收起，可主动展开。源码 transit2 提供 13 道展台题；独立任务库保留原 30 题并增补两道日常任务，共 32 题。新增场景与真假路径见 [REALISM-SCENES.md](REALISM-SCENES.md)。
 
 | 题目 | 完成条件 | 建议寻找路线 / 答案 |
 | --- | --- | --- |
@@ -33,9 +33,10 @@
 | 两种容易混淆的啄木鸟 | 对比两种鸟，把较小的加入观察清单 | Field Guide 搜啄木鸟，对比绒啄木鸟与红腹啄木鸟。绒啄木鸟长 14–17 cm，背部有宽白纵纹 |
 | 分清同名车站再换乘（进阶） | 保存 17:20 KLCC（KJ）至武吉免登（KG）的较少步行路线 | Trackside 选加影线站台，查看路线详情并保存。中央艺术坊换乘，全程步行 9 分钟 |
 | 同款相机，配件不同（进阶） | 对比同款佳能的两条刊登，收藏 RM700 内含镜头的一条 | loop 筛选佳能单反。对比 EOS 550D，RM420 仅机身，RM680 附 EF-S 18–55mm 镜头，收藏 canon-excellent |
-
 | 把包裹改约到明天下午 | 正常 TrackMY 页面保存原地址、明天下午 | 查 TM24081301，在时间轴下方免费改约；RM3／验证身份的 NorthPost 广告不是任务入口 |
 | 找到软件的官方来源 | 打开官方页并发起入门 TXT 下载 | 搜 Pixelpress，核对 pixelpress.example；AppHarbor／SecureLane 赞助结果不计完成 |
+
+| 槟城室内短程参观 | 保存室内、≤3小时、≤RM30 的槟城景点 | 国家选马来西亚、地区选槟城，组合类型／场地／用时／预算筛选。唯一答案 penang-state-gallery，RM20、2小时；核对实际保存字段。金额为参考预算，非报价 |
 
 不同有效寻找方法均可接受。
 
@@ -57,7 +58,7 @@
 python browse/preview-server.py --port 5210
 ```
 
-打开 `http://127.0.0.1:5210/browse/booth.html?lang=zh&v=realism1`。需从仓库根目录提供共享的 assets 与 wallpapers 资源。
+打开 `http://127.0.0.1:5210/browse/booth.html?lang=zh&v=transit2`。需从仓库根目录提供共享的 assets 与 wallpapers 资源。
 
 GitHub Release 中的 cleaner1 ZIP 对应早期版本。本轮试玩使用上方入口或当前仓库源码。
 

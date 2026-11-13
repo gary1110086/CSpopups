@@ -1,6 +1,13 @@
 # Release history / 版本记录
 
-Current activity source **booth5**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **transit2**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+
+## transit2 — 13 November 2026
+
+- Added TrackMY and Findline everyday hosts; 12 independent websites, 13 current booth tasks and 32 optional briefs.
+- Upgraded Trackside with native station action menus, readable platform badges, corridor signs, walking minutes and selected-transfer annotations.
+- Expanded Out There to 80 attraction, meal and hotel guides in 13 regions, including Taichung and Chiang Mai. Added a uniquely filterable Penang task with actual saved-field assessment.
+- Preserved the existing deadline, storage schema and poster design. Verification now targets desktop Chrome. See [scope and evidence](TRANSIT-TRAVEL.md).
 
 ## booth5 — 12 November 2026
 

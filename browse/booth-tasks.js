@@ -277,5 +277,45 @@ window.BROWSE_BOOTH_TASKS = [
     ],
     "cover": "assets/search-software.svg",
     "advanced": false
+  },
+  {
+    "id": "minute4-penang-indoor",
+    "scene": "events",
+    "file": "events.html",
+    "site": "Out There",
+    "title": [
+      "A short indoor visit in Penang",
+      "槟城室内短程参观"
+    ],
+    "brief": [
+      "In Malaysia → Penang, find an indoor attraction taking at most 3 hours with a reference budget up to RM30. Save the matching guide to your plan.",
+      "在马来西亚 → 槟城，找一处室内景点：用时不超过3小时、参考预算不超过RM30。把符合条件的指南存入计划。"
+    ],
+    "hint": [
+      "Combine country, region, attraction, indoors, ≤3h and ≤RM30. The longer gallery visit is a separate guide.",
+      "组合筛选国家、地区、景点、室内、≤3小时和≤RM30。半日美术馆是另一篇指南。"
+    ],
+    "goals": [
+      [
+        "Save the matching two-hour guide.",
+        "保存符合条件的两小时指南。"
+      ]
+    ],
+    "route": [
+      [
+        "Choose Malaysia → Penang, attraction, indoors, budget ≤RM30 and time ≤3h.",
+        "选择马来西亚 → 槟城、景点、室内、预算≤RM30、用时≤3小时。"
+      ],
+      [
+        "Open the sole result and save it.",
+        "打开唯一结果，并加入收藏。"
+      ]
+    ],
+    "answer": [
+      "penang-state-gallery: Malaysia / Penang / attraction / indoor / RM20 / 2h. The glass museum exceeds the budget, the garden is outdoors, and the long gallery guide takes 4h. These are editorial budgets, not ticket quotes. Assessment checks the actual saved selection and its planning fields.",
+      "penang-state-gallery：马来西亚／槟城／景点／室内／RM20／2小时。玻璃博物馆超预算，植物园在户外，半日美术馆需4小时。金额为编辑参考预算，并非门票报价。判定核对实际收藏和保存的规划字段。"
+    ],
+    "cover": "assets/guide-gallery.svg",
+    "advanced": false
   }
 ];
