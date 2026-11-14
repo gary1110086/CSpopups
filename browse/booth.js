@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'ui4';
+  const VERSION = 'score2';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
@@ -134,7 +134,7 @@
               <ol>${item.goals.map(goal => `<li>${taskText(goal, item)}</li>`).join('')}</ol>
             </div>
             <button id="booth-start" type="button" class="booth-button booth-button-primary">${t('Start the challenge', '开始挑战')} <span aria-hidden="true">→</span></button>
-            <p id="booth-start-note" class="booth-note" role="status">${t('The 60 seconds start once the site is ready. Switching tabs does not pause the clock.', '网页就绪后开始 60 秒倒计时。切换标签页时照常计时。')}</p>
+            <p id="booth-start-note" class="booth-note" role="status">${t('The 60 seconds start once the site is ready. Switching tabs does not pause the clock. Task 40 + time 40 + resilience 20. Complete and submit within 30 seconds for full time points.', '网页就绪后开始 60 秒倒计时，切换标签页时照常计时。任务 40＋时间 40＋抗干扰 20；全部完成后点「交卷」，30 秒内交卷得时间满分。')}</p>
           </div>
           <figure class="booth-brief-figure"><img class="booth-brief-photo" src="${esc(item.briefCover||item.cover)}" alt="" width="480" height="360">${item.coverNote?`<figcaption>${esc(txt(item.coverNote))}</figcaption>`:""}</figure>
         </section>
@@ -201,7 +201,7 @@
         }
       } catch (_) { review = null; }
     }
-    try { return engine.compute(assessment, review); } catch (_) { return null; }
+    try { return engine.compute(assessment, review, round); } catch (_) { return null; }
   }
 
   function unavailableResilience(round) {
@@ -210,7 +210,7 @@
   }
   function scoreBlock(score, round) {
     if (!score) return '';
-    const r = score.resilience;
+    const r = score.resilience, time = score.time;
     const rows = r ? [[t('Clean closes', '干净关闭'), r.cleanCloses], [t('False closes', '假关闭'), r.decoys],
       [t('Evasion chases', '追逐闪避'), r.dodges], [t('10-second close assists', '10 秒关闭辅助'), r.revealed],
       [t('Advertiser tabs opened', '已打开广告标签页'), r.opened]] : [];
@@ -219,10 +219,17 @@
         <div class="booth-score-total"><strong>${score.total}</strong><span>/ 100</span></div>
         <dl class="booth-score-split">
           <div><dt>${t('Task', '任务完成')}</dt><dd>${score.task.score} / 40</dd><small>${t(`${score.task.met} of ${score.task.total} evidence checks recorded`, `已记录 ${score.task.met} / ${score.task.total} 项证据`)}</small></div>
-          <div><dt>${t('Resilience', '抗干扰')}</dt><dd>${r ? `${r.score} / 60` : '—'}</dd><small>${r ? t('From actual close behaviour', '来自实际关闭行为') : unavailableResilience(round)}</small></div>
+          <div><dt>${t('Time', '时间效率')}</dt><dd>${time ? `${time.score} / 40` : '—'}</dd><small>${time ? t(`${time.base} base + ${time.bonus} speed bonus`, `基础 ${time.base} ＋速度奖励 ${time.bonus}`) : t('Timing data is unavailable', '用时数据不可用')}</small></div>
+          <div><dt>${t('Resilience', '抗干扰')}</dt><dd>${r ? `${r.score} / 20` : '—'}</dd><small>${r ? t('10 base, adjusted by close behaviour', '基础 10，按实际关闭行为加减') : unavailableResilience(round)}</small></div>
         </dl>
         ${rows.length ? `<ul class="booth-score-detail">${rows.map(([label, value]) => `<li><span>${esc(label)}</span><b>${value}</b></li>`).join('')}</ul>` : ''}
         <p class="booth-note">${t('The task score counts automatically confirmable evidence, so its total can differ from the condition checklist below, which also lists conditions only staff can confirm.', '任务分统计可自动确认的证据，分母可能与下方「条件核对」不同——后者还包含只能由工作人员核对的条件。')}</p>
+        <details class="booth-score-rules">
+          <summary>${t('How scoring works', '查看计分规则')}</summary>
+          <p>${t('Task: up to 40 points, proportional to the recorded evidence. Time: complete and submit within 30 seconds for all 40 time points; after 30 seconds, points decrease logarithmically to 20 at 60 seconds. Submit when finished: the time is measured until submission or timeout. For partial completion, only the speed bonus above the 20-point base is scaled by task progress.', '任务：按已记录的证据比例计分，最高 40。时间：全部完成并在 30 秒内交卷得满 40；30 秒后按对数曲线递减，60 秒为 20。用时截止于交卷或超时，请在完成后点「交卷」；部分完成时，只按完成比例折算基础 20 之外的速度奖励。')}</p>
+          <table><caption>${t('Time points when all task evidence is recorded · ≤30s = 40', '任务证据全部完成时的时间分 · ≤30 秒满 40')}</caption><thead><tr><th scope="col">${t('Time used', '已用时间')}</th>${[30,35,40,45,50,55,60].map(n => `<th scope="col">${n}s</th>`).join('')}</tr></thead><tbody><tr><th scope="row">${t('Points / 40', '分数 / 40')}</th>${[40,36,32,28,25,23,20].map(n => `<td>${n}</td>`).join('')}</tr></tbody></table>
+          <p>${t('Resilience: 10 base points, capped at 20. Clean close +1; false close −3; evasion −2; 10-second assist −1. Advertiser tabs opened are informational. Rounds without ads or usable ad records show — for resilience. Voided rounds have no score.', '抗干扰：基础 10，最高 20、最低 0。干净关闭 +1，假关闭 −3，追逐闪避 −2，10 秒辅助 −1。打开广告标签页仅供参考。无广告或缺少可用记录时，抗干扰显示「—」；作废轮次不计分。')}</p>
+        </details>
       </section>`;
   }
 
@@ -245,7 +252,8 @@
     const score = scoreData(round);
     const lines = [t('ONE MINUTE — ROUND RECORD', '一分钟 — 本轮记录'), '', `${t('Round', '轮次')}: ${round.id}`, `Seed: ${round.seed}`, `${t('Task', '题目')}: ${txt(item.title)} (${item.id})`, `${t('Memory anchor', '任务要点')}: ${txt(item.badge || item.title)}`, `${t('Second-level hint', '二级提示')}: ${round.usedSecondHint ? t('Used', '已使用') : t('Not used', '未使用')}`, `${t('Website', '网站')}: ${item.site}`, `${t('Mode', '环境')}: ${modeName(round.mode)}`, `${t('Status', '状态')}: ${reasonText(round)}`, `${t('Time used', '实际用时')}: ${elapsedText(round)}`,       ...(score ? [`${t('Score', '得分')}: ${score.total} / 100`,
         `${t('Task', '任务完成')}: ${score.task.score} / 40 (${score.task.met}/${score.task.total})`,
-        `${t('Resilience', '抗干扰')}: ${score.resilience ? `${score.resilience.score} / 60` : `— (${unavailableResilience(round)})`}`,
+        `${t('Time', '时间效率')}: ${score.time ? `${score.time.score} / 40 (${t('base', '基础')} ${score.time.base} + ${t('speed bonus', '速度奖励')} ${score.time.bonus})` : '—'}`,
+        `${t('Resilience', '抗干扰')}: ${score.resilience ? `${score.resilience.score} / 20` : `— (${unavailableResilience(round)})`}`,
         ...(score.resilience ? [`${t('Clean closes / false closes / evasions / assists', '干净关闭 / 假关闭 / 闪避 / 辅助')}: ${score.resilience.cleanCloses} / ${score.resilience.decoys} / ${score.resilience.dodges} / ${score.resilience.revealed}`, `${t('Advertiser tabs opened', '已打开广告标签页')}: ${score.resilience.opened}`] : [])] : []),
  `${t('Staff verdict', '工作人员判定')}: ${verdictText(round.judgement)}`, '', txt(item.brief), '', t('TASK CONDITIONS — ✓ recorded; ○ not recorded; — staff check needed', '条件核对 — ✓ 已记录；○ 尚未记录；— 待人工核对'), evidenceSummary(assessment), ...assessment.checks.map(check => `${check.met===true?'[✓]':check.met===null?'[—]':'[○]'} ${txt(check.label)}${check.detail ? ': ' + txt(check.detail) : ''}`), '', t('STAFF REFERENCE', '工作人员参考'), txt(item.answer), ...item.route.map((step, index) => `${index + 1}. ${txt(step)}`), '', `${t('This round’s review', '本轮复盘')}: ${new URL(api.reviewURL(round), location.href).href}`, '', t('Generated locally. A download record shows that the browser was asked to download a generated file; staff should verify files on disk where needed.', '本地生成。导出记录代表文件已生成并向浏览器发起下载；需要时由工作人员核对磁盘上的实际文件。')];
     let objectURL;
