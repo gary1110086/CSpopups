@@ -335,10 +335,29 @@
   if (!app) return;
   if (!api || !tasks.length) { renderError('runtime'); return; }
   if (view === 'result') {
-    let round;
-    try { round = params.get('round') ? api.get(params.get('round')) : null; } catch (_) { round = null; }
-    const item = round && findTask(round.taskId);
-    if (!round || !item) renderError('round'); else renderResult(round, item);
+    const refreshResult = () => {
+      let round;
+      try { round = params.get('round') ? api.get(params.get('round')) : null; } catch (_) { round = null; }
+      const item = round && findTask(round.taskId);
+      window.BROWSE_BOOTH_SCORE_LAST = null;
+      if (!round || !item) renderError('round'); else renderResult(round, item);
+    };
+    let recoveryFrame = 0, recoveryGeneration = 0;
+    window.addEventListener('pagehide', () => {
+      recoveryGeneration++;
+      cancelAnimationFrame(recoveryFrame);
+    });
+    window.addEventListener('pageshow', event => {
+      if (!event.persisted) return;
+      const own = ++recoveryGeneration;
+      // Reconcile late sessionStorage writes from the departed page before reading.
+      recoveryFrame = requestAnimationFrame(() => {
+        recoveryFrame = requestAnimationFrame(() => {
+          if (own === recoveryGeneration) refreshResult();
+        });
+      });
+    });
+    refreshResult();
   } else if (view === 'brief') {
     if (task) renderBrief(task); else renderError('task');
   } else renderChoose();
