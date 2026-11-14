@@ -2,7 +2,9 @@
 
 The `ui1` revision keeps the 12 websites, 13 activity tasks and existing 60-second deadline. The activity bar now carries a short memory anchor. Task conditions and optional hints remain available during the round; checking them does not pause time. Second-level hint use appears in the round record.
 
-The task list is grouped by purpose. Suggested working times describe the task, while every activity round still has a full 60 seconds. Result checkmarks mean that the browser recorded a condition. A cross means it is not independently confirmed; it is not an automatic failure. Staff retain the final verdict. A generated-file record establishes download dispatch, not a file saved on disk.
+The task list is grouped by purpose. Suggested working times describe the task, while every activity round still has a full 60 seconds. In the current `ui3` results, a checkmark means the browser recorded the condition, a circle means it has not recorded that condition, and a dash means the available evidence needs staff verification. Older frozen records without individual facts remain unknown. Staff retain a separately labelled final verdict. A generated-file record establishes download dispatch, not a file saved on disk.
+
+Condition reporting uses the frozen round evidence. Selecting the correct catalogue item establishes its fixed metadata. Movie presence, journey fields and redelivery fields have separate facts; all journey fields must belong to one journey. New Findline rounds record ordinary and middle-click sponsored-result activation. Browser context-menu actions are outside that event record, so staff review remains necessary where browser observation is insufficient.
 
 | Website | Signature detail and desktop structure |
 |---|---|

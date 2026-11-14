@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'ui2';
+  const VERSION = 'ui3';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
@@ -75,7 +75,7 @@
     return `<details class="booth-staff booth-history" id="booth-history"><summary>${t('Staff tools', '工作人员工具')}</summary><div class="booth-staff-body">
       <nav class="booth-staff-links" aria-label="${t('Staff tools', '工作人员工具')}">
         ${mode === 'ads' ? `<a href="${esc(url({mode:'clean'}))}">${t('Difficulty test · no ads', '难度测试 · 无广告')} ↗</a>` : `<a href="${esc(url({mode:'ads'}))}">${t('Return to the challenge', '返回正式挑战')} ↗</a>`}
-        <a href="launch.html?lang=${lang}&amp;v=ui2">${t('Free browsing', '自由浏览')} ↗</a>
+        <a href="launch.html?lang=${lang}&amp;v=ui3">${t('Free browsing', '自由浏览')} ↗</a>
       </nav>
       <label class="booth-advanced"><input id="booth-include-advanced" type="checkbox"> ${t('Include advanced tasks in the draw', '随机抽题时加入进阶题')}</label>
       <h2>${t('Recent rounds', '最近轮次')}</h2>
@@ -179,7 +179,13 @@
     return {checks:[], allMet:false};
   }
   function resultChecks(assessment) {
-    return assessment.checks.length ? assessment.checks.map(check => `<li data-booth-check data-met="${check.met === true}"><span class="booth-check-symbol" aria-hidden="true">${check.met === true ? '✓' : '✗'}</span><div><strong>${esc(txt(check.label))}</strong>${check.detail ? `<p>${esc(txt(check.detail))}</p>` : ''}</div><span class="booth-check-state">${check.met === true ? t('Recorded', '有记录') : t('Not confirmed', '未确认')}</span></li>`).join('') : `<li data-booth-check data-met="false"><span class="booth-check-symbol" aria-hidden="true">—</span><div><strong>${t('No task evidence is available.', '暂无可用的任务证据。')}</strong><p>${t('Ask the participant and inspect the actual output. No success is inferred.', '请询问参与者并检查实际产物；系统不会据此推断成功。')}</p></div></li>`;
+    return assessment.checks.length ? assessment.checks.map(check => `<li data-booth-check data-met="${check.met===null?'unknown':check.met===true}"><span class="booth-check-symbol" aria-hidden="true">${check.met===true?'✓':check.met===null?'—':'○'}</span><div><strong>${esc(txt(check.label))}</strong>${check.detail ? `<p>${esc(txt(check.detail))}</p>` : ''}</div><span class="booth-check-state">${check.met===true?t('Recorded','已记录'):check.met===null?t('Staff check needed','待人工核对'):t('Not recorded','尚未记录')}</span></li>`).join('') : `<li data-booth-check data-met="unknown"><span class="booth-check-symbol" aria-hidden="true">—</span><div><strong>${t('No task evidence is available.', '暂无可用的任务证据。')}</strong><p>${t('Ask the participant and inspect the actual output. No success is inferred.', '请询问参与者并检查实际产物；系统不会据此推断成功。')}</p></div></li>`;
+  }
+  function evidenceSummary(assessment) {
+    const recorded=assessment.checks.filter(c=>c.met===true).length,total=assessment.checks.length;
+    if(total&&recorded===total)return t('All task conditions recorded.','全部任务条件已记录。');
+    const unknown=assessment.checks.filter(c=>c.met===null).length;
+    return t(`${recorded} of ${total} conditions recorded.${unknown?` ${unknown} require a staff check.`:''}`,`已记录 ${recorded}/${total} 项条件。${unknown?`另有 ${unknown} 项需人工核对。`:''}`);
   }
   function renderPending(round, item) {
     const armed = round.status === 'armed';
@@ -188,7 +194,7 @@
   }
   function exportResult(round, item) {
     const assessment = validAssessment(round);
-    const lines = [t('ONE MINUTE — ROUND RECORD', '一分钟 — 本轮记录'), '', `${t('Round', '轮次')}: ${round.id}`, `Seed: ${round.seed}`, `${t('Task', '题目')}: ${txt(item.title)} (${item.id})`, `${t('Memory anchor', '任务要点')}: ${txt(item.badge || item.title)}`, `${t('Second-level hint', '二级提示')}: ${round.usedSecondHint ? t('Used', '已使用') : t('Not used', '未使用')}`, `${t('Website', '网站')}: ${item.site}`, `${t('Mode', '环境')}: ${modeName(round.mode)}`, `${t('Status', '状态')}: ${reasonText(round)}`, `${t('Time used', '实际用时')}: ${elapsedText(round)}`, `${t('Staff verdict', '工作人员判定')}: ${verdictText(round.judgement)}`, '', txt(item.brief), '', t('TASK CONDITIONS — ✗ means not independently confirmed, not an automatic failure', '条件核对 — ✗ 代表未独立确认，不是自动判定失败'), ...assessment.checks.map(check => `${check.met === true ? '[✓]' : '[✗]'} ${txt(check.label)}${check.detail ? ': ' + txt(check.detail) : ''}`), '', t('STAFF REFERENCE', '工作人员参考'), txt(item.answer), ...item.route.map((step, index) => `${index + 1}. ${txt(step)}`), '', `${t('This round’s review', '本轮复盘')}: ${new URL(api.reviewURL(round), location.href).href}`, '', t('Generated locally. A download record shows that the browser was asked to download a generated file; staff should verify files on disk where needed.', '本地生成。导出记录代表文件已生成并向浏览器发起下载；需要时由工作人员核对磁盘上的实际文件。')];
+    const lines = [t('ONE MINUTE — ROUND RECORD', '一分钟 — 本轮记录'), '', `${t('Round', '轮次')}: ${round.id}`, `Seed: ${round.seed}`, `${t('Task', '题目')}: ${txt(item.title)} (${item.id})`, `${t('Memory anchor', '任务要点')}: ${txt(item.badge || item.title)}`, `${t('Second-level hint', '二级提示')}: ${round.usedSecondHint ? t('Used', '已使用') : t('Not used', '未使用')}`, `${t('Website', '网站')}: ${item.site}`, `${t('Mode', '环境')}: ${modeName(round.mode)}`, `${t('Status', '状态')}: ${reasonText(round)}`, `${t('Time used', '实际用时')}: ${elapsedText(round)}`, `${t('Staff verdict', '工作人员判定')}: ${verdictText(round.judgement)}`, '', txt(item.brief), '', t('TASK CONDITIONS — ✓ recorded; ○ not recorded; — staff check needed', '条件核对 — ✓ 已记录；○ 尚未记录；— 待人工核对'), evidenceSummary(assessment), ...assessment.checks.map(check => `${check.met===true?'[✓]':check.met===null?'[—]':'[○]'} ${txt(check.label)}${check.detail ? ': ' + txt(check.detail) : ''}`), '', t('STAFF REFERENCE', '工作人员参考'), txt(item.answer), ...item.route.map((step, index) => `${index + 1}. ${txt(step)}`), '', `${t('This round’s review', '本轮复盘')}: ${new URL(api.reviewURL(round), location.href).href}`, '', t('Generated locally. A download record shows that the browser was asked to download a generated file; staff should verify files on disk where needed.', '本地生成。导出记录代表文件已生成并向浏览器发起下载；需要时由工作人员核对磁盘上的实际文件。')];
     let objectURL;
     try {
       objectURL = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/plain;charset=utf-8'}));
@@ -220,14 +226,14 @@
           <div class="booth-time-stamp"><span>${t('Time used', '用时')}</span><strong>${esc(elapsedText(round))}</strong></div>
         </section>
         <section class="booth-result-evidence" aria-labelledby="booth-evidence-title">
-          <h2 id="booth-evidence-title">${t('Condition checklist', '条件核对')}</h2><p class="booth-note">${t('✓ Recorded · ✗ Not independently confirmed. Unconfirmed conditions need a staff check; they are not an automatic failure.', '✓ 有记录 · ✗ 未独立确认。未确认的条件需工作人员核对，不代表自动失败。')}</p>
+          <h2 id="booth-evidence-title">${t('Condition checklist', '条件核对')}</h2><p class="booth-evidence-summary" role="status">${esc(evidenceSummary(assessment))}</p><p class="booth-note">${t('✓ Recorded · ○ Not recorded · — Staff check needed. The staff verdict is shown separately below.', '✓ 已记录 · ○ 尚未记录 · — 待人工核对。工作人员最终判定在下方单独显示。')}</p>
           <ul class="booth-checks">${resultChecks(assessment)}</ul>
           <p class="booth-note">${round.status === 'void'
             ? t('Staff set this round aside.', '工作人员已将本轮作废。')
             : t('Staff will verify these records and any downloaded files.', '工作人员会核对记录和实际下载的文件。')}</p>
         </section>
         <div class="booth-result-actions">
-          <strong id="booth-verdict">${esc(verdictText(round.judgement))}</strong>
+          <span class="booth-final-verdict"><small>${t('Final staff verdict','工作人员最终判定')}</small><strong id="booth-verdict">${esc(verdictText(round.judgement))}</strong></span>
           <a id="booth-review" class="booth-button booth-button-primary" href="${esc(localisedURL(api.reviewURL(round)))}">${t('Review this round', '查看本轮复盘')} <span aria-hidden="true">→</span></a>
         </div>
         <details class="booth-staff" id="booth-staff">

@@ -1,6 +1,14 @@
 # Release history / 版本记录
 
-Current activity source **ui2**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **ui3**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+
+## ui3 — 14 November 2026
+
+- Fixed condition records that stayed unconfirmed after the required target or action was recorded. Correct target selection now establishes its fixed catalogue facts.
+- Separated individual movie, route, download and redelivery conditions so one missing requirement does not hide other completed requirements. Route conditions come from one journey, preventing different partial plans from being combined into a complete result.
+- Recorded sponsored search-result clicks during new rounds. Older snapshots without the necessary detail remain marked for staff review.
+- Results and TXT exports now distinguish recorded conditions, missing records and conditions needing staff verification, with a separate final staff verdict. Kept the absolute 60-second deadline, frozen evidence, manual judgement and black bold task highlights.
+- Verified all thirteen tasks through real desktop Chrome actions, partial and incorrect attempts, native navigation and Back. Automated checks do not replace the participant study or establish that dispatched downloads were saved on disk.
 
 ## ui2 — 14 November 2026
 

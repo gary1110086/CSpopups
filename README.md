@@ -1,12 +1,12 @@
 # CSpopups · One Minute
 
-**[Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=ui2)** · [简体中文](README.zh-CN.md)
+**[Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=ui3)** · [简体中文](README.zh-CN.md)
 
 You have a minute to do something ordinary on a website. Find a wallpaper, compare two used cameras, or put together a watchlist while fictional XMUM campus ads try to pull you away from the task.
 
 Includes TrackMY parcel redelivery and Findline official-download searches. [New scene guide](docs/REALISM-SCENES.md).
 
-`ui2` gives the twelve sites their own catalogue and filter layouts, and adds grouped task selection, persistent task badges, layered hints and condition-by-condition round records. All rounds still last 60 seconds and staff retain the final verdict. [Desktop design and limits](docs/UI1-DESIGN.md).
+The twelve sites have distinct catalogue and filter layouts, grouped task selection, persistent task badges and layered hints. Current `ui3` fixes condition records that missed completed actions and separates completed, unrecorded and unknown conditions. All rounds still last 60 seconds and staff retain the final verdict. [Desktop design and limits](docs/UI1-DESIGN.md).
 
 ## How to play
 
@@ -34,7 +34,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=ui2)
+[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=ui3)
 
 ## Further reading
 

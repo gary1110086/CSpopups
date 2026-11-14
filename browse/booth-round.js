@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'ui2', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'ui3', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute4-penang-indoor': {scene:'events',file:'events.html',target:'penang-state-gallery',key:'bp-outings-saved'},
     'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
@@ -44,6 +44,9 @@
       {key:'loop-compare',items:['canon-good','canon-excellent'],label:['Both Canon listings are in Compare','两条佳能刊登均已加入对比']}
     ]}
   };
+  // Optional, append-only condition facts share the existing boolean checks array.
+  // Missing facts in older frozen rounds stay unknown; they are never fabricated.
+  const DETAIL_CHECKS = {'minute2-movie-animation':1,'minute2-travel-interchange':4,'minute3-courier-redelivery':2,'minute3-search-official':1};
   const FILES = new Set(Object.values(RULES).map(r => r.file));
   const isObject = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const finite = v => typeof v === 'number' && Number.isFinite(v);
@@ -56,7 +59,7 @@
   const emptyEvidence = taskId => {
     const rule = RULES[taskId];
     return {targetId:rule.target,saved:false,found:false,servings:null,trip:null,exports:[],capturedAt:0,
-      ...(rule.checks ? {checks:rule.checks.map(() => false)} : {})};
+      ...(rule.checks || DETAIL_CHECKS[taskId] ? {checks:(rule.checks || []).map(() => false)} : {})};
   };
   const validDate = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v+'T00:00:00Z')) && new Date(v+'T00:00:00Z').toISOString().slice(0,10) === v;
   const validTrip = (v, trip) => isObject(v) && v.from === trip.from && v.to === trip.to && v.time === trip.time
@@ -81,7 +84,13 @@
       e.servings = record.taskId === 'minute-recipe-lunch' && [1,2,4,6].includes(v.servings) ? v.servings : null;
       const rule = RULES[record.taskId];
       if (rule.trip && validTrip(v.trip,rule.trip)) e.trip = tripEvidence(v.trip,rule.trip);
-      if (rule.checks && Array.isArray(v.checks)) e.checks = rule.checks.map((_,index) => v.checks[index] === true);
+      if ((rule.checks || DETAIL_CHECKS[record.taskId]) && Array.isArray(v.checks)) {
+        const base=rule.checks?.length || 0;
+        e.checks=(rule.checks || []).map((_,index) => v.checks[index] === true);
+        for(let i=0;i<(DETAIL_CHECKS[record.taskId] || 0);i++) {
+          const value=v.checks[base+i];if(typeof value!=='boolean')break;e.checks.push(value);
+        }
+      }
     }
     if (Array.isArray(v.exports)) e.exports = v.exports.slice(-12).map(x => {
       const out = exportValue(x);
@@ -208,33 +217,49 @@
     return {checks,allMet:checks.length>0&&checks.every(c=>c.met)};
   };
 
-  // Presentation only: map each written condition to existing assessment evidence.
-  // A catalogue fact or an unrecorded action remains explicitly unconfirmed.
+  // Each condition uses the same frozen round evidence as the original assessment.
+  // Correct target selection establishes its fixed catalogue facts, not a separate
+  // unobservable "read the metadata" action. Unknown historical facts stay neutral.
   const CONDITION_EVIDENCE = {
-    'minute2-wall-earthrise':[[1],[0],[0]],
-    'minute2-recipe-budget':[null,[1],[2],[0]],
-    'minute2-tool-webp':[[0],[1],[1]],
-    'minute2-movie-animation':[[0],[1],[0,1]],
-    'minute2-outing-craft':[null,[0],[1]],
+    'minute2-wall-earthrise':[[1],'found',[0]],
+    'minute2-recipe-budget':['found',[1],[2],[0]],
+    'minute2-tool-webp':[[0],[1],[0]],
+    'minute2-movie-animation':[[0],'detail0',[0,1]],
+    'minute2-outing-craft':['found',[0],[1]],
     'minute2-book-verne':[[2],[0],[1]],
-    'minute2-museum-manet':[[1],null,[0]],
-    'minute2-nature-woodpeckers':[[1],null,[0]],
-    'minute2-travel-interchange':[[0],[0],[0],[0]],
-    'minute2-market-lens':[[1],null,[0]],
-    'minute3-courier-redelivery':[null,[0],[0]],
-    'minute3-search-official':[[1],[0],null],
+    'minute2-museum-manet':[[1],'found',[0]],
+    'minute2-nature-woodpeckers':[[1],'found',[0]],
+    'minute2-travel-interchange':['detail0','detail1','detail2','detail3'],
+    'minute2-market-lens':[[1],[0],[0]],
+    'minute3-courier-redelivery':['found','detail0','detail1'],
+    'minute3-search-official':[[1],[0],'detail0'],
     'minute4-penang-indoor':[[0],[0],[0]]
   };
   const conditions = input => {
-    const task=taskData(input?.taskId),assessment=assess(input),map=CONDITION_EVIDENCE[input?.taskId];
+    const record=input&&idOK(input.id)?normalize(input,input.id):null;
+    const task=taskData(record?.taskId),assessment=assess(record),map=CONDITION_EVIDENCE[record?.taskId];
     if(!task?.steps||!map)return assessment;
+    const e=record.evidence,base=RULES[record.taskId].checks?.length || 0;
     const checks=task.steps.map((label,index)=>{
-      const refs=map[index],recorded=Array.isArray(refs)&&refs.length>0;
-      return {label,met:recorded&&refs.every(i=>assessment.checks[i]?.met===true),
-        detail:recorded ? refs.map(i=>assessment.checks[i]?.detail).filter(Boolean).join('; ') :
-          ['No independent record of this condition. Staff should check the catalogue or ask the participant.','此条件没有独立记录，请工作人员核对目录或询问参与者。']};
+      const refs=map[index];let met=null,detail='';
+      if(Array.isArray(refs)) {met=refs.every(i=>assessment.checks[i]?.met===true);detail=refs.map(i=>assessment.checks[i]?.detail).filter(value=>value&&!(typeof value==='string'&&/^[✓✗○—\s]*$/.test(value))).join('; ');}
+      else if(refs==='found') met=e.found||e.saved;
+      else if(refs?.startsWith('detail')) {
+        const value=e.checks?.[base+Number(refs.slice(6))];
+        if(typeof value==='boolean') {
+          met=value;
+          if(record.taskId==='minute3-search-official'&&!value)detail=['A sponsored search result was clicked during this round.','本轮曾点击赞助搜索结果。'];
+        }
+        // Older complete evidence already proves these positive facts. A failed
+        // aggregate cannot establish which individual subcondition was missing.
+        else if(record.taskId==='minute2-movie-animation'&&e.checks?.[0]===true)met=true;
+        else if(record.taskId==='minute3-courier-redelivery'&&e.saved)met=true;
+        else if(record.taskId==='minute2-travel-interchange'&&e.saved&&e.trip)met=true;
+      }
+      if(met===null)detail=['The browser record is insufficient to verify this condition automatically. Staff should check it; it has not been marked incomplete.','浏览器记录不足以自动核实此项，请工作人员核对；这不表示未完成。'];
+      return {label,met,detail};
     });
-    return {checks,allMet:checks.length>0&&checks.every(c=>c.met)};
+    return {checks,allMet:checks.length>0&&checks.every(c=>c.met===true)};
   };
 
   // Query validation is available before the engine chooses a seed or enables ads.
@@ -287,6 +312,7 @@
     const rule=RULES[record.taskId],e={...record.evidence,exports:record.evidence.exports.slice()},read=(key,fallback)=>{
       try {return C.read(key,fallback);} catch {return fallback;}
     };
+    let details=[];
     if (rule.key) {
       const values=read(rule.key,[]);
       e.saved=Array.isArray(values)&&values.some(x=>rule.key==='nature-sightings'?isObject(x)&&x.id===rule.target:x===rule.target);
@@ -297,6 +323,14 @@
       const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);
       const date=[tomorrow.getFullYear(),String(tomorrow.getMonth()+1).padStart(2,'0'),String(tomorrow.getDate()).padStart(2,'0')].join('-');
       e.saved=isObject(schedule)&&validDate(schedule.date)&&schedule.date===date&&schedule.slot==='afternoon'&&schedule.address==='Campus parcel desk, Sepang';
+      details=[isObject(schedule)&&schedule.date===date&&schedule.slot==='afternoon',isObject(schedule)&&validDate(schedule.date)&&['morning','afternoon','evening'].includes(schedule.slot)&&schedule.address==='Campus parcel desk, Sepang'];
+    }
+    if(record.taskId==='minute2-movie-animation') {
+      const list=read('frame-watchlist',[]);details=[Array.isArray(list)&&list.includes('elephants-dream')];
+    }
+    if(record.taskId==='minute3-search-official') {
+      const trace=read('search-result-actions-v1',null);
+      if(isObject(trace)&&trace.version===1&&trace.roundId===record.id&&Array.isArray(trace.clicked)&&trace.clicked.every(id=>['software','security'].includes(id)))details=[trace.clicked.length===0];
     }
     if (record.taskId==='minute4-penang-indoor') {
       const values=read('bp-outing-details',{}),plan=isObject(values)?values[rule.target]:null;
@@ -306,14 +340,24 @@
     if (rule.trip) {
       const values=read('travel-trips',[]),trip=Array.isArray(values)?values.find(v=>validTrip(v,rule.trip)):null;
       e.saved=Boolean(trip);e.trip=trip?tripEvidence(trip,rule.trip):null;
+      if(record.taskId==='minute2-travel-interchange') {
+        const validPlan=v=>isObject(v)&&typeof v.from==='string'&&typeof v.to==='string'&&v.from!==v.to&&validDate(v.date)&&typeof v.time==='string'&&/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(v.time)&&['fastest','changes','walking'].includes(v.pref);
+        const saved=Array.isArray(values)?values.filter(validPlan):[],planned=Object.fromEntries(['from','to','date','time','pref'].map(key=>[key,C.params?.get(key)]));
+        // Derive all four rows from one coherent journey, never a union of
+        // different partial journeys. A previously saved exact match still counts.
+        const candidate=trip||(validPlan(planned)?planned:saved[0]);
+        const stored=Boolean(candidate)&&saved.some(v=>['from','to','date','time','pref'].every(key=>v[key]===candidate[key]));
+        details=[candidate?.from===rule.trip.from&&candidate?.to===rule.trip.to,candidate?.time===rule.trip.time,candidate?.pref===rule.trip.pref,stored];
+      }
     }
     if (rule.checks) e.checks=rule.checks.map(({key,items,value,count})=>{
       const stored=read(key,null);
       if (!items) return stored===value;
       return Array.isArray(stored)&&(count===undefined||stored.length===count)&&items.every(item=>stored.includes(item));
     });
+    if(DETAIL_CHECKS[record.taskId])e.checks=[...(rule.checks?e.checks:[]),...details];
     const selected=C.params?.get('id');
-    e.found=e.found||selected===rule.target||record.taskId==='minute-tool-webp'&&C.params?.get('sample')==='city';
+    e.found=e.found||selected===rule.target||record.taskId==='minute-tool-webp'&&C.params?.get('sample')==='city'||record.taskId==='minute3-courier-redelivery'&&(C.params?.get('tracking')||'').slice(0,160).trim().toUpperCase()===rule.target;
     e.capturedAt=now;
     record.evidence=e;record.updatedAt=Math.max(record.updatedAt,now);
     return store(record);

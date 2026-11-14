@@ -152,6 +152,9 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.08; font-weight: 900; l
 .booth-checks li[data-met=true] .booth-check-symbol { color: #157a3a; }
 .booth-result-actions { margin-top: 20px; flex-wrap: wrap; }
 #booth-verdict { font-family: var(--display); font-size: 1.2rem; }
+.booth-final-verdict { display:grid; gap:3px; }
+.booth-final-verdict small { color:var(--muted); font-size:.75rem; }
+.booth-evidence-summary { font-weight:800; }
 .booth-judgement-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .booth-judgement-row select { min-height: 42px; padding: 6px 10px; border: 3px solid var(--ink); background: var(--paper); color: var(--ink); font-weight: 600; }
 .booth-staff-answer { margin-top: 16px; }

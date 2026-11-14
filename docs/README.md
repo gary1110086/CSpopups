@@ -8,10 +8,10 @@
 
 | Entry / 入口 | Links / 链接 |
 | --- | --- |
-| One Minute / 一分钟挑战 | [English](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=ui2) · [中文](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=ui2) |
-| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=ui2) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=ui2) |
-| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=ui2) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=ui2) |
-| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=ui2); records stay in that browser tab. |
+| One Minute / 一分钟挑战 | [English](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=ui3) · [中文](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=ui3) |
+| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=ui3) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=ui3) |
+| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=ui3) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=ui3) |
+| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=ui3); records stay in that browser tab. |
 | Local package / 本地运行包 | [Release and download](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1); extract everything and follow `START-HERE.txt`. |
 
 ## Project documents / 项目文档
@@ -25,7 +25,7 @@
 | [AdSweep sources](../browse/CLEANER-SOURCES.md) | Product-page references and the deceptive cleaner mechanism. |
 | [Design references](../browse/DESIGN-NOTES.md) | Category-specific layouts and reference decisions. |
 | [Verification record](../browse/VERIFICATION.md) | Recorded checks and their limits, including media, exports, native tabs and cached browser returns. |
-| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=ui2) | Benchmark websites and documented deceptive mechanisms. |
+| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=ui3) | Benchmark websites and documented deceptive mechanisms. |
 | [Little Daily runtime](../prototypes/little-daily/README.md) | Earlier article-site implementation and the root HTML routes that still use it. |
 | [Standalone Stillwall](../wallpapers/README.md) | Independent wallpaper prototype, its runtime and original artwork. |
 

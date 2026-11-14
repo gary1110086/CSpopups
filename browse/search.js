@@ -38,6 +38,22 @@
       const previous = allowedArray(key, ['pixelpress']);
       return previous.includes('pixelpress') || C.write(key, [...previous, 'pixelpress']) !== false;
     };
+    const resultActionsKey='search-result-actions-v1',roundId=params.get('round');
+    const resultActions=()=>{
+      const trace=C.read(resultActionsKey,null);
+      return trace&&trace.version===1&&trace.roundId===roundId&&Array.isArray(trace.clicked)&&trace.clicked.every(id=>sponsoredIDs.includes(id))?trace:null;
+    };
+    // Only a newly armed round can establish an observed history with no clicks.
+    // Never turn missing tracking in an older running round into proof of avoidance.
+    const roundContext=window.BROWSE_BOOTH?.context(params,C.scene);
+    if(roundContext?.valid&&roundContext.round.status==='armed'&&!resultActions())C.write(resultActionsKey,{version:1,roundId,clicked:[]});
+    const trackSponsoredResult=event=>{
+      if(event.type==='auxclick'&&event.button!==1||event.defaultPrevented||!roundId||!canMutate())return;
+      const anchor=event.target.closest('a[data-br-ad]');
+      if(!anchor?.closest('[data-search-sponsored]')||anchor.closest('[inert]')||!sponsoredIDs.includes(anchor.dataset.brAd))return;
+      const trace=resultActions();
+      C.write(resultActionsKey,{version:1,roundId,clicked:[...new Set([...(trace?.clicked||[]),anchor.dataset.brAd])]});
+    };
     const contextInputs = () => [...new URL(route()).searchParams]
       .filter(([name]) => !['q', 'view', 'app', 'tab'].includes(name))
       .map(([name, value]) => `<input type="hidden" name="${esc(name)}" value="${esc(value)}">`).join('');
@@ -168,12 +184,16 @@
     const cleanup = () => {
       ended = true; hide();
       root.removeEventListener('click', click);
+      root.removeEventListener('click', trackSponsoredResult,true);
+      root.removeEventListener('auxclick', trackSponsoredResult,true);
       window.removeEventListener('keydown', escape);
       window.removeEventListener('pagehide', hide);
       window.removeEventListener('pageshow', show);
       window.removeEventListener('browse:booth-end', cleanup);
     };
     root.addEventListener('click', click);
+    root.addEventListener('click', trackSponsoredResult,true);
+    root.addEventListener('auxclick', trackSponsoredResult,true);
     window.addEventListener('keydown', escape);
     window.addEventListener('pagehide', hide);
     window.addEventListener('pageshow', show);
