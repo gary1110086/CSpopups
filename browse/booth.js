@@ -178,6 +178,23 @@
     } catch (_) { /* A broken assessment must not become a successful result. */ }
     return {checks:[], allMet:false};
   }
+  // Scoring reads the underlying evidence (assess), not the displayed condition list
+  // (conditions), so every task can reach full marks. See the scoring spec.
+  function scoreData(round) {
+    const engine = window.BROWSE_BOOTH_SCORE;
+    if (!engine || round.status === 'void') return null;
+    let assessment = {checks: [], allMet: false};
+    try {
+      const result = api.assess(round);
+      if (result && Array.isArray(result.checks)) assessment = result;
+    } catch (_) { /* A broken assessment scores zero rather than inventing success. */ }
+    let review = null;
+    if (round.mode !== 'clean') {
+      try { review = window.BROWSE_REVIEW_DATA?.read(round.seed) || null; } catch (_) { review = null; }
+    }
+    try { return engine.compute(assessment, review); } catch (_) { return null; }
+  }
+
   function resultChecks(assessment) {
     return assessment.checks.length ? assessment.checks.map(check => `<li data-booth-check data-met="${check.met===null?'unknown':check.met===true}"><span class="booth-check-symbol" aria-hidden="true">${check.met===true?'✓':check.met===null?'—':'○'}</span><div><strong>${esc(txt(check.label))}</strong>${check.detail ? `<p>${esc(txt(check.detail))}</p>` : ''}</div><span class="booth-check-state">${check.met===true?t('Recorded','已记录'):check.met===null?t('Staff check needed','待人工核对'):t('Not recorded','尚未记录')}</span></li>`).join('') : `<li data-booth-check data-met="unknown"><span class="booth-check-symbol" aria-hidden="true">—</span><div><strong>${t('No task evidence is available.', '暂无可用的任务证据。')}</strong><p>${t('Ask the participant and inspect the actual output. No success is inferred.', '请询问参与者并检查实际产物；系统不会据此推断成功。')}</p></div></li>`;
   }
@@ -214,6 +231,8 @@
   function renderResult(round, item) {
     if (round.status === 'armed' || round.status === 'running') { renderPending(round, item); return; }
     const assessment = validAssessment(round);
+    const score = scoreData(round);
+    window.BROWSE_BOOTH_SCORE_LAST = score;
     document.title = `${reasonText(round)} · ${t('One Minute', '60秒任务挑战')}`;
     app.innerHTML = `${header(t('03 / Results', '03 / 结果'), round)}
       <main id="booth-main" data-booth-view="result" class="booth-main booth-result-main">
