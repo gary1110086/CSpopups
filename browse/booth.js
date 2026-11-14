@@ -136,7 +136,7 @@
             <button id="booth-start" type="button" class="booth-button booth-button-primary">${t('Start the challenge', '开始挑战')} <span aria-hidden="true">→</span></button>
             <p id="booth-start-note" class="booth-note" role="status">${t('The 60 seconds start once the site is ready. Switching tabs does not pause the clock.', '网页就绪后开始 60 秒倒计时。切换标签页时照常计时。')}</p>
           </div>
-          <figure class="booth-brief-figure"><img class="booth-brief-photo" src="${esc(item.briefCover||item.cover)}" alt="" width="480" height="360">${item.coverNote?`<figcaption>${esc(txt(item.coverNote))}</figcaption>`:""}</figure>
+          <figure class="booth-brief-figure"><img class="booth-brief-photo" src="${esc(item.cover)}" alt="" width="480" height="360">${item.coverNote?`<figcaption>${esc(txt(item.coverNote))}</figcaption>`:""}</figure>
         </section>
       </main>`;
     document.getElementById('booth-start').addEventListener('click', () => {
@@ -190,7 +190,16 @@
     } catch (_) { /* A broken assessment scores zero rather than inventing success. */ }
     let review = null;
     if (round.mode !== 'clean') {
-      try { review = window.BROWSE_REVIEW_DATA?.read(round.seed) || null; } catch (_) { review = null; }
+      try {
+        // The reader repairs missing counts to zero. Check the stored shape first
+        // so a damaged record cannot manufacture the neutral resilience points.
+        const raw = sessionStorage.getItem(`br-review-v2:${round.seed}`)
+          ?? sessionStorage.getItem(`br-review-v1:${round.seed}`);
+        const stored = raw === null ? null : JSON.parse(raw);
+        if (stored?.counts && typeof stored.counts === 'object' && !Array.isArray(stored.counts)) {
+          review = window.BROWSE_REVIEW_DATA?.read(round.seed) || null;
+        }
+      } catch (_) { review = null; }
     }
     try { return engine.compute(assessment, review); } catch (_) { return null; }
   }

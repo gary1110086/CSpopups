@@ -125,7 +125,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.08; font-weight: 900; l
 .booth-start-hint { margin-bottom: 22px; padding: 14px 16px 14px 18px; border: 3px solid var(--ink); border-left: 10px solid var(--yellow); background: var(--paper); box-shadow: var(--shadow); }
 .booth-start-hint strong { display: block; font-size: 1rem; text-transform: uppercase; }
 .booth-start-hint p { margin: 6px 0 0; }
-.booth-brief-photo { width: auto; height: auto; max-width: 100%; max-height: 620px; aspect-ratio: auto; object-fit: contain; border: 4px solid var(--ink); box-shadow: var(--shadow); }
+.booth-brief-photo { width: 100%; height: auto; aspect-ratio: 4 / 3; border: 4px solid var(--ink); box-shadow: var(--shadow); }
 .booth-goals { padding: 16px 18px; margin: 0 0 22px; border: 3px solid var(--ink); border-left: 10px solid var(--red); background: var(--paper); }
 .booth-goals h2 { margin: 0 0 8px; font-size: 1rem; text-transform: uppercase; }
 .booth-goals ol, .booth-route { margin: 0; padding-left: 22px; }
