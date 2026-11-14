@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'score2';
+  const VERSION = 'score3';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
@@ -212,7 +212,7 @@
     if (!score) return '';
     const r = score.resilience, time = score.time;
     const rows = r ? [[t('Clean closes', '干净关闭'), r.cleanCloses], [t('False closes', '假关闭'), r.decoys],
-      [t('Evasion chases', '追逐闪避'), r.dodges], [t('10-second close assists', '10 秒关闭辅助'), r.revealed],
+      [t('Evasion chases (record only)', '追逐闪避（仅记录）'), r.dodges], [t('10-second close assists (record only)', '10 秒关闭辅助（仅记录）'), r.revealed],
       [t('Advertiser tabs opened', '已打开广告标签页'), r.opened]] : [];
     return `<section class="booth-score" aria-labelledby="booth-score-title">
         <h2 id="booth-score-title" class="booth-sr">${t('Round score', '本轮得分')}</h2>
@@ -228,7 +228,7 @@
           <summary>${t('How scoring works', '查看计分规则')}</summary>
           <p>${t('Task: up to 40 points, proportional to the recorded evidence. Time: complete and submit within 30 seconds for all 40 time points; after 30 seconds, points decrease logarithmically to 20 at 60 seconds. Submit when finished: the time is measured until submission or timeout. For partial completion, only the speed bonus above the 20-point base is scaled by task progress.', '任务：按已记录的证据比例计分，最高 40。时间：全部完成并在 30 秒内交卷得满 40；30 秒后按对数曲线递减，60 秒为 20。用时截止于交卷或超时，请在完成后点「交卷」；部分完成时，只按完成比例折算基础 20 之外的速度奖励。')}</p>
           <table><caption>${t('Time points when all task evidence is recorded · ≤30s = 40', '任务证据全部完成时的时间分 · ≤30 秒满 40')}</caption><thead><tr><th scope="col">${t('Time used', '已用时间')}</th>${[30,35,40,45,50,55,60].map(n => `<th scope="col">${n}s</th>`).join('')}</tr></thead><tbody><tr><th scope="row">${t('Points / 40', '分数 / 40')}</th>${[40,36,32,28,25,23,20].map(n => `<td>${n}</td>`).join('')}</tr></tbody></table>
-          <p>${t('Resilience: 10 base points, capped at 20. Clean close +1; false close −3; evasion −2; 10-second assist −1. Advertiser tabs opened are informational. Rounds without ads or usable ad records show — for resilience. Voided rounds have no score.', '抗干扰：基础 10，最高 20、最低 0。干净关闭 +1，假关闭 −3，追逐闪避 −2，10 秒辅助 −1。打开广告标签页仅供参考。无广告或缺少可用记录时，抗干扰显示「—」；作废轮次不计分。')}</p>
+          <p>${t('Resilience: 10 base points, capped at 20, minimum 0. Clean close +2; false close −1. Evasion and 10-second assists are recorded without penalties; a genuine close after an assist still earns +2. Five genuine closes with no false-close clicks reach 20. Advertiser tabs opened are informational. Rounds without ads or usable ad records show — for resilience. Voided rounds have no score.', '抗干扰：基础 10，最高 20、最低 0。干净关闭 +2，假关闭 −1。闪避和 10 秒关闭辅助仅记录，不扣分；辅助后正常关闭照样 +2。不点假关闭，成功关闭 5 次即满 20。打开广告标签页仅供参考。无广告或缺少可用记录时，抗干扰显示「—」；作废轮次不计分。')}</p>
         </details>
       </section>`;
   }

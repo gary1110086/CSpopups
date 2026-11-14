@@ -2,7 +2,7 @@
 
 Current `ui4` adds increasing final-ten-second urgency audio with its own mute control, restores matching pictures to all24 film cards and gives brief images their native proportions, including the full-resolution bird photograph. Per-condition records, bold task anchors, category-specific layouts, layered hints and the absolute60-second deadline remain. [Design and limits](../docs/UI1-DESIGN.md).
 
-The result page's `score2` revision uses **task40 + time40 + resilience20**. A complete task submitted within30 seconds earns40 time points; after30 seconds, time points decrease logarithmically to20 at the60-second timeout. Partial completion scales only the speed bonus. Resilience starts at10. Submit when finished to receive speed points. [Full bilingual scoring rules and examples](../docs/SCORING.md).
+The result page's `score3` revision uses **task40 + time40 + resilience20**. A complete task submitted within30 seconds earns40 time points; after30 seconds, time points decrease logarithmically to20 at the60-second timeout. Partial completion scales only the speed bonus. Resilience starts at10: genuine close +2, false close −1, bounded0–20. Designed evasions and close assists are observations only; a genuine close after an assist still earns +2. Submit when finished to receive speed points. [Full bilingual scoring rules and examples](../docs/SCORING.md).
 
 Source branch `realism1`: two additional everyday hosts, 12 booth tasks and 32 optional briefs. Local preview and true/false paths: [scene guide](../docs/REALISM-SCENES.md). Publication is not inferred from these source changes.
 

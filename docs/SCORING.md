@@ -47,30 +47,32 @@ The 30-second full-credit window and the 60-second floor are explicit game desig
 ## Resilience / 抗干扰：0–20
 
 ```text
-cleanCloses = max(0, closed − revealed)
-resilience = clamp(10 + cleanCloses − 3×decoys − 2×dodges − revealed, 0, 20)
+cleanCloses = closed
+resilience = clamp(10 + 2×cleanCloses − decoys, 0, 20)
 ```
 
 | Recorded behaviour / 行为 | Points / 分数 |
 | --- | ---: |
 | Base / 基础 | 10 |
-| Clean close / 干净关闭 | +1 |
-| False close / 假关闭 | −3 |
-| Actual evasion chase / 实际闪避追逐 | −2 |
-| 10-second close assist / 10 秒关闭辅助 | −1 |
+| Clean close / 干净关闭 | +2 |
+| False close / 假关闭 | −1 |
+| Actual evasion chase / 实际闪避追逐 | 0 (record only / 仅记录) |
+| 10-second close assist / 10 秒关闭辅助 | 0 (record only / 仅记录) |
 
-`opened` is informational. An assisted close receives no clean-close reward and costs one point. A false-close click followed by a genuine close nets −2. Ten clean closes with no penalties reach 20. The existing aggregate `closed − revealed` remains an approximation when the two counts refer to different cards.
+`opened`, `dodges` and `revealed` are informational. Every recorded genuine close earns +2, including a close after the 10-second assist appears. The assist itself earns no points and removes none. A false-close click followed by a genuine close nets +1. Five genuine closes with no false-close clicks reach 20. Scores are clamped only after all rewards and penalties are added; genuine-close counters retain their existing deduplication.
 
-打开广告标签页不单独扣分；辅助后关闭不计干净关闭奖励，净 −1；先点假关闭再正常关闭，净 −2。跨广告卡的聚合差值仍是近似计算。
+打开广告标签页、闪避和辅助出现都仅作记录，不扣分。每次记录到真正关闭都 +2，辅助后正常关闭也照样加分；辅助出现本身不加不扣。先点假关闭再正常关闭，净 +1。不点假关闭，成功关闭 5 次即满 20。所有加减合计后再限制为 0–20；真正关闭沿用现有的去重记录。
 
 ## Missing data and examples / 边界与示例
 
 - Clean rounds show `—` for resilience, so their attainable total is 80/100. No free resilience points are assigned.
 - Missing or structurally corrupt ad records also show `—`. Valid zero-count records retain the neutral 10 points.
-- A fully completed task at 30 seconds with 10 clean closes: `40 + 40 + 20 = 100`.
-- A fully completed task at 45 seconds with 3 clean closes: `40 + 28 + 13 = 81`.
-- A half-completed task at 30 seconds with 3 clean closes: `20 + 30 + 13 = 63`.
-- A completed task at the 60-second timeout with 3 clean closes: `40 + 20 + 13 = 73`.
+- A fully completed task at 30 seconds with 5 clean closes: `40 + 40 + 20 = 100`.
+- A fully completed task at 45 seconds with 3 clean closes: `40 + 28 + 16 = 84`.
+- A half-completed task at 30 seconds with 3 clean closes: `20 + 30 + 16 = 66`.
+- A completed task at the 60-second timeout with 3 clean closes: `40 + 20 + 16 = 76`.
+- Three genuine closes, including assisted closes, and any number of evasions: `10 + 2×3 = 16` resilience points.
+- One false-close click followed by one genuine close: `10 − 1 + 2 = 11` resilience points.
 - No task evidence at timeout and valid zero-count ad data: `0 + 20 + 10 = 30`.
 
 ## Basis and limits / 参考与限制

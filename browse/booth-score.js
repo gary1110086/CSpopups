@@ -5,7 +5,7 @@
     TASK_MAX: 40, TIME_MAX: 40, TIME_BASE: 20,
     ROUND_MS: 60000, TIME_FULL_MS: 30000,
     RESILIENCE_MAX: 20, RESILIENCE_BASE: 10,
-    CLEAN_CLOSE: 1, DECOY: -3, DODGE: -2, REVEAL: -1
+    CLEAN_CLOSE: 2, DECOY: -1, DODGE: 0, REVEAL: 0
   });
   const count = v => Number.isInteger(v) && v > 0 ? Math.min(10000, v) : 0;
   const taskScore = assessment => {
@@ -29,10 +29,11 @@
     const c = reviewData?.counts;
     if (!c || typeof c !== 'object' || Array.isArray(c)) return null;
     const closed = count(c.closed), revealed = count(c.revealed), decoys = count(c.decoys), dodges = count(c.dodges);
-    // Aggregate approximation: per-card ID sets could differ across cards. See the spec.
-    const cleanCloses = Math.max(0, closed - revealed);
+    // Every genuine close earns credit, including after the designed close assist.
+    // Motion and reveal counters remain observations and do not affect scoring.
+    const cleanCloses = closed;
     const raw = CONFIG.RESILIENCE_BASE + CONFIG.CLEAN_CLOSE * cleanCloses
-      + CONFIG.DECOY * decoys + CONFIG.DODGE * dodges + CONFIG.REVEAL * revealed;
+      + CONFIG.DECOY * decoys;
     return {score: Math.max(0, Math.min(CONFIG.RESILIENCE_MAX, raw)),
       cleanCloses, closed, decoys, dodges, revealed, shown: count(c.shown), opened: count(c.opened)};
   };
