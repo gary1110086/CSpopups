@@ -184,3 +184,28 @@ button.booth-text-link { border: 0; border-bottom: 2px solid var(--red); padding
   .booth-header-right { gap: 8px; }
   .booth-stage { display: none; }
 }
+
+.booth-memory-badge { display:inline-block; margin-top:12px; padding:6px 12px; background:#ffd200; color:#141414; font-weight:800; }
+.booth-hint-used { font-size:13px; }
+
+/* Four compact task shelves make category and suggested effort easy to scan. */
+[data-booth-view="choose"] .booth-hero { padding:26px 32px; }
+[data-booth-view="choose"] .booth-hero h1 { font-size:42px; }
+[data-booth-view="choose"] .booth-hero p:not(.booth-eyebrow) { margin:10px 0 18px; }
+[data-booth-view="choose"] .booth-collection { margin-top:28px; }
+.booth-task-groups { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.booth-task-group { min-width:0; }
+.booth-task-group h3 { margin:0 0 12px; padding-bottom:10px; font-size:16px; border-bottom:3px solid var(--red); }
+.booth-task-group .booth-task-grid { grid-template-columns:1fr; gap:10px; }
+.booth-task-group .booth-task-card { grid-template-columns:48px minmax(0,1fr); padding:10px; gap:10px; min-height:106px; }
+.booth-task-group .booth-task-card strong { font-size:13px; line-height:1.35; }
+.booth-task-group .booth-task-card small { font-size:10px; }
+.booth-task-group .booth-arrow { display:none; }
+.booth-task-thumb { position:relative; display:block; width:48px; height:60px; overflow:hidden; border:1px solid #141414; }
+.booth-task-thumb::after { content:""; position:absolute; inset:0; box-shadow:inset 0 0 15px #0008; pointer-events:none; }
+.booth-task-card .booth-task-thumb img { width:100%; height:100%; border:0; }
+.booth-task-card .booth-suggested { display:inline-block; padding:2px 5px; background:#fff2af; color:#141414; font-weight:800; }
+.booth-duration-note { margin:0 0 20px; }
+.booth-brief-figure { margin:0; }
+.booth-brief-figure figcaption { margin-top:14px; color:#4c4c4c; font-size:11px; }
+@media(max-width:1050px) { .booth-task-groups { grid-template-columns:repeat(2,minmax(0,1fr)); } }

@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'transit2';
+  const VERSION = 'ui1';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
@@ -51,10 +51,17 @@
     </header>`;
   }
   const modeName = value => value === 'ads' ? t('Ad challenge', '广告挑战') : t('Difficulty test · no ads', '难度测试 · 无广告');
+  const taskGroups = [
+    {title:['Search & tools','搜索·工具'],ids:['minute3-search-official','minute2-tool-webp','minute2-wall-earthrise']},
+    {title:['Content & collections','内容·收藏'],ids:['minute2-movie-animation','minute2-book-verne','minute2-museum-manet','minute2-nature-woodpeckers']},
+    {title:['Plan & compare','规划·比较'],ids:['minute2-travel-interchange','minute2-market-lens','minute4-penang-indoor']},
+    {title:['Everyday services','生活服务'],ids:['minute2-recipe-budget','minute2-outing-craft','minute3-courier-redelivery']}
+  ];
+  const suggestedSeconds = id => ['minute3-search-official','minute3-courier-redelivery'].includes(id) ? 30 : ['minute2-tool-webp','minute2-movie-animation','minute2-book-verne'].includes(id) ? 45 : 60;
   function taskCard(item) {
     return `<li><a class="booth-task-card" data-booth-task="${esc(item.id)}" href="${esc(url({view:'brief', task:item.id}))}">
-      <img src="${esc(item.cover)}" alt="" loading="lazy" width="76" height="58">
-      <span><strong>${esc(txt(item.title))}</strong><small>${esc(item.site)}${item.advanced ? ` · ${t('Advanced', '进阶')}` : ''}</small></span>
+      <span class="booth-task-thumb"><img src="${esc(item.cover)}" alt="" loading="lazy" width="76" height="58"${item.coverNote?` title="${esc(txt(item.coverNote))}"`:""}></span>
+      <span><strong>${esc(txt(item.title))}</strong><small>${esc(item.site)}${item.advanced ? ` · ${t('Advanced', '进阶')}` : ''}</small><small class="booth-suggested">${t("Suggested", "建议")} ${suggestedSeconds(item.id)} ${t("sec", "秒")}</small></span>
       <span class="booth-arrow" aria-hidden="true">→</span>
     </a></li>`;
   }
@@ -67,7 +74,7 @@
     return `<details class="booth-staff booth-history" id="booth-history"><summary>${t('Staff tools', '工作人员工具')}</summary><div class="booth-staff-body">
       <nav class="booth-staff-links" aria-label="${t('Staff tools', '工作人员工具')}">
         ${mode === 'ads' ? `<a href="${esc(url({mode:'clean'}))}">${t('Difficulty test · no ads', '难度测试 · 无广告')} ↗</a>` : `<a href="${esc(url({mode:'ads'}))}">${t('Return to the challenge', '返回正式挑战')} ↗</a>`}
-        <a href="launch.html?lang=${lang}&amp;v=corn3">${t('Free browsing', '自由浏览')} ↗</a>
+        <a href="launch.html?lang=${lang}&amp;v=ui1">${t('Free browsing', '自由浏览')} ↗</a>
       </nav>
       <label class="booth-advanced"><input id="booth-include-advanced" type="checkbox"> ${t('Include advanced tasks in the draw', '随机抽题时加入进阶题')}</label>
       <h2>${t('Recent rounds', '最近轮次')}</h2>
@@ -97,7 +104,7 @@
             <h2 id="booth-task-heading">${t('Or pick your own', '也可以自己选题')}</h2>
             <span>${tasks.length} ${t('tasks', '题')}</span>
           </div>
-          <ul class="booth-task-grid">${tasks.map(taskCard).join('')}</ul>
+          <p class="booth-note booth-duration-note">${t('Suggested durations describe task difficulty. Every round still has a 60-second countdown.', '建议时长用于挑选难度；每轮实际倒计时均为 60 秒。')}</p><div class="booth-task-groups">${taskGroups.map((group,i)=>`<section class="booth-task-group" aria-labelledby="booth-group-${i}"><h3 id="booth-group-${i}">${esc(txt(group.title))}</h3><ul class="booth-task-grid">${group.ids.map(id=>tasks.find(x=>x.id===id)).filter(Boolean).map(taskCard).join('')}</ul></section>`).join('')}</div>
         </section>
         ${staffHistory()}
       </main>`;
@@ -128,7 +135,7 @@
             <button id="booth-start" type="button" class="booth-button booth-button-primary">${t('Start the challenge', '开始挑战')} <span aria-hidden="true">→</span></button>
             <p id="booth-start-note" class="booth-note" role="status">${t('The 60 seconds start once the site is ready. Switching tabs does not pause the clock.', '网页就绪后开始 60 秒倒计时。切换标签页时照常计时。')}</p>
           </div>
-          <img class="booth-brief-photo" src="${esc(item.cover)}" alt="" width="480" height="360">
+          <figure class="booth-brief-figure"><img class="booth-brief-photo" src="${esc(item.cover)}" alt="" width="480" height="360">${item.coverNote?`<figcaption>${esc(txt(item.coverNote))}</figcaption>`:""}</figure>
         </section>
       </main>`;
     document.getElementById('booth-start').addEventListener('click', () => {
@@ -165,13 +172,13 @@
   }
   function validAssessment(round) {
     try {
-      const result = api.assess(round);
+      const result = api.conditions ? api.conditions(round) : api.assess(round);
       if (result && Array.isArray(result.checks)) return result;
     } catch (_) { /* A broken assessment must not become a successful result. */ }
     return {checks:[], allMet:false};
   }
   function resultChecks(assessment) {
-    return assessment.checks.length ? assessment.checks.map(check => `<li data-booth-check data-met="${check.met === true}"><span class="booth-check-symbol" aria-hidden="true">${check.met === true ? '✓' : '—'}</span><div><strong>${esc(txt(check.label))}</strong>${check.detail ? `<p>${esc(txt(check.detail))}</p>` : ''}</div><span class="booth-check-state">${check.met === true ? t('Recorded', '有记录') : t('Not confirmed', '未确认')}</span></li>`).join('') : `<li data-booth-check data-met="false"><span class="booth-check-symbol" aria-hidden="true">—</span><div><strong>${t('No task evidence is available.', '暂无可用的任务证据。')}</strong><p>${t('Ask the participant and inspect the actual output. No success is inferred.', '请询问参与者并检查实际产物；系统不会据此推断成功。')}</p></div></li>`;
+    return assessment.checks.length ? assessment.checks.map(check => `<li data-booth-check data-met="${check.met === true}"><span class="booth-check-symbol" aria-hidden="true">${check.met === true ? '✓' : '✗'}</span><div><strong>${esc(txt(check.label))}</strong>${check.detail ? `<p>${esc(txt(check.detail))}</p>` : ''}</div><span class="booth-check-state">${check.met === true ? t('Recorded', '有记录') : t('Not confirmed', '未确认')}</span></li>`).join('') : `<li data-booth-check data-met="false"><span class="booth-check-symbol" aria-hidden="true">—</span><div><strong>${t('No task evidence is available.', '暂无可用的任务证据。')}</strong><p>${t('Ask the participant and inspect the actual output. No success is inferred.', '请询问参与者并检查实际产物；系统不会据此推断成功。')}</p></div></li>`;
   }
   function renderPending(round, item) {
     const armed = round.status === 'armed';
@@ -180,7 +187,7 @@
   }
   function exportResult(round, item) {
     const assessment = validAssessment(round);
-    const lines = [t('ONE MINUTE — ROUND RECORD', '一分钟 — 本轮记录'), '', `${t('Round', '轮次')}: ${round.id}`, `Seed: ${round.seed}`, `${t('Task', '题目')}: ${txt(item.title)} (${item.id})`, `${t('Website', '网站')}: ${item.site}`, `${t('Mode', '环境')}: ${modeName(round.mode)}`, `${t('Status', '状态')}: ${reasonText(round)}`, `${t('Time used', '实际用时')}: ${elapsedText(round)}`, `${t('Staff verdict', '工作人员判定')}: ${verdictText(round.judgement)}`, '', txt(item.brief), '', t('RECORDED CHECKS — not an automatic verdict', '任务证据 — 不等于自动判定'), ...assessment.checks.map(check => `${check.met === true ? '[✓]' : '[ ]'} ${txt(check.label)}${check.detail ? ': ' + txt(check.detail) : ''}`), '', t('STAFF REFERENCE', '工作人员参考'), txt(item.answer), ...item.route.map((step, index) => `${index + 1}. ${txt(step)}`), '', `${t('This round’s review', '本轮复盘')}: ${new URL(api.reviewURL(round), location.href).href}`, '', t('Generated locally. A download record shows that the browser was asked to download a generated file; staff should verify files on disk where needed.', '本地生成。导出记录代表文件已生成并向浏览器发起下载；需要时由工作人员核对磁盘上的实际文件。')];
+    const lines = [t('ONE MINUTE — ROUND RECORD', '一分钟 — 本轮记录'), '', `${t('Round', '轮次')}: ${round.id}`, `Seed: ${round.seed}`, `${t('Task', '题目')}: ${txt(item.title)} (${item.id})`, `${t('Memory anchor', '任务要点')}: ${txt(item.badge || item.title)}`, `${t('Second-level hint', '二级提示')}: ${round.usedSecondHint ? t('Used', '已使用') : t('Not used', '未使用')}`, `${t('Website', '网站')}: ${item.site}`, `${t('Mode', '环境')}: ${modeName(round.mode)}`, `${t('Status', '状态')}: ${reasonText(round)}`, `${t('Time used', '实际用时')}: ${elapsedText(round)}`, `${t('Staff verdict', '工作人员判定')}: ${verdictText(round.judgement)}`, '', txt(item.brief), '', t('TASK CONDITIONS — ✗ means not independently confirmed, not an automatic failure', '条件核对 — ✗ 代表未独立确认，不是自动判定失败'), ...assessment.checks.map(check => `${check.met === true ? '[✓]' : '[✗]'} ${txt(check.label)}${check.detail ? ': ' + txt(check.detail) : ''}`), '', t('STAFF REFERENCE', '工作人员参考'), txt(item.answer), ...item.route.map((step, index) => `${index + 1}. ${txt(step)}`), '', `${t('This round’s review', '本轮复盘')}: ${new URL(api.reviewURL(round), location.href).href}`, '', t('Generated locally. A download record shows that the browser was asked to download a generated file; staff should verify files on disk where needed.', '本地生成。导出记录代表文件已生成并向浏览器发起下载；需要时由工作人员核对磁盘上的实际文件。')];
     let objectURL;
     try {
       objectURL = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/plain;charset=utf-8'}));
@@ -207,12 +214,12 @@
           <div>
             <p class="booth-eyebrow">${esc(modeName(round.mode))}</p>
             <h1 id="booth-title">${esc(reasonText(round))}</h1>
-            <p>${esc(txt(item.title))} · ${esc(item.site)}</p>
+            <p>${esc(txt(item.title))} · ${esc(item.site)}</p>${item.badge?`<strong class="booth-memory-badge">${esc(txt(item.badge))}</strong>`:""}${round.usedSecondHint?`<p class="booth-hint-used">${t("Used a second-level hint","使用了二级提示")}</p>`:""}
           </div>
           <div class="booth-time-stamp"><span>${t('Time used', '用时')}</span><strong>${esc(elapsedText(round))}</strong></div>
         </section>
         <section class="booth-result-evidence" aria-labelledby="booth-evidence-title">
-          <h2 id="booth-evidence-title">${t('Task record', '任务记录')}</h2>
+          <h2 id="booth-evidence-title">${t('Condition checklist', '条件核对')}</h2><p class="booth-note">${t('✓ Recorded · ✗ Not independently confirmed. Unconfirmed conditions need a staff check; they are not an automatic failure.', '✓ 有记录 · ✗ 未独立确认。未确认的条件需工作人员核对，不代表自动失败。')}</p>
           <ul class="booth-checks">${resultChecks(assessment)}</ul>
           <p class="booth-note">${round.status === 'void'
             ? t('Staff set this round aside.', '工作人员已将本轮作废。')

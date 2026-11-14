@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'transit2', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'ui1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute4-penang-indoor': {scene:'events',file:'events.html',target:'penang-state-gallery',key:'bp-outings-saved'},
     'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
@@ -102,6 +102,7 @@
       if (v.status === 'void' && (!time(v.endedAt) || v.endedAt < v.startedAt || v.endedAt > v.deadline || v.reason !== 'void')) return null;
     }
     const out = {version:1,id:v.id,taskId:v.taskId,seed:v.seed,mode:v.mode,lang:v.lang,status:v.status,createdAt:v.createdAt,updatedAt:v.updatedAt,startedAt:v.startedAt,deadline:v.deadline,endedAt:v.endedAt,reason:v.reason,judgement:v.judgement};
+    if (typeof v.usedSecondHint === 'boolean') out.usedSecondHint = v.usedSecondHint;
     out.evidence = v.status === 'armed' ? emptyEvidence(v.taskId) : normalizeEvidence(v.evidence,out);
     return out;
   };
@@ -110,7 +111,12 @@
     try { const text = sessionStorage.getItem(PREFIX+id); return text && text.length <= 16000 ? normalize(JSON.parse(text),id) : null; } catch { return null; }
   };
   const store = record => {
-    try { sessionStorage.setItem(PREFIX+record.id,JSON.stringify(record)); return true; } catch { return false; }
+    try {
+      // A cached renderer may still hold a record from before the hint was used.
+      const authoritative=readRecord(record.id);
+      if(authoritative?.usedSecondHint===true)record.usedSecondHint=true;
+      sessionStorage.setItem(PREFIX+record.id,JSON.stringify(record)); return true;
+    } catch { return false; }
   };
   const readIndex = () => {
     try { const raw = JSON.parse(sessionStorage.getItem(INDEX) || '[]'); return Array.isArray(raw) ? [...new Set(raw.filter(idOK))].slice(0,LIMIT) : []; } catch { return []; }
@@ -202,6 +208,35 @@
     return {checks,allMet:checks.length>0&&checks.every(c=>c.met)};
   };
 
+  // Presentation only: map each written condition to existing assessment evidence.
+  // A catalogue fact or an unrecorded action remains explicitly unconfirmed.
+  const CONDITION_EVIDENCE = {
+    'minute2-wall-earthrise':[[1],[0],[0]],
+    'minute2-recipe-budget':[null,[1],[2],[0]],
+    'minute2-tool-webp':[[0],[1],[1]],
+    'minute2-movie-animation':[[0],[1],[0,1]],
+    'minute2-outing-craft':[null,[0],[1]],
+    'minute2-book-verne':[[2],[0],[1]],
+    'minute2-museum-manet':[[1],null,[0]],
+    'minute2-nature-woodpeckers':[[1],null,[0]],
+    'minute2-travel-interchange':[[0],[0],[0],[0]],
+    'minute2-market-lens':[[1],null,[0]],
+    'minute3-courier-redelivery':[null,[0],[0]],
+    'minute3-search-official':[[1],[0],null],
+    'minute4-penang-indoor':[[0],[0],[0]]
+  };
+  const conditions = input => {
+    const task=taskData(input?.taskId),assessment=assess(input),map=CONDITION_EVIDENCE[input?.taskId];
+    if(!task?.steps||!map)return assessment;
+    const checks=task.steps.map((label,index)=>{
+      const refs=map[index],recorded=Array.isArray(refs)&&refs.length>0;
+      return {label,met:recorded&&refs.every(i=>assessment.checks[i]?.met===true),
+        detail:recorded ? refs.map(i=>assessment.checks[i]?.detail).filter(Boolean).join('; ') :
+          ['No independent record of this condition. Staff should check the catalogue or ask the participant.','此条件没有独立记录，请工作人员核对目录或询问参与者。']};
+    });
+    return {checks,allMet:checks.length>0&&checks.every(c=>c.met)};
+  };
+
   // Query validation is available before the engine chooses a seed or enables ads.
   const context = (params, scene) => {
     const p=params instanceof URLSearchParams?params:new URLSearchParams(params || location.search),requested=p.has('round');
@@ -211,10 +246,10 @@
     if (scene && RULES[record.taskId].scene!==scene) return {requested:true,valid:false,round:record,task,reason:'scene'};
     return {requested:true,valid:true,round:record,task,reason:null};
   };
-  let active=null,suspended=false,restoring=false,generation=0,frame=0,ticker=0,bar=null,dialog=null,observer=null,redirecting=false;
+  let active=null,suspended=false,restoring=false,generation=0,frame=0,ticker=0,bar=null,dialog=null,observer=null,redirecting=false,reminder=null,reminderUntil=0;
   const emit = (name,detail) => window.dispatchEvent(new CustomEvent(name,{detail}));
   const translate = (en,zh) => active?.lang === 'zh' ? zh : en;
-  const stopUI = () => { clearInterval(ticker);ticker=0; if(dialog?.open)dialog.close(); };
+  const stopUI = () => { clearInterval(ticker);ticker=0; if(dialog?.open)dialog.close();reminder?.remove();reminder=null; };
   const leave = record => {
     if (redirecting) return;
     redirecting=true;stopUI();
@@ -315,12 +350,20 @@
     if (bar) return;
     const task=taskData(record.taskId),text=v=>Array.isArray(v)?v[record.lang==='zh'?1:0]:v;
     bar=document.createElement('aside');bar.id='br-booth-bar';bar.setAttribute('aria-label',translate('60-second challenge','60秒挑战'));
-    bar.innerHTML=`<div class="br-booth-time"><small>${translate('TIME LEFT','剩余时间')}</small><strong data-booth-clock role="timer" aria-live="off">1:00</strong></div><div class="br-booth-current"><span>${record.mode==='clean'?translate('CLEAN ROUND','无广告挑战'):translate('AD CHALLENGE','广告挑战')}</span><b>${escape(text(task.title))}</b></div><div class="br-booth-actions"><button type="button" data-booth-task>${translate('View task','查看任务')}</button><button type="button" data-booth-submit>${translate('Submit','我完成了')}</button><button type="button" data-booth-void aria-label="${translate('Staff: void this round','工作人员：作废本轮')}">${translate('Staff','工作人员')}</button></div>`;
+    bar.innerHTML=`<div class="br-booth-time"><small>${translate('TIME LEFT','剩余时间')}</small><strong data-booth-clock role="timer" aria-live="off">1:00</strong></div><div class="br-booth-current"><span>${record.mode==='clean'?translate('CLEAN ROUND','无广告挑战'):translate('AD CHALLENGE','广告挑战')}</span><b>${escape(text(task.title))}</b>${task.badge?`<strong class="br-booth-badge">${escape(text(task.badge))}</strong>`:""}</div><div class="br-booth-actions"><button type="button" data-booth-task>${translate('View task','查看任务')}</button><button type="button" data-booth-submit>${translate('Submit','我完成了')}</button><button type="button" data-booth-void aria-label="${translate('Staff: void this round','工作人员：作废本轮')}">${translate('Staff','工作人员')}</button></div>`;
     dialog=document.createElement('dialog');dialog.id='br-booth-task-dialog';dialog.setAttribute('aria-labelledby','br-booth-dialog-title');
-    const goals=task.goals || [];
-    dialog.innerHTML=`<div class="br-booth-dialog-inner"><div class="br-booth-dialog-kicker">${translate('YOUR 60-SECOND TASK','你的60秒任务')}</div><h1 id="br-booth-dialog-title">${escape(text(task.title))}</h1><p>${escape(text(task.brief))}</p>${task.hint?`<p class="br-booth-start-hint"><strong>${translate('Start here','从这里开始')}</strong><br>${escape(text(task.hint))}</p>`:''}<ul>${goals.map(x=>`<li>${escape(text(x))}</li>`).join('')}</ul><p class="br-booth-dialog-rule">${translate('The clock continues while this task or another tab is open. Submission is checked by a staff member.','查看题目或打开其他标签页时，计时继续。交卷后由工作人员核对结果。')}</p><button type="button" data-booth-dialog-close>${translate('Continue challenge','继续挑战')}</button></div>`;
+    const goals=task.steps || task.goals || [];
+    dialog.innerHTML=`<div class="br-booth-dialog-inner"><div class="br-booth-dialog-kicker">${translate('YOUR 60-SECOND TASK','你的60秒任务')}</div><h1 id="br-booth-dialog-title">${escape(text(task.title))}</h1><p>${escape(text(task.brief))}</p><ul class="br-booth-conditions">${goals.map(x=>`<li><span aria-hidden="true">□</span> ${escape(text(x))}</li>`).join('')}</ul>${task.hint?`<details class="br-booth-start-hint"><summary>${translate('Start here','从这里开始')}</summary><p>${escape(text(task.hint))}</p></details>`:''}${task.hint2?`<button type="button" data-booth-second-hint aria-expanded="false" aria-controls="br-booth-hint2">${translate('A little more help','再给一点提示')}</button><p id="br-booth-hint2" hidden>${escape(text(task.hint2))}</p>`:''}<p class="br-booth-dialog-rule">${translate('Viewing the task uses time. The clock continues in other tabs too. A staff member checks the result.','查看任务会消耗时间。打开其他标签页时也继续计时，结果由工作人员核对。')}</p><button type="button" data-booth-dialog-close>${translate('Continue challenge','继续挑战')}</button></div>`;
+    dialog.querySelector('[data-booth-second-hint]')?.addEventListener('click',()=>{
+      if(!canAct())return;
+      const fresh=current();if(!fresh)return;
+      fresh.usedSecondHint=true;fresh.updatedAt=Math.max(fresh.updatedAt,Date.now());
+      if(!store(fresh))return;
+      dialog.querySelector('#br-booth-hint2').hidden=false;
+      dialog.querySelector('[data-booth-second-hint]').setAttribute('aria-expanded','true');
+    });
     document.body.append(bar,dialog);document.documentElement.classList.add('br-booth-running');document.documentElement.style.setProperty('--br-booth-offset','56px');
-    bar.querySelector('[data-booth-task]').addEventListener('click',()=>{if(!canAct()||modalActive())return;emit('browse:booth-dialog',{open:true});dialog.showModal();});
+    bar.querySelector('[data-booth-task]').addEventListener('click',()=>{if(!canAct()||modalActive())return;reminder?.remove();reminder=null;emit('browse:booth-dialog',{open:true});dialog.showModal();});
     bar.querySelector('[data-booth-submit]').addEventListener('click',()=>{if(!modalActive()&&canAct())end('submitted');});
     bar.querySelector('[data-booth-void]').addEventListener('click',()=>{
       if(!canAct()||modalActive())return;
@@ -336,6 +379,19 @@
     observer=new MutationObserver(syncControls);observer.observe(document.body,{attributes:true,attributeFilter:['inert','open','hidden','aria-modal'],childList:true,subtree:true});
     syncControls();
   };
+  const openingReminder = record => {
+    if(reminder && Date.now()>=reminderUntil){reminder.remove();reminder=null;}
+    const age=Date.now()-record.startedAt;
+    if(age<4000||age>=7000||reminder||modalActive()||dialog?.open)return;
+    const key='br-booth-ui-v1:'+record.id;
+    try{if(sessionStorage.getItem(key)==='reminded')return;sessionStorage.setItem(key,'reminded');}catch{return;}
+    const task=taskData(record.taskId),text=v=>Array.isArray(v)?v[record.lang==='zh'?1:0]:v;
+    reminder=document.createElement('aside');reminder.id='br-booth-opening-reminder';
+    reminder.setAttribute('aria-label',translate('Task reminder','任务提醒'));
+    reminder.innerHTML=`<strong>${escape(text(task.badge||task.title))}</strong><button type="button" aria-label="${translate('Close reminder','关闭提醒')}">×</button><ul>${(task.steps||task.goals||[]).map(x=>`<li>${escape(text(x))}</li>`).join('')}</ul>`;
+    reminderUntil=Date.now()+3000;document.body.append(reminder);
+    reminder.querySelector('button').addEventListener('click',()=>{reminder.remove();reminder=null;});
+  };
   const tick = () => {
     if (!active || suspended || restoring || redirecting) return;
     const record=current();
@@ -345,7 +401,7 @@
     const seconds=Math.ceil(left/1000),clock=bar?.querySelector('[data-booth-clock]');
     if(clock)clock.textContent=`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
     if(bar)bar.dataset.urgent=String(seconds<=10);
-    syncControls();
+    openingReminder(record);syncControls();
   };
   const start = C => {
     const ctx=context(C.params,C.scene);
@@ -369,6 +425,7 @@
     if (!suspended&&!restoring&&!redirecting) {
       if(canAct())capture(active.C);
     }
+    reminder?.remove();reminder=null;
     suspended=true;restoring=false;generation++;cancelAnimationFrame(frame);frame=0;
     if(dialog?.open)dialog.close();syncControls();
   };
@@ -393,8 +450,8 @@
   window.addEventListener('browse:image-export',event=>recordExport(event.detail));
   // Catch an input dispatched just after the deadline before scene handlers run.
   for (const name of ['click','submit','input','change','drop','paste']) document.addEventListener(name,event=>{
-    if(!active||bar?.contains(event.target)||dialog?.contains(event.target))return;
+    if(!active||bar?.contains(event.target)||dialog?.contains(event.target)||reminder?.contains(event.target))return;
     if(!canAct()){event.preventDefault();event.stopImmediatePropagation();}
   },true);
-  window.BROWSE_BOOTH={create,get,list,judge,assess,entryURL,resultURL,reviewURL,context,start,capture,canAct,recordExport,decorate};
+  window.BROWSE_BOOTH={create,get,list,judge,assess,conditions,entryURL,resultURL,reviewURL,context,start,capture,canAct,recordExport,decorate};
 })();

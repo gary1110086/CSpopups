@@ -1,15 +1,17 @@
 # Documentation / 文档索引
 
-**One Minute / 一分钟挑战** has ten bilingual 60-second tasks. Staff tools sit below the task list and include an ad-free difficulty test, free browsing and recent rounds. [Tasks, routes and operation / 任务、路线与现场操作](MINUTE-BOOTH.md).
+**One Minute / 一分钟挑战** has thirteen bilingual 60-second tasks. Staff tools sit below the task list and include an ad-free difficulty test, free browsing and recent rounds. [Tasks, routes and operation / 任务、路线与现场操作](MINUTE-BOOTH.md).
+
+[Desktop interface and task design / 电脑端界面与任务设计](UI1-DESIGN.md).
 
 ## Start / 开始
 
 | Entry / 入口 | Links / 链接 |
 | --- | --- |
-| One Minute / 一分钟挑战 | [English](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=booth7) · [中文](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=booth7) |
-| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=minute1) |
-| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=minute1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=minute1) |
-| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=minute1); records stay in that browser tab. |
+| One Minute / 一分钟挑战 | [English](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=ui1) · [中文](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=ui1) |
+| Website chooser / 选择网站 | [English](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=en&v=ui1) · [中文](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=ui1) |
+| Task library / 任务库 | [English](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=en&v=ui1) · [中文](https://gary1110086.github.io/CSpopups/browse/tasks.html?lang=zh&v=ui1) |
+| Manual review / 主动复盘 | [Open on the participant browser](https://gary1110086.github.io/CSpopups/browse/review.html?lang=en&v=ui1); records stay in that browser tab. |
 | Local package / 本地运行包 | [Release and download](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1); extract everything and follow `START-HERE.txt`. |
 
 ## Project documents / 项目文档
@@ -23,7 +25,7 @@
 | [AdSweep sources](../browse/CLEANER-SOURCES.md) | Product-page references and the deceptive cleaner mechanism. |
 | [Design references](../browse/DESIGN-NOTES.md) | Category-specific layouts and reference decisions. |
 | [Verification record](../browse/VERIFICATION.md) | Recorded checks and their limits, including media, exports, native tabs and cached browser returns. |
-| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=minute1) | Benchmark websites and documented deceptive mechanisms. |
+| [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=ui1) | Benchmark websites and documented deceptive mechanisms. |
 | [Little Daily runtime](../prototypes/little-daily/README.md) | Earlier article-site implementation and the root HTML routes that still use it. |
 | [Standalone Stillwall](../wallpapers/README.md) | Independent wallpaper prototype, its runtime and original artwork. |
 

@@ -1,6 +1,13 @@
 # Release history / 版本记录
 
-Current activity source **transit2**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **ui1**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+
+## ui1 — 14 November 2026
+
+- Gave twelve desktop websites distinct catalogue, filter and first-viewport structures; added working site information and media retry controls.
+- Added grouped thirteen-task selection, a persistent memory badge, a short opening reminder and layered hints. Optional second-hint usage survives native navigation and Back.
+- Added condition-by-condition results and TXT records while retaining manual staff verdicts, existing evidence and the absolute60-second deadline.
+- Preserved sourced media and independent earlier entries. The five-person first-time participant study remains unperformed. See [desktop design and limits](UI1-DESIGN.md).
 
 ## transit2 — 13 November 2026
 
