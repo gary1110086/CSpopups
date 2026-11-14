@@ -136,7 +136,7 @@
             <button id="booth-start" type="button" class="booth-button booth-button-primary">${t('Start the challenge', '开始挑战')} <span aria-hidden="true">→</span></button>
             <p id="booth-start-note" class="booth-note" role="status">${t('The 60 seconds start once the site is ready. Switching tabs does not pause the clock.', '网页就绪后开始 60 秒倒计时。切换标签页时照常计时。')}</p>
           </div>
-          <figure class="booth-brief-figure"><img class="booth-brief-photo" src="${esc(item.cover)}" alt="" width="480" height="360">${item.coverNote?`<figcaption>${esc(txt(item.coverNote))}</figcaption>`:""}</figure>
+          <figure class="booth-brief-figure"><img class="booth-brief-photo" src="${esc(item.briefCover||item.cover)}" alt="" width="480" height="360">${item.coverNote?`<figcaption>${esc(txt(item.coverNote))}</figcaption>`:""}</figure>
         </section>
       </main>`;
     document.getElementById('booth-start').addEventListener('click', () => {
@@ -195,6 +195,28 @@
     try { return engine.compute(assessment, review); } catch (_) { return null; }
   }
 
+  function unavailableResilience(round) {
+    return round.mode === 'clean' ? t('This round had no advertisements', '本轮没有广告')
+      : t('Ad behaviour data is unavailable', '广告行为数据不可用');
+  }
+  function scoreBlock(score, round) {
+    if (!score) return '';
+    const r = score.resilience;
+    const rows = r ? [[t('Clean closes', '干净关闭'), r.cleanCloses], [t('False closes', '假关闭'), r.decoys],
+      [t('Evasion chases', '追逐闪避'), r.dodges], [t('10-second close assists', '10 秒关闭辅助'), r.revealed],
+      [t('Advertiser tabs opened', '已打开广告标签页'), r.opened]] : [];
+    return `<section class="booth-score" aria-labelledby="booth-score-title">
+        <h2 id="booth-score-title" class="booth-sr">${t('Round score', '本轮得分')}</h2>
+        <div class="booth-score-total"><strong>${score.total}</strong><span>/ 100</span></div>
+        <dl class="booth-score-split">
+          <div><dt>${t('Task', '任务完成')}</dt><dd>${score.task.score} / 40</dd><small>${t(`${score.task.met} of ${score.task.total} evidence checks recorded`, `已记录 ${score.task.met} / ${score.task.total} 项证据`)}</small></div>
+          <div><dt>${t('Resilience', '抗干扰')}</dt><dd>${r ? `${r.score} / 60` : '—'}</dd><small>${r ? t('From actual close behaviour', '来自实际关闭行为') : unavailableResilience(round)}</small></div>
+        </dl>
+        ${rows.length ? `<ul class="booth-score-detail">${rows.map(([label, value]) => `<li><span>${esc(label)}</span><b>${value}</b></li>`).join('')}</ul>` : ''}
+        <p class="booth-note">${t('The task score counts automatically confirmable evidence, so its total can differ from the condition checklist below, which also lists conditions only staff can confirm.', '任务分统计可自动确认的证据，分母可能与下方「条件核对」不同——后者还包含只能由工作人员核对的条件。')}</p>
+      </section>`;
+  }
+
   function resultChecks(assessment) {
     return assessment.checks.length ? assessment.checks.map(check => `<li data-booth-check data-met="${check.met===null?'unknown':check.met===true}"><span class="booth-check-symbol" aria-hidden="true">${check.met===true?'✓':check.met===null?'—':'○'}</span><div><strong>${esc(txt(check.label))}</strong>${check.detail ? `<p>${esc(txt(check.detail))}</p>` : ''}</div><span class="booth-check-state">${check.met===true?t('Recorded','已记录'):check.met===null?t('Staff check needed','待人工核对'):t('Not recorded','尚未记录')}</span></li>`).join('') : `<li data-booth-check data-met="unknown"><span class="booth-check-symbol" aria-hidden="true">—</span><div><strong>${t('No task evidence is available.', '暂无可用的任务证据。')}</strong><p>${t('Ask the participant and inspect the actual output. No success is inferred.', '请询问参与者并检查实际产物；系统不会据此推断成功。')}</p></div></li>`;
   }
@@ -244,6 +266,7 @@
           </div>
           <div class="booth-time-stamp"><span>${t('Time used', '用时')}</span><strong>${esc(elapsedText(round))}</strong></div>
         </section>
+        ${scoreBlock(score, round)}
         <section class="booth-result-evidence" aria-labelledby="booth-evidence-title">
           <h2 id="booth-evidence-title">${t('Condition checklist', '条件核对')}</h2><p class="booth-evidence-summary" role="status">${esc(evidenceSummary(assessment))}</p><p class="booth-note">${t('✓ Recorded · ○ Not recorded · — Staff check needed. The staff verdict is shown separately below.', '✓ 已记录 · ○ 尚未记录 · — 待人工核对。工作人员最终判定在下方单独显示。')}</p>
           <ul class="booth-checks">${resultChecks(assessment)}</ul>
