@@ -24,3 +24,7 @@ Condition reporting uses the frozen round evidence. Selecting the correct catalo
 All sites have working local About, Privacy and Help links, and media failures offer a retry. Source credits remain attached to their content; typography does not turn a film still into a release poster, and a reference photograph does not establish the condition of a fictional camera listing.
 
 Verification targets desktop Chrome at 1440×900 and 1280×900. Screenshots and browser checks cover rendering, native navigation, saved state, real exports and the unchanged round deadline. A five-person first-time participant trial is a separate human study: automated checks do not establish memory recall, task completion rates or a guarantee about other browsers.
+
+The `ui4` refinement restores matching photographic film cards and preserves each brief image's native aspect ratio. The bird brief uses the full714×1000 photograph; the chooser still uses its small thumbnail. Original release posters and poster drawings keep their correct descriptions; film stills are labelled as stills.
+
+An original triangle-wave countdown cue starts during the final10seconds, grows in volume and accelerates toward expiry. It has an independent per-tab mute preference, reconciled after nativeBack. Only an active, visible, focused task page may produce cues; submission, expiry and pagehide stop its audio. Missed beats never queue, and sound controls never change deadline or evidence. Browser autoplay permission can require a click; the timer-sound control exposes activation when needed.

@@ -51,6 +51,12 @@
 }
 .scene-movies .fm-poster{aspect-ratio:2/3!important;background:var(--fm-cover,#273d45)!important}
 .scene-movies .fm-poster .fm-open-still{object-fit:contain!important;width:100%;height:100%}
+.scene-movies .fm-illustrated-cover{display:flex;flex-direction:column}
+.scene-movies .fm-illustrated-cover .fm-open-still{position:static;inset:auto;width:100%;height:auto;max-height:55%;flex:none;background:#172126}
+.fm-cover-caption{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;gap:8px;padding:13px 11px 15px;color:#fff;border-top:2px solid #ffffff30}
+.fm-cover-caption small{font-size:8px;line-height:1.4;letter-spacing:.03em;color:#fffd}
+.fm-cover-caption strong{font:700 clamp(13px,1.35vw,21px)/1.13 Georgia,"SimSun",serif;overflow-wrap:anywhere}
+.fm-cover-caption>span{font-size:9px;line-height:1.4;color:#fffd}
 .fm-type-cover{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:14px 11px;color:#fff;background:linear-gradient(145deg,#ffffff0a,transparent 50%),var(--fm-cover);border:8px solid #ffffff0c}
 .fm-type-cover>small{font-size:6px;line-height:1.5;letter-spacing:.12em}.fm-type-cover .fm-cover-year{font:400 32px/1 Georgia,serif;color:#fff8}.fm-type-cover>strong{font:700 19px/1.12 Georgia,"SimSun",serif;letter-spacing:-.02em;overflow-wrap:anywhere}.fm-type-cover>span:last-of-type{font-size:8px;line-height:1.4;margin-top:9px}
 .fm-more-filters{border-block:1px solid #e1e4e8;padding:12px 0;margin-top:14px;font-size:11px}.fm-more-filters summary{cursor:pointer;color:#5b6673;font-weight:bold}

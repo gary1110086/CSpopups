@@ -1,6 +1,14 @@
 # Release history / 版本记录
 
-Current activity source **ui3**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **ui4**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+
+## ui4 — 14 November 2026
+
+- Added original countdown beeps during the final ten seconds of a round. The cadence and volume increase toward expiry. A separate timer-sound control remembers the participant's choice across native navigation, reload and Back.
+- Countdown audio stops on submission, expiry and page departure, and stays silent while the task page is hidden or unfocused. It never pauses or resets the absolute60-second clock. Browser sound permission and system volume still apply.
+- Restored matching local images to all24 movie entries, distinguishing film stills, poster drawings and original release posters. A brighter Sintel frame comes from the existing licensed official trailer; source details and the historical preview remain.
+- Brief photographs now retain their original proportions. The bird task uses the714×1000 full photograph instead of enlarging and cropping its257×360 thumbnail; task selection keeps the small thumbnail.
+- Verified desktop1280/1440 layouts, film/bird completion records, actual60-second Web Audio output, mute/reload/nativeBack and authoritative BFCache preference recovery. Human participant trials and other browsers remain outside this acceptance.
 
 ## ui3 — 14 November 2026
 

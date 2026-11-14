@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'ui3', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'ui4', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute4-penang-indoor': {scene:'events',file:'events.html',target:'penang-state-gallery',key:'bp-outings-saved'},
     'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
@@ -271,10 +271,10 @@
     if (scene && RULES[record.taskId].scene!==scene) return {requested:true,valid:false,round:record,task,reason:'scene'};
     return {requested:true,valid:true,round:record,task,reason:null};
   };
-  let active=null,suspended=false,restoring=false,generation=0,frame=0,ticker=0,bar=null,dialog=null,observer=null,redirecting=false,reminder=null,reminderUntil=0;
+  let active=null,suspended=false,restoring=false,generation=0,frame=0,ticker=0,bar=null,dialog=null,observer=null,redirecting=false,reminder=null,reminderUntil=0,countdown=null;
   const emit = (name,detail) => window.dispatchEvent(new CustomEvent(name,{detail}));
   const translate = (en,zh) => active?.lang === 'zh' ? zh : en;
-  const stopUI = () => { clearInterval(ticker);ticker=0; if(dialog?.open)dialog.close();reminder?.remove();reminder=null; };
+  const stopUI = () => { clearInterval(ticker);ticker=0;countdown?.destroy();countdown=null; if(dialog?.open)dialog.close();reminder?.remove();reminder=null; };
   const leave = record => {
     if (redirecting) return;
     redirecting=true;stopUI();
@@ -422,6 +422,9 @@
     dialog.addEventListener('close',()=>{dialog.querySelector('.br-booth-void-confirm')?.remove();emit('browse:booth-dialog',{open:false});syncControls();});
     // The native dialog owns its focus rules. Ads retain their existing focus trap.
     observer=new MutationObserver(syncControls);observer.observe(document.body,{attributes:true,attributeFilter:['inert','open','hidden','aria-modal'],childList:true,subtree:true});
+    const soundButton=document.createElement('button');soundButton.type='button';soundButton.dataset.boothSound='';
+    bar.querySelector('.br-booth-actions').prepend(soundButton);
+    countdown=window.BROWSE_COUNTDOWN_SOUND?.({button:soundButton,readRound:current,isLive:()=>Boolean(active&&!suspended&&!restoring&&!redirecting),lang:record.lang});
     syncControls();
   };
   const openingReminder = record => {
@@ -446,7 +449,7 @@
     const seconds=Math.ceil(left/1000),clock=bar?.querySelector('[data-booth-clock]');
     if(clock)clock.textContent=`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
     if(bar)bar.dataset.urgent=String(seconds<=10);
-    openingReminder(record);syncControls();
+    countdown?.tick(record);openingReminder(record);syncControls();
   };
   const start = C => {
     const ctx=context(C.params,C.scene);
@@ -470,7 +473,7 @@
     if (!suspended&&!restoring&&!redirecting) {
       if(canAct())capture(active.C);
     }
-    reminder?.remove();reminder=null;
+    reminder?.remove();reminder=null;countdown?.pause();
     suspended=true;restoring=false;generation++;cancelAnimationFrame(frame);frame=0;
     if(dialog?.open)dialog.close();syncControls();
   };
@@ -485,7 +488,7 @@
       const fresh=current();restoring=false;suspended=false;
       if(bar)delete bar.dataset.restoring;
       if(!fresh||fresh.status!=='running'||Date.now()>=fresh.deadline){end('timeout');return;}
-      capture(active.C);tick();syncControls();
+      capture(active.C);countdown?.resume();tick();syncControls();
     });});
   };
   window.addEventListener('pagehide',hide);

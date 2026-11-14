@@ -20,6 +20,7 @@ All three source films are licensed under [Creative Commons Attribution3.0](http
 - Source download: https://download.blender.org/durian/trailer/sintel_trailer-720p.mp4
 - `video-sintel.mp4`: entire official trailer,52.21seconds,960×540, H.264 + AAC.
 - `video-sintel.jpg`: frame at9seconds, encoded as a JPEG preview.
+- `movie-sintel-still.jpg`: frame at24seconds from the same locally stored official trailer, 960×540 JPEG, including the original letterboxing. Used for the current catalogue and video poster to show a brighter city-and-dragons scene than the historical dark9-second frame. Same Sintel / Blender Foundation credit and CC BY3.0 licence; the historical image is retained.
 - Changes: resized and re-encoded for delivery; original sound and trailer ending retained. The full film is14minutes48seconds.
 
 ## Tears of Steel

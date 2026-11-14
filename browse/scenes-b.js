@@ -3,11 +3,13 @@
   'use strict';
   const films=(window.BROWSE_OPEN_FILMS||[]).map(f=>({...f,origin:f.origin||'studio',cast:f.crew.filter(x=>/voice|actor|cast|the |count|cesare|christine|raoul|erik|boy|girl|tramp/i.test(x[1])).map(x=>x[0]).join(', ')||f.director,tag:f.collectionName||'Blender open movie',tagZh:f.collectionNameZh||'Blender 开放电影'}));
   function poster(f,wide=false) {
-    const art=(window.BROWSE_FILM_ARTWORK||{})[f.id],picture=art?.kind==='poster'?art.file:null;
+    const art=(window.BROWSE_FILM_ARTWORK||{})[f.id],media=(window.BROWSE_MEDIA||[]).find(m=>m.id===f.id),picture=art?.file||media?.poster;
     const safe=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const zh=document.documentElement.lang.startsWith('zh'),title=zh?(f.zh||f.title):f.title;
     const color=['#a9573d','#336a70','#6b603f','#4b5279'][films.indexOf(f)%4]||'#336a70';
-    return `<div class="fm-poster fm-open-poster ${wide?'fm-wide':''}" style="--fm-cover:${color}">${picture?`<img class="fm-open-still" src="${safe(picture)}" alt="${safe(f.title)} — ${zh?'原版发行海报':'original release poster'}" loading="lazy">`:`<div class="fm-type-cover"><small>FRAME / FILM LIBRARY</small><span class="fm-cover-year">${f.year}</span><strong>${safe(title)}</strong><span>${safe(f.director)}</span><small>${zh?'片目排版封面':'CATALOGUE TYPE COVER'}</small></div>`}</div>`;
+    const kind=art?.kind==='poster'?'poster':art?.kind==='drawing'?'drawing':'still';
+    const label=kind==='poster'?(zh?'原版发行海报':'original release poster'):kind==='drawing'?(zh?'原版海报草图':'original poster drawing'):(zh?'影片剧照':'film still');
+    return `<div class="fm-poster fm-open-poster ${kind!=='poster'?'fm-illustrated-cover':''} ${wide?'fm-wide':''}" style="--fm-cover:${color}">${picture?`<img class="fm-open-still" src="${safe(picture)}" alt="${safe(f.title)} — ${label}" loading="lazy">${kind!=='poster'?`<div class="fm-cover-caption"><small>${f.year} · ${label}</small><strong>${safe(title)}</strong><span>${safe(f.director)}</span></div>`:''}`:`<div class="fm-type-cover"><small>FRAME / FILM LIBRARY</small><span class="fm-cover-year">${f.year}</span><strong>${safe(title)}</strong><span>${safe(f.director)}</span><small>${zh?'片目排版封面':'CATALOGUE TYPE COVER'}</small></div>`}</div>`;
   }
   function renderMovies(C) {
     const {root,params,t,esc,url,read,write,complete}=C;

@@ -1,6 +1,6 @@
 # One Minute activity / 一分钟活动
 
-Current `ui3` fixes missed and conflated condition records across the thirteen tasks. Results distinguish recorded, unrecorded and unknown conditions, with a separate manual staff verdict. Category-specific desktop layouts, bold task anchors, layered hints and the absolute 60-second deadline remain. [Design and limits](../docs/UI1-DESIGN.md).
+Current `ui4` adds increasing final-ten-second urgency audio with its own mute control, restores matching pictures to all24 film cards and gives brief images their native proportions, including the full-resolution bird photograph. Per-condition records, bold task anchors, category-specific layouts, layered hints and the absolute60-second deadline remain. [Design and limits](../docs/UI1-DESIGN.md).
 
 Source branch `realism1`: two additional everyday hosts, 12 booth tasks and 32 optional briefs. Local preview and true/false paths: [scene guide](../docs/REALISM-SCENES.md). Publication is not inferred from these source changes.
 

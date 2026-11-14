@@ -304,6 +304,7 @@ window.BROWSE_BOOTH_TASKS = [
     route: [["Search woodpecker or 啄木鸟. Check each candidate’s field marks.","搜「啄木鸟」或 woodpecker，核对候选的外观特征。"],["Compare Downy and Red-bellied Woodpecker and check their lengths.","对比绒啄木鸟和红腹啄木鸟，核对体长。"],["Add the shorter species to the observation list.","把较短的一种加入观察清单。"]],
     answer: ["downy (14–17 cm, broad white stripe) and red-bellied (23–27 cm, barred back). Observe downy.","downy 绒啄木鸟（14–17 cm，宽白纵纹）与 red-bellied 红腹啄木鸟（23–27 cm，背部横纹）。记录绒啄木鸟。"],
     cover: "assets/journey-red-bellied-0-thumb.webp",
+    briefCover: "assets/journey-red-bellied-0.webp",
     advanced: false,
     badge: ["woodpecker","woodpecker·较短者"],
     steps: [["Compare Downy and Red-bellied Woodpecker","对比绒啄木鸟和红腹啄木鸟"],["Check which bird has the shorter length","核对哪种体长较短"],["Add the shorter bird to your observation list","把较短者加入观察清单"]],

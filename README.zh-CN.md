@@ -1,12 +1,12 @@
 # CSpopups · 一分钟挑战
 
-**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=ui3)** · [English](README.md)
+**[开始试玩](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=ui4)** · [English](README.md)
 
 给你一分钟，在网页上办完一件小事。比如找一张壁纸、对比两台二手相机，或给社团选两部短片。过程中会跳出虚构的 XMUM 校园广告，有些按钮看起来还挺像你正要找的那个。
 
 新增 TrackMY 快递改约与 Findline 官网检索。[新增场景说明](docs/REALISM-SCENES.md)。
 
-十二个网站保留各自的目录与筛选布局、分组选题、常显任务徽标和分层提示。当前 `ui3` 修正了已完成操作仍未被确认的问题，逐项区分已记录、尚未记录与待人工核对。每轮仍为 60 秒，最终结果由工作人员核对。[电脑端设计与验证边界](docs/UI1-DESIGN.md)。
+十二个网站保留各自的目录与筛选布局、分组选题、黑粗任务要点和分层提示。当前 `ui4` 加入最后十秒逐渐加快、变响的倒计时音，恢复电影配图，并完整显示清晰的鸟类任务图片。倒计时音可单独关闭。每轮仍为 60 秒，最终结果由工作人员核对。[电脑端设计与验证边界](docs/UI1-DESIGN.md)。
 
 ## 怎么玩
 
@@ -34,7 +34,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=ui3)
+[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=ui4)
 
 ## 其他资料
 
