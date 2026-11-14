@@ -187,6 +187,7 @@ button.booth-text-link { border: 0; border-bottom: 2px solid var(--red); padding
 
 .booth-memory-badge { display:inline-block; margin-top:12px; padding:6px 12px; background:#ffd200; color:#141414; font-weight:800; }
 .booth-hint-used { font-size:13px; }
+strong.br-task-key { display:inline; margin:0; padding:0; color:#111; font-size:inherit; font-weight:800; text-transform:none; }
 
 /* Four compact task shelves make category and suggested effort easy to scan. */
 [data-booth-view="choose"] .booth-hero { padding:26px 32px; }

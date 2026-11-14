@@ -1,3 +1,81 @@
+/* Presentation only: emphasize existing task words without changing plain-text records. */
+(() => {
+  const actions = [
+    ['search', 'find', 'compare', 'choose', 'select', 'set', 'tick', 'save', 'download', 'add', 'keep', 'check', 'open', 'avoid', 'track', 'plan'],
+    ['搜索', '搜', '找到', '查询', '对比', '比较', '选择', '设为', '勾选', '勾', '收藏', '下载', '加入', '保存', '保留', '核对', '检查', '打开', '避开', '不要从赞助结果进入']
+  ];
+  const keywords = {
+    'minute2-wall-earthrise': [
+      ['Earthrise', '1972', '3840 × 2160', 'JPG', 'two versions', 'both'],
+      ['Earthrise', '1972 年', '3840 × 2160', 'JPG', '两张']
+    ],
+    'minute2-recipe-budget': [
+      ['Red lentil & tomato soup', 'RM5 per serving', 'six servings', 'red lentils', 'shopping list'],
+      ['红扁豆番茄汤', 'RM5', '六人份', '红扁豆', '采购清单']
+    ],
+    'minute2-tool-webp': [
+      ['La Trobe Reading Room', 'WebP', 'width 800 px', '800 px', 'width 800', '70%', 'export settings'],
+      ['拉筹伯阅览室', '选 WebP', 'WebP', '宽 800 px', '800 px', '宽 800', '70%', '导出设置']
+    ],
+    'minute2-movie-animation': [
+      ['Sintel', 'Elephants Dream', 'watchlist', 'only these two films'],
+      ['辛特尔', '大象之梦', '想看片单', '只留这两部']
+    ],
+    'minute2-outing-craft': [
+      ['Central Market', 'RM20', 'return journey', 'weather', 'departure list', 'departure checklist', 'indoors'],
+      ['中央艺术坊', 'RM20', '返程', '天气', '出发清单', '室内']
+    ],
+    'minute2-book-verne': [
+      ['Around the World in Eighty Days', 'English', 'French', 'both editions', 'TXT', 'opening excerpt'],
+      ['八十天环游地球', '英文', '法文', '两个版本', 'TXT', '开篇']
+    ],
+    'minute2-museum-manet': [
+      ['Manet', 'Boating', 'The Monet Family in Their Garden at Argenteuil', 'under 100 cm', 'narrower than 100 cm', '100 cm', 'My Exhibition', 'width'],
+      ['Manet', '划船', '莫奈一家在阿让特伊的花园里', '宽度不到 100 cm', '100 cm', '我的展览', '较窄']
+    ],
+    'minute2-nature-woodpeckers': [
+      ['woodpecker', 'Downy', 'Red-bellied Woodpecker', 'shorter', 'observation list', 'Length'],
+      ['woodpecker', '绒啄木鸟', '红腹啄木鸟', '体长较短', '较短者', '观察清单', '体长']
+    ],
+    'minute2-travel-interchange': [
+      ['KLCC', 'KJ', 'Bukit Bintang', '17:20', 'Less walking', 'KG'],
+      ['KLCC', 'KJ', '武吉免登', '17:20', '较少步行', 'KG']
+    ],
+    'minute2-market-lens': [
+      ['RM700', 'EOS 550D', 'Good', 'Excellent', 'camera and lens', 'lens included', 'body and lens included', 'Included items', 'kit listing'],
+      ['RM700', 'EOS 550D', '良好', '极佳', '机身和镜头', '含机身和镜头', '附带物品', '套机刊登']
+    ],
+    'minute3-courier-redelivery': [
+      ['TM24081301', 'tomorrow afternoon', 'Tomorrow', '14:00–18:00', 'campus parcel desk address', 'free redelivery'],
+      ['TM24081301', '明天下午', '明天', '14:00–18:00', '校园收件处地址', '免费改约']
+    ],
+    'minute3-search-official': [
+      ['Pixelpress', 'official', 'free', 'getting-started TXT', 'TXT', 'sponsored results', 'pixelpress.example'],
+      ['Pixelpress', '官方站点', '官方结果', '免费', '入门说明 TXT', 'TXT', '赞助结果', 'pixelpress.example']
+    ],
+    'minute4-penang-indoor': [
+      ['Malaysia', 'Penang', 'indoor attraction', 'at most 3 hours', '3 hours', 'RM30', '≤3h', '≤RM30'],
+      ['马来西亚', '槟城', '室内景点', '不超过3小时', '≤3小时', '不超过RM30', '≤RM30', 'RM30']
+    ]
+  };
+  const escape = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const pattern = term => {
+    const literal = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return (/^[a-z0-9]/i.test(term) ? '\\b' : '') + literal + (/[a-z0-9]$/i.test(term) ? '\\b' : '');
+  };
+  window.BROWSE_BOOTH_TASK_TEXT = (value, task, lang) => {
+    const text = String(value ?? ''), index = lang === 'en' ? 0 : 1;
+    const terms = [...new Set([...actions[index], ...(keywords[task?.id]?.[index] || [])])].sort((a,b) => b.length-a.length);
+    const matches = new RegExp(terms.map(pattern).join('|'), 'gi');
+    let html = '', end = 0;
+    for (const match of text.matchAll(matches)) {
+      html += escape(text.slice(end, match.index)) + '<strong class="br-task-key">' + escape(match[0]) + '</strong>';
+      end = match.index + match[0].length;
+    }
+    return html + escape(text.slice(end));
+  };
+})();
+
 /* Earlier round records still resolve their original briefs and answers. */
 window.BROWSE_BOOTH_LEGACY_TASKS = [
   {

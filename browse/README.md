@@ -1,6 +1,6 @@
 # One Minute activity / 一分钟活动
 
-Current `ui1`: category-specific desktop layouts, grouped thirteen-task chooser, persistent memory anchors, layered hints and condition records; unchanged60-second rounds and manual verdict. [Design and limits](../docs/UI1-DESIGN.md).
+Current `ui2`: category-specific desktop layouts, grouped thirteen-task chooser, persistent memory anchors, layered hints and condition records; unchanged60-second rounds and manual verdict. [Design and limits](../docs/UI1-DESIGN.md).
 
 Source branch `realism1`: two additional everyday hosts, 12 booth tasks and 32 optional briefs. Local preview and true/false paths: [scene guide](../docs/REALISM-SCENES.md). Publication is not inferred from these source changes.
 

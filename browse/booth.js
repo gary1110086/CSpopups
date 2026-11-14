@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'ui1';
+  const VERSION = 'ui2';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
@@ -18,6 +18,7 @@
   const t = (en, zh) => li === 0 ? en : zh;
   const txt = pair => Array.isArray(pair) ? String(pair[li] ?? pair[0] ?? '') : String(pair ?? '');
   const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const taskText = (value, item) => window.BROWSE_BOOTH_TASK_TEXT(txt(value), item, lang);
   const status = value => { document.getElementById('booth-status').textContent = value; };
   function url(values = {}) {
     const next = new URL('booth.html', location.href);
@@ -74,7 +75,7 @@
     return `<details class="booth-staff booth-history" id="booth-history"><summary>${t('Staff tools', '工作人员工具')}</summary><div class="booth-staff-body">
       <nav class="booth-staff-links" aria-label="${t('Staff tools', '工作人员工具')}">
         ${mode === 'ads' ? `<a href="${esc(url({mode:'clean'}))}">${t('Difficulty test · no ads', '难度测试 · 无广告')} ↗</a>` : `<a href="${esc(url({mode:'ads'}))}">${t('Return to the challenge', '返回正式挑战')} ↗</a>`}
-        <a href="launch.html?lang=${lang}&amp;v=ui1">${t('Free browsing', '自由浏览')} ↗</a>
+        <a href="launch.html?lang=${lang}&amp;v=ui2">${t('Free browsing', '自由浏览')} ↗</a>
       </nav>
       <label class="booth-advanced"><input id="booth-include-advanced" type="checkbox"> ${t('Include advanced tasks in the draw', '随机抽题时加入进阶题')}</label>
       <h2>${t('Recent rounds', '最近轮次')}</h2>
@@ -126,11 +127,11 @@
           <div class="booth-brief-copy">
             <p class="booth-eyebrow">${esc(item.site)}${item.advanced ? ` · ${t('Advanced', '进阶')}` : ''}${mode === 'clean' ? ` · ${esc(modeName(mode))}` : ''}</p>
             <h1 id="booth-title">${esc(txt(item.title))}</h1>
-            <p class="booth-brief-text">${esc(txt(item.brief))}</p>
-            ${item.hint ? `<aside class="booth-start-hint"><strong>${t('Start here', '从这里开始')}</strong><p>${esc(txt(item.hint))}</p></aside>` : ''}
+            <p class="booth-brief-text">${taskText(item.brief, item)}</p>
+            ${item.hint ? `<aside class="booth-start-hint"><strong>${t('Start here', '从这里开始')}</strong><p>${taskText(item.hint, item)}</p></aside>` : ''}
             <div class="booth-goals">
               <h2>${t('What counts as finished', '完成条件')}</h2>
-              <ol>${item.goals.map(goal => `<li>${esc(txt(goal))}</li>`).join('')}</ol>
+              <ol>${item.goals.map(goal => `<li>${taskText(goal, item)}</li>`).join('')}</ol>
             </div>
             <button id="booth-start" type="button" class="booth-button booth-button-primary">${t('Start the challenge', '开始挑战')} <span aria-hidden="true">→</span></button>
             <p id="booth-start-note" class="booth-note" role="status">${t('The 60 seconds start once the site is ready. Switching tabs does not pause the clock.', '网页就绪后开始 60 秒倒计时。切换标签页时照常计时。')}</p>

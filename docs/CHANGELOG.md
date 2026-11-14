@@ -1,6 +1,11 @@
 # Release history / 版本记录
 
-Current activity source **ui1**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **ui2**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+
+## ui2 — 14 November 2026
+
+- Emphasized task-specific keywords, numeric conditions and actions in black bold text across bilingual task briefs, completion goals, in-round task dialogs, hints and opening reminders.
+- Kept original task wording, plain-text records, evidence and timing unchanged.
 
 ## ui1 — 14 November 2026
 

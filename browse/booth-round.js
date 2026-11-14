@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'ui1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'ui2', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute4-penang-indoor': {scene:'events',file:'events.html',target:'penang-state-gallery',key:'bp-outings-saved'},
     'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
@@ -349,11 +349,12 @@
   const mount = record => {
     if (bar) return;
     const task=taskData(record.taskId),text=v=>Array.isArray(v)?v[record.lang==='zh'?1:0]:v;
+    const taskText=value=>window.BROWSE_BOOTH_TASK_TEXT(text(value),task,record.lang);
     bar=document.createElement('aside');bar.id='br-booth-bar';bar.setAttribute('aria-label',translate('60-second challenge','60秒挑战'));
     bar.innerHTML=`<div class="br-booth-time"><small>${translate('TIME LEFT','剩余时间')}</small><strong data-booth-clock role="timer" aria-live="off">1:00</strong></div><div class="br-booth-current"><span>${record.mode==='clean'?translate('CLEAN ROUND','无广告挑战'):translate('AD CHALLENGE','广告挑战')}</span><b>${escape(text(task.title))}</b>${task.badge?`<strong class="br-booth-badge">${escape(text(task.badge))}</strong>`:""}</div><div class="br-booth-actions"><button type="button" data-booth-task>${translate('View task','查看任务')}</button><button type="button" data-booth-submit>${translate('Submit','我完成了')}</button><button type="button" data-booth-void aria-label="${translate('Staff: void this round','工作人员：作废本轮')}">${translate('Staff','工作人员')}</button></div>`;
     dialog=document.createElement('dialog');dialog.id='br-booth-task-dialog';dialog.setAttribute('aria-labelledby','br-booth-dialog-title');
     const goals=task.steps || task.goals || [];
-    dialog.innerHTML=`<div class="br-booth-dialog-inner"><div class="br-booth-dialog-kicker">${translate('YOUR 60-SECOND TASK','你的60秒任务')}</div><h1 id="br-booth-dialog-title">${escape(text(task.title))}</h1><p>${escape(text(task.brief))}</p><ul class="br-booth-conditions">${goals.map(x=>`<li><span aria-hidden="true">□</span> ${escape(text(x))}</li>`).join('')}</ul>${task.hint?`<details class="br-booth-start-hint"><summary>${translate('Start here','从这里开始')}</summary><p>${escape(text(task.hint))}</p></details>`:''}${task.hint2?`<button type="button" data-booth-second-hint aria-expanded="false" aria-controls="br-booth-hint2">${translate('A little more help','再给一点提示')}</button><p id="br-booth-hint2" hidden>${escape(text(task.hint2))}</p>`:''}<p class="br-booth-dialog-rule">${translate('Viewing the task uses time. The clock continues in other tabs too. A staff member checks the result.','查看任务会消耗时间。打开其他标签页时也继续计时，结果由工作人员核对。')}</p><button type="button" data-booth-dialog-close>${translate('Continue challenge','继续挑战')}</button></div>`;
+    dialog.innerHTML=`<div class="br-booth-dialog-inner"><div class="br-booth-dialog-kicker">${translate('YOUR 60-SECOND TASK','你的60秒任务')}</div><h1 id="br-booth-dialog-title">${escape(text(task.title))}</h1><p>${taskText(task.brief)}</p><ul class="br-booth-conditions">${goals.map(x=>`<li><span aria-hidden="true">□</span> ${taskText(x)}</li>`).join('')}</ul>${task.hint?`<details class="br-booth-start-hint"><summary>${translate('Start here','从这里开始')}</summary><p>${taskText(task.hint)}</p></details>`:''}${task.hint2?`<button type="button" data-booth-second-hint aria-expanded="false" aria-controls="br-booth-hint2">${translate('A little more help','再给一点提示')}</button><p id="br-booth-hint2" hidden>${taskText(task.hint2)}</p>`:''}<p class="br-booth-dialog-rule">${translate('Viewing the task uses time. The clock continues in other tabs too. A staff member checks the result.','查看任务会消耗时间。打开其他标签页时也继续计时，结果由工作人员核对。')}</p><button type="button" data-booth-dialog-close>${translate('Continue challenge','继续挑战')}</button></div>`;
     dialog.querySelector('[data-booth-second-hint]')?.addEventListener('click',()=>{
       if(!canAct())return;
       const fresh=current();if(!fresh)return;
@@ -388,7 +389,7 @@
     const task=taskData(record.taskId),text=v=>Array.isArray(v)?v[record.lang==='zh'?1:0]:v;
     reminder=document.createElement('aside');reminder.id='br-booth-opening-reminder';
     reminder.setAttribute('aria-label',translate('Task reminder','任务提醒'));
-    reminder.innerHTML=`<strong>${escape(text(task.badge||task.title))}</strong><button type="button" aria-label="${translate('Close reminder','关闭提醒')}">×</button><ul>${(task.steps||task.goals||[]).map(x=>`<li>${escape(text(x))}</li>`).join('')}</ul>`;
+    reminder.innerHTML=`<strong>${escape(text(task.badge||task.title))}</strong><button type="button" aria-label="${translate('Close reminder','关闭提醒')}">×</button><ul>${(task.steps||task.goals||[]).map(x=>`<li>${window.BROWSE_BOOTH_TASK_TEXT(text(x),task,record.lang)}</li>`).join('')}</ul>`;
     reminderUntil=Date.now()+3000;document.body.append(reminder);
     reminder.querySelector('button').addEventListener('click',()=>{reminder.remove();reminder=null;});
   };
