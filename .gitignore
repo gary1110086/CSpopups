@@ -47,6 +47,14 @@
 !/browse/assets/*.mp3
 !/browse/assets/*.json
 
+# Current timed-round endings (original volume shader and generated voice).
+!/browse/end-effects/
+!/browse/end-effects/*.html
+!/browse/end-effects/*.js
+!/browse/end-effects/*.css
+!/browse/end-effects/*.wav
+!/browse/end-effects/*.mp3
+
 # Project documentation.
 !/docs/
 !/docs/*.md

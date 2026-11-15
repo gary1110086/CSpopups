@@ -1,7 +1,7 @@
 /* A durable, explicit 60-second booth round. Ordinary website visits stay untimed. */
 (() => {
   'use strict';
-  const VERSION = 'audio1', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
+  const VERSION = 'ending3', PREFIX = 'br-booth-v1:', INDEX = 'br-booth-index-v1', LIMIT = 12, DURATION = 60000;
   const RULES = {
     'minute4-penang-indoor': {scene:'events',file:'events.html',target:'penang-state-gallery',key:'bp-outings-saved'},
     'minute3-courier-redelivery': {scene:'courier',file:'courier.html',target:'TM24081301',key:'courier-completed'},
@@ -279,6 +279,13 @@
     if (redirecting) return;
     redirecting=true;stopUI();
     emit('browse:booth-end',{roundId:record?.id || active?.id,seed:record?.seed || active?.seed,reason:record?.reason || 'invalid',mode:record?.mode || active?.mode});
+    // Hand a one-use presentation ticket to the result page after durable finalization.
+    // Actual reason is authoritative: a click at/after the deadline stays a timeout.
+    try {
+      if(record?.status==='ended' && ['timeout','submitted'].includes(record.reason) &&
+         !sessionStorage.getItem('br-booth-ending-seen-v1:'+record.id))
+        sessionStorage.setItem('br-booth-ending-next-v1',JSON.stringify({id:record.id,reason:record.reason,at:Date.now()}));
+    } catch {} // Missing storage must never prevent leaving or submitting a score.
     location.replace(record ? resultURL(record) : pageURL('booth.html',null,{notice:'expired-context'}));
   };
   const current = () => active ? readRecord(active.id) : null;
