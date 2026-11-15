@@ -1,32 +1,51 @@
 # CSpopups · One Minute
 
-**[Play One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=audio1)** · [简体中文](README.zh-CN.md)
+**[Play in your browser](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=audio1)** · [中文说明](README.zh-CN.md)
 
-You have a minute to do something ordinary on a website. Find a wallpaper, compare two used cameras, or put together a watchlist while fictional XMUM campus ads try to pull you away from the task.
+You have 60 seconds to finish a small job on a website: save two films for movie night, find dinner for six, or resize a photo for a club page. While you work, fictional campus ads keep getting in the way. Some borrow the look of the search, download or close button you wanted to use.
 
-Includes TrackMY parcel redelivery and Findline official-download searches. [New scene guide](docs/REALISM-SCENES.md).
+The websites work: you can search, filter, compare, save and export files. Advertiser links open another tab, so you can return to your work. The clock keeps running while you're away.
 
-The twelve sites have distinct catalogue and filter layouts, grouped task selection, bold task anchors and layered hints. Current `audio1` adds faster, louder beeps during the final ten seconds, restores matching movie images and shows the full-resolution bird brief without cropping. Timer sound has its own mute control. All rounds still last 60 seconds and staff retain the final verdict. [Desktop design and limits](docs/UI1-DESIGN.md).
+![The current movie task, with its timer and campus advertisements](docs/images/one-minute-challenge-en.png)
 
 ## How to play
 
-1. Pick one of the thirteen tasks or draw one at random. Read the brief, then press **Start the challenge**. The timer starts when the task website is ready.
-2. Use the site's search, filters or comparisons to find what you need. Follow the brief to save or download the result.
-3. Press **Submit** when you're done. If time runs out, the round record opens automatically.
+1. Choose a task or pick one at random. There are **13 tasks across 12 websites**. Read the brief before starting; reading time is free.
+2. Press **Start the challenge**. You get one minute once the task website is ready. **View task** brings the brief back, including hints.
+3. When you're finished, press **Submit**. At 60 seconds the round ends automatically. The result shows the recorded conditions, score and ad interactions.
 
-Two or three ads arrive in the first **1–3 seconds** of focused browsing. From **4 seconds**, a new ad arrives every 1.5–2.5 seconds, even if you leave them open. When the screen is full, older ads make way for new ones (up to five visible on desktop). Some look like the search or download button you're looking for. Ad links open in a new tab while the round clock keeps running. Press **Esc** for a short break from the ads. Current development and verification target desktop use.
+Ads build up during the round. Some move, hide their close control or offer a misleading shortcut. **Esc** clears them for a short break. The final 15 seconds have a clock sound, followed by a spoken countdown from ten; **Timer sound** can mute it separately from the ads.
 
-![A One Minute round with the timer, task website and campus ads on screen](assets/one-minute-booth4.png)
+<details>
+<summary>Task selection and an example result</summary>
 
-## Running a session
+![Thirteen tasks grouped by what you need to do](docs/images/one-minute-choose-en.png)
 
-Open **Staff tools** at the bottom of the task list. Use the ad-free mode to check how difficult a task is on its own. After a round, you can check what the browser recorded and talk through any ads that caught the player's attention. [Staff guide and answer key](docs/MINUTE-BOOTH.md)
+![A completed film task and its score breakdown](docs/images/one-minute-result-en.png)
 
-The same menu opens **Free browsing**, where you can explore the twelve sites at your own pace. It has a separate library of 32 briefs. [Free-browsing guide](browse/README.md)
+These are screenshots of an automated demonstration round, not participant test results.
+
+</details>
+
+## What the score means
+
+| Part | Points | What counts |
+| --- | ---: | --- |
+| Task | 40 | The task evidence recorded before submission or timeout. |
+| Time | 40 | Finish and submit within 30 seconds for full time points. The bonus gets smaller after that and depends on how much you completed. |
+| Resilience | 20 | Starts at 10: a genuine close adds 2, a false close subtracts 1. |
+
+The result lists what was recorded and what still needs checking. A staff member can check the actual result or downloaded file and leave a separate verdict. [Scoring details](docs/SCORING.md) · [Staff guide and answers](docs/MINUTE-BOOTH.md)
+
+## Trying it with other people
+
+Open **Staff tools** below the task list. It has an ad-free mode for trying the task itself, recent rounds, and **Free browsing**. Free browsing has the same twelve websites and a separate library of **32 untimed briefs**.
+
+The sites cover wallpapers, recipes, image tools, films, books, art, birds, outings, rail journeys, used cameras, parcel redelivery and finding an official download. Saved work and round records stay in that browser tab; they don't sync between computers.
 
 ## Run locally
 
-Clone the repository and start the included preview server from the repository root. You'll need Python 3.
+You need Python 3. Clone the whole repository, then run its preview server:
 
 ```sh
 git clone https://github.com/gary1110086/CSpopups.git
@@ -34,11 +53,20 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-[Open the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=audio1)
+Open [the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=audio1). There is no build step. Serve the whole folder: Browse uses shared files outside its own directory, and the included server supports video seeking.
 
-## Further reading
+## Finding your way around the repository
 
-- [Folder guide](docs/FOLDERS.md): current source, shared assets, prototypes and local archives.
-- Round records and saved work stay in the browser tab. Image processing and file exports run in the browser. Offers, payments and prizes are simulated.
-- Little Daily and the standalone Stillwall are earlier prototypes. The `cleaner1` ZIP is an older free-browsing snapshot. [Project and prototype index](docs/README.md) · [Release history](docs/CHANGELOG.md) · [Earlier ZIP release](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)
-- Photographs, films and other media retain their source licences. [Media credits](docs/README.md#media-sources--素材来源) · [Screenshot notes](assets/README-PREVIEW.md)
+| Folder | Contents |
+| --- | --- |
+| [browse](browse/README.md) | The current challenge, task websites and advertiser pages. |
+| [docs](docs/README.md) | Session instructions, answers, scoring and development notes. |
+| [docs/images](docs/images/README.md) | Current README screenshots; the earlier screenshot is under `history/`. |
+| [prototypes/little-daily](prototypes/little-daily/README.md) | The earlier article-site runtime. Root HTML URLs still use it. |
+| [wallpapers](wallpapers/README.md) | The independent Stillwall prototype; some assets are also used by Browse. |
+
+Start with the play link above. The root `index.html` opens the older Little Daily site. [Folder guide](docs/FOLDERS.md) · [Version history](docs/CHANGELOG.md)
+
+The ZIPs on [GitHub Releases](https://github.com/gary1110086/CSpopups/releases) are older free-browsing snapshots. For this one-minute challenge, use the live site or clone the current source.
+
+Image processing and exports run in the browser. Offers, checkout screens and prizes in the ads are simulations. Photos, films and audio keep their original licences: [media sources](docs/README.md#media-sources--素材来源) · [screenshot credits](docs/images/README.md).

@@ -1,4 +1,4 @@
-# README screenshot
+# Earlier README screenshot / 早期截图
 
 `one-minute-booth4.png` is an unaltered 1160 × 660 Chrome screenshot of the public **booth4** challenge. It shows the Trackside rail task with 46 seconds left. The route timings and campus promotions are part of the exercise.
 

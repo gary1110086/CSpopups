@@ -2,6 +2,13 @@
 
 Current activity source **audio1**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
 
+## Repository and README — 15 November 2026
+
+- Rewrote the English and Chinese visitor explanations around the current thirteen-task activity, current scoring and recorded countdown audio.
+- Grouped current screenshots in `docs/images/`; kept the earlier booth4 screenshot in its `history/` subdirectory.
+- Moved accumulated Browse development notes and the earlier cleaner1 implementation check to `docs/history/`. Current entry documents now describe twelve websites and distinguish the 32 untimed briefs.
+- Documented local archive/QA locations and the difference between public files and ignored local prototypes. Runtime files, media, shared dependencies and existing playable URLs stay in place.
+
 ## audio1 — 14 November 2026
 
 - Replaced synthesized beeps with the selected Mixkit male countdown and Tomas Herudek's Tense Clock Transition, adapted as one local15-second game cue. Clock texture fades in from15 seconds remaining, speech10..1 joins at10 seconds, with background ducking and increasing urgency. Source, licence and processing records are in assets/COUNTDOWN-AUDIO-SOURCES.md.

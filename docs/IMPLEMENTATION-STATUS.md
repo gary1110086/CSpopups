@@ -1,35 +1,19 @@
-# Implementation check / 功能核对
+# Current implementation / 当前实现
 
-26 October 2026 · cleaner1. This checks the accepted requirements against the current implementation. 历史方案中后来被改掉的行为不作为缺失功能重新加回。
+15 November 2026. This page points to the current source. The older cleaner1 requirement check is preserved in [history](history/CLEANER1-IMPLEMENTATION.md).
 
-| Requirement / 要求 | Current implementation / 当前状态 |
-| --- | --- |
-| A shareable website, native pages and tabs / 可分享的真实网页 | Implemented. Static GitHub Pages routes, native anchors/GET forms and isolated advertiser tabs. Browser Back/Forward and reload retain session choices. |
-| More ordinary task websites / 增加场景 | 10 websites and 30 bilingual assignments. Catalogue data, unique identifiers, task routes and 353 referenced local media files checked. |
-| Useful depth and real media / 内容与互动深度 | Search, filters, details, saved lists/comparisons, book excerpts, bird calls, video previews, image processing and TXT/JPEG/ICS exports. Media and benchmark records remain linked from the guide. Not every film or bird has a playable clip. |
-| Normal and scam-pattern advertising / 普通与骗局广告 | 10 rotating advertiser destinations plus the independent AdSweep cleaner promotion. Four ordinary/irrelevant promotions and six documented teaching mechanisms, with reference/case records. |
-| More overwhelming advertising / 增加密度 | First standard card at 3 focused seconds, further arrivals at 2.2–3.2s gaps, desktop maximum 4/mobile 2 concurrent, at most 30 automatic arrivals. Ticker, leaderboard, rail and document placements remain. |
-| Bouncing and full-screen evasion / 反弹与全屏闪避 | Implemented with viewport bounds and an edge preference. Each dodging card has a stable random 4–6 actual evasions, retained across reload/Back. |
-| Faint, moved and fake closes / 透明、异位与假关闭 | Visible/dual/ghost styles and a shuffled close-layout deck. Includes upper-left, occasional lower-right, and fake upper-right with genuine upper-left. True controls dismiss only their own card. |
-| Visible close after 10 seconds / 10秒显露关闭 | Ghost-only genuine close becomes conspicuous after 10 focused seconds and its card stops moving. Background and Cookie-dialog time do not count. |
-| Collision and squeezing / 碰撞与挤压 | Normal sessions retain the seeded30% choice; manual bursts always enable it. All nonmodal cards, including stationary ones, can react. Smooth300ms bounded pushes and inner-frame compression respect focus, held pointers, reduced motion, modals and the disclosed close; touch-only devices retain static positions. |
-| Leaked developer switch / 泄露式开发者开关 | Large yellow/black title; one activation fills the shared layer to desktop10/mobile5. Then an explicit native-tab AdSweep link leads through a detailed check/product/setup flow. True close, Escape and session restoration remain. |
-| Audible popup advertisements / 有声弹窗 | Previously missing from the Browse runtime; implemented here as actual Web Audio cues after trusted input, with an explicit session mute. No background or restore catch-up. Following video still starts muted. |
-| Eight random encounters / 八种事件 | All eight implemented; each seed selects three applicable types. Chat, tab reminder, following video, search suggestions, escalating refusal offer, character, quiet/comeback and completion bonus depend on their relevant browsing actions. |
-| Late ad displacement / 延迟挤位广告 | Implemented. Stable 60% site/session eligibility, 8–12 focused-second delay, no placeholder, persistent genuine dismissal. |
-| Cookie choice maze / Cookie选择 | Implemented. Stable 70% automatic-banner eligibility after 6.5 focused seconds; footer settings on every scene, optional switches, real reject/custom saving. No tracking service is activated. |
-| Manual facilitator review / 工作人员复盘 | Implemented with observed counts, a bounded timeline, discussion prompts, TXT export and separate deletion. Open manually in the participant's original tab. Typed text and image pixels are excluded. |
-| Hide task panel and timer / 隐藏顶部任务栏与计时器 | Preserved. Briefs live in the separate task library; no automatic finish or correctness score. |
-| Earlier Cornhub redirect / 早期Cornhub跳转 | Kept in the independent Little Daily/Stillwall prototypes. Current Browse opens advertiser tabs through ad controls and leaves genuine content navigation/downloads usable. |
+| Area / 内容 | Current behaviour / 当前行为 | Source / 源码 |
+| --- | --- | --- |
+| Entry / 入口 | 13 bilingual tasks on 12 websites. Read before starting; the round begins when the task website is ready. | [Chooser](../browse/booth.js), [tasks](../browse/booth-tasks.js), [websites](../browse/scene-registry.js) |
+| Deadline / 计时 | An absolute 60-second round, including other tabs and native navigation. Submission and timeout freeze the result. | [Round lifecycle](../browse/booth-round.js) |
+| Sound / 声音 | Clock texture in the final 15 seconds, spoken ten-to-one countdown, separate timer mute and ad sound controls. | [Countdown](../browse/booth-countdown.js), [audio sources](../browse/assets/COUNTDOWN-AUDIO-SOURCES.md) |
+| Result / 结果 | Task 40 + time 40 + resilience 20, using recorded evidence. Staff verdict is separate. | [Scoring](../browse/booth-score.js), [rules](SCORING.md) |
+| Advertisements / 广告 | Campus-themed interruptions accumulate during the activity; genuine close, temporary Escape relief and native advertiser tabs remain. | [Activity ad policy](../browse/booth-ads.js), [ad stack](../browse/ad-stack.js), [motion](../browse/popup-motion.js) |
+| Real interactions / 实际操作 | Search, filters, saved lists, comparisons and image/text/calendar exports. Media availability and credits are shown on the relevant pages. | [Browse overview](../browse/README.md), [sources](README.md#media-sources--素材来源) |
+| Free browsing / 自由浏览 | Twelve normal websites and a separate library of 32 briefs, without an activity deadline unless a round was started. | [Chooser](../browse/launch.html), [task library](../browse/task-library.js) |
+| Local state / 本地记录 | Round records, saved work and review remain in the current browser tab. | [Staff guide](MINUTE-BOOTH.md), [review log](../browse/review-log.js) |
+| Earlier entries / 早期入口 | Root Little Daily URLs and independent Stillwall remain available. | [Little Daily](../prototypes/little-daily/README.md), [Stillwall](../wallpapers/README.md) |
 
-## Fixes from this check / 本轮修复
+The repository remains a static site with no build step. Serve the whole root with `python browse/preview-server.py --port 5175`; copying only `browse/` omits shared assets.
 
-- Frame Movies: revisiting a cached detail page now reloads the latest saved rating, rather than displaying the older document's value.
-- loop: searching for a lens matches listings that actually include it; body-only listings no longer inherit the model's default-kit lens as a search term.
-- Advertiser observation: middle-button opening now records one native/unconfirmed action while leaving the browser's tab-opening behaviour intact.
-- Pixelpress: cancelling an image example while encoding prevents its unfinished continuation from restoring that cancelled example in the page address or status.
-- Shared GET-form context wiring has one implementation for initial rendering and redraws. The facilitator guide now explains the new displacement/Cookie/review features and opens the latest local report without an unrelated seed.
-
-See the [verification record](../browse/VERIFICATION.md) for checks and their practical limits. 本轮核对不等于逐项人工完成所有30道任务，也不代表所有浏览器都已测试。
-
-[Open the chooser / 打开场景选择](https://gary1110086.github.io/CSpopups/browse/launch.html?lang=zh&v=cleaner1) · [Facilitator guide / 主持人说明](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=zh&v=cleaner1)
+[README screenshots](images/README.md) show the current public interface. Automated demonstration rounds illustrate the UI; their times and scores are not participant study data. Historical test counts stay in their original records and are not presented as new verification.

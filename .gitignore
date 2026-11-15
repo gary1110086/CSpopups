@@ -17,8 +17,6 @@
 !/assets/
 /assets/*
 !/assets/favicon.svg
-!/assets/one-minute-booth4.png
-!/assets/README-PREVIEW.md
 !/assets/cornhub-favicon.svg
 !/assets/sunday-room.png
 !/assets/earbuds.png
@@ -63,6 +61,14 @@
 # Project documentation and the earlier article-site runtime.
 !/docs/
 !/docs/*.md
+!/docs/history/
+!/docs/history/*.md
+!/docs/images/
+!/docs/images/*.md
+!/docs/images/*.png
+!/docs/images/history/
+!/docs/images/history/*.md
+!/docs/images/history/*.png
 !/prototypes/
 !/prototypes/little-daily/
 !/prototypes/little-daily/*.js

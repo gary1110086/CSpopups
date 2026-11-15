@@ -2,7 +2,7 @@
 
 从一分钟挑战进入。随机抽题或自己选题，读完后开始。题目网站、倒计时和结果都在同一个浏览器标签页。
 
-- [一分钟挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=transit2) · [One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=transit2)
+- [一分钟挑战](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=zh&v=audio1) · [One Minute](https://gary1110086.github.io/CSpopups/browse/booth.html?lang=en&v=audio1)
 
 ## 工作人员怎么用
 
@@ -19,7 +19,7 @@
 
 ## 本轮任务与建议路线
 
-参与者会看到题目、「从这里开始」和完成条件。开始线索会给搜索词或操作入口，游戏中点「查看任务」也能再看。工作人员路线及答案默认收起，可主动展开。源码 transit2 提供 13 道展台题；独立任务库保留原 30 题并增补两道日常任务，共 32 题。新增场景与真假路径见 [REALISM-SCENES.md](REALISM-SCENES.md)。
+参与者会看到题目、「从这里开始」和完成条件。开始线索会给搜索词或操作入口，游戏中点「查看任务」也能再看。工作人员路线及答案默认收起，可主动展开。当前有 13 道展台题；独立任务库保留原 30 题并增补两道日常任务，共 32 题。结果页另有[任务、时间和抗干扰计分](SCORING.md)，工作人员判定单独保留。新增场景与真假路径见 [REALISM-SCENES.md](REALISM-SCENES.md)。
 
 | 题目 | 完成条件 | 建议寻找路线 / 答案 |
 | --- | --- | --- |
@@ -58,7 +58,7 @@
 python browse/preview-server.py --port 5210
 ```
 
-打开 `http://127.0.0.1:5210/browse/booth.html?lang=zh&v=transit2`。需从仓库根目录提供共享的 assets 与 wallpapers 资源。
+打开 `http://127.0.0.1:5210/browse/booth.html?lang=zh&v=audio1`。需从仓库根目录提供共享的 assets 与 wallpapers 资源。
 
 GitHub Release 中的 cleaner1 ZIP 对应早期版本。本轮试玩使用上方入口或当前仓库源码。
 
