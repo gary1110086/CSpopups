@@ -4,13 +4,13 @@ The desktop challenge totals **100 points: task 40 + time 40 + resilience 20**. 
 
 桌面挑战满分 **100：任务 40＋时间 40＋抗干扰 20**。只读取现有本地记录，现场计算得分。
 
-## Task / 任务：0–40
+## Task / 任务：10–40
 
-`round(40 × met / total)`
+`max(10, round(40 × met / total))` (when a valid evidence checklist is available)
 
-The existing automatically confirmable evidence checklist (`assess`) is unchanged. Only `met === true` counts. Empty evidence scores zero. Written conditions (`conditions`) remain a separate checklist; staff judgement is an optional note and never changes the score.
+The existing automatically confirmable evidence checklist (`assess`) is unchanged. Only `met === true` counts. No completed checks earns 10 consolation points; partial progress retains the proportional score with a minimum of 10; all checks completed earns 40. The consolation floor never counts as completed evidence or increases the time bonus. An unavailable or empty checklist still scores zero rather than inferring participation. Written conditions (`conditions`) remain a separate checklist; staff judgement is an optional note and never changes the score.
 
-任务按已满足的自动记录证据占比计算，算法不变。工作人员判定不参与计分。
+任务按已满足的自动记录证据占比计算，保底 10、满分 40。一项都没完成也给 10 分安慰分；完成一半仍为 20，全部完成为 40。安慰分不算完成进度，不增加时间奖励。证据清单不可用或为空时仍为 0，不据此推断参与；作废轮次仍不计分。工作人员判定不参与计分。
 
 ## Time / 时间：20–40
 
@@ -73,7 +73,7 @@ resilience = clamp(10 + 2×cleanCloses − decoys, 0, 20)
 - A completed task at the 60-second timeout with 3 clean closes: `40 + 20 + 16 = 76`.
 - Three genuine closes, including assisted closes, and any number of evasions: `10 + 2×3 = 16` resilience points.
 - One false-close click followed by one genuine close: `10 − 1 + 2 = 11` resilience points.
-- No task evidence at timeout and valid zero-count ad data: `0 + 20 + 10 = 30`.
+- No completed checks at timeout and valid zero-count ad data: `10 + 20 + 10 = 40`.
 
 ## Basis and limits / 参考与限制
 

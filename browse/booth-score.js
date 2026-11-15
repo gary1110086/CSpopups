@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const CONFIG = Object.freeze({
-    TASK_MAX: 40, TIME_MAX: 40, TIME_BASE: 20,
+    TASK_MAX: 40, TASK_BASE: 10, TIME_MAX: 40, TIME_BASE: 20,
     ROUND_MS: 60000, TIME_FULL_MS: 30000,
     RESILIENCE_MAX: 20, RESILIENCE_BASE: 10,
     CLEAN_CLOSE: 2, DECOY: -1, DODGE: 0, REVEAL: 0
@@ -11,7 +11,7 @@
   const taskScore = assessment => {
     const checks = Array.isArray(assessment?.checks) ? assessment.checks : [];
     const total = checks.length, met = checks.filter(c => c?.met === true).length;
-    return {score: total ? Math.round(CONFIG.TASK_MAX * met / total) : 0, met, total};
+    return {score: total ? Math.max(CONFIG.TASK_BASE, Math.round(CONFIG.TASK_MAX * met / total)) : 0, met, total};
   };
   const timeScore = (assessment, round) => {
     if (round?.status !== 'ended' || !Number.isFinite(round.startedAt) || round.startedAt <= 0
