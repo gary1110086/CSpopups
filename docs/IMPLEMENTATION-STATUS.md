@@ -12,7 +12,7 @@
 | Real interactions / 实际操作 | Search, filters, saved lists, comparisons and image/text/calendar exports. Media availability and credits are shown on the relevant pages. | [Browse overview](../browse/README.md), [sources](README.md#media-sources--素材来源) |
 | Free browsing / 自由浏览 | Twelve normal websites and a separate library of 32 briefs, without an activity deadline unless a round was started. | [Chooser](../browse/launch.html), [task library](../browse/task-library.js) |
 | Local state / 本地记录 | Round records, saved work and review remain in the current browser tab. | [Staff guide](MINUTE-BOOTH.md), [review log](../browse/review-log.js) |
-| Earlier entries / 早期入口 | Root Little Daily URLs and independent Stillwall remain available. | [Little Daily](../prototypes/little-daily/README.md), [Stillwall](../wallpapers/README.md) |
+| Entry and retired URLs / 入口与旧网址 | Root opens One Minute. Retired article/wallpaper/Cornhub URLs redirect to current routes; old runtimes are archived locally. | [Entry](../index.html), [earlier designs](DESIGN-HISTORY.md), [shared wallpaper assets](../wallpapers/README.md) |
 
 The repository remains a static site with no build step. Serve the whole root with `python browse/preview-server.py --port 5175`; copying only `browse/` omits shared assets.
 

@@ -30,14 +30,14 @@
 | [Design references](../browse/DESIGN-NOTES.md) | Category-specific layouts and reference decisions. |
 | [Verification record](../browse/VERIFICATION.md) | Recorded checks and their limits, including media, exports, native tabs and cached browser returns. |
 | [Live reference and scam guide](https://gary1110086.github.io/CSpopups/browse/guide.html?lang=en&v=audio1) | Benchmark websites and documented deceptive mechanisms. |
-| [Little Daily runtime](../prototypes/little-daily/README.md) | Earlier article-site implementation and the root HTML routes that still use it. |
-| [Standalone Stillwall](../wallpapers/README.md) | Independent wallpaper prototype, its runtime and original artwork. |
+| [Earlier designs / 早期设计](DESIGN-HISTORY.md) | Retired prototypes and what the current site keeps. |
+| [Shared wallpaper assets](../wallpapers/README.md) | Catalogue and original artwork used by the current site. |
 
 ## Repository and existing URLs / 目录与旧网址
 
-`browse/` is the current app. `prototypes/little-daily/` groups the earlier article site's six JavaScript/CSS files; its original root HTML entry URLs, including `index.html` and `article.html`, remain in place. The repository root website still opens Little Daily. Use the Browse chooser above for the current experience.
+`browse/` is the current app. The root website opens One Minute. Retired article-site URLs now lead to the challenge; old Cornhub URLs lead to the current advertiser page. They no longer load the earlier runtime.
 
-`wallpapers/` remains an independent prototype and supplies catalogue/artwork dependencies to Browse. `assets/` also contains shared resources. Serve the entire repository root, or use the complete release package; copying only `browse/` omits required files. Each experience keeps its own state, and sharing a URL does not synchronize progress across computers.
+`wallpapers/` supplies catalogue/artwork dependencies to Browse; its old standalone pages now redirect to the current wallpaper scene. `assets/` also contains shared resources. Serve the entire repository root; copying only `browse/` omits required files. Sharing a URL does not synchronize progress across computers. Historical ZIPs preserve their earlier standalone layouts.
 
 ## Media sources / 素材来源
 

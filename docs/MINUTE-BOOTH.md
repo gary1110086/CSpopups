@@ -62,4 +62,4 @@ python browse/preview-server.py --port 5210
 
 GitHub Release 中的 cleaner1 ZIP 对应早期版本。本轮试玩使用上方入口或当前仓库源码。
 
-普通Browse自由浏览、早期Little Daily和独立Stillwall继续使用各自原来的流程；它们不会因为活动版新增而自动限时。
+普通 Browse 自由浏览没有活动倒计时。早期 Little Daily 和独立 Stillwall 已停用，旧网址转到当前体验；当前 Browse 里的 Stillwall 场景继续保留。

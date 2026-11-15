@@ -1,19 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#faf9f6">
-<meta name="description" content="A small collection of original wallpapers. Find a new view for your desktop, preview it and download a high-resolution image.">
-<title>Wallpaper | Stillwall</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="app.css?v=wallpaper1">
-<script src="catalog.js?v=wallpaper1" defer></script>
-<script src="app.js?v=wallpaper1" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <title>一分钟挑战 · One Minute</title>
 </head>
-<body data-page="detail">
-<a class="skip" href="#main">Skip to content</a>
-<div id="app"></div><div id="floating-ad"></div>
-<dialog id="site-dialog" aria-labelledby="dialog-title"></dialog>
-<div id="toast" role="status" aria-live="polite" hidden></div>
-<noscript><main><h1>Stillwall</h1><p>Enable JavaScript to browse and download wallpapers. 请启用 JavaScript 浏览和下载壁纸。</p></main></noscript>
-</body></html>
+<body>
+  <p>旧版已停用，请前往当前体验。<br>This prototype has retired. Continue to the current experience.</p>
+  <p><a id="continue" href="../browse/wallpaper.html?v=audio1&amp;lang=zh">继续 · Continue</a></p>
+  <script>
+    (() => {
+      const lang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'zh';
+      const target = new URL("../browse/wallpaper.html?v=audio1", location.href);
+      target.searchParams.set('lang', lang);
+      document.getElementById('continue').href = target.href;
+      location.replace(target.href);
+    })();
+  </script>
+</body>
+</html>

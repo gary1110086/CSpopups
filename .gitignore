@@ -17,27 +17,16 @@
 !/assets/
 /assets/*
 !/assets/favicon.svg
-!/assets/cornhub-favicon.svg
-!/assets/sunday-room.png
-!/assets/earbuds.png
-!/assets/mobile-plan.png
 !/assets/nightroom-contact-sheet.png
 
-# Independent Stillwall wallpaper experience.
+# Shared wallpaper catalogue/artwork and retired-route compatibility redirects.
 !/wallpapers/
 !/wallpapers/*.html
-!/wallpapers/*.js
-!/wallpapers/*.css
-!/wallpapers/*.svg
+!/wallpapers/catalog.js
 !/wallpapers/README.md
 !/wallpapers/assets/
 !/wallpapers/assets/*.svg
-!/wallpapers/vendor/
-!/wallpapers/vendor/*.js
-!/wallpapers/vendor/*.css
-!/wallpapers/vendor/assets/
-!/wallpapers/vendor/assets/*.png
-!/wallpapers/vendor/assets/*.svg
+
 
 # Independent randomized task websites and advertiser destinations.
 !/browse/
@@ -58,7 +47,7 @@
 !/browse/assets/*.mp3
 !/browse/assets/*.json
 
-# Project documentation and the earlier article-site runtime.
+# Project documentation.
 !/docs/
 !/docs/*.md
 !/docs/history/
@@ -69,13 +58,8 @@
 !/docs/images/history/
 !/docs/images/history/*.md
 !/docs/images/history/*.png
-!/prototypes/
-!/prototypes/little-daily/
-!/prototypes/little-daily/*.js
-!/prototypes/little-daily/*.css
-!/prototypes/little-daily/README.md
+
 
 # Local archives, working notes and verification evidence.
 /archives/
 /local/
-/prototypes/legacy-booth/

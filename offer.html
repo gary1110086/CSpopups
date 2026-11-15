@@ -1,15 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#203c32"><meta name="description" content="Little Daily — stories for everyday living.">
-  <title>Continue</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="prototypes/little-daily/styles.css"><link rel="stylesheet" href="prototypes/little-daily/site.css">
-  <script src="prototypes/little-daily/content.js" defer></script><script src="prototypes/little-daily/site.js?v=cornhub3" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>一分钟挑战 · One Minute</title>
 </head>
-<body data-page="offer">
-  <main id="site-content"></main>
-  <div id="overlay-root"></div><div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <noscript>Please enable JavaScript to browse Little Daily. 请启用 JavaScript。</noscript>
+<body>
+  <p>旧版已停用，请前往当前体验。<br>This prototype has retired. Continue to the current experience.</p>
+  <p><a id="continue" href="browse/booth.html?v=audio1&amp;lang=zh">继续 · Continue</a></p>
+  <script>
+    (() => {
+      const lang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'zh';
+      const target = new URL("browse/booth.html?v=audio1", location.href);
+      target.searchParams.set('lang', lang);
+      document.getElementById('continue').href = target.href;
+      location.replace(target.href);
+    })();
+  </script>
 </body>
 </html>

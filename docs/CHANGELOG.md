@@ -2,6 +2,10 @@
 
 Current activity source **audio1**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
 
+## 15 November 2026 — retire earlier prototypes
+
+The root URL now opens One Minute. Little Daily, the simulated-browser game, the odd-one-out prototype and standalone Stillwall have retired. Old public HTML URLs redirect to current routes. Their runtime files and unused images were removed from the published tree; originals were archived locally with per-file hashes. Current Browse code, shared wallpaper assets and historical release ZIPs are unchanged. [Design inventory](DESIGN-HISTORY.md).
+
 ## Repository and README — 15 November 2026
 
 - Rewrote the English and Chinese visitor explanations around the current thirteen-task activity, current scoring and recorded countdown audio.
@@ -168,4 +172,4 @@ These are development milestone names, not a list of published GitHub release ta
 | **deep2 / deep2a** |24 October 2026| Ten websites and 30 tasks with attributed real media and exports; the top task/notebook panel was hidden while the separate task library remained. |
 | **deep1** |23 October 2026| Concrete bilingual task briefs, deeper catalogues, local licensed video previews and working exports. |
 
-Little Daily and the independent Stillwall experiment predate the current Browse suite. Their entry points and documentation are linked from the [documentation index](README.md).
+Little Daily and the independent Stillwall experiment predate the current Browse suite. They have since retired; see [earlier designs](DESIGN-HISTORY.md).

@@ -55,7 +55,7 @@ cd CSpopups
 python browse/preview-server.py --port 5175
 ```
 
-然后[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=audio1)。不用构建。请保留完整目录，部分素材由几个原型共用；内置服务器也支持视频拖动播放。
+然后[打开本地挑战](http://127.0.0.1:5175/browse/booth.html?lang=zh&v=audio1)。不用构建。请保留完整目录，当前网站仍使用根目录的共享素材；内置服务器也支持视频拖动播放。
 
 ## 文件放在哪里
 
@@ -64,10 +64,9 @@ python browse/preview-server.py --port 5175
 | [browse](browse/README.md) | 当前挑战、任务网站和广告页面。 |
 | [docs](docs/README.md) | 玩法、答案、计分与开发说明。 |
 | [docs/images](docs/images/README.md) | 现在的 README 截图，早期截图放在里面的 `history/`。 |
-| [prototypes/little-daily](prototypes/little-daily/README.md) | 早期文章站的运行代码，根目录的旧网址仍保留。 |
-| [wallpapers](wallpapers/README.md) | 独立 Stillwall 原型，也向当前网站提供部分素材。 |
+| [wallpapers](wallpapers/README.md) | 当前网站使用的壁纸目录和原创 SVG 素材。 |
 
-试玩用顶部链接；根目录的 `index.html` 仍是早期 Little Daily。详细位置见[文件夹说明](docs/FOLDERS.md)，过去的改动见[版本记录](docs/CHANGELOG.md)。
+根网址也会直接进入一分钟挑战。Little Daily、初代模拟浏览器游戏、找不同原型和独立壁纸站已停用，经过见[早期设计整理](docs/DESIGN-HISTORY.md)。详细位置见[文件夹说明](docs/FOLDERS.md)，过去的改动见[版本记录](docs/CHANGELOG.md)。
 
 [GitHub Releases](https://github.com/gary1110086/CSpopups/releases) 里的 ZIP 是旧版自由浏览快照。想玩现在的一分钟挑战，直接开在线版，或克隆当前源码。
 

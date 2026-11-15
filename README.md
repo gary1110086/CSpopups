@@ -62,10 +62,9 @@ Open [the local challenge](http://127.0.0.1:5175/browse/booth.html?lang=en&v=aud
 | [browse](browse/README.md) | The current challenge, task websites and advertiser pages. |
 | [docs](docs/README.md) | Session instructions, answers, scoring and development notes. |
 | [docs/images](docs/images/README.md) | Current README screenshots; the earlier screenshot is under `history/`. |
-| [prototypes/little-daily](prototypes/little-daily/README.md) | The earlier article-site runtime. Root HTML URLs still use it. |
-| [wallpapers](wallpapers/README.md) | The independent Stillwall prototype; some assets are also used by Browse. |
+| [wallpapers](wallpapers/README.md) | Shared wallpaper catalogue and original SVG artwork used by Browse. |
 
-Start with the play link above. The root `index.html` opens the older Little Daily site. [Folder guide](docs/FOLDERS.md) · [Version history](docs/CHANGELOG.md)
+The root website also opens One Minute. Little Daily, the original simulated-browser game, the odd-one-out prototype and standalone Stillwall have retired. [Earlier designs](docs/DESIGN-HISTORY.md). [Folder guide](docs/FOLDERS.md) · [Version history](docs/CHANGELOG.md)
 
 The ZIPs on [GitHub Releases](https://github.com/gary1110086/CSpopups/releases) are older free-browsing snapshots. For this one-minute challenge, use the live site or clone the current source.
 
