@@ -147,7 +147,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.08; font-weight: 900; l
 .booth-score-total { display: flex; align-items: baseline; gap: 10px; }
 .booth-score-total strong { font: 900 clamp(3rem, 7vw, 4.6rem)/1 var(--display); font-variant-numeric: tabular-nums; }
 .booth-score-total span { font-size: 1.1rem; font-weight: 800; color: var(--muted); }
-.booth-score-split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; }
+.booth-score-split { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; }
 .booth-score-split > div { padding: 12px 14px; border: 3px solid var(--ink); background: var(--cream); }
 .booth-score-split dt { font-size: .74rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
 .booth-score-split dd { margin: 4px 0 0; font: 900 1.6rem/1.2 var(--display); font-variant-numeric: tabular-nums; }
@@ -155,6 +155,13 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.08; font-weight: 900; l
 .booth-score-detail { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
 .booth-score-detail li { display: flex; align-items: baseline; gap: 6px; padding: 6px 10px; border: 2px solid var(--ink); background: var(--yellow); font-size: .78rem; font-weight: 700; }
 .booth-score-detail b { font-variant-numeric: tabular-nums; }
+.booth-score-rules { border-top: 2px solid var(--line); padding-top: 12px; font-size: .8rem; }
+.booth-score-rules summary { font-weight: 800; }
+.booth-score-rules p { margin: 10px 0; }
+.booth-score-rules table { width: 100%; border-collapse: collapse; text-align: center; font-variant-numeric: tabular-nums; }
+.booth-score-rules caption { text-align: left; font-weight: 700; margin-bottom: 6px; }
+.booth-score-rules th, .booth-score-rules td { padding: 6px; border: 1px solid var(--line); }
+.booth-score-rules thead { background: var(--cream); }
 
 .booth-checks { list-style: none; margin: 0; padding: 0; border: 3px solid var(--ink); background: var(--paper); }
 .booth-checks li { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 12px; padding: 12px 14px; }
