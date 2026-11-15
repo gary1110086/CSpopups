@@ -1,6 +1,6 @@
 # One Minute activity / 一分钟活动
 
-Current `ui4` adds increasing final-ten-second urgency audio with its own mute control, restores matching pictures to all24 film cards and gives brief images their native proportions, including the full-resolution bird photograph. Per-condition records, bold task anchors, category-specific layouts, layered hints and the absolute60-second deadline remain. [Design and limits](../docs/UI1-DESIGN.md).
+Current `audio1` adds increasing final-ten-second urgency audio with its own mute control, restores matching pictures to all24 film cards and gives brief images their native proportions, including the full-resolution bird photograph. Per-condition records, bold task anchors, category-specific layouts, layered hints and the absolute60-second deadline remain. [Design and limits](../docs/UI1-DESIGN.md).
 
 Source branch `realism1`: two additional everyday hosts, 12 booth tasks and 32 optional briefs. Local preview and true/false paths: [scene guide](../docs/REALISM-SCENES.md). Publication is not inferred from these source changes.
 

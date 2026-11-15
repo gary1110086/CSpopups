@@ -1,7 +1,7 @@
 /* Native activity entry; the durable clock and evidence belong to booth-round.js. */
 (() => {
   'use strict';
-  const VERSION = 'ui4';
+  const VERSION = 'audio1';
   const app = document.getElementById('booth-app');
   const params = new URLSearchParams(location.search);
   const tasks = Array.isArray(window.BROWSE_BOOTH_TASKS) ? window.BROWSE_BOOTH_TASKS : [];
@@ -75,7 +75,7 @@
     return `<details class="booth-staff booth-history" id="booth-history"><summary>${t('Staff tools', '工作人员工具')}</summary><div class="booth-staff-body">
       <nav class="booth-staff-links" aria-label="${t('Staff tools', '工作人员工具')}">
         ${mode === 'ads' ? `<a href="${esc(url({mode:'clean'}))}">${t('Difficulty test · no ads', '难度测试 · 无广告')} ↗</a>` : `<a href="${esc(url({mode:'ads'}))}">${t('Return to the challenge', '返回正式挑战')} ↗</a>`}
-        <a href="launch.html?lang=${lang}&amp;v=ui4">${t('Free browsing', '自由浏览')} ↗</a>
+        <a href="launch.html?lang=${lang}&amp;v=audio1">${t('Free browsing', '自由浏览')} ↗</a>
       </nav>
       <label class="booth-advanced"><input id="booth-include-advanced" type="checkbox"> ${t('Include advanced tasks in the draw', '随机抽题时加入进阶题')}</label>
       <h2>${t('Recent rounds', '最近轮次')}</h2>

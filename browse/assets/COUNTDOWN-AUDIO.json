@@ -1,0 +1,138 @@
+{
+  "duration": 15,
+  "sampleRate": 44100,
+  "sources": [
+    {
+      "file": "mixkit-male-voice-countdown-917.wav",
+      "sha256": "8fb08d9224f5279af7daa6949ea8f27a01b5bdbca87291393b8ed6845778fd8a",
+      "bytes": 1917856
+    },
+    {
+      "file": "tomas_herudek-tense-clock-transition-480613.mp3",
+      "sha256": "6afb22e0d887b33ba38b306ce518058171a2efce8e60d2ff5dbbff37c88177c1",
+      "bytes": 2014464
+    }
+  ],
+  "voices": [
+    {
+      "number": 10,
+      "sourceAttack": 0,
+      "mixedAttack": 5,
+      "sourceClip": [
+        0,
+        0.64
+      ]
+    },
+    {
+      "number": 9,
+      "sourceAttack": 1.006961,
+      "mixedAttack": 6,
+      "sourceClip": [
+        0.961961,
+        1.6469610000000001
+      ]
+    },
+    {
+      "number": 8,
+      "sourceAttack": 2.090998,
+      "mixedAttack": 7,
+      "sourceClip": [
+        2.045998,
+        2.730998
+      ]
+    },
+    {
+      "number": 7,
+      "sourceAttack": 3.167256,
+      "mixedAttack": 8,
+      "sourceClip": [
+        3.122256,
+        3.807256
+      ]
+    },
+    {
+      "number": 6,
+      "sourceAttack": 4.091429,
+      "mixedAttack": 9,
+      "sourceClip": [
+        4.046429,
+        4.731428999999999
+      ]
+    },
+    {
+      "number": 5,
+      "sourceAttack": 5.093946,
+      "mixedAttack": 10,
+      "sourceClip": [
+        5.048946,
+        5.7339459999999995
+      ]
+    },
+    {
+      "number": 4,
+      "sourceAttack": 6.06771,
+      "mixedAttack": 11,
+      "sourceClip": [
+        6.02271,
+        6.70771
+      ]
+    },
+    {
+      "number": 3,
+      "sourceAttack": 7.101111,
+      "mixedAttack": 12,
+      "sourceClip": [
+        7.0561110000000005,
+        7.741111
+      ]
+    },
+    {
+      "number": 2,
+      "sourceAttack": 8.141905,
+      "mixedAttack": 13,
+      "sourceClip": [
+        8.096905,
+        8.781905
+      ]
+    },
+    {
+      "number": 1,
+      "sourceAttack": 9.039002,
+      "mixedAttack": 14,
+      "sourceClip": [
+        8.994002,
+        9.679002
+      ]
+    }
+  ],
+  "clockSource": {
+    "start": 43,
+    "end": 60.625,
+    "playbackRateStart": 0.8,
+    "playbackRateEnd": 1.55
+  },
+  "peakBeforeEncoding": 0.7636728498780949,
+  "rmsBySecond": [
+    0.0009904948076727357,
+    0.008041168128138446,
+    0.016222736059870166,
+    0.0256837417363575,
+    0.0379032340976457,
+    0.05205480563888769,
+    0.051392454526459436,
+    0.044751609464128324,
+    0.07316580651830605,
+    0.060762580998610524,
+    0.07836834214576846,
+    0.11408219470947285,
+    0.1127783229327232,
+    0.12284190918158884,
+    0.0992363995853479
+  ],
+  "output": {
+    "file": "booth-countdown-mix1.mp3",
+    "sha256": "b3aac295d529b41a4b9a9a9521edaa4689ef77fc359230a653180075006249a3",
+    "bytes": 361955
+  },
+  "script": "make-mix.py retained in task evidence; unmodified source recordings retained in Downloads"
+}

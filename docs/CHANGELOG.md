@@ -1,6 +1,12 @@
 # Release history / 版本记录
 
-Current activity source **ui4**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+Current activity source **audio1**. Previous downloadable snapshot **[cleaner1](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)**. [中文玩法说明](../README.zh-CN.md#怎么玩) · [Detailed verification](../browse/VERIFICATION.md).
+
+## audio1 — 14 November 2026
+
+- Replaced synthesized beeps with the selected Mixkit male countdown and Tomas Herudek's Tense Clock Transition, adapted as one local15-second game cue. Clock texture fades in from15 seconds remaining, speech10..1 joins at10 seconds, with background ducking and increasing urgency. Source, licence and processing records are in assets/COUNTDOWN-AUDIO-SOURCES.md.
+- The preloaded recording follows the absolute deadline through normal navigation, reload, unmute and nativeBack. A late entry waits out a partial word rather than replaying missed numbers. The timer-sound choice remains separate from advertisement audio. End, hidden/blur and page departure stop playback; recoverable download/decode errors expose a retry button.
+- Kept60000ms round duration, frozen condition evidence, task scoring, advertiser scheduling and independent sites unchanged. Desktop acceptance covers real audio playback and lifecycle; no human-study or other-browser guarantee.
 
 ## ui4 — 14 November 2026
 
