@@ -38,6 +38,7 @@ python browse/preview-server.py --port 5175
 
 ## 其他资料
 
+- [文件夹说明](docs/FOLDERS.md)：当前代码、共享素材、旧原型和本地归档的位置。
 - 本轮记录和收藏保存在当前浏览器标签页。图片处理和文件导出在浏览器里完成。广告里的优惠、付款和奖品是模拟内容。
 - Little Daily 和独立 Stillwall 是早期原型。`cleaner1` ZIP 对应较早的自由浏览版本。 [项目与原型索引](docs/README.md) · [版本记录](docs/CHANGELOG.md) · [旧版下载](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)
 - 照片、影片等素材沿用各自的来源许可。 [素材来源](docs/README.md#media-sources--素材来源) · [截图说明](assets/README-PREVIEW.md)

@@ -18,6 +18,7 @@
 
 | Document / 文档 | Contents / 内容 |
 | --- | --- |
+| [Folder guide / 文件夹说明](FOLDERS.md) | Current source, shared dependencies, local archives and where new files belong. |
 | [Project overview](../README.md) · [中文概览](../README.zh-CN.md) | How to play, current features, local setup, privacy and media credits. |
 | [Release history / 版本记录](CHANGELOG.md) | Current changes and a compact history of the main development milestones. |
 | [Implementation check / 功能核对](IMPLEMENTATION-STATUS.md) | Accepted requirements, current behaviour and fixes found during the latest review. |

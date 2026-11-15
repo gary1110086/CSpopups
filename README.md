@@ -38,6 +38,7 @@ python browse/preview-server.py --port 5175
 
 ## Further reading
 
+- [Folder guide](docs/FOLDERS.md): current source, shared assets, prototypes and local archives.
 - Round records and saved work stay in the browser tab. Image processing and file exports run in the browser. Offers, payments and prizes are simulated.
 - Little Daily and the standalone Stillwall are earlier prototypes. The `cleaner1` ZIP is an older free-browsing snapshot. [Project and prototype index](docs/README.md) · [Release history](docs/CHANGELOG.md) · [Earlier ZIP release](https://github.com/gary1110086/CSpopups/releases/tag/v-cleaner1)
 - Photographs, films and other media retain their source licences. [Media credits](docs/README.md#media-sources--素材来源) · [Screenshot notes](assets/README-PREVIEW.md)

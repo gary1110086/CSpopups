@@ -68,3 +68,8 @@
 !/prototypes/little-daily/*.js
 !/prototypes/little-daily/*.css
 !/prototypes/little-daily/README.md
+
+# Local archives, working notes and verification evidence.
+/archives/
+/local/
+/prototypes/legacy-booth/
